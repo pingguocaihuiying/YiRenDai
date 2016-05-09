@@ -3,3 +3,10 @@
 //
 
 #import "HFStretchableTableHeaderView.h"
+
+//ToolKitObjC
+#import "ToolKitObjC.h"
+
+//Mob
+#import <SMS_SDK/SMSSDK.h> //导入SMS-SDK的头文件
+#import <SMS_SDK/Extend/SMSSDK+AddressBookMethods.h>

@@ -15,6 +15,10 @@ target 'YiRenDai' do
     
     #刷新
     pod 'MJRefresh'
+    
+    #Mob
+    pod 'MOBFoundation_IDFA' #Mob产品公共库
+    pod 'SMSSDK' #SMSSDK必须
 
 end
 

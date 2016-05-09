@@ -155,7 +155,7 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.backgroundColor = UIColor.getColorThird()
                 //退出
                 logoutBtn = UIButton(frame: CGRectMake(14, (100 - 60) / 2, screen_width - 14 * 2, 46))
-                logoutBtn.setTitle(CommonDef.isLogin() ? "安全退出" : "登录", forState: .Normal)
+                logoutBtn.setTitle(ToolKit.isLogin() ? "安全退出" : "登录", forState: .Normal)
                 logoutBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
                 logoutBtn.setBackgroundImage(UIImage(named: "button_normal"), forState: .Normal)
                 logoutBtn.tag = 1

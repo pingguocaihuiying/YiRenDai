@@ -9,10 +9,16 @@
 import Foundation
 import UIKit
 
+protocol ReSendSMSDelegate {
+    func reSendSMS()
+}
+
 class Timer:UIButton {
     
     var verificationCodeBtn: UIButton!
     var countdownTimer: NSTimer?
+    
+    var delegate: ReSendSMSDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,7 +40,9 @@ class Timer:UIButton {
         isCounting = true
         
         //发送验证码
-        print("发送验证码")
+        if delegate != nil {
+            delegate?.reSendSMS()
+        }
     }
     
     var remainingSeconds: Int = 0 {

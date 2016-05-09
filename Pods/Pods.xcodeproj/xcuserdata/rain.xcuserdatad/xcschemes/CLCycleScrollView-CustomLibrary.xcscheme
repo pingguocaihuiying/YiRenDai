@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '16273855C5071E67006971AE'
+               BlueprintIdentifier = 'D3A543F673C76E2785F8849A'
                BlueprintName = 'CLCycleScrollView-CustomLibrary'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'CustomLibrary.bundle'>

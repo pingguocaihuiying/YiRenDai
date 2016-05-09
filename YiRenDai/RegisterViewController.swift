@@ -152,10 +152,24 @@ class RegisterViewController: BaseNavigationController, UITextFieldDelegate {
     }
     
     func clickEvent(sender: UIButton){
-        let registerFinishVC = RegisterFinishViewController()
-        registerFinishVC.navtitle = "注册"
-        registerFinishVC.accountValue = phoneNoTxt.text
-        navigationController?.pushViewController(registerFinishVC, animated: true)
+        if !ToolKitObjC.hyb_isValidPersonID(IDNoTxt.text) {
+            view.viewAlert(self, title: "提示", msg: "输入的身份号格式不正确", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            return
+        }
+        
+        SMSSDK.getVerificationCodeByMethod(SMSGetCodeMethodSMS, phoneNumber: phoneNoTxt.text, zone: "86", customIdentifier: nil) { (error) in
+            if error == nil{
+                let registerFinishVC = RegisterFinishViewController()
+                registerFinishVC.navtitle = "注册"
+                registerFinishVC.accountValue = self.phoneNoTxt.text
+                registerFinishVC.areaCode = "86"
+                registerFinishVC.userName = self.nameTxt.text
+                registerFinishVC.IDNo = self.IDNoTxt.text
+                self.navigationController?.pushViewController(registerFinishVC, animated: true)
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: error.userInfo["getVerificationCode"]!.debugDescription, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
     }
     
     //UITextFieldDelegate

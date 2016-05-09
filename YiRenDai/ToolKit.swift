@@ -26,7 +26,7 @@ let SMSSDK_Secret = "1a5a8f3bf629f5f834cca96f8b25ab8d"
 
 
 // MARK: - 全局方法
-class CommonDef{
+class ToolKit{
     /**
      判断是否登录
      - returns: true：登录  false：退出

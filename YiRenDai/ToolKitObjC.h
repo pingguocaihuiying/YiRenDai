@@ -10,4 +10,6 @@
 
 @interface ToolKitObjC : NSObject
 
++ (BOOL)hyb_isValidPersonID:(NSString *)personId;
+
 @end

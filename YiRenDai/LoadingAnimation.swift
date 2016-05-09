@@ -124,12 +124,12 @@ extension LoadingAnimation{
     
     class func show(){
         let loadingAnimation = LoadingAnimation(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height))
-        let view = CommonDef.getTopView()
+        let view = ToolKit.getTopView()
         view.addSubview(loadingAnimation)
     }
     
     class func dismiss(){
-        let view = CommonDef.getTopView()
+        let view = ToolKit.getTopView()
         view.subviews[view.subviews.count - 1].removeFromSuperview()
     }
 }

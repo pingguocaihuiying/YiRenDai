@@ -8,9 +8,12 @@
 
 import UIKit
 
-class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegate {
+class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegate, ReSendSMSDelegate {
     
     var accountValue: String!
+    var areaCode: String!
+    var userName: String!
+    var IDNo: String!
     
     var pwdIv: UIImageView!
     var pwdTxt: UITextField!
@@ -113,6 +116,7 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
         //IDNoTxt
         pwdTxt = UITextField(frame: CGRectMake(pwdIv.viewRightX + 15, 47, contentView.viewWidth - 28, 47))
         pwdTxt.delegate = self
+        pwdTxt.secureTextEntry = true
         pwdTxt.font = UIFont.systemFontOfSize(15)
         pwdTxt.placeholder = "请输入6-16位字符"
         pwdTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
@@ -130,6 +134,7 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
         contentView.addSubview(verificationTxt)
         //verificationCodeBtn
         let verificationCodeBtn = Timer(frame: CGRectMake(0, 5, 120, verificationTxt.viewHeight - 10))
+        verificationCodeBtn.delegate = self
         verificationTxt.rightView = verificationCodeBtn
         verificationTxt.rightViewMode = .Always
         //lineView6
@@ -159,10 +164,25 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
     }
     
     func clickEvent(sender: UIButton){
-        NSUserDefaults.setUserDefaultValue(true, forKey: "isLogin")
-        let customTabBarVC = CustomTabBarViewController()
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.window?.rootViewController = customTabBarVC
+        SMSSDK.commitVerificationCode(verificationTxt.text, phoneNumber: accountValue, zone: areaCode) { (error) in
+            if error == nil{
+                //注册
+                DataProvider.sharedInstance.register(self.accountValue, password: self.pwdTxt.text!, userName: self.userName, IDNo: self.IDNo, handler: { (state, message) in
+                    if state == 1{
+                        NSUserDefaults.setUserDefaultValue(true, forKey: "isLogin")
+                        let customTabBarVC = CustomTabBarViewController()
+                        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                        appDelegate.window?.rootViewController = customTabBarVC
+                        NSNotificationCenter.defaultCenter().postNotificationName("setDefaultSelectTabBarItem", object: nil, userInfo: ["index":2])
+                    }else if state == 1{
+                        self.view.viewAlert(self, title: "提示", msg: message, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+                    }
+                })
+            }else{
+                self.verificationTxt.text = ""
+                self.view.viewAlert(self, title: "提示", msg: error.userInfo["commitVerificationCode"]!.debugDescription, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
     }
     
     //UITextFieldDelegate
@@ -185,6 +205,15 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
         }else{
             okBtn.setBackgroundImage(UIImage(named: "button_normal"), forState: .Normal)
             okBtn.enabled = true
+        }
+    }
+    
+    //MARK: - ReSendSMSDelegate
+    func reSendSMS() {
+        SMSSDK.getVerificationCodeByMethod(SMSGetCodeMethodSMS, phoneNumber: accountValue, zone: areaCode, customIdentifier: nil) { (error) in
+            if error != nil{
+                self.view.viewAlert(self, title: "提示", msg: error.userInfo["getVerificationCode"]!.debugDescription, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
         }
     }
 

@@ -35,8 +35,10 @@ class NetworkRequest {
      - parameter params: 参数
      */
     func postRequest(url url: String, params: [String:String], handler:(json: JSON) -> Void){
+        LoadingAnimation.show()
         Alamofire.request(.POST, url, parameters: params).responseJSON { (response) -> Void in
             if let json = response.result.value{
+                LoadingAnimation.dismiss()
                 handler(json: JSON(json))
             }
         }

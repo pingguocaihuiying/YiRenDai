@@ -10,12 +10,16 @@ import UIKit
 
 class LoginViewController: BaseNavigationController, UITextFieldDelegate {
     
+    //view
     var accountIv: UIImageView!
     var accountTxt: UITextField!
     var passwordIv: UIImageView!
     var passwordTxt: UITextField!
     var loginBtn: UIButton!
     var targetNav: UINavigationController!
+    
+    //data
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,16 +42,10 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
     }
     
     override func clickRightBtnEvent() {
-        DataProvider.register("15165561652", password: "123", userName: "HelloWorld", IDNo: "371321199011133110") { (state, message) in
-            print(state)
-            print(message)
-        }
-        
-        /*
         let retrievePwdVC = RetrievePwdViewController()
         retrievePwdVC.navtitle = "找回密码"
         retrievePwdVC.hidesBottomBarWhenPushed = true
-        targetNav.pushViewController(retrievePwdVC, animated: true)*/
+        targetNav.pushViewController(retrievePwdVC, animated: true)
     }
     
     //MARK: - 自定义方法
@@ -79,6 +77,7 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
         //passwordTxt
         passwordTxt = UITextField(frame: CGRectMake(accountTxt.viewX, lineView1.viewBottomY, accountPwdView.viewWidth - 28, 47))
         passwordTxt.delegate = self
+        passwordTxt.secureTextEntry = true
         passwordTxt.placeholder = "输入密码"
         passwordTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
         accountPwdView.addSubview(passwordTxt)
@@ -121,13 +120,18 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
     }
     
     func loginEvent(){
-        NSUserDefaults.setUserDefaultValue(true, forKey: "isLogin")
-        accountTxt.resignFirstResponder()
-        passwordTxt.resignFirstResponder()
-        let customTabBarVC = CustomTabBarViewController()
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.window!.rootViewController = customTabBarVC
-        NSNotificationCenter.defaultCenter().postNotificationName("setDefaultSelectTabBarItem", object: nil, userInfo: ["index":2])
+        DataProvider.sharedInstance.login(accountTxt.text!, password: passwordTxt.text!) { (state, message) in
+            if state == 1{
+                NSUserDefaults.setUserDefaultValue(true, forKey: "isLogin")
+                let customTabBarVC = CustomTabBarViewController()
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.window!.rootViewController = customTabBarVC
+                NSNotificationCenter.defaultCenter().postNotificationName("setDefaultSelectTabBarItem", object: nil, userInfo: ["index":2])
+            }else{
+                self.passwordTxt.text = ""
+                self.view.viewAlert(self, title: "提示", msg: message, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
     }
     
     func registerEvent(){

@@ -55,7 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //MARK: - 自定义方法
     func initConfiguration(){
-        
+        //SMSSDK
+        SMSSDK.registerApp(SMSSDK_AppKey, withSecret: SMSSDK_Secret)
+        SMSSDK.enableAppContactFriends(false)
     }
 
 }

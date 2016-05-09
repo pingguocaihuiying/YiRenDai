@@ -96,7 +96,7 @@ class CustomTabBarViewController: UITabBarController {
         }
         
         //将view添加到tabbar
-        let isLogin = CommonDef.isLogin()
+        let isLogin = ToolKit.isLogin()
         self.viewControllers = [navHomePageVC, navProductListVC, isLogin ? navMyWealthVC : navLoginVC, navLcqVC, navMoreVC]
         
         //设置tabbar的选中时颜色

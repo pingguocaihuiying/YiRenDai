@@ -6,9 +6,9 @@
 //  Copyright © 2016年 YiRenDai. All rights reserved.
 //
 
-#import "ToolKit_ObjC.h"
+#import "ToolKitObjC.h"
 
-@implementation ToolKit_ObjC
+@implementation ToolKitObjC
 
 + (BOOL)hyb_isValidPersonID:(NSString *)personId {
     // 判断位数

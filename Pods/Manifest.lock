@@ -2,18 +2,24 @@ PODS:
   - Alamofire (3.2.1)
   - CLCycleScrollView (0.0.5)
   - MJRefresh (3.1.0)
+  - MOBFoundation_IDFA (1.5.1)
+  - SMSSDK (2.0.4)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire
   - CLCycleScrollView
   - MJRefresh
+  - MOBFoundation_IDFA
+  - SMSSDK
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: f11d8624a05f5d39e0c99309b3e600a3ba64298a
   CLCycleScrollView: 5c15298988923566f3ba03a19b50169c2cd6acc8
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+  MOBFoundation_IDFA: f5d3d1f89166f60c6985e34b7d90e6fb5d58fb61
+  SMSSDK: 642b6a8c55fd382be44487cd5e0b0710681895f9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
 COCOAPODS: 0.39.0
