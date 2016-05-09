@@ -19,6 +19,10 @@ let tabBar_height:CGFloat = 49
 //网络请求链接前缀
 let URL = "http://115.28.67.86:8083/index.php?r=api/"
 
+//SMSSDK
+let SMSSDK_AppKey = "1283183fef2d8"
+let SMSSDK_Secret = "1a5a8f3bf629f5f834cca96f8b25ab8d"
+
 
 
 // MARK: - 全局方法
