@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class LoginViewController: BaseNavigationController, UITextFieldDelegate {
     
@@ -17,9 +18,6 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
     var passwordTxt: UITextField!
     var loginBtn: UIButton!
     var targetNav: UINavigationController!
-    
-    //data
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,9 +86,11 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
         
         //登陆按钮
         loginBtn = UIButton(frame: CGRectMake(14, accountPwdView.viewBottomY + 15, screen_width - 28, 45))
-        loginBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Normal)
+        loginBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Disabled)
         loginBtn.titleLabel?.font = UIFont.systemFontOfSize(16)
+        loginBtn.enabled = false
         loginBtn.setTitle("登陆", forState: .Normal)
+        loginBtn.addTarget(self, action: #selector(loginEvent), forControlEvents: .TouchUpInside)
         view.addSubview(loginBtn)
 
         //免费注册领红包
@@ -120,7 +120,7 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
     }
     
     func loginEvent(){
-        DataProvider.sharedInstance.login(accountTxt.text!, password: passwordTxt.text!) { (state, message) in
+        DataProvider.sharedInstance.login(accountTxt.text!, password: passwordTxt.text!) { (state, message, data) in
             if state == 1{
                 NSUserDefaults.setUserDefaultValue(true, forKey: "isLogin")
                 let customTabBarVC = CustomTabBarViewController()
@@ -172,10 +172,10 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
         }
         if accountTxt.text != "" && passwordTxt.text != "" {
             loginBtn.setBackgroundImage(UIImage(named: "button_normal"), forState: .Normal)
-            loginBtn.addTarget(self, action: #selector(loginEvent), forControlEvents: .TouchUpInside)
+            loginBtn.enabled = true
         }else{
             loginBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Normal)
-            loginBtn.removeTarget(self, action: #selector(loginEvent), forControlEvents: .TouchUpInside)
+            loginBtn.enabled = false
         }
     }
     

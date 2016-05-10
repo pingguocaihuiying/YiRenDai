@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class BaseNavigationController: UIViewController {
     //全局变量

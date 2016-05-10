@@ -62,17 +62,26 @@ class RetrievePwdViewController: BaseNavigationController, UITextFieldDelegate {
         
         //nextBtn
         nextBtn = UIButton(frame: CGRectMake(14, accountView.viewBottomY + 40, screen_width - 28, 45))
-        nextBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Normal)
+        nextBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Disabled)
         nextBtn.titleLabel?.font = UIFont.systemFontOfSize(16)
+        nextBtn.enabled = false
         nextBtn.setTitle("下一步", forState: .Normal)
         nextBtn.addTarget(self, action: #selector(clickEvent(_:)), forControlEvents: .TouchUpInside)
         view.addSubview(nextBtn)
     }
     
     func clickEvent(sender: UIButton){
-        let verificationCodeVC = VerificationCodeViewController()
-        verificationCodeVC.navtitle = "填写验证码"
-        navigationController?.pushViewController(verificationCodeVC, animated: true)
+        SMSSDK.getVerificationCodeByMethod(SMSGetCodeMethodSMS, phoneNumber: accountTxt.text, zone: "86", customIdentifier: nil) { (error) in
+            if error == nil{
+                let verificationCodeVC = VerificationCodeViewController()
+                verificationCodeVC.accountValue = self.accountTxt.text
+                verificationCodeVC.areaCode = "86"
+                verificationCodeVC.navtitle = "填写验证码"
+                self.navigationController?.pushViewController(verificationCodeVC, animated: true)
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: error.userInfo["getVerificationCode"]!.debugDescription, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
     }
     
     //UITextFieldDelegate
@@ -84,9 +93,11 @@ class RetrievePwdViewController: BaseNavigationController, UITextFieldDelegate {
     func textFieldDidChange(textField: UITextField){
         if textField.text == "" {
             accountIv.image = UIImage(named: "lg_us_normal")
+            nextBtn.enabled = false
             nextBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Normal)
         }else{
             accountIv.image = UIImage(named: "lg_us_click")
+            nextBtn.enabled = true
             nextBtn.setBackgroundImage(UIImage(named: "button_normal"), forState: .Normal)
         }
     }

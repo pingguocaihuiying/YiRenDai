@@ -15,7 +15,7 @@ extension NSUserDefaults {
      - parameter value: value值
      - parameter key:   key值
      */
-    class func setUserDefaultValue(value: AnyObject?, forKey key: String){
+    class func setUserDefaultValue(value: AnyObject, forKey key: String){
         let userDefault = NSUserDefaults.standardUserDefaults()
         userDefault.setValue(value, forKey: key)
     }

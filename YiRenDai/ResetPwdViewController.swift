@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class ResetPwdViewController: BaseNavigationController, UITextFieldDelegate {
 
+    var accountVale: String!
+    
     var pwdIv: UIImageView!
     var pwdTxt: UITextField!
     var rePwdTxt: UITextField!
@@ -74,18 +77,34 @@ class ResetPwdViewController: BaseNavigationController, UITextFieldDelegate {
         
         //nextBtn
         finishBtn = UIButton(frame: CGRectMake(14, pwdView.viewBottomY + 40, screen_width - 28, 45))
-        finishBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Normal)
+        finishBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Disabled)
         finishBtn.titleLabel?.font = UIFont.systemFontOfSize(16)
         finishBtn.setTitle("完成", forState: .Normal)
+        finishBtn.enabled = false
         finishBtn.addTarget(self, action: #selector(clickEvent(_:)), forControlEvents: .TouchUpInside)
         view.addSubview(finishBtn)
     }
     
     func clickEvent(sender: UIButton){
-        NSUserDefaults.setUserDefaultValue(true, forKey: "isLogin")
-        let customTabBarVC = CustomTabBarViewController()
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        appDelegate.window?.rootViewController = customTabBarVC
+        if pwdTxt.text == "" || rePwdTxt.text == "" {
+            view.viewAlert(self, title: "提示", msg: "密码不能为空", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            return
+        }
+        if pwdTxt.text != rePwdTxt.text {
+            view.viewAlert(self, title: "提示", msg: "两次输入的密码不一致", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            return
+        }
+        DataProvider.sharedInstance.resetPwd(accountVale, password: pwdTxt.text!) { (data) in
+            if data["status"]["succeed"].intValue == 1{
+                NSUserDefaults.setUserDefaultValue(true, forKey: "isLogin")
+                let customTabBarVC = CustomTabBarViewController()
+                let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                appDelegate.window?.rootViewController = customTabBarVC
+                NSNotificationCenter.defaultCenter().postNotificationName("setDefaultSelectTabBarItem", object: nil, userInfo: ["index":2])
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
     }
     
     //UITextFieldDelegate
@@ -101,8 +120,10 @@ class ResetPwdViewController: BaseNavigationController, UITextFieldDelegate {
             pwdIv.image = UIImage(named: "lg_psd_click")
             
             if pwdTxt.text?.characters.count >= 6 && rePwdTxt.text?.characters.count >= 6 {
+                finishBtn.enabled = true
                 finishBtn.setBackgroundImage(UIImage(named: "button_normal"), forState: .Normal)
             }else{
+                finishBtn.enabled = false
                 finishBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Normal)
             }
         }

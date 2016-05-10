@@ -8,9 +8,12 @@
 
 import UIKit
 import MJRefresh
+import SwiftyJSON
 
 class LjInvestBtnViewController: BaseNavigationController {
 
+    var productID: String!
+    
     //view
     var tableView: UITableView!
     var reduceBtn: UIButton!
@@ -18,7 +21,7 @@ class LjInvestBtnViewController: BaseNavigationController {
     var amountNumTxt: UITextField!
     
     //data
-    var productListData = []
+    var productData: JSON?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,19 +52,28 @@ class LjInvestBtnViewController: BaseNavigationController {
     }
     
     func refreshData(){
-        productListData = []
-        //刷新结束
-        tableView.mj_header.endRefreshing()
-        //刷新数据
-        tableView.reloadData()
+        DataProvider.sharedInstance.getProductDetail(productID) { (data) in
+            if data["status"]["succeed"].intValue == 1{
+                self.productData = data["data"]["productlist"][0]
+                //刷新结束
+                self.tableView.mj_header.endRefreshing()
+                //刷新数据
+                self.tableView.reloadData()
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
+        return
     }
     
     func clickEvent(target: AnyObject) {
+        let minAmount = productData!["min_amount"].intValue
+        let maxAmount = productData!["max_amount"].intValue
         switch target.tag {
         case 1:
-            if amountNumTxt.text == "5000" {
+            if amountNumTxt.text == "\(minAmount)" {
                 return
-            }else if amountNumTxt.text == "6000" {
+            }else if amountNumTxt.text == "\(minAmount + 1000)" {
                 reduceBtn.setImage(UIImage(named: "product_rb_minus_disabled"), forState: .Normal)
                 amountNumTxt.text = "\(Int(amountNumTxt.text!)! - 1000)"
             }else{
@@ -70,9 +82,9 @@ class LjInvestBtnViewController: BaseNavigationController {
                 addBtn.setImage(UIImage(named: "product_rb_plus_normal"), forState: .Normal)
             }
         case 2:
-            if amountNumTxt.text == "30000" {
+            if amountNumTxt.text == "\(maxAmount)" {
                 return
-            }else if Int(amountNumTxt.text!)! >= 5000 && Int(amountNumTxt.text!)! < 30000 - 1000 {
+            }else if Int(amountNumTxt.text!)! >= minAmount && Int(amountNumTxt.text!)! < maxAmount - 1000 {
                 reduceBtn.setImage(UIImage(named: "product_rb_minus_normal"), forState: .Normal)
                 addBtn.setImage(UIImage(named: "product_rb_plus_normal"), forState: .Normal)
                 amountNumTxt.text = "\(Int(amountNumTxt.text!)! + 1000)"
@@ -94,7 +106,7 @@ extension LjInvestBtnViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5;
+        return productData == nil ? 0 : 5;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -110,7 +122,7 @@ extension LjInvestBtnViewController: UITableViewDataSource, UITableViewDelegate{
             detailLbl1.textAlignment = .Center
             detailLbl1.textColor = UIColor.whiteColor()
             detailLbl1.font = UIFont.systemFontOfSize(45)
-            detailLbl1.text = "9.2"
+            detailLbl1.text = productData!["interest_rate"].stringValue
             cell.addSubview(detailLbl1)
             //detailLbl2
             let detailLbl2 = UILabel(frame: CGRectMake(detailLbl1.viewRightX + 1, detailLbl1.viewY + 5, 120, 12))
@@ -128,18 +140,18 @@ extension LjInvestBtnViewController: UITableViewDataSource, UITableViewDelegate{
             view.backgroundColor = UIColor(red:0.95, green:0.27, blue:0.25, alpha:1.00)
             cell.addSubview(view)
             //detailLbl4
-            let detailLbl4 = UILabel(frame: CGRectMake(14, 0, 100, 40))
+            let detailLbl4 = UILabel(frame: CGRectMake(20, 0, 200, 40))
             detailLbl4.textColor = UIColor.whiteColor()
-            detailLbl4.textAlignment = .Center
+            detailLbl4.textAlignment = .Left
             detailLbl4.font = UIFont.systemFontOfSize(14)
-            detailLbl4.text = "24个月封闭期"
+            detailLbl4.text = "\(productData!["duration_type"].stringValue)封闭期"
             view.addSubview(detailLbl4)
             //detailLbl5
             let detailLbl5 = UILabel(frame: CGRectMake(screen_width - 14 - 100, 0, 100, 40))
             detailLbl5.textColor = UIColor.whiteColor()
             detailLbl5.textAlignment = .Right
             detailLbl5.font = UIFont.systemFontOfSize(14)
-            detailLbl5.text = "24个月封闭期"
+            detailLbl5.text = "\(productData!["min_amount"].stringValue)元起投"
             view.addSubview(detailLbl5)
             
         }else if indexPath.row == 1{
@@ -155,7 +167,7 @@ extension LjInvestBtnViewController: UITableViewDataSource, UITableViewDelegate{
             detailLbl2.textColor = UIColor.lightGrayColor()
             detailLbl2.textAlignment = .Right
             detailLbl2.font = UIFont.systemFontOfSize(14)
-            detailLbl2.text = "单笔最高可投50万元"
+            detailLbl2.text = "单笔最高可投\(productData!["min_amount"].intValue / 10000)万元"
             cell.addSubview(detailLbl2)
         }else if indexPath.row == 2{
             //detailLbl1
@@ -190,7 +202,7 @@ extension LjInvestBtnViewController: UITableViewDataSource, UITableViewDelegate{
             detail2.textColor = UIColor.grayColor()
             let formatter = NSNumberFormatter()
             formatter.numberStyle = .DecimalStyle
-            detail2.text = "\(formatter.stringFromNumber(1265000)!)元"
+            detail2.text = "\(formatter.stringFromNumber(productData!["remaining_amount"].intValue)!)元"
             view1.addSubview(detail2)
             //lineView
             let lineView = UIView(frame: CGRectMake(screen_width / 2, 15, 0.5, 70 - 30))
@@ -201,7 +213,7 @@ extension LjInvestBtnViewController: UITableViewDataSource, UITableViewDelegate{
             detail3.font = UIFont.systemFontOfSize(14)
             detail3.textColor = UIColor.lightGrayColor()
             detail3.textAlignment = .Right
-            detail3.text = "预计收益"
+            detail3.text = "预计收益(元)"
             view1.addSubview(detail3)
             //detail4
             let detail4 = UILabel(frame: CGRectMake(screen_width - 100 - 20, detail2.viewY, 100, 14))
@@ -209,7 +221,7 @@ extension LjInvestBtnViewController: UITableViewDataSource, UITableViewDelegate{
             detail4.textColor = UIColor.lightGrayColor()
             detail4.textAlignment = .Right
             detail4.textColor = UIColor.getColorFourth()
-            detail4.text = "920.00"
+            detail4.text = NSString(format: "%.2f", productData!["min_amount"].floatValue * productData!["interest_rate"].floatValue / 100 / 12) as String
             view1.addSubview(detail4)
             
             //view2
@@ -228,7 +240,7 @@ extension LjInvestBtnViewController: UITableViewDataSource, UITableViewDelegate{
             amountNumTxt.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1.0)
             amountNumTxt.layer.borderWidth = 1
             amountNumTxt.layer.borderColor = UIColor.getColorThird().CGColor
-            amountNumTxt.text = "5000"
+            amountNumTxt.text = "\(productData!["min_amount"].stringValue)"
             view2.addSubview(amountNumTxt)
             //加Btn
             addBtn = UIButton(frame: CGRectMake(view2.viewWidth - 35, 0, 35, 35))

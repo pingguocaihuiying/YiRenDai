@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import SwiftyJSON
 
 class ProductListViewController: BaseNavigationController {
 
@@ -18,7 +19,10 @@ class ProductListViewController: BaseNavigationController {
     var tableView: UITableView!
     
     //data
-    var productListData = []
+    var productListData: JSON?
+    var pageData: JSON?
+    var pagenumber: Int!
+    let pagesize = 15
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +51,21 @@ class ProductListViewController: BaseNavigationController {
     }
     
     func refreshData(){
-        productListData = []
-        //刷新结束
-        tableView.mj_header.endRefreshing()
-        //mj_footer设置为:普通闲置状态(Idle)
-        tableView.mj_footer.state = MJRefreshState.Idle
-        //刷新数据
-        tableView.reloadData()
+        pagenumber = 1
+        DataProvider.sharedInstance.getProductList("1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
+            if data["status"]["succeed"].intValue == 1{
+                self.productListData = data["data"]["productlist"]
+                self.pageData = data["data"]["page"]
+                //刷新结束
+                self.tableView.mj_header.endRefreshing()
+                //mj_footer设置为:普通闲置状态(Idle)
+                self.tableView.mj_footer.state = MJRefreshState.Idle
+                //刷新数据
+                self.tableView.reloadData()
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
     }
     
     func loadMore(){
@@ -63,18 +75,17 @@ class ProductListViewController: BaseNavigationController {
         //刷新结束
         tableView.mj_footer.endRefreshing()
         //判断数据是否全部加载完
-        if productListData.count >= 30{
+        if productListData!.count >= 30{
             tableView.mj_footer.state = MJRefreshState.NoMoreData
         }
         //刷新数据
         tableView.reloadData()
     }
-
 }
 
 extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 6
+        return 1 + (productListData == nil ? 0 : productListData!.count)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -97,14 +108,19 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
         default:
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierNib, forIndexPath: indexPath) as! ProductListTableViewCell
             cell.selectionStyle = UITableViewCellSelectionStyle.None
-            let titleLbl = UILabel(frame: CGRectMake(0, 0, cell.titleView.viewWidth, cell.titleView.viewHeight))
-            titleLbl.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1.0)
-            titleLbl.font = UIFont.systemFontOfSize(16)
-            titleLbl.text = "易定盈S-6月期"
-            cell.titleView.addSubview(titleLbl)
-            cell.shouyiLbl.text = "9.9%"
-            cell.fengbiqiLbl.text = "18个月"
-            cell.amountLbl.text = "5000元"
+            let is_tiro = productListData![indexPath.section - 1]["is_tiro"].intValue
+            if is_tiro == 1 {
+                
+            }else{
+                let titleLbl = UILabel(frame: CGRectMake(0, 0, cell.titleView.viewWidth, cell.titleView.viewHeight))
+                titleLbl.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1.0)
+                titleLbl.font = UIFont.systemFontOfSize(16)
+                titleLbl.text = productListData![indexPath.section - 1]["product_name"].stringValue
+                cell.titleView.addSubview(titleLbl)
+            }
+            cell.shouyiLbl.text = "\(productListData![indexPath.section - 1]["interest_rate"].stringValue)%"
+            cell.fengbiqiLbl.text = productListData![indexPath.section - 1]["duration_type"].stringValue
+            cell.amountLbl.text = "\(productListData![indexPath.section - 1]["min_amount"].stringValue)元"
             return cell
         }
     }
@@ -135,7 +151,8 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section > 0 {
             let ljInvestBtnVC = LjInvestBtnViewController()
-            ljInvestBtnVC.navtitle = "宜定盈S-24月期"
+            ljInvestBtnVC.productID = productListData![indexPath.section - 1]["product_id"].stringValue
+            ljInvestBtnVC.navtitle = productListData![indexPath.section - 1]["product_name"].stringValue
             ljInvestBtnVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(ljInvestBtnVC, animated: true)
         }

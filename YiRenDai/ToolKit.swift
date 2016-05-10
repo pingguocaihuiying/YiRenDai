@@ -17,7 +17,7 @@ let top_height:CGFloat = 64
 let tabBar_height:CGFloat = 49
 
 //网络请求链接前缀
-let URL = "http://115.28.67.86:8083/index.php?r=api/"
+let URL = "http://115.28.67.86:8083/index.php?r=api"
 
 //SMSSDK
 let SMSSDK_AppKey = "1283183fef2d8"
@@ -43,5 +43,15 @@ class ToolKit{
     static func getTopView() -> UIView{
         let view = UIApplication.sharedApplication().keyWindow?.subviews[0]
         return view!
+    }
+    
+    /**
+     对电话进行编辑 -- 中间四位替换为*
+     - parameter phone: 手机号
+     - returns: 返回修改后的手机号
+     */
+    static func phoneEdit(phone: String) -> String{
+        let str = phone[phone.startIndex.advancedBy(3) ..< phone.startIndex.advancedBy(7)]
+        return phone.stringByReplacingOccurrencesOfString(str, withString: "****")
     }
 }

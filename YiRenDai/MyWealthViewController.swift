@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import SwiftyJSON
 
 class MyWealthViewController: BaseViewController {
 
@@ -15,11 +16,7 @@ class MyWealthViewController: BaseViewController {
     
     //view
     var tableView: UITableView!
-    var stretchHeaderView = HFStretchableTableHeaderView()
     var loginVC: LoginViewController!
-    
-    //data
-    var myWealthData = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +29,7 @@ class MyWealthViewController: BaseViewController {
             self.view.addSubview(loginVC.view)
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateData), name: "updateData", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateData(_:)), name: "updateData", object: nil)
     }
     
     //MARK:自定义方法
@@ -59,7 +56,6 @@ class MyWealthViewController: BaseViewController {
     }
     
     func refreshData(){
-        myWealthData = []
         //刷新结束
         tableView.mj_header.endRefreshing()
         //刷新数据
@@ -90,7 +86,7 @@ class MyWealthViewController: BaseViewController {
         }
     }
     
-    func updateData(){
+    func updateData(notification: NSNotification){
         initView()
     }
     
@@ -140,7 +136,7 @@ extension MyWealthViewController: UITableViewDataSource, UITableViewDelegate{
                 contentView.addSubview(imageView2)
                 //name
                 let nameLbl = UILabel(frame: CGRectMake(imageView2.viewRightX + 5, imageView2.viewY + 2, 100, 21))
-                nameLbl.text = "名称"
+                nameLbl.text = "姓名"
                 nameLbl.font = UIFont.systemFontOfSize(17)
                 nameLbl.textColor = UIColor.whiteColor()
                 contentView.addSubview(nameLbl)

@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import SwiftyJSON
 
 class LcqViewController: BaseNavigationController {
 
@@ -18,7 +19,9 @@ class LcqViewController: BaseNavigationController {
     var tableView: UITableView!
     
     //data
-    var lcqData = []
+    var lcqData: JSON?
+    var pagenumber: Int!
+    var pagesize = 15
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,13 +50,20 @@ class LcqViewController: BaseNavigationController {
     }
     
     func refreshData(){
-        lcqData = []
-        //刷新结束
-        tableView.mj_header.endRefreshing()
-        //mj_footer设置为:普通闲置状态(Idle)
-        tableView.mj_footer.state = MJRefreshState.Idle
-        //刷新数据
-        tableView.reloadData()
+        pagenumber = 0
+        DataProvider.sharedInstance.getArticleList("1", status_code: "1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
+            if data["status"]["succeed"].intValue == 1{
+                self.lcqData = data["data"]
+                //刷新结束
+                self.tableView.mj_header.endRefreshing()
+                //mj_footer设置为:普通闲置状态(Idle)
+                self.tableView.mj_footer.state = MJRefreshState.Idle
+                //刷新数据
+                self.tableView.reloadData()
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
     }
     
     func loadMore(){
@@ -63,7 +73,7 @@ class LcqViewController: BaseNavigationController {
         //刷新结束
         tableView.mj_footer.endRefreshing()
         //判断数据是否全部加载完
-        if lcqData.count >= 30{
+        if lcqData!.count >= 30{
             tableView.mj_footer.state = MJRefreshState.NoMoreData
         }
         //刷新数据
@@ -74,7 +84,7 @@ class LcqViewController: BaseNavigationController {
 
 extension LcqViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 6
+        return 1 + (lcqData == nil ? 0 : lcqData!.count)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -104,8 +114,8 @@ extension LcqViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         default:
             let cell = tableView.dequeueReusableCellWithIdentifier(lcqCell, forIndexPath: indexPath) as! LcqTableViewCell
-            cell.titleLbl.text = "美国Lendlt大会，今天正式发布了XXX产品"
-            cell.detailLbl.text = "通过科技来改变生活，从而让生活更加的方便"
+            cell.titleLbl.text = lcqData![indexPath.section - 1]["article_title"].stringValue
+            cell.detailLbl.text = lcqData![indexPath.section - 1]["article_title"].stringValue
             cell.typeIv.image = UIImage(named: "community_article")
             cell.dateLbl.text = "2016-04-18"
             cell.imageIv.image = UIImage(named: "image4")
