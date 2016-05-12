@@ -50,14 +50,19 @@ class LcqViewController: BaseNavigationController {
     }
     
     func refreshData(){
-        pagenumber = 0
+        pagenumber = 1
         DataProvider.sharedInstance.getArticleList("1", status_code: "1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
             if data["status"]["succeed"].intValue == 1{
-                self.lcqData = data["data"]
+                self.lcqData = data["data"]["articlelist"]
                 //刷新结束
                 self.tableView.mj_header.endRefreshing()
-                //mj_footer设置为:普通闲置状态(Idle)
-                self.tableView.mj_footer.state = MJRefreshState.Idle
+                if self.lcqData!.count == data["data"]["page"]["total"].intValue{
+                    // 所有数据加载完毕，没有更多的数据了
+                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
+                }else{
+                    // mj_footer设置为:普通闲置状态(Idle)
+                    self.tableView.mj_footer.state = MJRefreshState.Idle
+                }
                 //刷新数据
                 self.tableView.reloadData()
             }else{
@@ -115,10 +120,11 @@ extension LcqViewController: UITableViewDataSource, UITableViewDelegate{
         default:
             let cell = tableView.dequeueReusableCellWithIdentifier(lcqCell, forIndexPath: indexPath) as! LcqTableViewCell
             cell.titleLbl.text = lcqData![indexPath.section - 1]["article_title"].stringValue
-            cell.detailLbl.text = lcqData![indexPath.section - 1]["article_title"].stringValue
+            cell.detailLbl.text = lcqData![indexPath.section - 1]["article_content"].stringValue
             cell.typeIv.image = UIImage(named: "community_article")
-            cell.dateLbl.text = "2016-04-18"
-            cell.imageIv.image = UIImage(named: "image4")
+            cell.dateLbl.text = lcqData![indexPath.section - 1]["create_time"].stringValue
+            let url = "\(lcqData![indexPath.section - 1]["article_image"].stringValue)"
+            cell.imageIv.imageFromURL(url, placeholder: UIImage())
             return cell
         }
     }
@@ -143,6 +149,18 @@ extension LcqViewController: UITableViewDataSource, UITableViewDelegate{
         
         if cell .respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")){
             cell.preservesSuperviewLayoutMargins = false
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if indexPath.section == 0 {
+            
+        }else{
+            let lcqDetailVC = LcqDetailViewController()
+            lcqDetailVC.navtitle = lcqData![indexPath.section - 1]["article_title"].stringValue
+            lcqDetailVC.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(lcqDetailVC, animated: true)
         }
     }
     

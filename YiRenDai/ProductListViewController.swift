@@ -20,7 +20,6 @@ class ProductListViewController: BaseNavigationController {
     
     //data
     var productListData: JSON?
-    var pageData: JSON?
     var pagenumber: Int!
     let pagesize = 15
     
@@ -55,11 +54,15 @@ class ProductListViewController: BaseNavigationController {
         DataProvider.sharedInstance.getProductList("1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
             if data["status"]["succeed"].intValue == 1{
                 self.productListData = data["data"]["productlist"]
-                self.pageData = data["data"]["page"]
                 //刷新结束
                 self.tableView.mj_header.endRefreshing()
-                //mj_footer设置为:普通闲置状态(Idle)
-                self.tableView.mj_footer.state = MJRefreshState.Idle
+                if self.productListData!.count == data["data"]["page"]["total"].intValue{
+                    // 所有数据加载完毕，没有更多的数据了
+                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
+                }else{
+                    // mj_footer设置为:普通闲置状态(Idle)
+                    self.tableView.mj_footer.state = MJRefreshState.Idle
+                }
                 //刷新数据
                 self.tableView.reloadData()
             }else{

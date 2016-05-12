@@ -29,7 +29,7 @@ class MyWealthViewController: BaseViewController {
             self.view.addSubview(loginVC.view)
         }
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateData(_:)), name: "updateData", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateMyWealthData(_:)), name: "updateMyWealthData", object: nil)
     }
     
     //MARK:自定义方法
@@ -86,7 +86,7 @@ class MyWealthViewController: BaseViewController {
         }
     }
     
-    func updateData(notification: NSNotification){
+    func updateMyWealthData(notification: NSNotification){
         initView()
     }
     

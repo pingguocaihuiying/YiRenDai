@@ -102,6 +102,9 @@ class DataProvider {
         }
     }
     
+    //MARK: - 我的财富
+    
+    //MARK: - 理财圈
     /**
      获取文章列表
      - parameter channel_id:  文章分类ID,1:理财圈；2：活动中心
@@ -111,16 +114,25 @@ class DataProvider {
      - parameter handler:     回调方法
      */
     func getArticleList(channel_id: String, status_code: String, pagenumber: String, pagesize: String, handler: (data: JSON) -> Void){
-        let url = "\(URL)/article/getArticleList"
+        let url = "\(URL)/article/getArticles"
         let params = ["json":"{\"channel_id\":\"\(channel_id)\",\"status_code\":\"\(status_code)\"}","page":"{\"pagenumber\":\"\(pagenumber)\",\"pagesize\":\"\(pagesize)\"}"]
         obj.postRequest(url: url, params: params) { (json) in
             handler(data: json)
         }
     }
     
-    //MARK: - 我的财富
-    
-    //MARK: - 理财圈
+    /**
+     根据ID获取文章详情
+     - parameter article_id: 文章ID
+     - parameter handler:    回调方法
+     */
+    func getArticleDetail(article_id: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/article/getArticles"
+        let params = ["json":"{\"article_id\":\"\(article_id)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
     
     //MARK: - 更多
 }

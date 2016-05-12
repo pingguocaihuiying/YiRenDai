@@ -22,10 +22,8 @@ class MoreViewController: BaseNavigationController {
         setTopViewTitle("更多")
         
         initView()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Automatic)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(updateMoreData), name: "updateMoreData", object: nil)
     }
     
     //MARK:自定义方法
@@ -45,19 +43,24 @@ class MoreViewController: BaseNavigationController {
         case 1:
             if logoutBtn.titleLabel?.text == "登录" {
                 let loginVC = LoginViewController()
+                loginVC.isShowBackBtn = true
                 navigationController?.pushViewController(loginVC, animated: true)
             }else{
                 view.viewAlert(self, title: "确认退出账号？", msg: nil, cancelButtonTitle: "取消", otherButtonTitle: "确认", handler: { (buttonIndex, action) in
                     if buttonIndex == 1{
                         NSUserDefaults.setUserDefaultValue(false, forKey: "isLogin")
                         self.logoutBtn.setTitle("登录", forState: .Normal)
-                        NSNotificationCenter.defaultCenter().postNotificationName("updateData", object: nil)
+                        NSNotificationCenter.defaultCenter().postNotificationName("updateMyWealthData", object: nil)
                     }
                 })
             }
         default:
             break
         }
+    }
+    
+    func updateMoreData(){
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Automatic)
     }
 
 }
@@ -80,7 +83,6 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
         switch indexPath.section {
         case 0:
             switch indexPath.row {
@@ -140,6 +142,7 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.accessoryType = .DisclosureIndicator
                 //customBtn
                 let customBtn = CLButton(frame: CGRectMake(14, 0, screen_width, 45), imageName: "more_team", title: "设置")
+                customBtn.userInteractionEnabled = false
                 cell.addSubview(customBtn)
                 //rightLbl
                 let rightLbl = UILabel(frame: CGRectMake(screen_width - 25 - 100, (45 - 21) / 2, 100, 21))
@@ -205,14 +208,30 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
         switch indexPath.section {
         case 1:
-            if indexPath.row == 1 {
+            if indexPath.row == 0 {
+                let manageTeamVC = ManageTeamViewController()
+                manageTeamVC.hidesBottomBarWhenPushed = true
+                manageTeamVC.navtitle = "管理团队"
+                navigationController?.pushViewController(manageTeamVC, animated: true)
+            }else if indexPath.row == 1 {
                 let contactUsVC = ContactUsViewController()
                 contactUsVC.navtitle = "联系我们"
                 contactUsVC.hidesBottomBarWhenPushed = true
                 navigationController?.pushViewController(contactUsVC, animated: true)
+            }else if indexPath.row == 2{
+                let faqVC = FAQViewController()
+                faqVC.hidesBottomBarWhenPushed = true
+                faqVC.navtitle = "常见问题"
+                navigationController?.pushViewController(faqVC, animated: true)
             }
+        case 2:
+            let settingVC = SettingsViewController()
+            settingVC.navtitle = "设置"
+            settingVC.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(settingVC, animated: true)
         default:
             break
         }

@@ -11,6 +11,8 @@ import SwiftyJSON
 
 class LoginViewController: BaseNavigationController, UITextFieldDelegate {
     
+    var isShowBackBtn = Bool()
+    
     //view
     var accountIv: UIImageView!
     var accountTxt: UITextField!
@@ -23,6 +25,9 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
         super.viewDidLoad()
         
         setTopViewTitle("登录")
+        if isShowBackBtn {
+            setTopViewLeftBtnImg("left")
+        }
         setTopViewRightBtn("找回密码")
         view.backgroundColor = UIColor.getColorThird()
         initView()
@@ -36,6 +41,12 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
         }
         if passwordTxt.text == "" {
             passwordIv.image = UIImage(named: "lg_psd_normal")
+        }
+    }
+    
+    override func clickLeftBtnEvent() {
+        if isShowBackBtn{
+            super.clickLeftBtnEvent()
         }
     }
     
@@ -123,6 +134,7 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
         DataProvider.sharedInstance.login(accountTxt.text!, password: passwordTxt.text!) { (state, message, data) in
             if state == 1{
                 NSUserDefaults.setUserDefaultValue(true, forKey: "isLogin")
+                NSNotificationCenter.defaultCenter().postNotificationName("updateMoreData", object: nil)
                 let customTabBarVC = CustomTabBarViewController()
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 appDelegate.window!.rootViewController = customTabBarVC
