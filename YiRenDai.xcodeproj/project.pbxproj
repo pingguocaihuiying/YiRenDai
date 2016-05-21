@@ -11,9 +11,6 @@
 		B70CC12D1CE411D1002C1445 /* FAQDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70CC12B1CE411D1002C1445 /* FAQDetailTableViewCell.swift */; };
 		B70CC12E1CE411D2002C1445 /* FAQDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B70CC12C1CE411D1002C1445 /* FAQDetailTableViewCell.xib */; };
 		B70CC1311CE42D22002C1445 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70CC1301CE42D22002C1445 /* SettingsViewController.swift */; };
-		B70CC13C1CE47B68002C1445 /* GesturePasswordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70CC1391CE47B68002C1445 /* GesturePasswordButton.swift */; };
-		B70CC13D1CE47B68002C1445 /* GesturePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70CC13A1CE47B68002C1445 /* GesturePasswordView.swift */; };
-		B70CC13E1CE47B68002C1445 /* TentacleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70CC13B1CE47B68002C1445 /* TentacleView.swift */; };
 		B70CC1401CE47C1B002C1445 /* GesturePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70CC13F1CE47C1B002C1445 /* GesturePasswordViewController.swift */; };
 		B716E9781CDC7B62004AC76D /* UICopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B716E9771CDC7B62004AC76D /* UICopyLabel.swift */; };
 		B7248FA31CC5CFA7000A4D78 /* ProductListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7248FA11CC5CFA7000A4D78 /* ProductListTableViewCell.swift */; };
@@ -22,6 +19,7 @@
 		B72CBF6B1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72CBF6A1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m */; };
 		B75E1D621CCF3F99001F0B44 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E1D611CCF3F99001F0B44 /* MyAccountViewController.swift */; };
 		B75E1D641CCF55E1001F0B44 /* TixianViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E1D631CCF55E1001F0B44 /* TixianViewController.swift */; };
+		B76794AE1CE5B5E800404794 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76794AD1CE5B5E800404794 /* AlertView.swift */; };
 		B76DF5931CE2C76F00BF7912 /* LcqDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DF5921CE2C76F00BF7912 /* LcqDetailViewController.swift */; };
 		B76DF5971CE2CCF900BF7912 /* AFImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DF5951CE2CCF900BF7912 /* AFImageExtension.swift */; };
 		B76DF5981CE2CCF900BF7912 /* AFImageVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DF5961CE2CCF900BF7912 /* AFImageVIewExtension.swift */; };
@@ -73,6 +71,9 @@
 		B7AEA4B81CD834DC006194C6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AEA4B71CD834DC006194C6 /* RegisterViewController.swift */; };
 		B7AEA4BA1CD84FA8006194C6 /* RegisterFinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AEA4B91CD84FA8006194C6 /* RegisterFinishViewController.swift */; };
 		B7AEA4BC1CD88E89006194C6 /* LoadingAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AEA4BB1CD88E89006194C6 /* LoadingAnimation.swift */; };
+		B7BEB90C1CE5736E0089D20D /* GesturePasswordButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BEB9091CE5736E0089D20D /* GesturePasswordButton.swift */; };
+		B7BEB90D1CE5736E0089D20D /* GesturePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BEB90A1CE5736E0089D20D /* GesturePasswordView.swift */; };
+		B7BEB90E1CE5736E0089D20D /* TentacleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7BEB90B1CE5736E0089D20D /* TentacleView.swift */; };
 		B7D3FD3E1CCD98B600E67ABF /* LjInvestBtnViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D3FD3D1CCD98B600E67ABF /* LjInvestBtnViewController.swift */; };
 		B7DBC3261CC8A6C100D2C214 /* LcqViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DBC3251CC8A6C100D2C214 /* LcqViewController.swift */; };
 		B7DBC3291CC8ACDB00D2C214 /* LcqTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DBC3271CC8ACDB00D2C214 /* LcqTableViewCell.swift */; };
@@ -106,9 +107,6 @@
 		B70CC12B1CE411D1002C1445 /* FAQDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B70CC12C1CE411D1002C1445 /* FAQDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FAQDetailTableViewCell.xib; sourceTree = "<group>"; };
 		B70CC1301CE42D22002C1445 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		B70CC1391CE47B68002C1445 /* GesturePasswordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordButton.swift; sourceTree = "<group>"; };
-		B70CC13A1CE47B68002C1445 /* GesturePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordView.swift; sourceTree = "<group>"; };
-		B70CC13B1CE47B68002C1445 /* TentacleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TentacleView.swift; sourceTree = "<group>"; };
 		B70CC13F1CE47C1B002C1445 /* GesturePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordViewController.swift; sourceTree = "<group>"; };
 		B716E9771CDC7B62004AC76D /* UICopyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICopyLabel.swift; sourceTree = "<group>"; };
 		B7248FA11CC5CFA7000A4D78 /* ProductListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListTableViewCell.swift; sourceTree = "<group>"; };
@@ -119,6 +117,7 @@
 		B72CBF6A1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HFStretchableTableHeaderView.m; sourceTree = "<group>"; };
 		B75E1D611CCF3F99001F0B44 /* MyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		B75E1D631CCF55E1001F0B44 /* TixianViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TixianViewController.swift; sourceTree = "<group>"; };
+		B76794AD1CE5B5E800404794 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		B76DF5921CE2C76F00BF7912 /* LcqDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcqDetailViewController.swift; sourceTree = "<group>"; };
 		B76DF5951CE2CCF900BF7912 /* AFImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AFImageExtension.swift; sourceTree = "<group>"; };
 		B76DF5961CE2CCF900BF7912 /* AFImageVIewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AFImageVIewExtension.swift; sourceTree = "<group>"; };
@@ -177,6 +176,9 @@
 		B7AEA4B71CD834DC006194C6 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		B7AEA4B91CD84FA8006194C6 /* RegisterFinishViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterFinishViewController.swift; sourceTree = "<group>"; };
 		B7AEA4BB1CD88E89006194C6 /* LoadingAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingAnimation.swift; sourceTree = "<group>"; };
+		B7BEB9091CE5736E0089D20D /* GesturePasswordButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordButton.swift; sourceTree = "<group>"; };
+		B7BEB90A1CE5736E0089D20D /* GesturePasswordView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordView.swift; sourceTree = "<group>"; };
+		B7BEB90B1CE5736E0089D20D /* TentacleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TentacleView.swift; sourceTree = "<group>"; };
 		B7D3FD3D1CCD98B600E67ABF /* LjInvestBtnViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LjInvestBtnViewController.swift; sourceTree = "<group>"; };
 		B7DBC3251CC8A6C100D2C214 /* LcqViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcqViewController.swift; sourceTree = "<group>"; };
 		B7DBC3271CC8ACDB00D2C214 /* LcqTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcqTableViewCell.swift; sourceTree = "<group>"; };
@@ -231,9 +233,9 @@
 		B70CC1381CE47B22002C1445 /* GesturePassword */ = {
 			isa = PBXGroup;
 			children = (
-				B70CC1391CE47B68002C1445 /* GesturePasswordButton.swift */,
-				B70CC13A1CE47B68002C1445 /* GesturePasswordView.swift */,
-				B70CC13B1CE47B68002C1445 /* TentacleView.swift */,
+				B7BEB9091CE5736E0089D20D /* GesturePasswordButton.swift */,
+				B7BEB90A1CE5736E0089D20D /* GesturePasswordView.swift */,
+				B7BEB90B1CE5736E0089D20D /* TentacleView.swift */,
 			);
 			name = GesturePassword;
 			sourceTree = "<group>";
@@ -271,6 +273,7 @@
 				B77C93181CD05F1700739CBE /* CLMenu.swift */,
 				B7AEA4BB1CD88E89006194C6 /* LoadingAnimation.swift */,
 				B716E9771CDC7B62004AC76D /* UICopyLabel.swift */,
+				B76794AD1CE5B5E800404794 /* AlertView.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -729,15 +732,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7816E9B1CC4CF5700EC4B77 /* CLButton.swift in Sources */,
+				B7BEB90D1CE5736E0089D20D /* GesturePasswordView.swift in Sources */,
 				B75E1D641CCF55E1001F0B44 /* TixianViewController.swift in Sources */,
 				B7248FA31CC5CFA7000A4D78 /* ProductListTableViewCell.swift in Sources */,
 				B70CC12A1CE40CA6002C1445 /* FAQDetailViewController.swift in Sources */,
+				B76794AE1CE5B5E800404794 /* AlertView.swift in Sources */,
+				B7BEB90C1CE5736E0089D20D /* GesturePasswordButton.swift in Sources */,
 				B7801BCD1CCB66F0003EDEFA /* ActivityCenterTableViewCell.swift in Sources */,
 				B7816E841CC48A4800EC4B77 /* ToolKit.swift in Sources */,
 				B7816E8B1CC48AAC00EC4B77 /* CustomTabBarViewController.swift in Sources */,
 				B7DBC3291CC8ACDB00D2C214 /* LcqTableViewCell.swift in Sources */,
 				B76DF5971CE2CCF900BF7912 /* AFImageExtension.swift in Sources */,
 				B72CBF6B1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m in Sources */,
+				B7BEB90E1CE5736E0089D20D /* TentacleView.swift in Sources */,
 				B75E1D621CCF3F99001F0B44 /* MyAccountViewController.swift in Sources */,
 				B70CC12D1CE411D1002C1445 /* FAQDetailTableViewCell.swift in Sources */,
 				B7819AC41CD73BCA0078E02F /* Timer.swift in Sources */,
@@ -758,7 +765,6 @@
 				B76DF5A21CE31A9200BF7912 /* FAQViewController.swift in Sources */,
 				B76DF59B1CE2D54C00BF7912 /* ManageTeamViewController.swift in Sources */,
 				B78B66A81CDB2FD8005232FF /* ContactUsTableViewCell.swift in Sources */,
-				B70CC13E1CE47B68002C1445 /* TentacleView.swift in Sources */,
 				B78B66A41CDB2F16005232FF /* ContactUsViewController.swift in Sources */,
 				B7816E8C1CC48AAC00EC4B77 /* StartScrollViewController.swift in Sources */,
 				B7816E9D1CC4DBE800EC4B77 /* UIColorExtension.swift in Sources */,
@@ -766,7 +772,6 @@
 				B77C93131CD03FC700739CBE /* MyGiftViewController.swift in Sources */,
 				B76DF5931CE2C76F00BF7912 /* LcqDetailViewController.swift in Sources */,
 				B7DBC32D1CC8B50200D2C214 /* MoreViewController.swift in Sources */,
-				B70CC13D1CE47B68002C1445 /* GesturePasswordView.swift in Sources */,
 				B7816E801CC48A2400EC4B77 /* UITextViewExtension.swift in Sources */,
 				B78B669A1CDB216A005232FF /* DataProvider.swift in Sources */,
 				B7816E7F1CC48A2400EC4B77 /* NSDateExtension.swift in Sources */,
@@ -783,7 +788,6 @@
 				B7AEA4BC1CD88E89006194C6 /* LoadingAnimation.swift in Sources */,
 				B7816E4C1CC46AA800EC4B77 /* AppDelegate.swift in Sources */,
 				B76DF5A51CE31B6E00BF7912 /* FAQTableViewCell.swift in Sources */,
-				B70CC13C1CE47B68002C1445 /* GesturePasswordButton.swift in Sources */,
 				B79474061CDD6AEC00F78C26 /* FeedbackViewController.swift in Sources */,
 				B78143251CE038D500BE13A7 /* UserInfo.swift in Sources */,
 				B77C93151CD047F400739CBE /* YirenbiViewController.swift in Sources */,

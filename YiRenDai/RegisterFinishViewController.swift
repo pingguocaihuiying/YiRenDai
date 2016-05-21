@@ -153,7 +153,7 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
         lineView7.backgroundColor = UIColor.getColorSecond()
         contentView.addSubview(lineView7)
         
-        //nextBtn
+        //okBtn
         okBtn = UIButton(frame: CGRectMake(14, contentView.viewBottomY + 40, screen_width - 28, 45))
         okBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Disabled)
         okBtn.titleLabel?.font = UIFont.systemFontOfSize(16)

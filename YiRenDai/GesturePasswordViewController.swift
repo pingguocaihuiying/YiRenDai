@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol ChangeGesturePwdDelegate {
+    func changeGesturePwd(state: Int)
+}
+
 class GesturePasswordViewController: UIViewController, VerificationDelegate, ResetDelegate, GesturePasswordDelegate {
     
     var gesturePasswordType: Int!
@@ -16,15 +20,23 @@ class GesturePasswordViewController: UIViewController, VerificationDelegate, Res
     
     var previousString:String? = ""
     var password:String? = ""
-
+    
+    var delegate: ChangeGesturePwdDelegate?
+    
+    //var secKey:String = "GesturePassword4Swift"
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
         
-        if gesturePasswordType == 1 {
-            reset()
-        }else{
-            verify()
+        if gesturePasswordType == 1{
+            self.reset()
         }
+        else if gesturePasswordType == 2{
+            self.verify()
+        }
+        
     }
     
     //MARK: - 重置手势密码
@@ -34,9 +46,8 @@ class GesturePasswordViewController: UIViewController, VerificationDelegate, Res
         gesturePasswordView.gesturePasswordDelegate = self
         gesturePasswordView.tentacleView!.style = 2
         gesturePasswordView.forgetButton!.hidden = true
-        gesturePasswordView.changeButton!.hidden = true
-        gesturePasswordView.setTopViewTitle("开启手势密码")
         gesturePasswordView.backgroundColor = UIColor.whiteColor()
+        gesturePasswordView.setTopViewTitle("开启手势密码")
         self.view.addSubview(gesturePasswordView)
         
         gesturePasswordView.state!.text = "绘制解锁图案"
@@ -47,78 +58,84 @@ class GesturePasswordViewController: UIViewController, VerificationDelegate, Res
     func verify(){
         gesturePasswordView = GesturePasswordView(frame: UIScreen.mainScreen().bounds)
         gesturePasswordView.tentacleView!.rerificationDelegate = self
-        gesturePasswordView.tentacleView!.style = 1
         gesturePasswordView.gesturePasswordDelegate = self
-        gesturePasswordView.setTopViewTitle("手势密码")
+        gesturePasswordView.tentacleView!.style = 1
+        gesturePasswordView.changeButton!.hidden = true
         gesturePasswordView.backgroundColor = UIColor.whiteColor()
+        gesturePasswordView.setTopViewTitle("手势密码")
         self.view.addSubview(gesturePasswordView)
-        
         gesturePasswordView.state!.text = "输入原手势密码"
+        
     }
     
-    //验证密码
     func verification(result:String)->Bool{
-        
-        // println("password:\(result)====\(password)")
         if(result == password){
-            
             gesturePasswordView.state!.textColor = UIColor.whiteColor()
             gesturePasswordView.state!.text = "输入正确"
-            
+            if delegate != nil {
+                delegate?.changeGesturePwd(0)
+            }
+            backFunc()
             return true
         }
+        gesturePasswordView.tentacleView!.enterArgin()
         gesturePasswordView.state!.textColor = UIColor.redColor()
-        gesturePasswordView.state!.text = "手势密码错误"
+        gesturePasswordView.state!.text = "手势密码错误，请重新绘制"
         return false
     }
     
-    //重设密码
     func resetPassword(result: String) -> Bool {
+        if result.characters.count < 4{
+            gesturePasswordView.state!.text = "至少连接4个点，请重新绘制"
+            return false
+        }
         if(previousString == ""){
             previousString = result
             gesturePasswordView.tentacleView!.enterArgin()
             gesturePasswordView.state!.textColor = UIColor(red: 2/255, green: 174/255, blue: 240/255, alpha: 1)
             gesturePasswordView.state!.text = "再次绘制解锁图案"
-            
             return true
         }else{
-            
             if(result == previousString){
-                
-                
-                
-                //KeychainWrapper.setString(result, forKey: secKey)
-                
                 gesturePasswordView.state!.textColor = UIColor(red: 2/255, green: 174/255, blue: 240/255, alpha: 1)
                 gesturePasswordView.state!.text = "已保存手势密码"
-                
-                
+                if delegate != nil {
+                    delegate?.changeGesturePwd(1)
+                }
+                backFunc()
                 return true;
             }else{
-                previousString = "";
+                gesturePasswordView.tentacleView!.enterArgin()
                 gesturePasswordView.state!.textColor = UIColor.redColor()
-                gesturePasswordView.state!.text = "两次密码不一致，请重新输入"
-                
+                gesturePasswordView.state!.text = "与上次绘制不一致，请重新绘制"
                 return false
             }
-            
         }
     }
     
     //MARK: - 改变手势密码
     func change(){
-        
-        print("改变手势密码")
-        
+        previousString = ""
+        gesturePasswordView.tentacleView!.enterArgin()
+        gesturePasswordView.state!.textColor = UIColor.redColor()
+        gesturePasswordView.state!.text = "重新绘制解锁图案"
     }
     
     //MARK: - 忘记密码
     func forget(){
         print("忘记密码")
     }
-
-    //MARK: - 点击左按钮返回
+    
+    //点击左按钮触发事件
     func clickLeftBtnEventGesturePwd() {
-        self.navigationController?.popViewControllerAnimated(true)
+        backFunc()
+    }
+    
+    func backFunc(){
+        if navigationController != nil {
+            navigationController?.popViewControllerAnimated(true)
+        }else{
+            dismissViewControllerAnimated(true, completion: nil)
+        }
     }
 }

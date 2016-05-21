@@ -33,17 +33,17 @@ class GesturePasswordView: UIView,TouchBeginDelegate {
     
     private var lineStartPoint:CGPoint?
     private var lineEndPoint:CGPoint?
-
+    
     private var topView:UIView!
     private var titleLbl:UILabel!
     private var leftBtn:UIButton!
+
     
     override init(frame: CGRect) {
         
         super.init(frame: frame)
         
         // Initialization code
-        
         initTopView()
       
         let view = UIView(frame:CGRectMake(frame.size.width/2-160, frame.size.height/2-80, 320, 320))
@@ -77,7 +77,7 @@ class GesturePasswordView: UIView,TouchBeginDelegate {
         
         state = UILabel(frame: CGRectMake(frame.size.width/2-140, frame.size.height/2-120, 280, 30))
         state!.textAlignment = NSTextAlignment.Center
-        state!.font = UIFont.systemFontOfSize(14)
+        state!.font = UIFont.systemFontOfSize(15)
         self.addSubview(state!)
         
         imgView = UIImageView(frame:CGRectMake(frame.size.width/2-35, frame.size.width/2-80, 70, 70))
@@ -86,17 +86,17 @@ class GesturePasswordView: UIView,TouchBeginDelegate {
         imgView!.layer.cornerRadius = 35
         self.addSubview(imgView!)
         
-        forgetButton = UIButton(frame:CGRectMake(frame.size.width/2-150, frame.size.height/2+220, 120, 30))
+        forgetButton = UIButton(frame:CGRectMake((frame.size.width - 120) / 2, frame.size.height/2+220, 120, 30))
         forgetButton!.titleLabel?.font = UIFont.systemFontOfSize(14)
-        forgetButton!.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        forgetButton!.setTitleColor(UIColor(red: 2/255, green: 174/255, blue: 240/255, alpha: 1), forState: UIControlState.Normal)
         forgetButton!.setTitle("忘记手势密码", forState: UIControlState.Normal)
         forgetButton!.addTarget(self, action: #selector(GesturePasswordView.forget), forControlEvents: UIControlEvents.TouchDown)
         self.addSubview(forgetButton!)
         
-        changeButton = UIButton(frame:CGRectMake(frame.size.width/2+30, frame.size.height/2+220, 120, 30))
+        changeButton = UIButton(frame:CGRectMake((frame.size.width - 120) / 2, frame.size.height/2+220, 120, 30))
         changeButton!.titleLabel?.font = UIFont.systemFontOfSize(14)
-        changeButton!.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-        changeButton!.setTitle("修改手势密码", forState: UIControlState.Normal)
+        changeButton!.setTitleColor(UIColor(red: 2/255, green: 174/255, blue: 240/255, alpha: 1), forState: UIControlState.Normal)
+        changeButton!.setTitle("重新设置密码", forState: UIControlState.Normal)
         changeButton!.addTarget(self, action: #selector(GesturePasswordView.change), forControlEvents: UIControlEvents.TouchDown)
         self.addSubview(changeButton!)
         
@@ -128,17 +128,6 @@ class GesturePasswordView: UIView,TouchBeginDelegate {
         self.addSubview(leftBtn)
     }
     
-    //设置lblTitle文本
-    func setTopViewTitle(title:String){
-        titleLbl.text = title
-    }
-    
-    //点击左按钮触发事件
-    func clickLeftBtnEventGesturePwd(){
-        if(gesturePasswordDelegate != nil){
-            gesturePasswordDelegate!.clickLeftBtnEventGesturePwd()
-        }
-    }
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -175,6 +164,18 @@ class GesturePasswordView: UIView,TouchBeginDelegate {
     func change(){
         if(gesturePasswordDelegate != nil){
             gesturePasswordDelegate!.change()
+        }
+    }
+    
+    //设置lblTitle文本
+    func setTopViewTitle(title:String){
+        titleLbl.text = title
+    }
+    
+    //点击左按钮触发事件
+    func clickLeftBtnEventGesturePwd(){
+        if(gesturePasswordDelegate != nil){
+            gesturePasswordDelegate!.clickLeftBtnEventGesturePwd()
         }
     }
 

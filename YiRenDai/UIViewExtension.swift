@@ -6,7 +6,7 @@
 //  Copyright © 2016年 rain. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension UIView {
     //MARK: - 属性

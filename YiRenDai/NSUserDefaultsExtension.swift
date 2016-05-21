@@ -6,7 +6,7 @@
 //  Copyright © 2016年 YiRenDai. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension NSUserDefaults {
     

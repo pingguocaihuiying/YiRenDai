@@ -153,6 +153,7 @@ class TentacleView: UIView {
     
     override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
         var resultString:String = ""
+        
         //println("end....\(touchedArray)")
         for p in touchesArray {
             if(p["num"] == nil){
@@ -193,14 +194,14 @@ class TentacleView: UIView {
             return;
         }
        // println("drawRect\(touchedArray)")
-        
-        for i in 0 ..< touchesArray.count {
+        var removeNum = 0
+        for i in 0 ..< touchesArray.count + removeNum {
             
             let context:CGContextRef = UIGraphicsGetCurrentContext()!
       
-            if(touchesArray[i]["num"] == nil){
-                touchesArray.removeAtIndex(i)
-                //i = i-1;
+            if(touchesArray[i - removeNum]["num"] == nil){
+                touchesArray.removeAtIndex(i - removeNum)
+                removeNum = removeNum + 1
                 continue
             }
             
@@ -213,11 +214,11 @@ class TentacleView: UIView {
             
             CGContextSetLineWidth(context,5)
             
-            CGContextMoveToPoint(context,CGFloat(touchesArray[i]["x"]!),CGFloat(touchesArray[i]["y"]!))
+            CGContextMoveToPoint(context,CGFloat(touchesArray[i - removeNum]["x"]!),CGFloat(touchesArray[i - removeNum]["y"]!))
             
-            if(i<touchesArray.count-1){
+            if(i - removeNum < touchesArray.count-1){
                 
-                CGContextAddLineToPoint(context,CGFloat(touchesArray[i+1]["x"]!),CGFloat(touchesArray[i+1]["y"]!))
+                CGContextAddLineToPoint(context,CGFloat(touchesArray[i - removeNum + 1]["x"]!),CGFloat(touchesArray[i - removeNum + 1]["y"]!))
             }
             else{
                 

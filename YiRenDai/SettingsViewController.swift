@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: BaseNavigationController {
+class SettingsViewController: BaseNavigationController, ChangeGesturePwdDelegate, AlertViewDelegate {
     
     let cellIdentifier = "CellIdentifier"
 
@@ -45,18 +45,29 @@ class SettingsViewController: BaseNavigationController {
         case 0:
             if sender.on {
                 isSettingGesturePwd = true
-                let gesturePasswordVC = GesturePasswordViewController()
-                gesturePasswordVC.gesturePasswordType = 1
-                navigationController?.pushViewController(gesturePasswordVC, animated: true)
+                let alertView = AlertView(frame: CGRectMake(20, screen_height / 2 - 200, screen_width - 40, 200))
+                alertView.delegate = self
+                view.addSubview(alertView)
             }else{
                 isSettingGesturePwd = false
                 let gesturePasswordVC = GesturePasswordViewController()
-                gesturePasswordVC.gesturePasswordType = 0
+                gesturePasswordVC.delegate = self
+                gesturePasswordVC.gesturePasswordType = 2
                 navigationController?.pushViewController(gesturePasswordVC, animated: true)
             }
-            tableView.reloadData()
         default:
             break
+        }
+        sender.setOn(isSettingGesturePwd, animated: false)
+    }
+    
+    // MARK: - AlertViewDelegate
+    func clickOK(password: String) {
+        if true{
+            let gesturePasswordVC = GesturePasswordViewController()
+            gesturePasswordVC.delegate = self
+            gesturePasswordVC.gesturePasswordType = 1
+            navigationController?.pushViewController(gesturePasswordVC, animated: true)
         }
     }
 
@@ -93,7 +104,7 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
                 //switchBtn
                 let switchBtn = UISwitch(frame: CGRectMake(screen_width - 50 - 10, 0, 50, cell.viewHeight))
                 switchBtn.center.y = titleLbl.center.y
-                switchBtn.setOn(true, animated: false)
+                switchBtn.setOn(isSettingGesturePwd, animated: false)
                 switchBtn.tag = 0
                 switchBtn.addTarget(self, action: #selector(clickEvent(_:)), forControlEvents: UIControlEvents.ValueChanged)
                 cell.addSubview(switchBtn)
@@ -144,8 +155,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
                 //switchBtn
                 let switchBtn = UISwitch(frame: CGRectMake(screen_width - 50 - 10, 0, 50, cell.viewHeight))
                 switchBtn.tag = 0
-                switchBtn.addTarget(self, action: #selector(clickEvent(_:)), forControlEvents: UIControlEvents.ValueChanged)
+                switchBtn.addTarget(self, action: #selector(clickEvent(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                 switchBtn.center.y = titleLbl.center.y
+                switchBtn.setOn(isSettingGesturePwd, animated: false)
                 cell.addSubview(switchBtn)
             }else if indexPath.row == 1{
                 //titleLbl
@@ -200,5 +212,15 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
     //section
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 25
+    }
+    
+    //MARK: - ChangeGesturePwdDelegate
+    func changeGesturePwd(state: Int) {
+        if state == 1 { // 保存手势成功
+            isSettingGesturePwd = true
+        }else{
+            isSettingGesturePwd = false
+        }
+        tableView.reloadData()
     }
 }

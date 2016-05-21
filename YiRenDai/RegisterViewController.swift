@@ -132,6 +132,7 @@ class RegisterViewController: BaseNavigationController, UITextFieldDelegate {
         //phoneNoTxt
         phoneNoTxt = UITextField(frame: CGRectMake(phoneNoIv.viewRightX + 15, 47 * 2, contentView.viewWidth - 28, 47))
         phoneNoTxt.delegate = self
+        phoneNoTxt.keyboardType = .PhonePad
         phoneNoTxt.font = UIFont.systemFontOfSize(15)
         phoneNoTxt.placeholder = "手机号"
         phoneNoTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
