@@ -30,9 +30,9 @@ class CustomTabBarViewController: UITabBarController {
     func initTabBarItem(){
         //第一个tabbar面板
         let homePageVC = HomePageViewController()
-        homePageVC.title = "首页"
-        homePageVC.tabBarItem.image = UIImage(named: "tab_product")
-        homePageVC.tabBarItem.selectedImage = UIImage(named: "tab_product_select")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        homePageVC.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0)
+        homePageVC.tabBarItem.image = UIImage(named: "huiseshouye")
+        homePageVC.tabBarItem.selectedImage = UIImage(named: "hongseshouye")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         let navHomePageVC = UINavigationController(rootViewController: homePageVC)
         navHomePageVC.navigationBar.hidden = true
         if (homePageVC.navigationController!.navigationBar.translucent) {
@@ -41,9 +41,9 @@ class CustomTabBarViewController: UITabBarController {
         
         //第二个tabbar面板
         let productListVC = ProductListViewController()
-        productListVC.title = "产品列表"
-        productListVC.tabBarItem.image = UIImage(named: "second_noselect")
-        productListVC.tabBarItem.selectedImage = UIImage(named: "second")
+        productListVC.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0)
+        productListVC.tabBarItem.image = UIImage(named: "huisewoyaotouzi")
+        productListVC.tabBarItem.selectedImage = UIImage(named: "hongsewoyaotouzi")
         let navProductListVC = UINavigationController(rootViewController: productListVC)
         navProductListVC.navigationBar.hidden = true
         if (productListVC.navigationController!.navigationBar.translucent) {
@@ -53,9 +53,9 @@ class CustomTabBarViewController: UITabBarController {
         //第三个tabbar面板
         //我的财富
         let myWealthVC = MyWealthViewController()
-        myWealthVC.title = "我的财富"
-        myWealthVC.tabBarItem.image = UIImage(named: "second_noselect")
-        myWealthVC.tabBarItem.selectedImage = UIImage(named: "first")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        myWealthVC.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0)
+        myWealthVC.tabBarItem.image = UIImage(named: "huisewodecaifu")
+        myWealthVC.tabBarItem.selectedImage = UIImage(named: "hongsewodecaifu")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         let navMyWealthVC = UINavigationController(rootViewController: myWealthVC)
         navMyWealthVC.navigationBar.hidden = true
         if (myWealthVC.navigationController!.navigationBar.translucent) {
@@ -63,9 +63,9 @@ class CustomTabBarViewController: UITabBarController {
         }
         //登陆界面
         let loginVC = LoginViewController()
-        loginVC.title = "我的财富"
-        loginVC.tabBarItem.image = UIImage(named: "second_noselect")
-        loginVC.tabBarItem.selectedImage = UIImage(named: "first")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        loginVC.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0)
+        loginVC.tabBarItem.image = UIImage(named: "huisewodecaifu")
+        loginVC.tabBarItem.selectedImage = UIImage(named: "hongsewodecaifu")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         let navLoginVC = UINavigationController(rootViewController: loginVC)
         navLoginVC.navigationBar.hidden = true
         loginVC.targetNav = navLoginVC
@@ -75,9 +75,9 @@ class CustomTabBarViewController: UITabBarController {
         
         //第四个tabbar面板
         let lcqVC = LcqViewController()
-        lcqVC.title = "理财圈"
-        lcqVC.tabBarItem.image = UIImage(named: "second_noselect")
-        lcqVC.tabBarItem.selectedImage = UIImage(named: "first")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        lcqVC.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0)
+        lcqVC.tabBarItem.image = UIImage(named: "huisewoyaojiekuan")
+        lcqVC.tabBarItem.selectedImage = UIImage(named: "hongsewoyaojiekuan")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         let navLcqVC = UINavigationController(rootViewController: lcqVC)
         navLcqVC.navigationBar.hidden = true
         if (lcqVC.navigationController!.navigationBar.translucent) {
@@ -86,9 +86,9 @@ class CustomTabBarViewController: UITabBarController {
         
         //第五个tabbar面板
         let moreVC = MoreViewController()
-        moreVC.title = "更多"
-        moreVC.tabBarItem.image = UIImage(named: "second_noselect")
-        moreVC.tabBarItem.selectedImage = UIImage(named: "first")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        moreVC.tabBarItem.imageInsets = UIEdgeInsetsMake(7, 0, -7, 0)
+        moreVC.tabBarItem.image = UIImage(named: "huisegengduo")
+        moreVC.tabBarItem.selectedImage = UIImage(named: "hongsegengduo")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         let navMoreVC = UINavigationController(rootViewController: moreVC)
         navMoreVC.navigationBar.hidden = true
         if (moreVC.navigationController!.navigationBar.translucent) {

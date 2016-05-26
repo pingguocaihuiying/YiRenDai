@@ -22,7 +22,7 @@ class FAQDetailViewController: BaseNavigationController {
         super.viewDidLoad()
         
         setTopViewLeftBtnImg("left")
-        view.backgroundColor = UIColor.getColorThird()
+        view.backgroundColor = UIColor.getGrayColorThird()
         
         initView()
     }
@@ -33,7 +33,7 @@ class FAQDetailViewController: BaseNavigationController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.estimatedRowHeight = 50
-        tableView.backgroundColor = UIColor.getColorThird()
+        tableView.backgroundColor = UIColor.getGrayColorThird()
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
     }

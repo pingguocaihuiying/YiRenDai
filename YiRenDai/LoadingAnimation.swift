@@ -11,7 +11,7 @@ import UIKit
 class LoadingAnimation: UIView {
     
     let duration: CFTimeInterval = 1
-    let size = CGSizeMake(30, 30)
+    let size = CGSizeMake(40, 40)
     let circleSpacing: CGFloat = -2
     let color = UIColor(red: CGFloat(237 / 255.0), green: CGFloat(85 / 255.0), blue: CGFloat(101 / 255.0), alpha: 1)
     let beginTime = CACurrentMediaTime()
@@ -23,11 +23,18 @@ class LoadingAnimation: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         circleSize = (size.width - 4 * circleSpacing) / 5
         x = (self.bounds.width - size.width) / 2
         y = (self.bounds.width - size.height) / 2
         
         initView()
+    }
+    
+    init(frame: CGRect, iFlag: Int, msg: String?) {
+        super.init(frame: frame)
+        
+        initViewSecond(iFlag, msg: msg)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -73,6 +80,34 @@ class LoadingAnimation: UIView {
             circle.addAnimation(animation, forKey: "animation")
             layer.addSublayer(circle)
         }
+    }
+    
+    func initViewSecond(iFlag: Int, msg: String?){
+        // showView
+        let showView = UIView(frame: CGRectMake((frame.size.width - 100) / 2, (frame.size.height - 100) / 2, 100, 100))
+        showView.backgroundColor = UIColor(red:0.35, green:0.33, blue:0.33, alpha:1.00)
+        showView.layer.masksToBounds = true
+        showView.layer.cornerRadius = 10
+        self.addSubview(showView)
+        // iconIv
+        let iconIv = UIImageView(frame: CGRectMake((showView.viewWidth - 40) / 2, 20, 40, 40))
+        if iFlag == 1{
+            iconIv.image = UIImage(named: "success")
+        }else{
+            iconIv.image = UIImage(named: "ic_error_white")
+        }
+        showView.addSubview(iconIv)
+        // titleLbl
+        let titleLbl = UILabel(frame: CGRectMake(0, iconIv.viewBottomY + 10, showView.viewWidth, 21))
+        if iFlag == 1{
+            titleLbl.text = msg ?? "success"
+        }else{
+            titleLbl.text = msg ?? "failure"
+        }
+        titleLbl.textColor = UIColor.whiteColor()
+        titleLbl.font = UIFont.systemFontOfSize(14)
+        titleLbl.textAlignment = .Center
+        showView.addSubview(titleLbl)
     }
     
     func creatCircle(angle angle: CGFloat, size: CGFloat, origin: CGPoint, containerSize: CGSize, color: UIColor) -> CALayer {
@@ -129,9 +164,73 @@ extension LoadingAnimation{
         view.addSubview(loadingAnimation)
     }
     
+    class func show(target: UIViewController){
+        let loadingAnimation = LoadingAnimation(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height))
+        loadingAnimation.tag = 1
+        target.view.addSubview(loadingAnimation)
+    }
+    
+    class func showSuccess(target: UIViewController, msg: String?){
+        let loadingAnimation = LoadingAnimation(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height), iFlag: 1, msg: msg)
+        target.view.addSubview(loadingAnimation)
+        loadingAnimation.alpha = 0
+        loadingAnimation.transform = CGAffineTransformMakeScale(1.3, 1.3)
+        UIView.animateWithDuration(0.35, animations: {
+            loadingAnimation.alpha = 1
+            loadingAnimation.transform = CGAffineTransformMakeScale(1, 1)
+            }
+        )
+        let time: NSTimeInterval = 2.0
+        let delay = dispatch_time(DISPATCH_TIME_NOW,
+                                  Int64(time * Double(NSEC_PER_SEC)))
+        dispatch_after(delay, dispatch_get_main_queue()) {
+            UIView.animateWithDuration(0.35, animations: {
+                loadingAnimation.alpha = 0
+                loadingAnimation.transform = CGAffineTransformMakeScale(1.3, 1.3)
+                }, completion: { (finished) in
+                    if finished{
+                        loadingAnimation.removeFromSuperview()
+                    }
+            })
+        }
+    }
+    
+    class func showError(target: UIViewController, msg: String?){
+        let loadingAnimation = LoadingAnimation(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height), iFlag: 0, msg: msg)
+        target.view.addSubview(loadingAnimation)
+        loadingAnimation.alpha = 0
+        loadingAnimation.transform = CGAffineTransformMakeScale(1.3, 1.3)
+        UIView.animateWithDuration(0.35, animations: {
+            loadingAnimation.alpha = 1
+            loadingAnimation.transform = CGAffineTransformMakeScale(1, 1)
+            }
+        )
+        let time: NSTimeInterval = 2.0
+        let delay = dispatch_time(DISPATCH_TIME_NOW,
+                                  Int64(time * Double(NSEC_PER_SEC)))
+        dispatch_after(delay, dispatch_get_main_queue()) {
+            UIView.animateWithDuration(0.35, animations: {
+                loadingAnimation.alpha = 0
+                loadingAnimation.transform = CGAffineTransformMakeScale(1.3, 1.3)
+                }, completion: { (finished) in
+                    if finished{
+                        loadingAnimation.removeFromSuperview()
+                    }
+            })
+        }
+    }
+    
     class func dismiss(){
         let view = ToolKit.getTopView()
         for itemView in view.subviews {
+            if itemView.tag == 1 {
+                itemView.removeFromSuperview()
+            }
+        }
+    }
+    
+    class func dismiss(target: UIViewController){
+        for itemView in target.view.subviews {
             if itemView.tag == 1 {
                 itemView.removeFromSuperview()
             }

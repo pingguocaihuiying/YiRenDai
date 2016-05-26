@@ -23,13 +23,13 @@ class MyAccountViewController: BaseNavigationController {
     //MARK:自定义方法
     private func initView(){
         tableView = UITableView(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height - tabBar_height))
-        tableView.backgroundColor = UIColor.getColorThird()
+        tableView.backgroundColor = UIColor.getGrayColorThird()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.bounces = false
         //headerView
         let headerView = UIView(frame: CGRectMake(0, 0, screen_width, 150))
-        headerView.backgroundColor = UIColor.getColorThird()
+        headerView.backgroundColor = UIColor.getGrayColorThird()
         tableView.tableHeaderView = headerView
         //imageView
         let imageView = UIImageView(frame: CGRectMake((screen_width - 80) / 2, (150 - 80) / 2 - 20, 80, 80))

@@ -123,12 +123,12 @@ extension ActivityCenterViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headView = UIView(frame: CGRectMake(0, 0, screen_width, 14))
-        headView.backgroundColor = UIColor.getColorThird()
+        headView.backgroundColor = UIColor.getGrayColorThird()
         let upLineView = UIView(frame: CGRectMake(0, 0.25, screen_width, 0.25))
-        upLineView.backgroundColor = UIColor.getColorSecond()
+        upLineView.backgroundColor = UIColor.getGrayColorFirst()
         headView.addSubview(upLineView)
         let downLineView = UIView(frame: CGRectMake(0, 14 - 0.25, screen_width, 0.25))
-        downLineView.backgroundColor = UIColor.getColorSecond()
+        downLineView.backgroundColor = UIColor.getGrayColorFirst()
         headView.addSubview(downLineView)
         return headView
     }

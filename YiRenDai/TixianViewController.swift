@@ -29,7 +29,7 @@ class TixianViewController: BaseNavigationController {
     //MARK:自定义方法
     private func initView(){
         tableView = UITableView(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height))
-        tableView.backgroundColor = UIColor.getColorThird()
+        tableView.backgroundColor = UIColor.getGrayColorThird()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.bounces = false
@@ -122,7 +122,7 @@ extension TixianViewController: UITableViewDataSource, UITableViewDelegate{
             detail1.text = "添加提现银行卡"
             cell.addSubview(detail1)
         }else{
-            cell.backgroundColor = UIColor.getColorThird()
+            cell.backgroundColor = UIColor.getGrayColorThird()
             let ljtxBtn = UIButton(frame: CGRectMake(20, 30, screen_width - 40, 45))
             ljtxBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Normal)
             ljtxBtn.setTitle("立即提现", forState: .Normal)
@@ -165,12 +165,12 @@ extension TixianViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headView = UIView(frame: CGRectMake(0, 0, screen_width, 14))
-        headView.backgroundColor = UIColor.getColorThird()
+        headView.backgroundColor = UIColor.getGrayColorThird()
         let upLineView = UIView(frame: CGRectMake(0, 0.25, screen_width, 0.25))
-        upLineView.backgroundColor = UIColor.getColorSecond()
+        upLineView.backgroundColor = UIColor.getGrayColorFirst()
         headView.addSubview(upLineView)
         let downLineView = UIView(frame: CGRectMake(0, 14 - 0.25, screen_width, 0.25))
-        downLineView.backgroundColor = UIColor.getColorSecond()
+        downLineView.backgroundColor = UIColor.getGrayColorFirst()
         headView.addSubview(downLineView)
         return headView
     }

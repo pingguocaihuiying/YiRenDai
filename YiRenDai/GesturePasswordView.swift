@@ -131,22 +131,22 @@ class GesturePasswordView: UIView,TouchBeginDelegate {
     
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
-        
-        var context = UIGraphicsGetCurrentContext();
-        
-        var rgb = CGColorSpaceCreateDeviceRGB();
-        var colors:[CGFloat] = [134/255,157/255,147/255,1.0,3/255,3/255,37/255,1.0]
-      
-        var  nilUnsafePointer:UnsafePointer<CGFloat> = nil
-        
-        var gradient = CGGradientCreateWithColorComponents(rgb, colors, nilUnsafePointer,2)
-        
-        CGGradientDrawingOptions()
-        
-        //CGContextDrawLinearGradient(context, gradient, CGPointMake(0.0, 0.0), CGPointMake(0.0, self.frame.size.height), 0)
-    }
+//    override func drawRect(rect: CGRect) {
+//        // Drawing code
+//        
+//        var context = UIGraphicsGetCurrentContext();
+//        
+//        var rgb = CGColorSpaceCreateDeviceRGB();
+//        var colors:[CGFloat] = [134/255,157/255,147/255,1.0,3/255,3/255,37/255,1.0]
+//      
+//        var  nilUnsafePointer:UnsafePointer<CGFloat> = nil
+//        
+//        var gradient = CGGradientCreateWithColorComponents(rgb, colors, nilUnsafePointer,2)
+//        
+//        CGGradientDrawingOptions()
+//        
+//        CGContextDrawLinearGradient(context, gradient, CGPointMake(0.0, 0.0), CGPointMake(0.0, self.frame.size.height), 0)
+//    }
     
     
     func gestureTouchBegin(){

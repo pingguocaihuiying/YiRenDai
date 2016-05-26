@@ -96,14 +96,14 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.addSubview(customBtn1)
                 //lineView1
                 let lineView1 = UIView(frame: CGRectMake(screen_width / 3, 0, 0.25, 90))
-                lineView1.backgroundColor = UIColor.getColorSecond()
+                lineView1.backgroundColor = UIColor.getGrayColorFirst()
                 cell.addSubview(lineView1)
                 //customBtn2
                 let customBtn2 = CLButton(frame: CGRectMake(screen_width / 3, 0, screen_width / 3, 90), imageName: "zhanweitu", title: "安全保障", detail: "中国知名P2P平台纽交所上市公司")
                 cell.addSubview(customBtn2)
                 //lineView1
                 let lineView2 = UIView(frame: CGRectMake(screen_width / 3 * 2 + 0.25, 0, 0.25, 90))
-                lineView2.backgroundColor = UIColor.getColorSecond()
+                lineView2.backgroundColor = UIColor.getGrayColorFirst()
                 cell.addSubview(lineView2)
                 //customBtn3
                 let customBtn3 = CLButton(frame: CGRectMake(screen_width / 3 * 2, 0, screen_width / 3, 90), imageName: "zhanweitu", title: "资金托管", detail: "中国知名P2P平台纽交所上市公司")
@@ -155,7 +155,7 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
                 for itemView in cell.subviews{
                     itemView.removeFromSuperview()
                 }
-                cell.backgroundColor = UIColor.getColorThird()
+                cell.backgroundColor = UIColor.getGrayColorThird()
                 //退出
                 logoutBtn = UIButton(frame: CGRectMake(14, (100 - 60) / 2, screen_width - 14 * 2, 46))
                 logoutBtn.setTitle(ToolKit.isLogin() ? "安全退出" : "登录", forState: .Normal)
@@ -248,12 +248,12 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headView = UIView(frame: CGRectMake(0, 0, screen_width, 14))
-        headView.backgroundColor = UIColor.getColorThird()
+        headView.backgroundColor = UIColor.getGrayColorThird()
         let upLineView = UIView(frame: CGRectMake(0, 0.25, screen_width, 0.25))
-        upLineView.backgroundColor = UIColor.getColorSecond()
+        upLineView.backgroundColor = UIColor.getGrayColorFirst()
         headView.addSubview(upLineView)
         let downLineView = UIView(frame: CGRectMake(0, 14 - 0.25, screen_width, 0.25))
-        downLineView.backgroundColor = UIColor.getColorSecond()
+        downLineView.backgroundColor = UIColor.getGrayColorFirst()
         headView.addSubview(downLineView)
         return headView
     }

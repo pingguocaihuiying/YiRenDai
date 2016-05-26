@@ -50,9 +50,9 @@ class CLMenu: UIView {
             //底部线
             let lineView = UIView(frame: CGRectMake(CGFloat(i) * itemWidth, menuView.viewHeight, itemWidth, 0.5))
             if i == 0 {
-                lineView.backgroundColor = UIColor.getColorFourth()
+                lineView.backgroundColor = UIColor.getRedColorFirst()
             }else{
-                lineView.backgroundColor = UIColor.getColorFive()
+                lineView.backgroundColor = UIColor.getGrayColorSecond()
             }
             menuView.addSubview(lineView)
         }
@@ -65,14 +65,14 @@ class CLMenu: UIView {
             if itemView.isKindOfClass(UIButton) {
                 (itemView as! UIButton).setTitleColor(UIColor.grayColor(), forState: .Normal)
             }else if itemView.isKindOfClass(UIView){
-                itemView.backgroundColor = UIColor.getColorFive()
+                itemView.backgroundColor = UIColor.getGrayColorSecond()
             }
         }
         //设置选中样式
         let itemBtn = menuView[sender.tag * 2] as! UIButton
         let lineView = menuView[sender.tag * 2 + 1]
         itemBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        lineView.backgroundColor = UIColor.getColorFourth()
+        lineView.backgroundColor = UIColor.getRedColorFirst()
         
         //CLMenuDelegate
         if delegate != nil {

@@ -36,7 +36,7 @@ class LjInvestBtnViewController: BaseNavigationController {
         tableView = UITableView(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height))
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.getColorThird()
+        tableView.backgroundColor = UIColor.getGrayColorThird()
         let footerView = UIView(frame: CGRectMake(0, 0, screen_width, 50))
         let ljBuyBtn = UIButton(frame: CGRectMake(14, 15, screen_width - 14 * 2, 46))
         ljBuyBtn.setTitle("立即购买", forState: .Normal)
@@ -185,7 +185,7 @@ extension LjInvestBtnViewController: UITableViewDataSource, UITableViewDelegate{
             detailLbl2.text = "分现金保障"
             cell.addSubview(detailLbl2)
         }else if indexPath.row == 3{
-            cell.backgroundColor = UIColor.getColorThird()
+            cell.backgroundColor = UIColor.getGrayColorThird()
         }else{
             //view1
             let view1 = UIView(frame: CGRectMake(0, 0, screen_width, 70))
@@ -220,7 +220,7 @@ extension LjInvestBtnViewController: UITableViewDataSource, UITableViewDelegate{
             detail4.font = UIFont.systemFontOfSize(14)
             detail4.textColor = UIColor.lightGrayColor()
             detail4.textAlignment = .Right
-            detail4.textColor = UIColor.getColorFourth()
+            detail4.textColor = UIColor.getRedColorFirst()
             detail4.text = NSString(format: "%.2f", productData!["min_amount"].floatValue * productData!["interest_rate"].floatValue / 100 / 12) as String
             view1.addSubview(detail4)
             
@@ -239,7 +239,7 @@ extension LjInvestBtnViewController: UITableViewDataSource, UITableViewDelegate{
             amountNumTxt.textAlignment = .Center
             amountNumTxt.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1.0)
             amountNumTxt.layer.borderWidth = 1
-            amountNumTxt.layer.borderColor = UIColor.getColorThird().CGColor
+            amountNumTxt.layer.borderColor = UIColor.getGrayColorThird().CGColor
             amountNumTxt.text = "\(productData!["min_amount"].stringValue)"
             view2.addSubview(amountNumTxt)
             //加Btn

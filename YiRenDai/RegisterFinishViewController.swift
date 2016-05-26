@@ -24,7 +24,7 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.getColorThird()
+        view.backgroundColor = UIColor.getGrayColorThird()
         setTopViewLeftBtnImg("left")
 
         initView()
@@ -40,7 +40,7 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
     func initView(){
         //headerView
         let headerView = UIView(frame: CGRectMake(0, top_height, screen_width, 50))
-        headerView.backgroundColor = UIColor.getColorFourth()
+        headerView.backgroundColor = UIColor.getRedColorFirst()
         view.addSubview(headerView)
         //lineView1
         let lineView1 = UIView(frame: CGRectMake(30, 5, (screen_width - 60 - 5) / 2, 1))
@@ -87,7 +87,7 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
         view.addSubview(detail3)
         //lineView3
         let lineView3 = UIView(frame: CGRectMake(0, detail3.viewBottomY, screen_width, 0.5))
-        lineView3.backgroundColor = UIColor.getColorSecond()
+        lineView3.backgroundColor = UIColor.getGrayColorFirst()
         view.addSubview(lineView3)
         
         //contentView
@@ -106,7 +106,7 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
         contentView.addSubview(accountTxt)
         //lineView4
         let lineView4 = UIView(frame: CGRectMake(accountTxt.viewX, accountTxt.viewBottomY, contentView.viewWidth - 14 - 30, 0.5))
-        lineView4.backgroundColor = UIColor.getColorSecond()
+        lineView4.backgroundColor = UIColor.getGrayColorFirst()
         contentView.addSubview(lineView4)
         //IDNoIv
         pwdIv = UIImageView(frame: CGRectMake(14, 47 + (47 - 16) / 2, 16, 16))
@@ -123,7 +123,7 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
         contentView.addSubview(pwdTxt)
         //lineView5
         let lineView5 = UIView(frame: CGRectMake(pwdTxt.viewX, pwdTxt.viewBottomY, contentView.viewWidth - 14 - 30, 0.5))
-        lineView5.backgroundColor = UIColor.getColorSecond()
+        lineView5.backgroundColor = UIColor.getGrayColorFirst()
         contentView.addSubview(lineView5)
         //verificationTxt
         verificationTxt = UITextField(frame: CGRectMake(lineView5.viewX, 47 * 2, contentView.viewWidth - lineView5.viewX - 14, 47))
@@ -139,7 +139,7 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
         verificationTxt.rightViewMode = .Always
         //lineView6
         let lineView6 = UIView(frame: CGRectMake(verificationTxt.viewX, verificationTxt.viewBottomY, contentView.viewWidth - 14 - 30, 0.5))
-        lineView6.backgroundColor = UIColor.getColorSecond()
+        lineView6.backgroundColor = UIColor.getGrayColorFirst()
         contentView.addSubview(lineView6)
         //invitationCodeTxt
         invitationCodeTxt = UITextField(frame: CGRectMake(lineView5.viewX, 47 * 3, contentView.viewWidth - 28, 47))
@@ -150,7 +150,7 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
         contentView.addSubview(invitationCodeTxt)
         //lineView7
         let lineView7 = UIView(frame: CGRectMake(0, invitationCodeTxt.viewBottomY, contentView.viewWidth, 0.5))
-        lineView7.backgroundColor = UIColor.getColorSecond()
+        lineView7.backgroundColor = UIColor.getGrayColorFirst()
         contentView.addSubview(lineView7)
         
         //okBtn

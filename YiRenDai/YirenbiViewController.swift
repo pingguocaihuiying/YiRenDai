@@ -13,7 +13,7 @@ class YirenbiViewController: BaseNavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.getColorThird()
+        view.backgroundColor = UIColor.getGrayColorThird()
         setTopViewLeftBtnImg("left")
         setTopViewRightBtn("历史记录")
 
@@ -31,7 +31,7 @@ class YirenbiViewController: BaseNavigationController {
     func initView(){
         //headerView
         let headerView = UIView(frame: CGRectMake(0, top_height, screen_width, 180))
-        headerView.backgroundColor = UIColor.getColorFourth()
+        headerView.backgroundColor = UIColor.getRedColorFirst()
         view.addSubview(headerView)
         //imageView2
         let imageView2 = UIImageView(frame: CGRectMake(14, 20 + 60, screen_width - 28, 60))

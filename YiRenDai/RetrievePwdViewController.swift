@@ -17,7 +17,7 @@ class RetrievePwdViewController: BaseNavigationController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.getColorThird()
+        view.backgroundColor = UIColor.getGrayColorThird()
         
         setTopViewLeftBtnImg("left")
 

@@ -17,7 +17,7 @@ class FeedbackViewController: BaseNavigationController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        view.backgroundColor = UIColor.getColorThird()
+        view.backgroundColor = UIColor.getGrayColorThird()
         setTopViewTitle("意见反馈")
         setTopViewLeftBtnImg("left")
         setTopViewRightBtn("提交")

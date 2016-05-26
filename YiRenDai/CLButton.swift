@@ -10,7 +10,7 @@ import UIKit
 
 class CLButton: UIButton {
     
-    private let imageRatio :CGFloat = 0.7  // 图片占整个按钮高度的比例
+    private let imageRatio :CGFloat = 0.5  // 图片占整个按钮高度的比例
     private let titleRatio:CGFloat = 13   // 设置按钮标题字体默认的大小
     
     //MARK:初始化
@@ -40,7 +40,7 @@ class CLButton: UIButton {
         mDetailLbl.font = UIFont.systemFontOfSize(11)
         mDetailLbl.numberOfLines = 0
         mDetailLbl.textAlignment = .Center
-        mDetailLbl.textColor = UIColor.getColorSecond()
+        mDetailLbl.textColor = UIColor.getGrayColorFirst()
         mDetailLbl.text = detail
         self.addSubview(mDetailLbl)
     }
@@ -66,7 +66,7 @@ class CLButton: UIButton {
     }
     
     func initView(){
-        self.imageView?.contentMode = .Center
+        self.imageView?.contentMode = .ScaleAspectFit
         self.titleLabel?.textAlignment = .Center
         self.titleLabel?.font = UIFont.systemFontOfSize(14)
     }

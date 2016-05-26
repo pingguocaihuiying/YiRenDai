@@ -34,7 +34,7 @@ class SettingsViewController: BaseNavigationController, ChangeGesturePwdDelegate
         tableView.delegate = self
         tableView.dataSource = self
         tableView.bounces = false
-        tableView.backgroundColor = UIColor.getColorThird()
+        tableView.backgroundColor = UIColor.getGrayColorThird()
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)

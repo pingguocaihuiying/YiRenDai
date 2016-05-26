@@ -29,7 +29,7 @@ class FAQViewController: BaseNavigationController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.bounces = false
-        tableView.backgroundColor = UIColor.getColorThird()
+        tableView.backgroundColor = UIColor.getGrayColorThird()
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
     }
@@ -118,7 +118,7 @@ extension FAQViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRectMake(0, 0, screen_width, 0))
-        headerView.backgroundColor = UIColor.getColorThird()
+        headerView.backgroundColor = UIColor.getGrayColorThird()
         let titleLbl = UILabel(frame: CGRectMake(8, 40 - 18, screen_width, 15))
         titleLbl.textColor = UIColor.grayColor()
         titleLbl.font = UIFont.systemFontOfSize(15)

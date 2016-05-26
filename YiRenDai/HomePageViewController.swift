@@ -29,7 +29,7 @@ class HomePageViewController: BaseViewController, CycleScrollViewDelegate {
 
     //MARK:自定义方法
     private func initView(){
-        tableView = UITableView(frame: CGRectMake(0, 0, screen_width, screen_height))
+        tableView = UITableView(frame: CGRectMake(0, 0, screen_width, screen_height - tabBar_height))
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .None
@@ -75,15 +75,21 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 5
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
         cell.selectionStyle = UITableViewCellSelectionStyle.None
+        //先清空控件
+        for itemView in cell.subviews {
+            if itemView.isKindOfClass(UILabel) {
+                itemView.removeFromSuperview()
+            }
+        }
         switch indexPath.row {
         case 0:
-            let imageArray = [UIImage(named: "image1")!,UIImage(named: "image2")!,UIImage(named: "image3")!,UIImage(named: "image4")!]
+            let imageArray = [UIImage(named: "index1")!,UIImage(named: "index2")!,UIImage(named: "index3")!]
             cycleScrollView = CycleScrollView(frame: CGRectMake(0, 0, screen_width, 200), imageArray: imageArray)
             cycleScrollView.delegate = self
             cycleScrollView.currentPageControlColor = UIColor.blackColor()
@@ -93,7 +99,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
         case 1:
             //imageBtn1
             let imageBtn1 = CLButton(frame: CGRectMake(0, 20, screen_width / 3, 60))
-            imageBtn1.setImage(UIImage(named: "zhanweitu"), forState: .Normal)
+            imageBtn1.setImage(UIImage(named: "huodongzhongxin"), forState: .Normal)
             imageBtn1.setTitle("活动中心", forState: .Normal)
             imageBtn1.setTitleColor(UIColor.grayColor(), forState: .Normal)
             imageBtn1.tag = 1
@@ -102,12 +108,12 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             
             //lineView1
             let lineView1 = UIView(frame: CGRectMake(screen_width / 3, 0, 0.25, 100))
-            lineView1.backgroundColor = UIColor.getColorSecond()
+            lineView1.backgroundColor = UIColor.getGrayColorFirst()
             cell.addSubview(lineView1)
             
             //imageBtn2
             let imageBtn2 = CLButton(frame: CGRectMake(screen_width / 3 + 0.25, 20, screen_width / 3, 60))
-            imageBtn2.setImage(UIImage(named: "zhanweitu"), forState: .Normal)
+            imageBtn2.setImage(UIImage(named: "tuisongxianjin"), forState: .Normal)
             imageBtn2.setTitle("推荐送现金", forState: .Normal)
             imageBtn2.setTitleColor(UIColor.grayColor(), forState: .Normal)
             imageBtn2.tag = 2
@@ -116,83 +122,136 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             
             //lineView2
             let lineView2 = UIView(frame: CGRectMake(screen_width / 3 * 2 + 0.25, 0, 0.25, 100))
-            lineView2.backgroundColor = UIColor.getColorSecond()
+            lineView2.backgroundColor = UIColor.getGrayColorFirst()
             cell.addSubview(lineView2)
             
             //imageBtn3
             let imageBtn3 = CLButton(frame: CGRectMake(screen_width / 3 * 2 + 0.5, 20, screen_width / 3, 60))
-            imageBtn3.setImage(UIImage(named: "zhanweitu"), forState: .Normal)
+            imageBtn3.setImage(UIImage(named: "anquanbaozhang"), forState: .Normal)
             imageBtn3.setTitle("安全保障", forState: .Normal)
             imageBtn3.setTitleColor(UIColor.grayColor(), forState: .Normal)
             imageBtn3.tag = 3
             imageBtn3.addTarget(self, action: #selector(clickEvent), forControlEvents: .TouchUpInside)
             cell.addSubview(imageBtn3)
         case 2:
-            //先清空控件
-            for itemView in cell.subviews {
-                itemView.removeFromSuperview()
-            }
-            //mIv
-            let mIv1 = UIImageView(frame: CGRectMake(0, 0, screen_width, 50))
-            mIv1.image = UIImage(named: "home_product_title_no")
-            cell.addSubview(mIv1)
-            //qtAmount
-            let qtAmount = UILabel(frame: CGRectMake(20, 80, 100, 21))
-            qtAmount.font = UIFont.systemFontOfSize(20)
-            qtAmount.text = "5000"
-            cell.addSubview(qtAmount)
-            //qtAmountTitle
-            let qtAmountTitle = UILabel(frame: CGRectMake(qtAmount.viewX, qtAmount.viewBottomY + 5, 100, 21))
-            qtAmountTitle.font = UIFont.systemFontOfSize(14)
-            qtAmountTitle.textColor = UIColor.grayColor()
-            qtAmountTitle.text = "起投金额"
-            cell.addSubview(qtAmountTitle)
-            //mIv2
-            let mIv2 = UIImageView(frame: CGRectMake((screen_width - screen_width * 0.45) / 2, mIv1.viewBottomY - 24, screen_width * 0.45, screen_width * 0.45))
-            mIv2.image = UIImage(named: "home_product_circle")
-            cell.addSubview(mIv2)
-            //titleLbl1
-            let titleLbl1 = UILabel(frame: CGRectMake(0, mIv2.viewHeight * 0.2, mIv2.viewWidth, 14))
-            titleLbl1.textAlignment = .Center
-            titleLbl1.font = UIFont.systemFontOfSize(14)
-            titleLbl1.text = "宜定盈S-18月期"
-            mIv2.addSubview(titleLbl1)
-            //titleLbl2
-            let titleLbl2 = UILabel(frame: CGRectMake(0, titleLbl1.viewBottomY + 7, mIv2.viewWidth, 45))
-            titleLbl2.textAlignment = .Center
-            titleLbl2.font = UIFont.systemFontOfSize(45)
-            titleLbl2.textColor = UIColor.redColor()
-            titleLbl2.text = "8.6%"
-            mIv2.addSubview(titleLbl2)
-            //titleLbl3
-            let titleLbl3 = UILabel(frame: CGRectMake(0, titleLbl2.viewBottomY + 9, mIv2.viewWidth, 12))
-            titleLbl3.textAlignment = .Center
-            titleLbl3.font = UIFont.systemFontOfSize(14)
-            titleLbl3.textColor = UIColor.redColor()
-            titleLbl3.text = "年化收益"
-            mIv2.addSubview(titleLbl3)
-            //closeDeadline
-            let closeDeadline = UILabel(frame: CGRectMake(screen_width - 20 - 100, 80, 100, 21))
-            closeDeadline.font = UIFont.systemFontOfSize(20)
-            closeDeadline.textAlignment = .Right
-            closeDeadline.text = "18个月"
-            cell.addSubview(closeDeadline)
-            //closeDeadlineTitle
-            let closeDeadlineTitle = UILabel(frame: CGRectMake(closeDeadline.viewX, qtAmount.viewBottomY + 5, 100, 21))
-            closeDeadlineTitle.font = UIFont.systemFontOfSize(14)
-            closeDeadlineTitle.textColor = UIColor.grayColor()
-            closeDeadlineTitle.textAlignment = .Right
-            closeDeadlineTitle.text = "封闭期限"
-            cell.addSubview(closeDeadlineTitle)
-            //ljInvestBtn
-            let ljInvestBtn = UIButton(frame: CGRectMake((screen_width - screen_width * 0.6) / 2 , mIv2.viewBottomY + 15, screen_width * 0.6 + 10, 35))
-            ljInvestBtn.setBackgroundImage(UIImage(named: "bt_acc_gotobuy_press"), forState: .Normal)
-            ljInvestBtn.userInteractionEnabled = false
-            ljInvestBtn.setTitle("立即投资", forState: .Normal)
-            cell.addSubview(ljInvestBtn)
-            let mIv3 = UIImageView(frame: CGRectMake(ljInvestBtn.viewWidth - 70, 0, 70, 35))
-            mIv3.image = UIImage(named: "bt_home_normal.9")
-            ljInvestBtn.addSubview(mIv3)
+            cell.backgroundColor = UIColor.getGrayColorSecond()
+        case 3:
+            // leftView
+            let leftView = UIView(frame: CGRectMake(0, 0, (screen_width - 0.5) / 2, cell.viewHeight))
+            cell.addSubview(leftView)
+            // leftDetailTitleLbl
+            let leftDetailTitleLbl = UILabel(frame: CGRectMake(0, 10, leftView.viewWidth, 21))
+            leftDetailTitleLbl.text = "累计成交金额(元)"
+            leftDetailTitleLbl.textColor = UIColor.grayColor()
+            leftDetailTitleLbl.textAlignment = .Center
+            leftDetailTitleLbl.font = UIFont.systemFontOfSize(16)
+            leftView.addSubview(leftDetailTitleLbl)
+            // leftDetailLbl
+            let leftDetailLbl = UILabel(frame: CGRectMake(0, leftDetailTitleLbl.viewBottomY + 5, leftView.viewWidth, 21))
+            let formatter = NSNumberFormatter()
+            formatter.numberStyle = .DecimalStyle
+            leftDetailLbl.text = formatter.stringFromNumber(1234567890)
+            leftDetailLbl.textColor = UIColor.getRedColorSecond()
+            leftDetailLbl.textAlignment = .Center
+            leftDetailLbl.font = UIFont.systemFontOfSize(19)
+            leftView.addSubview(leftDetailLbl)
+            // lineView
+            let lineView = UIView(frame: CGRectMake(leftView.viewRightX, 10, 0.5, cell.viewHeight - 20))
+            lineView.backgroundColor = UIColor.getGrayColorSecond()
+            cell.addSubview(lineView)
+            
+            // rightView
+            let rightView = UIView(frame: CGRectMake(lineView.viewRightX, 0, (screen_width - 0.5) / 2, cell.viewHeight))
+            cell.addSubview(rightView)
+            // rightDetailTitleLbl
+            let rightDetailTitleLbl = UILabel(frame: CGRectMake(0, 10, leftView.viewWidth, 21))
+            rightDetailTitleLbl.text = "累计投资人数(人)"
+            rightDetailTitleLbl.textColor = UIColor.grayColor()
+            rightDetailTitleLbl.textAlignment = .Center
+            rightDetailTitleLbl.font = UIFont.systemFontOfSize(16)
+            rightView.addSubview(rightDetailTitleLbl)
+            // leftDetailLbl
+            let rightDetailLbl = UILabel(frame: CGRectMake(0, rightDetailTitleLbl.viewBottomY + 5, leftView.viewWidth, 21))
+            rightDetailLbl.text = formatter.stringFromNumber(1234567890)
+            rightDetailLbl.textColor = UIColor.getRedColorSecond()
+            rightDetailLbl.textAlignment = .Center
+            rightDetailLbl.font = UIFont.systemFontOfSize(19)
+            rightView.addSubview(rightDetailLbl)
+        case 4:
+            // leftView
+            let leftView = UIView(frame: CGRectMake(10, 20 + (screen_width * 0.45 - screen_width * 0.45 * 0.75) / 2, screen_width * 0.45 * 0.75, screen_width * 0.45 * 0.75))
+            leftView.layer.masksToBounds = true
+            leftView.layer.cornerRadius = leftView.viewWidth / 2
+            leftView.layer.borderWidth = 1
+            leftView.layer.borderColor = UIColor.getRedColorSecond().CGColor
+            cell.addSubview(leftView)
+            // leftDetailLbl1
+            let leftDetailLbl1 = UILabel(frame: CGRectMake(0, leftView.viewHeight / 2 - 21, leftView.viewWidth, 21))
+            leftDetailLbl1.text = "20%"
+            leftDetailLbl1.font = UIFont.systemFontOfSize(20)
+            leftDetailLbl1.textAlignment = .Center
+            leftDetailLbl1.textColor = UIColor.getRedColorSecond()
+            leftView.addSubview(leftDetailLbl1)
+            // leftDetailLbl2
+            let leftDetailLbl2 = UILabel(frame: CGRectMake(0, leftDetailLbl1.viewBottomY + 5, leftView.viewWidth, 21))
+            leftDetailLbl2.text = "500元起投"
+            leftDetailLbl2.font = UIFont.systemFontOfSize(14)
+            leftDetailLbl2.textAlignment = .Center
+            leftDetailLbl2.textColor = UIColor.getRedColorSecond()
+            leftView.addSubview(leftDetailLbl2)
+            // rightView
+            let rightView = UIView(frame: CGRectMake(screen_width - 10 - screen_width * 0.45 * 0.75, 20 + (screen_width * 0.45 - screen_width * 0.45 * 0.75) / 2, screen_width * 0.45 * 0.75, screen_width * 0.45 * 0.75))
+            rightView.layer.masksToBounds = true
+            rightView.layer.cornerRadius = leftView.viewWidth / 2
+            rightView.layer.borderWidth = 1
+            rightView.layer.borderColor = UIColor.getRedColorSecond().CGColor
+            cell.addSubview(rightView)
+            // rightDetailLbl1
+            let rightDetailLbl1 = UILabel(frame: CGRectMake(0, leftView.viewHeight / 2 - 21, leftView.viewWidth, 21))
+            rightDetailLbl1.text = "15%"
+            rightDetailLbl1.font = UIFont.systemFontOfSize(20)
+            rightDetailLbl1.textAlignment = .Center
+            rightDetailLbl1.textColor = UIColor.getRedColorSecond()
+            rightView.addSubview(rightDetailLbl1)
+            // rightDetailLbl2
+            let rightDetailLbl2 = UILabel(frame: CGRectMake(0, leftDetailLbl1.viewBottomY + 5, leftView.viewWidth, 21))
+            rightDetailLbl2.text = "已售罄"
+            rightDetailLbl2.font = UIFont.systemFontOfSize(16)
+            rightDetailLbl2.textAlignment = .Center
+            rightDetailLbl2.textColor = UIColor.getGrayColorFirst()
+            rightView.addSubview(rightDetailLbl2)
+            // centerBtn
+            let centerBtn = UIButton(frame: CGRectMake(screen_width * 0.55 / 2, 20, screen_width * 0.45, screen_width * 0.45))
+            centerBtn.setImage(UIImage(named: "hongyuan"), forState: .Normal)
+            cell.addSubview(centerBtn)
+            // centerDetail1
+            let centerDetail1 = UILabel(frame: CGRectMake(0, 30, centerBtn.viewWidth, 21))
+            centerDetail1.textAlignment = .Center
+            centerDetail1.text = "预期年化"
+            centerDetail1.font = UIFont.systemFontOfSize(16)
+            centerDetail1.textColor = UIColor.grayColor()
+            centerBtn.addSubview(centerDetail1)
+            // centerDetail2
+            let centerDetail2 = UILabel(frame: CGRectMake(0, (centerBtn.viewHeight - 21) / 2, centerBtn.viewWidth, 21))
+            centerDetail2.textAlignment = .Center
+            let str = NSMutableAttributedString(string: "20%")
+            str.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(30), range: NSMakeRange(0, str.length - 1))
+            str.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(14), range: NSMakeRange(str.length - 1, 1))
+            centerDetail2.attributedText = str
+            centerDetail2.textColor = UIColor.getRedColorFirst()
+            centerBtn.addSubview(centerDetail2)
+            // centerDetail3
+            let centerDetail3 = UILabel(frame: CGRectMake(0, centerDetail2.viewBottomY + 10, centerBtn.viewWidth, 21))
+            centerDetail3.textAlignment = .Center
+            centerDetail3.text = "500元起投100天"
+            centerDetail3.font = UIFont.systemFontOfSize(14)
+            centerDetail3.textColor = UIColor.grayColor()
+            centerBtn.addSubview(centerDetail3)
+            // bottomDetail
+            let bottomDetail = UILabel(frame: CGRectMake(0, centerBtn.viewBottomY + 5, screen_width, 21))
+            bottomDetail.textAlignment = .Center
+            bottomDetail.text = "房利宝"
+            cell.addSubview(bottomDetail)
         default:
             break
         }
@@ -206,7 +265,11 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
         case 1:
             return 100
         case 2:
-            return 300
+            return 20
+        case 3:
+            return 70
+        case 4:
+            return 130 * 2
         default:
             return 0
         }

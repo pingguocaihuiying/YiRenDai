@@ -21,7 +21,7 @@ class RegisterViewController: BaseNavigationController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.getColorThird()
+        view.backgroundColor = UIColor.getGrayColorThird()
         setTopViewLeftBtnImg("left")
 
         initView()
@@ -37,7 +37,7 @@ class RegisterViewController: BaseNavigationController, UITextFieldDelegate {
     func initView(){
         //headerView
         let headerView = UIView(frame: CGRectMake(0, top_height, screen_width, 50))
-        headerView.backgroundColor = UIColor.getColorFourth()
+        headerView.backgroundColor = UIColor.getRedColorFirst()
         view.addSubview(headerView)
         //lineView1
         let lineView1 = UIView(frame: CGRectMake(30, 5, (screen_width - 60 - 5) / 2, 1))
@@ -85,7 +85,7 @@ class RegisterViewController: BaseNavigationController, UITextFieldDelegate {
         view.addSubview(detail3)
         //lineView3
         let lineView3 = UIView(frame: CGRectMake(0, detail3.viewBottomY, screen_width, 0.5))
-        lineView3.backgroundColor = UIColor.getColorSecond()
+        lineView3.backgroundColor = UIColor.getGrayColorFirst()
         view.addSubview(lineView3)
         
         //contentView
@@ -106,7 +106,7 @@ class RegisterViewController: BaseNavigationController, UITextFieldDelegate {
         contentView.addSubview(nameTxt)
         //lineView4
         let lineView4 = UIView(frame: CGRectMake(nameTxt.viewX, nameTxt.viewBottomY, contentView.viewWidth - 14 - 30, 0.5))
-        lineView4.backgroundColor = UIColor.getColorSecond()
+        lineView4.backgroundColor = UIColor.getGrayColorFirst()
         contentView.addSubview(lineView4)
         //IDNoIv
         IDNoIv = UIImageView(frame: CGRectMake(14, 47 + (47 - 16) / 2, 16, 16))
@@ -122,7 +122,7 @@ class RegisterViewController: BaseNavigationController, UITextFieldDelegate {
         contentView.addSubview(IDNoTxt)
         //lineView5
         let lineView5 = UIView(frame: CGRectMake(IDNoTxt.viewX, IDNoTxt.viewBottomY, contentView.viewWidth - 14 - 30, 0.5))
-        lineView5.backgroundColor = UIColor.getColorSecond()
+        lineView5.backgroundColor = UIColor.getGrayColorFirst()
         contentView.addSubview(lineView5)
         //phoneNoIv
         phoneNoIv = UIImageView(frame: CGRectMake(14, 47 * 2 + (47 - 16) / 2, 16, 16))
@@ -139,7 +139,7 @@ class RegisterViewController: BaseNavigationController, UITextFieldDelegate {
         contentView.addSubview(phoneNoTxt)
         //lineView6
         let lineView6 = UIView(frame: CGRectMake(0, phoneNoTxt.viewBottomY, contentView.viewWidth, 0.5))
-        lineView6.backgroundColor = UIColor.getColorSecond()
+        lineView6.backgroundColor = UIColor.getGrayColorFirst()
         contentView.addSubview(lineView6)
         
         //nextBtn

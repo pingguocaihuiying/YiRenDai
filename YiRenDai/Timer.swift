@@ -64,7 +64,7 @@ class Timer:UIButton {
             } else {
                 countdownTimer?.invalidate()
                 countdownTimer = nil
-                verificationCodeBtn.backgroundColor = UIColor.getColorFourth()
+                verificationCodeBtn.backgroundColor = UIColor.getRedColorFirst()
             }
             verificationCodeBtn.enabled = !newValue
         }

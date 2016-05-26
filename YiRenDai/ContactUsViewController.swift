@@ -17,7 +17,7 @@ class ContactUsViewController: BaseNavigationController {
         super.viewDidLoad()
         
         setTopViewLeftBtnImg("left")
-        view.backgroundColor = UIColor.getColorThird()
+        view.backgroundColor = UIColor.getGrayColorThird()
         
         initView()
     }

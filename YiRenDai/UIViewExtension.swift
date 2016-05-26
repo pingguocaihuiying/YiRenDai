@@ -101,7 +101,7 @@ extension UIView {
             alertController.addAction(cancelAction)
         }
         for i in 0 ..< otherButtonTitles.count {
-            let otherAction = UIAlertAction(title: otherButtonTitles[i], style: UIAlertActionStyle.Destructive, handler: { (action) -> Void in
+            let otherAction = UIAlertAction(title: otherButtonTitles[i], style: UIAlertActionStyle.Default, handler: { (action) -> Void in
                 if handler != nil{
                     handler!(buttonIndex: i + 1,action: action)
                 }

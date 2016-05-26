@@ -29,7 +29,7 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
             setTopViewLeftBtnImg("left")
         }
         setTopViewRightBtn("找回密码")
-        view.backgroundColor = UIColor.getColorThird()
+        view.backgroundColor = UIColor.getGrayColorThird()
         initView()
     }
     
@@ -108,9 +108,9 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
         let registerBtn = UIButton(frame: CGRectMake(14, loginBtn.viewBottomY + 20, screen_width - 28, 45))
         registerBtn.setTitle("免费注册领红包", forState: .Normal)
         registerBtn.titleLabel?.font = UIFont.systemFontOfSize(16)
-        registerBtn.setTitleColor(UIColor.getColorFourth(), forState: .Normal)
+        registerBtn.setTitleColor(UIColor.getRedColorFirst(), forState: .Normal)
         registerBtn.layer.borderWidth = 1
-        registerBtn.layer.borderColor = UIColor.getColorFourth().CGColor
+        registerBtn.layer.borderColor = UIColor.getRedColorFirst().CGColor
         registerBtn.addTarget(self, action: #selector(registerEvent), forControlEvents: .TouchUpInside)
         view.addSubview(registerBtn)
         

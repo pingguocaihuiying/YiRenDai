@@ -19,7 +19,7 @@ class VerificationCodeViewController: BaseNavigationController, UITextFieldDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.getColorThird()
+        view.backgroundColor = UIColor.getGrayColorThird()
         
         setTopViewLeftBtnImg("left")
         
