@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		58C40453D71A1C9F629E85DA /* Pods_YiRenDaiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 627D2ED297966B1F9C187631 /* Pods_YiRenDaiTests.framework */; };
+		7F3AD6AAC5CE34C9658FEF7F /* Pods_YiRenDaiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9717C836CA00144C5FCE24F7 /* Pods_YiRenDaiUITests.framework */; };
+		B7033D781CF82AD600810E81 /* SaveSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7033D771CF82AD500810E81 /* SaveSecurityViewController.swift */; };
 		B70CC12A1CE40CA6002C1445 /* FAQDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70CC1291CE40CA6002C1445 /* FAQDetailViewController.swift */; };
 		B70CC12D1CE411D1002C1445 /* FAQDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70CC12B1CE411D1002C1445 /* FAQDetailTableViewCell.swift */; };
 		B70CC12E1CE411D2002C1445 /* FAQDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B70CC12C1CE411D1002C1445 /* FAQDetailTableViewCell.xib */; };
@@ -21,8 +24,6 @@
 		B75E1D641CCF55E1001F0B44 /* TixianViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E1D631CCF55E1001F0B44 /* TixianViewController.swift */; };
 		B76794AE1CE5B5E800404794 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76794AD1CE5B5E800404794 /* AlertView.swift */; };
 		B76DF5931CE2C76F00BF7912 /* LcqDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DF5921CE2C76F00BF7912 /* LcqDetailViewController.swift */; };
-		B76DF5971CE2CCF900BF7912 /* AFImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DF5951CE2CCF900BF7912 /* AFImageExtension.swift */; };
-		B76DF5981CE2CCF900BF7912 /* AFImageVIewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DF5961CE2CCF900BF7912 /* AFImageVIewExtension.swift */; };
 		B76DF59B1CE2D54C00BF7912 /* ManageTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DF59A1CE2D54C00BF7912 /* ManageTeamViewController.swift */; };
 		B76DF59E1CE2D98000BF7912 /* ManageTeamTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DF59C1CE2D98000BF7912 /* ManageTeamTableViewCell.swift */; };
 		B76DF59F1CE2D98000BF7912 /* ManageTeamTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B76DF59D1CE2D98000BF7912 /* ManageTeamTableViewCell.xib */; };
@@ -79,7 +80,7 @@
 		B7DBC3291CC8ACDB00D2C214 /* LcqTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DBC3271CC8ACDB00D2C214 /* LcqTableViewCell.swift */; };
 		B7DBC32A1CC8ACDB00D2C214 /* LcqTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7DBC3281CC8ACDB00D2C214 /* LcqTableViewCell.xib */; };
 		B7DBC32D1CC8B50200D2C214 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DBC32C1CC8B50200D2C214 /* MoreViewController.swift */; };
-		F4CC33BD05A2CD7ABC7CE201 /* Pods_YiRenDai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 132B5DFD6B62737105FF06EF /* Pods_YiRenDai.framework */; };
+		BE4F5736F93C53F05AACE9E4 /* Pods_YiRenDai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9751B2B3F016075AF71AC2 /* Pods_YiRenDai.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,9 +101,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0F56242AB086DAB1CA4DA3D9 /* Pods-YiRenDai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiRenDai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YiRenDai/Pods-YiRenDai.debug.xcconfig"; sourceTree = "<group>"; };
-		132B5DFD6B62737105FF06EF /* Pods_YiRenDai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YiRenDai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8370241316B6282DFE4D56F9 /* Pods-YiRenDai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiRenDai.release.xcconfig"; path = "Pods/Target Support Files/Pods-YiRenDai/Pods-YiRenDai.release.xcconfig"; sourceTree = "<group>"; };
+		4834EEFAC3A381EE1AB2C5EA /* Pods-YiRenDaiUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiRenDaiUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YiRenDaiUITests/Pods-YiRenDaiUITests.release.xcconfig"; sourceTree = "<group>"; };
+		5FB76968796EF4229E4A2770 /* Pods-YiRenDaiUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiRenDaiUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YiRenDaiUITests/Pods-YiRenDaiUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		627D2ED297966B1F9C187631 /* Pods_YiRenDaiTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YiRenDaiTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6892443FFE7BC8A08F95D779 /* Pods-YiRenDai.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiRenDai.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YiRenDai/Pods-YiRenDai.debug.xcconfig"; sourceTree = "<group>"; };
+		721417FAB269DA6E8AEE07DA /* Pods-YiRenDaiTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiRenDaiTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-YiRenDaiTests/Pods-YiRenDaiTests.release.xcconfig"; sourceTree = "<group>"; };
+		8AE55587C03804E4A94F5DAF /* Pods-YiRenDaiTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiRenDaiTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YiRenDaiTests/Pods-YiRenDaiTests.debug.xcconfig"; sourceTree = "<group>"; };
+		9717C836CA00144C5FCE24F7 /* Pods_YiRenDaiUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YiRenDaiUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE9751B2B3F016075AF71AC2 /* Pods_YiRenDai.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YiRenDai.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7033D751CF7F2F300810E81 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		B7033D761CF7F2F400810E81 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		B7033D771CF82AD500810E81 /* SaveSecurityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveSecurityViewController.swift; sourceTree = "<group>"; };
 		B70CC1291CE40CA6002C1445 /* FAQDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQDetailViewController.swift; sourceTree = "<group>"; };
 		B70CC12B1CE411D1002C1445 /* FAQDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B70CC12C1CE411D1002C1445 /* FAQDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FAQDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -119,8 +128,6 @@
 		B75E1D631CCF55E1001F0B44 /* TixianViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TixianViewController.swift; sourceTree = "<group>"; };
 		B76794AD1CE5B5E800404794 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		B76DF5921CE2C76F00BF7912 /* LcqDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcqDetailViewController.swift; sourceTree = "<group>"; };
-		B76DF5951CE2CCF900BF7912 /* AFImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AFImageExtension.swift; sourceTree = "<group>"; };
-		B76DF5961CE2CCF900BF7912 /* AFImageVIewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AFImageVIewExtension.swift; sourceTree = "<group>"; };
 		B76DF59A1CE2D54C00BF7912 /* ManageTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageTeamViewController.swift; sourceTree = "<group>"; };
 		B76DF59C1CE2D98000BF7912 /* ManageTeamTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageTeamTableViewCell.swift; sourceTree = "<group>"; };
 		B76DF59D1CE2D98000BF7912 /* ManageTeamTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ManageTeamTableViewCell.xib; sourceTree = "<group>"; };
@@ -184,6 +191,7 @@
 		B7DBC3271CC8ACDB00D2C214 /* LcqTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcqTableViewCell.swift; sourceTree = "<group>"; };
 		B7DBC3281CC8ACDB00D2C214 /* LcqTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LcqTableViewCell.xib; sourceTree = "<group>"; };
 		B7DBC32C1CC8B50200D2C214 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		E38ED6B2209DCB145AA6A689 /* Pods-YiRenDai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiRenDai.release.xcconfig"; path = "Pods/Target Support Files/Pods-YiRenDai/Pods-YiRenDai.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,7 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4CC33BD05A2CD7ABC7CE201 /* Pods_YiRenDai.framework in Frameworks */,
+				BE4F5736F93C53F05AACE9E4 /* Pods_YiRenDai.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +207,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58C40453D71A1C9F629E85DA /* Pods_YiRenDaiTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,17 +215,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F3AD6AAC5CE34C9658FEF7F /* Pods_YiRenDaiUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2FDF8D2270A4661F926C712B /* Pods */ = {
+		61F76BF985AEA093F0AF47DB /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				0F56242AB086DAB1CA4DA3D9 /* Pods-YiRenDai.debug.xcconfig */,
-				8370241316B6282DFE4D56F9 /* Pods-YiRenDai.release.xcconfig */,
+				6892443FFE7BC8A08F95D779 /* Pods-YiRenDai.debug.xcconfig */,
+				E38ED6B2209DCB145AA6A689 /* Pods-YiRenDai.release.xcconfig */,
+				8AE55587C03804E4A94F5DAF /* Pods-YiRenDaiTests.debug.xcconfig */,
+				721417FAB269DA6E8AEE07DA /* Pods-YiRenDaiTests.release.xcconfig */,
+				5FB76968796EF4229E4A2770 /* Pods-YiRenDaiUITests.debug.xcconfig */,
+				4834EEFAC3A381EE1AB2C5EA /* Pods-YiRenDaiUITests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -267,7 +281,6 @@
 			isa = PBXGroup;
 			children = (
 				B70CC1381CE47B22002C1445 /* GesturePassword */,
-				B76DF5941CE2CCF900BF7912 /* AFImageHelper */,
 				B7819AC31CD73BCA0078E02F /* Timer.swift */,
 				B7816E9A1CC4CF5700EC4B77 /* CLButton.swift */,
 				B77C93181CD05F1700739CBE /* CLMenu.swift */,
@@ -285,15 +298,6 @@
 				B72CBF6A1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m */,
 			);
 			name = StretchTableHeader;
-			sourceTree = "<group>";
-		};
-		B76DF5941CE2CCF900BF7912 /* AFImageHelper */ = {
-			isa = PBXGroup;
-			children = (
-				B76DF5951CE2CCF900BF7912 /* AFImageExtension.swift */,
-				B76DF5961CE2CCF900BF7912 /* AFImageVIewExtension.swift */,
-			);
-			path = AFImageHelper;
 			sourceTree = "<group>";
 		};
 		B76DF5991CE2D51400BF7912 /* ManageTeam */ = {
@@ -326,8 +330,8 @@
 				B7816E5F1CC46AA900EC4B77 /* YiRenDaiTests */,
 				B7816E6A1CC46AA900EC4B77 /* YiRenDaiUITests */,
 				B7816E491CC46AA800EC4B77 /* Products */,
-				2FDF8D2270A4661F926C712B /* Pods */,
-				CA74A2CEFE2979CE5C65084A /* Frameworks */,
+				61F76BF985AEA093F0AF47DB /* Pods */,
+				F464801E45883107D503EA08 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -461,6 +465,7 @@
 				B7801BCB1CCB66F0003EDEFA /* ActivityCenterTableViewCell.swift */,
 				B7801BCC1CCB66F0003EDEFA /* ActivityCenterTableViewCell.xib */,
 				B7D3FD3D1CCD98B600E67ABF /* LjInvestBtnViewController.swift */,
+				B7033D771CF82AD500810E81 /* SaveSecurityViewController.swift */,
 			);
 			name = HomePage;
 			sourceTree = "<group>";
@@ -534,10 +539,12 @@
 			name = More;
 			sourceTree = "<group>";
 		};
-		CA74A2CEFE2979CE5C65084A /* Frameworks */ = {
+		F464801E45883107D503EA08 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				132B5DFD6B62737105FF06EF /* Pods_YiRenDai.framework */,
+				AE9751B2B3F016075AF71AC2 /* Pods_YiRenDai.framework */,
+				627D2ED297966B1F9C187631 /* Pods_YiRenDaiTests.framework */,
+				9717C836CA00144C5FCE24F7 /* Pods_YiRenDaiUITests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -549,12 +556,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B7816E701CC46AA900EC4B77 /* Build configuration list for PBXNativeTarget "YiRenDai" */;
 			buildPhases = (
-				499F653A8DDC0C355CBF9DF7 /* Check Pods Manifest.lock */,
+				6111DB179C461B3E1900F3F1 /* 📦 Check Pods Manifest.lock */,
 				B7816E441CC46AA800EC4B77 /* Sources */,
 				B7816E451CC46AA800EC4B77 /* Frameworks */,
 				B7816E461CC46AA800EC4B77 /* Resources */,
-				DFDFFC547F39266520978574 /* Embed Pods Frameworks */,
-				772E28F24506F7A088C26E3E /* Copy Pods Resources */,
+				8B50CDE44FC2EC87B66729C1 /* 📦 Embed Pods Frameworks */,
+				E6EC8F06246759EEA7C95195 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -569,9 +576,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B7816E731CC46AA900EC4B77 /* Build configuration list for PBXNativeTarget "YiRenDaiTests" */;
 			buildPhases = (
+				96F2190AF71FD7632BE36EA9 /* 📦 Check Pods Manifest.lock */,
 				B7816E581CC46AA900EC4B77 /* Sources */,
 				B7816E591CC46AA900EC4B77 /* Frameworks */,
 				B7816E5A1CC46AA900EC4B77 /* Resources */,
+				24564038EE361B87A4326821 /* 📦 Embed Pods Frameworks */,
+				C59BDD01286375F29E32631F /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -587,9 +597,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B7816E761CC46AA900EC4B77 /* Build configuration list for PBXNativeTarget "YiRenDaiUITests" */;
 			buildPhases = (
+				EF2BD325A48A3EE2A1C81AFD /* 📦 Check Pods Manifest.lock */,
 				B7816E631CC46AA900EC4B77 /* Sources */,
 				B7816E641CC46AA900EC4B77 /* Frameworks */,
 				B7816E651CC46AA900EC4B77 /* Resources */,
+				36448672963E9911A4CEE0B1 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -680,14 +692,44 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		499F653A8DDC0C355CBF9DF7 /* Check Pods Manifest.lock */ = {
+		24564038EE361B87A4326821 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiRenDaiTests/Pods-YiRenDaiTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		36448672963E9911A4CEE0B1 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiRenDaiUITests/Pods-YiRenDaiUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6111DB179C461B3E1900F3F1 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -695,14 +737,59 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		772E28F24506F7A088C26E3E /* Copy Pods Resources */ = {
+		8B50CDE44FC2EC87B66729C1 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiRenDai/Pods-YiRenDai-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		96F2190AF71FD7632BE36EA9 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		C59BDD01286375F29E32631F /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiRenDaiTests/Pods-YiRenDaiTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6EC8F06246759EEA7C95195 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -710,19 +797,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiRenDai/Pods-YiRenDai-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DFDFFC547F39266520978574 /* Embed Pods Frameworks */ = {
+		EF2BD325A48A3EE2A1C81AFD /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YiRenDai/Pods-YiRenDai-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -743,7 +830,6 @@
 				B7816E841CC48A4800EC4B77 /* ToolKit.swift in Sources */,
 				B7816E8B1CC48AAC00EC4B77 /* CustomTabBarViewController.swift in Sources */,
 				B7DBC3291CC8ACDB00D2C214 /* LcqTableViewCell.swift in Sources */,
-				B76DF5971CE2CCF900BF7912 /* AFImageExtension.swift in Sources */,
 				B72CBF6B1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m in Sources */,
 				B7BEB90E1CE5736E0089D20D /* TentacleView.swift in Sources */,
 				B75E1D621CCF3F99001F0B44 /* MyAccountViewController.swift in Sources */,
@@ -780,8 +866,8 @@
 				B7AEA4B61CD82580006194C6 /* ResetPwdViewController.swift in Sources */,
 				B7801BC81CCB530D003EDEFA /* NSUserDefaultsExtension.swift in Sources */,
 				B7DBC3261CC8A6C100D2C214 /* LcqViewController.swift in Sources */,
+				B7033D781CF82AD600810E81 /* SaveSecurityViewController.swift in Sources */,
 				B716E9781CDC7B62004AC76D /* UICopyLabel.swift in Sources */,
-				B76DF5981CE2CCF900BF7912 /* AFImageVIewExtension.swift in Sources */,
 				B7816E8F1CC48B5E00EC4B77 /* LoginViewController.swift in Sources */,
 				B7819AC21CD733B90078E02F /* VerificationCodeViewController.swift in Sources */,
 				B70CC1401CE47C1B002C1445 /* GesturePasswordViewController.swift in Sources */,
@@ -831,6 +917,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B7816E501CC46AA800EC4B77 /* Base */,
+				B7033D751CF7F2F300810E81 /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -839,6 +926,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				B7816E551CC46AA800EC4B77 /* Base */,
+				B7033D761CF7F2F400810E81 /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -931,7 +1019,7 @@
 		};
 		B7816E711CC46AA900EC4B77 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0F56242AB086DAB1CA4DA3D9 /* Pods-YiRenDai.debug.xcconfig */;
+			baseConfigurationReference = 6892443FFE7BC8A08F95D779 /* Pods-YiRenDai.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -950,7 +1038,7 @@
 		};
 		B7816E721CC46AA900EC4B77 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8370241316B6282DFE4D56F9 /* Pods-YiRenDai.release.xcconfig */;
+			baseConfigurationReference = E38ED6B2209DCB145AA6A689 /* Pods-YiRenDai.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -968,6 +1056,7 @@
 		};
 		B7816E741CC46AA900EC4B77 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8AE55587C03804E4A94F5DAF /* Pods-YiRenDaiTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = YiRenDaiTests/Info.plist;
@@ -980,6 +1069,7 @@
 		};
 		B7816E751CC46AA900EC4B77 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 721417FAB269DA6E8AEE07DA /* Pods-YiRenDaiTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = YiRenDaiTests/Info.plist;
@@ -992,6 +1082,7 @@
 		};
 		B7816E771CC46AA900EC4B77 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FB76968796EF4229E4A2770 /* Pods-YiRenDaiUITests.debug.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = YiRenDaiUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1003,6 +1094,7 @@
 		};
 		B7816E781CC46AA900EC4B77 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4834EEFAC3A381EE1AB2C5EA /* Pods-YiRenDaiUITests.release.xcconfig */;
 			buildSettings = {
 				INFOPLIST_FILE = YiRenDaiUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

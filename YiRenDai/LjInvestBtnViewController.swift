@@ -31,6 +31,27 @@ class LjInvestBtnViewController: BaseNavigationController {
         initView()
     }
     
+    override func clickRightBtnEvent() {
+        // 1.创建分享参数
+        let shareParames = NSMutableDictionary()
+        shareParames.SSDKSetupShareParamsByText("分享内容",
+                                                images : UIImage(named: "QQ"),
+                                                url : NSURL(string:"http://www.mob.com/#/"),
+                                                title : "分享标题",
+                                                type : SSDKContentType.WebPage)
+        // 2、分享（可以弹出我们的分享菜单和编辑界面）
+        ShareSDK.showShareActionSheet(nil, items: nil, shareParams: shareParames) { (state, platformType, userData, contentEntity, error, end) in
+            switch(state){
+            case SSDKResponseState.Success:
+                self.view.viewAlert(self, title: "提示", msg: "分享成功", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            case SSDKResponseState.Fail:
+                self.view.viewAlert(self, title: "提示", msg: "分享失败", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            default:
+                break
+            }
+        }
+    }
+    
     //MARK:自定义方法
     private func initView(){
         tableView = UITableView(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height))
@@ -42,6 +63,7 @@ class LjInvestBtnViewController: BaseNavigationController {
         ljBuyBtn.setTitle("立即购买", forState: .Normal)
         ljBuyBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         ljBuyBtn.setBackgroundImage(UIImage(named: "button_normal"), forState: .Normal)
+        ljBuyBtn.addTarget(self, action: #selector(ljBuyBtnFunc), forControlEvents: .TouchUpInside)
         footerView.addSubview(ljBuyBtn)
         tableView.tableFooterView = footerView
         view.addSubview(tableView)
@@ -66,7 +88,7 @@ class LjInvestBtnViewController: BaseNavigationController {
         return
     }
     
-    func clickEvent(target: AnyObject) {
+    func clickEvent(target: UIButton) {
         let minAmount = productData!["min_amount"].intValue
         let maxAmount = productData!["max_amount"].intValue
         switch target.tag {
@@ -94,6 +116,22 @@ class LjInvestBtnViewController: BaseNavigationController {
             }
         default:
             break
+        }
+    }
+    
+    func ljBuyBtnFunc(){
+        view.viewActionSheet(self, title: "选择支付方式", msg: nil, cancelButtonTitle: "取消", otherButtonTitles: ["支付宝支付","微信支付","银行卡支付","余额支付"]) { (buttonIndex, action) in
+            switch buttonIndex{
+            case 1:
+                break
+            case 2:
+                break
+            case 3:
+                break
+            case 4:
+                break
+            default:break
+            }
         }
     }
 

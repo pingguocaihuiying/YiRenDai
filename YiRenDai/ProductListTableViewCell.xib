@@ -41,7 +41,7 @@
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="起诉金额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2f-dQ-iix">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="起投金额" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B2f-dQ-iix">
                         <rect key="frame" x="214" y="36" width="65" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="65" id="DAV-JQ-Ccz"/>
@@ -95,8 +95,11 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="amountLbl" destination="Xjp-pl-E6q" id="uVg-OL-Aba"/>
+                <outlet property="amountTitleLbl" destination="B2f-dQ-iix" id="suh-Xq-Ect"/>
                 <outlet property="fengbiqiLbl" destination="PSI-i8-SWZ" id="5b5-OK-WpB"/>
+                <outlet property="fengbiqiTitleLbl" destination="Ort-Mf-Shr" id="yPl-8g-5k7"/>
                 <outlet property="shouyiLbl" destination="0DM-ik-0KW" id="zMD-a3-9QY"/>
+                <outlet property="shouyiTitleLbl" destination="yI9-cf-EHD" id="CHb-et-myq"/>
                 <outlet property="titleView" destination="f3V-YZ-60u" id="Ivn-6O-Ou8"/>
             </connections>
             <point key="canvasLocation" x="416" y="172"/>

@@ -72,6 +72,7 @@ class LcqViewController: BaseNavigationController {
     }
     
     func loadMore(){
+        pagenumber = pagenumber + 1
         for _ in 1...3{
             //dataArray.append("新数据")
         }

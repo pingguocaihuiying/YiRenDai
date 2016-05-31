@@ -22,7 +22,9 @@ class NetworkRequest {
      - parameter url: url地址
      */
     func getRequest(url url: String){
+        LoadingAnimation.show()
         Alamofire.request(.GET, url).responseJSON { (response) -> Void in
+            LoadingAnimation.dismiss()
             if let json = response.result.value{
                 print("json：\(json)")
             }
@@ -37,8 +39,8 @@ class NetworkRequest {
     func postRequest(url url: String, params: [String:String], handler:(json: JSON) -> Void){
         LoadingAnimation.show()
         Alamofire.request(.POST, url, parameters: params).responseJSON { (response) -> Void in
+            LoadingAnimation.dismiss()
             if let json = response.result.value{
-                LoadingAnimation.dismiss()
                 handler(json: JSON(json))
             }
         }

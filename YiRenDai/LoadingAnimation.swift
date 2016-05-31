@@ -73,7 +73,7 @@ class LoadingAnimation: UIView {
         for i in 0 ..< 8 {
             let circle = creatCircle(angle: CGFloat(M_PI_4 * Double(i)),
                                      size: circleSize,
-                                     origin: CGPoint(x: x, y: y + 50),
+                                     origin: CGPoint(x: x, y: y + 100),
                                      containerSize: size,
                                      color: color)
             animation.beginTime = beginTime + beginTimes[i]
@@ -94,7 +94,7 @@ class LoadingAnimation: UIView {
         if iFlag == 1{
             iconIv.image = UIImage(named: "success")
         }else{
-            iconIv.image = UIImage(named: "ic_error_white")
+            iconIv.image = UIImage(named: "error")
         }
         showView.addSubview(iconIv)
         // titleLbl
@@ -102,7 +102,7 @@ class LoadingAnimation: UIView {
         if iFlag == 1{
             titleLbl.text = msg ?? "success"
         }else{
-            titleLbl.text = msg ?? "failure"
+            titleLbl.text = msg ?? "error"
         }
         titleLbl.textColor = UIColor.whiteColor()
         titleLbl.font = UIFont.systemFontOfSize(14)
@@ -158,20 +158,20 @@ class LoadingAnimation: UIView {
 extension LoadingAnimation{
     
     class func show(){
-        let loadingAnimation = LoadingAnimation(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height))
+        let loadingAnimation = LoadingAnimation(frame: CGRectMake(0, 0, screen_width, screen_height))
         loadingAnimation.tag = 1
         let view = ToolKit.getTopView()
         view.addSubview(loadingAnimation)
     }
     
     class func show(target: UIViewController){
-        let loadingAnimation = LoadingAnimation(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height))
+        let loadingAnimation = LoadingAnimation(frame: CGRectMake(0, 0, screen_width, screen_height))
         loadingAnimation.tag = 1
         target.view.addSubview(loadingAnimation)
     }
     
     class func showSuccess(target: UIViewController, msg: String?){
-        let loadingAnimation = LoadingAnimation(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height), iFlag: 1, msg: msg)
+        let loadingAnimation = LoadingAnimation(frame: CGRectMake(0, 0, screen_width, screen_height), iFlag: 1, msg: msg)
         target.view.addSubview(loadingAnimation)
         loadingAnimation.alpha = 0
         loadingAnimation.transform = CGAffineTransformMakeScale(1.3, 1.3)
@@ -196,7 +196,7 @@ extension LoadingAnimation{
     }
     
     class func showError(target: UIViewController, msg: String?){
-        let loadingAnimation = LoadingAnimation(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height), iFlag: 0, msg: msg)
+        let loadingAnimation = LoadingAnimation(frame: CGRectMake(0, 0, screen_width, screen_height), iFlag: 0, msg: msg)
         target.view.addSubview(loadingAnimation)
         loadingAnimation.alpha = 0
         loadingAnimation.transform = CGAffineTransformMakeScale(1.3, 1.3)

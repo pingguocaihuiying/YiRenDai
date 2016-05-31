@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         window?.makeKeyAndVisible()
         
+        // 只能竖屏显示
+        UIDevice.currentDevice().setValue(UIInterfaceOrientation.Portrait.rawValue, forKey: "orientation")
+        
         return true
     }
     
@@ -64,6 +67,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //SMSSDK
         SMSSDK.registerApp(SMSSDK_AppKey, withSecret: SMSSDK_Secret)
         SMSSDK.enableAppContactFriends(false)
+        
+        // ShareSDK
+        ShareSDK.registerApp(ShareSDK_AppKey, activePlatforms: [
+            SSDKPlatformType.TypeSinaWeibo.rawValue,
+            SSDKPlatformType.TypeTencentWeibo.rawValue,
+            SSDKPlatformType.TypeWechat.rawValue,
+            SSDKPlatformType.TypeQQ.rawValue], onImport: { (platform) in
+                switch platform{
+                    
+                case SSDKPlatformType.TypeWechat:
+                    ShareSDKConnector.connectWeChat(WXApi.classForCoder())
+                    
+                case SSDKPlatformType.TypeQQ:
+                    ShareSDKConnector.connectQQ(QQApiInterface.classForCoder(), tencentOAuthClass: TencentOAuth.classForCoder())
+                default:
+                    break
+                }
+        }) { (platform, appInfo) in
+            switch(platform){
+            case SSDKPlatformType.TypeWechat:
+                appInfo.SSDKSetupWeChatByAppId("wxb1fb6e1f1f47c07f", appSecret: "0b98bac8fdab547ca0351edc5f28c09c")
+            case SSDKPlatformType.TypeQQ:
+                appInfo.SSDKSetupQQByAppId("1105020970", appKey: "QfVL5BJzt8hpGCN9", authType: SSDKAuthTypeBoth)
+            default:
+                break
+            }
+        }
     }
 
 }

@@ -111,12 +111,24 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
         default:
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierNib, forIndexPath: indexPath) as! ProductListTableViewCell
             cell.selectionStyle = UITableViewCellSelectionStyle.None
+            let remainMoney = productListData![indexPath.section - 1]["remaining_amount"].floatValue
+            let startMoney = productListData![indexPath.section - 1]["min_amount"].floatValue
+            let isSoldOut = remainMoney < startMoney ? true : false
             let is_tiro = productListData![indexPath.section - 1]["is_tiro"].intValue
             if is_tiro == 1 {
-                
+                // starIv
+                let starIv = UIImageView(frame: CGRectMake(0, (cell.titleView.viewHeight - 16) / 2, 16, 16))
+                starIv.image = UIImage(named: "xingji")
+                cell.titleView.addSubview(starIv)
+                // titleLbl
+                let titleLbl = UILabel(frame: CGRectMake(starIv.viewRightX + 5, 0, 100, cell.titleView.viewHeight))
+                titleLbl.text = "新手专区"
+                titleLbl.textColor = isSoldOut ? UIColor.getGrayColorFirst() : UIColor.getRedColorFirst()
+                titleLbl.font = UIFont.systemFontOfSize(16)
+                cell.titleView.addSubview(titleLbl)
             }else{
                 let titleLbl = UILabel(frame: CGRectMake(0, 0, cell.titleView.viewWidth, cell.titleView.viewHeight))
-                titleLbl.textColor = UIColor(red: 0.3, green: 0.3, blue: 0.3, alpha: 1.0)
+                titleLbl.textColor = isSoldOut ? UIColor.getGrayColorFirst() : UIColor.darkGrayColor()
                 titleLbl.font = UIFont.systemFontOfSize(16)
                 titleLbl.text = productListData![indexPath.section - 1]["product_name"].stringValue
                 cell.titleView.addSubview(titleLbl)
@@ -124,6 +136,17 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
             cell.shouyiLbl.text = "\(productListData![indexPath.section - 1]["interest_rate"].stringValue)%"
             cell.fengbiqiLbl.text = productListData![indexPath.section - 1]["duration_type"].stringValue
             cell.amountLbl.text = "\(productListData![indexPath.section - 1]["min_amount"].stringValue)元"
+            if isSoldOut{
+                let soldOutIv = UIImageView(frame: CGRectMake(screen_width - 50, 10, 50, 17))
+                soldOutIv.image = UIImage(named: "yishouqin")
+                cell.addSubview(soldOutIv)
+                cell.shouyiTitleLbl.textColor = UIColor.getGrayColorFirst()
+                cell.shouyiLbl.textColor = UIColor.getGrayColorFirst()
+                cell.fengbiqiTitleLbl.textColor = UIColor.getGrayColorFirst()
+                cell.fengbiqiLbl.textColor = UIColor.getGrayColorFirst()
+                cell.amountTitleLbl.textColor = UIColor.getGrayColorFirst()
+                cell.amountLbl.textColor = UIColor.getGrayColorFirst()
+            }
             return cell
         }
     }

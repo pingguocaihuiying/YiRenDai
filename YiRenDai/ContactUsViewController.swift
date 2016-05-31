@@ -32,7 +32,7 @@ class ContactUsViewController: BaseNavigationController {
         view.addSubview(tableView)
     }
     
-    func clickEvent(sender: AnyObject){
+    func clickEvent(sender: UIButton){
         switch sender.tag {
         case 1:
             break

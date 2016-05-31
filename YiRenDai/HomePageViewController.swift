@@ -9,6 +9,7 @@
 import UIKit
 import CLCycleScrollView
 import MJRefresh
+import SwiftyJSON
 
 class HomePageViewController: BaseViewController, CycleScrollViewDelegate {
     
@@ -19,7 +20,8 @@ class HomePageViewController: BaseViewController, CycleScrollViewDelegate {
     var cycleScrollView: CycleScrollView!
     
     //data
-    var homeData = []
+    var homeData: JSON?
+    var cycleImage: JSON?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,20 +45,35 @@ class HomePageViewController: BaseViewController, CycleScrollViewDelegate {
     }
     
     func refreshData(){
+        initCycleScrollView()
         homeData = []
         //刷新结束
         tableView.mj_header.endRefreshing()
         //刷新数据
-        tableView.reloadData()
+        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0), NSIndexPath(forRow: 2, inSection: 0),NSIndexPath(forRow: 3, inSection: 0) ,NSIndexPath(forRow: 4, inSection: 0)], withRowAnimation: .Automatic)
     }
     
-    func clickEvent(target: AnyObject){
+    func initCycleScrollView(){
+        DataProvider.sharedInstance.getSlide("1") { (data) in
+            if data["status"]["succeed"].intValue == 1{
+                self.cycleImage = data["data"]["slidelist"]
+                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 0)], withRowAnimation: .Automatic)
+            }else{
+                LoadingAnimation.showError(self, msg: nil)
+            }
+        }
+    }
+    
+    func clickEvent(target: UIButton){
         switch target.tag {
         case 1:
             let activityCenterVC = ActivityCenterViewController()
-            activityCenterVC.navtitle = "活动中心"
             activityCenterVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(activityCenterVC, animated: true)
+        case 3:
+            let saveSecurityVC = SaveSecurityViewController()
+            saveSecurityVC.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(saveSecurityVC, animated: true)
         default:
             break
         }
@@ -82,20 +99,23 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         //先清空控件
-        for itemView in cell.subviews {
-            if itemView.isKindOfClass(UILabel) {
-                itemView.removeFromSuperview()
-            }
+        for itemView in cell.contentView.subviews {
+            itemView.removeFromSuperview()
         }
         switch indexPath.row {
         case 0:
-            let imageArray = [UIImage(named: "index1")!,UIImage(named: "index2")!,UIImage(named: "index3")!]
-            cycleScrollView = CycleScrollView(frame: CGRectMake(0, 0, screen_width, 200), imageArray: imageArray)
+            var imageArray = [String]()
+            if cycleImage != nil && cycleImage?.count > 0 {
+                for i in 0 ..< cycleImage!.count{
+                    imageArray.append(cycleImage![i]["slide_img"].stringValue)
+                }
+            }
+            cycleScrollView = CycleScrollView(frame: CGRectMake(0, 0, screen_width, 200), imageArray: imageArray, placeholder: UIImage(named: "index1"))
             cycleScrollView.delegate = self
             cycleScrollView.currentPageControlColor = UIColor.blackColor()
             cycleScrollView.pageControlTintColor = UIColor.whiteColor()
             cycleScrollView.setUpCircleView()
-            cell.addSubview(cycleScrollView)
+            cell.contentView.addSubview(cycleScrollView)
         case 1:
             //imageBtn1
             let imageBtn1 = CLButton(frame: CGRectMake(0, 20, screen_width / 3, 60))
@@ -104,12 +124,12 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             imageBtn1.setTitleColor(UIColor.grayColor(), forState: .Normal)
             imageBtn1.tag = 1
             imageBtn1.addTarget(self, action: #selector(clickEvent), forControlEvents: .TouchUpInside)
-            cell.addSubview(imageBtn1)
+            cell.contentView.addSubview(imageBtn1)
             
             //lineView1
             let lineView1 = UIView(frame: CGRectMake(screen_width / 3, 0, 0.25, 100))
             lineView1.backgroundColor = UIColor.getGrayColorFirst()
-            cell.addSubview(lineView1)
+            cell.contentView.addSubview(lineView1)
             
             //imageBtn2
             let imageBtn2 = CLButton(frame: CGRectMake(screen_width / 3 + 0.25, 20, screen_width / 3, 60))
@@ -118,12 +138,12 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             imageBtn2.setTitleColor(UIColor.grayColor(), forState: .Normal)
             imageBtn2.tag = 2
             imageBtn2.addTarget(self, action: #selector(clickEvent), forControlEvents: .TouchUpInside)
-            cell.addSubview(imageBtn2)
+            cell.contentView.addSubview(imageBtn2)
             
             //lineView2
             let lineView2 = UIView(frame: CGRectMake(screen_width / 3 * 2 + 0.25, 0, 0.25, 100))
             lineView2.backgroundColor = UIColor.getGrayColorFirst()
-            cell.addSubview(lineView2)
+            cell.contentView.addSubview(lineView2)
             
             //imageBtn3
             let imageBtn3 = CLButton(frame: CGRectMake(screen_width / 3 * 2 + 0.5, 20, screen_width / 3, 60))
@@ -132,13 +152,13 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             imageBtn3.setTitleColor(UIColor.grayColor(), forState: .Normal)
             imageBtn3.tag = 3
             imageBtn3.addTarget(self, action: #selector(clickEvent), forControlEvents: .TouchUpInside)
-            cell.addSubview(imageBtn3)
+            cell.contentView.addSubview(imageBtn3)
         case 2:
             cell.backgroundColor = UIColor.getGrayColorSecond()
         case 3:
             // leftView
             let leftView = UIView(frame: CGRectMake(0, 0, (screen_width - 0.5) / 2, cell.viewHeight))
-            cell.addSubview(leftView)
+            cell.contentView.addSubview(leftView)
             // leftDetailTitleLbl
             let leftDetailTitleLbl = UILabel(frame: CGRectMake(0, 10, leftView.viewWidth, 21))
             leftDetailTitleLbl.text = "累计成交金额(元)"
@@ -158,11 +178,11 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             // lineView
             let lineView = UIView(frame: CGRectMake(leftView.viewRightX, 10, 0.5, cell.viewHeight - 20))
             lineView.backgroundColor = UIColor.getGrayColorSecond()
-            cell.addSubview(lineView)
+            cell.contentView.addSubview(lineView)
             
             // rightView
             let rightView = UIView(frame: CGRectMake(lineView.viewRightX, 0, (screen_width - 0.5) / 2, cell.viewHeight))
-            cell.addSubview(rightView)
+            cell.contentView.addSubview(rightView)
             // rightDetailTitleLbl
             let rightDetailTitleLbl = UILabel(frame: CGRectMake(0, 10, leftView.viewWidth, 21))
             rightDetailTitleLbl.text = "累计投资人数(人)"
@@ -184,7 +204,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             leftView.layer.cornerRadius = leftView.viewWidth / 2
             leftView.layer.borderWidth = 1
             leftView.layer.borderColor = UIColor.getRedColorSecond().CGColor
-            cell.addSubview(leftView)
+            cell.contentView.addSubview(leftView)
             // leftDetailLbl1
             let leftDetailLbl1 = UILabel(frame: CGRectMake(0, leftView.viewHeight / 2 - 21, leftView.viewWidth, 21))
             leftDetailLbl1.text = "20%"
@@ -205,7 +225,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             rightView.layer.cornerRadius = leftView.viewWidth / 2
             rightView.layer.borderWidth = 1
             rightView.layer.borderColor = UIColor.getRedColorSecond().CGColor
-            cell.addSubview(rightView)
+            cell.contentView.addSubview(rightView)
             // rightDetailLbl1
             let rightDetailLbl1 = UILabel(frame: CGRectMake(0, leftView.viewHeight / 2 - 21, leftView.viewWidth, 21))
             rightDetailLbl1.text = "15%"
@@ -223,7 +243,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             // centerBtn
             let centerBtn = UIButton(frame: CGRectMake(screen_width * 0.55 / 2, 20, screen_width * 0.45, screen_width * 0.45))
             centerBtn.setImage(UIImage(named: "hongyuan"), forState: .Normal)
-            cell.addSubview(centerBtn)
+            cell.contentView.addSubview(centerBtn)
             // centerDetail1
             let centerDetail1 = UILabel(frame: CGRectMake(0, 30, centerBtn.viewWidth, 21))
             centerDetail1.textAlignment = .Center
@@ -251,7 +271,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             let bottomDetail = UILabel(frame: CGRectMake(0, centerBtn.viewBottomY + 5, screen_width, 21))
             bottomDetail.textAlignment = .Center
             bottomDetail.text = "房利宝"
-            cell.addSubview(bottomDetail)
+            cell.contentView.addSubview(bottomDetail)
         default:
             break
         }

@@ -11,8 +11,11 @@ import UIKit
 class ProductListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleView: UIView!
+    @IBOutlet weak var shouyiTitleLbl: UILabel!
     @IBOutlet weak var shouyiLbl: UILabel!
+    @IBOutlet weak var fengbiqiTitleLbl: UILabel!
     @IBOutlet weak var fengbiqiLbl: UILabel!
+    @IBOutlet weak var amountTitleLbl: UILabel!
     @IBOutlet weak var amountLbl: UILabel!
     
     override func awakeFromNib() {

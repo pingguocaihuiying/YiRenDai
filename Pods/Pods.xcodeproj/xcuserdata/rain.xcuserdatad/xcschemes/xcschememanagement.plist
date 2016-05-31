@@ -4,17 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFImageHelper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>CLCycleScrollView-CustomLibrary.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>CLCycleScrollView.xcscheme</key>
+		<key>CLCircularPicture.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -29,6 +29,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-YiRenDaiTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-YiRenDaiUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,7 +47,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>647D1A2FC69342C93D5DE69F16E17002</key>
+		<key>33229BA8D666833D22A703732D21B87C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,7 +57,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6911DDE3CC9B961F805643EA097A4A4E</key>
+		<key>6A1B46061A3C837D277E6B2C92B4DFDE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +67,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9348A3E822DAE0163FC491D524ED7609</key>
+		<key>A24BFD93919C83833B83F4976F63668B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A6D00586EEDE630B9A3E30F722145D29</key>
+		<key>CECC2F4782C67A4691E8AA850C4FA6F3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E4627F852E46001DCCCCE3F64086B275</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F0C61E88DEDAF91CA071F46A3A94D991</key>
 		<dict>
 			<key>primary</key>
 			<true/>

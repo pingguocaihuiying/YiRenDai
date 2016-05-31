@@ -23,7 +23,8 @@ let URL = "http://115.28.67.86:8083/index.php?r=api"
 let SMSSDK_AppKey = "1283183fef2d8"
 let SMSSDK_Secret = "1a5a8f3bf629f5f834cca96f8b25ab8d"
 
-
+// ShareSDK
+let ShareSDK_AppKey = "1339d65a3e93b"
 
 // MARK: - 全局方法
 class ToolKit{

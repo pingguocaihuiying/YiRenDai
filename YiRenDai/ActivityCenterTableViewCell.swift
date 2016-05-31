@@ -12,7 +12,7 @@ class ActivityCenterTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
-    @IBOutlet weak var stateView: UIView!
+    @IBOutlet weak var stateLbl: UILabel!
     @IBOutlet weak var imageIv: UIImageView!
     @IBOutlet weak var detailLbl: UILabel!
     @IBOutlet weak var lickLbl: UILabel!

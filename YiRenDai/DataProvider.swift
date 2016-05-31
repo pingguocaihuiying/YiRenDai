@@ -61,7 +61,7 @@ class DataProvider {
      重新设置密码
      - parameter account:  账号
      - parameter password: 密码
-     - parameter handler:  回到方法
+     - parameter handler:  回调方法
      */
     func resetPwd(account: String, password: String, handler: (data: JSON) -> Void){
         let url = "\(URL)/member/resetPassword"
@@ -72,6 +72,18 @@ class DataProvider {
     }
     
     //MARK: - 首页
+    /**
+     获取安全保障
+     - parameter slide_type: 1 首页  2 安全保障
+     - parameter handler:    回调方法
+     */
+    func getSlide(slide_type: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/slide/getSlides"
+        let params = ["json":"{\"slide_type\":\"\(slide_type)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
     
     //MARK: - 产品列表
     /**

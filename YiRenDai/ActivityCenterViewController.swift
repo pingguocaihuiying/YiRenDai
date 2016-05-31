@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import SwiftyJSON
 
 class ActivityCenterViewController: BaseNavigationController {
 
@@ -17,11 +18,14 @@ class ActivityCenterViewController: BaseNavigationController {
     var tableView: UITableView!
     
     //data
-    var productListData = []
+    var activityListData: JSON?
+    var pagenumber: Int!
+    var pagesize = 15
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setTopViewTitle("活动中心")
         setTopViewLeftBtnImg("left")
         
         initView()
@@ -45,13 +49,25 @@ class ActivityCenterViewController: BaseNavigationController {
     }
     
     func refreshData(){
-        productListData = []
-        //刷新结束
-        tableView.mj_header.endRefreshing()
-        //mj_footer设置为:普通闲置状态(Idle)
-        tableView.mj_footer.state = MJRefreshState.Idle
-        //刷新数据
-        tableView.reloadData()
+        pagenumber = 1
+        DataProvider.sharedInstance.getArticleList("2", status_code: "1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
+            if data["status"]["succeed"].intValue == 1{
+                self.activityListData = data["data"]["articlelist"]
+                //刷新结束
+                self.tableView.mj_header.endRefreshing()
+                if self.activityListData!.count == data["data"]["page"]["total"].intValue{
+                    // 所有数据加载完毕，没有更多的数据了
+                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
+                }else{
+                    // mj_footer设置为:普通闲置状态(Idle)
+                    self.tableView.mj_footer.state = MJRefreshState.Idle
+                }
+                //刷新数据
+                self.tableView.reloadData()
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
     }
     
     func loadMore(){
@@ -61,7 +77,7 @@ class ActivityCenterViewController: BaseNavigationController {
         //刷新结束
         tableView.mj_footer.endRefreshing()
         //判断数据是否全部加载完
-        if productListData.count >= 30{
+        if activityListData!.count >= 30{
             tableView.mj_footer.state = MJRefreshState.NoMoreData
         }
         //刷新数据
@@ -72,7 +88,7 @@ class ActivityCenterViewController: BaseNavigationController {
 
 extension ActivityCenterViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 6
+        return activityListData == nil ? 0 : activityListData!.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,15 +98,16 @@ extension ActivityCenterViewController: UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(activityCenterCell, forIndexPath: indexPath) as! ActivityCenterTableViewCell
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        cell.titleLbl.text = "浓情母亲节"
+        cell.titleLbl.text = activityListData![indexPath.section]["article_title"].stringValue
         cell.dateLbl.text = "2016.04.20 - 2016.04.27"
-        let stateLbl = UILabel(frame: CGRectMake(0, 0, cell.stateView.viewWidth, cell.stateView.viewHeight))
-        stateLbl.textColor = UIColor.lightGrayColor()
-        stateLbl.font = UIFont.systemFontOfSize(12)
-        stateLbl.text = "已结束"
-        cell.stateView.addSubview(stateLbl)
-        cell.imageIv.image = UIImage(named: "image1")
-        cell.detailLbl.text = "赢价值1320元爱康国宾尊享体验卷送母亲"
+        cell.stateLbl.textColor = UIColor.getRedColorSecond()
+        cell.stateLbl.text = "已结束"
+        cell.stateLbl.layer.masksToBounds = true
+        cell.stateLbl.layer.cornerRadius = 8
+        cell.stateLbl.layer.borderWidth = 1
+        cell.stateLbl.layer.borderColor = UIColor.getRedColorSecond().CGColor
+        cell.imageIv.imageFromURL(activityListData![indexPath.section]["article_image"].stringValue, placeholder: UIImage())
+        cell.detailLbl.text = activityListData![indexPath.section]["article_content"].stringValue
         return cell
     }
     

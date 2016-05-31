@@ -1,0 +1,6 @@
+framework module CLCircularPicture {
+  umbrella header "CLCircularPicture-umbrella.h"
+
+  export *
+  module * { export * }
+}

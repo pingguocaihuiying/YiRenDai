@@ -1,0 +1,6 @@
+framework module Pods_YiRenDaiTests {
+  umbrella header "Pods-YiRenDaiTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

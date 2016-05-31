@@ -38,7 +38,7 @@ class MoreViewController: BaseNavigationController {
         view.addSubview(tableView)
     }
     
-    func clickEvent(sender: AnyObject){
+    func clickEvent(sender: UIButton){
         switch sender.tag {
         case 1:
             if logoutBtn.titleLabel?.text == "登录" {
@@ -75,7 +75,7 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
         case 0:
             return 2
         case 1:
-            return 4
+            return 3
         default:
             return 2
         }
@@ -92,21 +92,21 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.addSubview(imageView)
             case 1:
                 //customBtn1
-                let customBtn1 = CLButton(frame: CGRectMake(0, 0, screen_width / 3, 90), imageName: "zhanweitu", title: "品牌介绍", detail: "中国知名P2P平台纽交所上市公司")
+                let customBtn1 = CLButton(frame: CGRectMake(0, 3, screen_width / 3, 85), imageName: "pinpaijieshao", title: "品牌介绍", detail: "中国知名P2P平台纽交所上市公司")
                 cell.addSubview(customBtn1)
                 //lineView1
                 let lineView1 = UIView(frame: CGRectMake(screen_width / 3, 0, 0.25, 90))
                 lineView1.backgroundColor = UIColor.getGrayColorFirst()
                 cell.addSubview(lineView1)
                 //customBtn2
-                let customBtn2 = CLButton(frame: CGRectMake(screen_width / 3, 0, screen_width / 3, 90), imageName: "zhanweitu", title: "安全保障", detail: "中国知名P2P平台纽交所上市公司")
+                let customBtn2 = CLButton(frame: CGRectMake(screen_width / 3, 3, screen_width / 3, 85), imageName: "zhanweitu", title: "安全保障", detail: "中国知名P2P平台纽交所上市公司")
                 cell.addSubview(customBtn2)
                 //lineView1
                 let lineView2 = UIView(frame: CGRectMake(screen_width / 3 * 2 + 0.25, 0, 0.25, 90))
                 lineView2.backgroundColor = UIColor.getGrayColorFirst()
                 cell.addSubview(lineView2)
                 //customBtn3
-                let customBtn3 = CLButton(frame: CGRectMake(screen_width / 3 * 2, 0, screen_width / 3, 90), imageName: "zhanweitu", title: "资金托管", detail: "中国知名P2P平台纽交所上市公司")
+                let customBtn3 = CLButton(frame: CGRectMake(screen_width / 3 * 2, 3, screen_width / 3, 85), imageName: "zijintuoguan", title: "资金托管", detail: "中国知名P2P平台纽交所上市公司")
                 cell.addSubview(customBtn3)
             default:
                 break
@@ -116,17 +116,17 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
             switch indexPath.row {
             case 0:
                 //customBtn1
-                let customBtn1 = CLButton(frame: CGRectMake(14, 0, screen_width, 45), imageName: "more_team", title: "管理团队")
+                let customBtn1 = CLButton(frame: CGRectMake(14, 0, screen_width, 45), imageName: "guanlituandui", title: "管理团队")
                 customBtn1.userInteractionEnabled = false
                 cell.addSubview(customBtn1)
             case 1:
                 //customBtn2
-                let customBtn2 = CLButton(frame: CGRectMake(14, 0, screen_width, 45), imageName: "more_team", title: "联系我们")
+                let customBtn2 = CLButton(frame: CGRectMake(14, 0, screen_width, 45), imageName: "lianxiwomen", title: "联系我们")
                 customBtn2.userInteractionEnabled = false
                 cell.addSubview(customBtn2)
             case 2:
                 //customBtn3
-                let customBtn3 = CLButton(frame: CGRectMake(14, 0, screen_width, 45), imageName: "more_team", title: "常见问题")
+                let customBtn3 = CLButton(frame: CGRectMake(14, 0, screen_width, 45), imageName: "changjianwenti", title: "常见问题")
                 customBtn3.userInteractionEnabled = false
                 cell.addSubview(customBtn3)
             case 3:
@@ -141,7 +141,7 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
             if indexPath.row == 0 {
                 cell.accessoryType = .DisclosureIndicator
                 //customBtn
-                let customBtn = CLButton(frame: CGRectMake(14, 0, screen_width, 45), imageName: "more_team", title: "设置")
+                let customBtn = CLButton(frame: CGRectMake(14, 0, screen_width, 45), imageName: "shezhi", title: "设置")
                 customBtn.userInteractionEnabled = false
                 cell.addSubview(customBtn)
                 //rightLbl
