@@ -420,10 +420,10 @@ extension MyWealthViewController: UITableViewDataSource, UITableViewDelegate{
         let headView = UIView(frame: CGRectMake(0, 0, screen_width, 10))
         headView.backgroundColor = UIColor.getGrayColorThird()
         let upLineView = UIView(frame: CGRectMake(0, 0.25, screen_width, 0.25))
-        upLineView.backgroundColor = UIColor.getGrayColorFirst()
+        upLineView.backgroundColor = UIColor.getGrayColorSecond()
         headView.addSubview(upLineView)
         let downLineView = UIView(frame: CGRectMake(0, 10 - 0.25, screen_width, 0.25))
-        downLineView.backgroundColor = UIColor.getGrayColorFirst()
+        downLineView.backgroundColor = UIColor.getGrayColorSecond()
         headView.addSubview(downLineView)
         return headView
     }

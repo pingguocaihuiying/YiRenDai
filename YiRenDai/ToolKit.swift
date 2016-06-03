@@ -11,7 +11,7 @@ import UIKit
 // MARK: - 全局属性
 let screen_width = UIScreen.mainScreen().bounds.size.width
 let screen_height = UIScreen.mainScreen().bounds.size.height
-let statusBar_height:CGFloat = 20;
+let statusBar_height:CGFloat = 20
 let navigationBar_height:CGFloat = 44
 let top_height:CGFloat = 64
 let tabBar_height:CGFloat = 49
@@ -35,6 +35,17 @@ class ToolKit{
     static func isLogin() ->Bool{
         let isLogin = NSUserDefaults.getUserDefaultValue("isLogin") == nil ? false : (NSUserDefaults.getUserDefaultValue("isLogin")?.boolValue)!
         return isLogin
+    }
+    
+    /**
+     获取登陆用户Id
+     - returns: 返回用户Id
+     */
+    static func getUserId() -> String{
+        if let userId = NSUserDefaults.getUserDefaultValue("userId"){
+            return userId as! String
+        }
+        return ""
     }
     
     /**

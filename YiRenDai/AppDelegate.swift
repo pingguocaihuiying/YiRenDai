@@ -70,10 +70,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // ShareSDK
         ShareSDK.registerApp(ShareSDK_AppKey, activePlatforms: [
-            SSDKPlatformType.TypeSinaWeibo.rawValue,
-            SSDKPlatformType.TypeTencentWeibo.rawValue,
             SSDKPlatformType.TypeWechat.rawValue,
-            SSDKPlatformType.TypeQQ.rawValue], onImport: { (platform) in
+            SSDKPlatformType.TypeSinaWeibo.rawValue,
+            SSDKPlatformType.TypeSMS.rawValue
+            ], onImport: { (platform) in
                 switch platform{
                     
                 case SSDKPlatformType.TypeWechat:
@@ -87,9 +87,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }) { (platform, appInfo) in
             switch(platform){
             case SSDKPlatformType.TypeWechat:
-                appInfo.SSDKSetupWeChatByAppId("wxb1fb6e1f1f47c07f", appSecret: "0b98bac8fdab547ca0351edc5f28c09c")
-            case SSDKPlatformType.TypeQQ:
-                appInfo.SSDKSetupQQByAppId("1105020970", appKey: "QfVL5BJzt8hpGCN9", authType: SSDKAuthTypeBoth)
+                appInfo.SSDKSetupWeChatByAppId("wx0e24ffb7d515f749", appSecret: "9c4e4324f71698231c541ebf0c39df1d")
+            //case SSDKPlatformType.TypeQQ:
+                //appInfo.SSDKSetupQQByAppId("1105020970", appKey: "QfVL5BJzt8hpGCN9", authType: SSDKAuthTypeBoth)
             default:
                 break
             }

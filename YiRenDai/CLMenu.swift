@@ -15,7 +15,7 @@ protocol CLMenuDelegate {
 class CLMenu: UIView {
     
     private var menuArray = [String]()
-    private var delegate: CLMenuDelegate?
+    var delegate: CLMenuDelegate?
     
     init(frame: CGRect, menuArray: [String]){
         super.init(frame: frame)
@@ -48,7 +48,7 @@ class CLMenu: UIView {
             itemBtn.setTitle(menuArray[i], forState: .Normal)
             menuView.addSubview(itemBtn)
             //底部线
-            let lineView = UIView(frame: CGRectMake(CGFloat(i) * itemWidth, menuView.viewHeight, itemWidth, 0.5))
+            let lineView = UIView(frame: CGRectMake(CGFloat(i) * itemWidth, menuView.viewHeight - 0.5, itemWidth, 0.5))
             if i == 0 {
                 lineView.backgroundColor = UIColor.getRedColorFirst()
             }else{

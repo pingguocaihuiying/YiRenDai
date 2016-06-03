@@ -153,8 +153,21 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
         lineView7.backgroundColor = UIColor.getGrayColorFirst()
         contentView.addSubview(lineView7)
         
+        // checkIv
+        let checkIv = UIImageView(frame: CGRectMake(20, contentView.viewBottomY + 15, 20, 20))
+        checkIv.image = UIImage(named: "xuanze")
+        view.addSubview(checkIv)
+        // protocolBtn
+        let protocolBtn = UIButton(frame: CGRectMake(checkIv.viewRightX + 5, contentView.viewBottomY + 15, 120, 20))
+        protocolBtn.titleLabel?.font = UIFont.systemFontOfSize(15)
+        let str = NSMutableAttributedString(string: "我已同意注册协议")
+        str.addAttribute(NSForegroundColorAttributeName, value: UIColor.redColor(), range: NSMakeRange(4, 4))
+        str.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: NSMakeRange(4, 4))
+        protocolBtn.setAttributedTitle(str, forState: .Normal)
+        view.addSubview(protocolBtn)
+        
         //okBtn
-        okBtn = UIButton(frame: CGRectMake(14, contentView.viewBottomY + 40, screen_width - 28, 45))
+        okBtn = UIButton(frame: CGRectMake(14, contentView.viewBottomY + 50, screen_width - 28, 45))
         okBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Disabled)
         okBtn.titleLabel?.font = UIFont.systemFontOfSize(16)
         okBtn.enabled = false

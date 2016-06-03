@@ -111,6 +111,11 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
         default:
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierNib, forIndexPath: indexPath) as! ProductListTableViewCell
             cell.selectionStyle = UITableViewCellSelectionStyle.None
+            for itemView in cell.contentView.subviews {
+                if itemView.tag == 2001 {
+                    itemView.removeFromSuperview()
+                }
+            }
             let remainMoney = productListData![indexPath.section - 1]["remaining_amount"].floatValue
             let startMoney = productListData![indexPath.section - 1]["min_amount"].floatValue
             let isSoldOut = remainMoney < startMoney ? true : false
@@ -138,8 +143,9 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
             cell.amountLbl.text = "\(productListData![indexPath.section - 1]["min_amount"].stringValue)元"
             if isSoldOut{
                 let soldOutIv = UIImageView(frame: CGRectMake(screen_width - 50, 10, 50, 17))
+                soldOutIv.tag = 2001
                 soldOutIv.image = UIImage(named: "yishouqin")
-                cell.addSubview(soldOutIv)
+                cell.contentView.addSubview(soldOutIv)
                 cell.shouyiTitleLbl.textColor = UIColor.getGrayColorFirst()
                 cell.shouyiLbl.textColor = UIColor.getGrayColorFirst()
                 cell.fengbiqiTitleLbl.textColor = UIColor.getGrayColorFirst()
@@ -197,10 +203,10 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
         let headView = UIView(frame: CGRectMake(0, 0, screen_width, 14))
         headView.backgroundColor = UIColor.getGrayColorThird()
         let upLineView = UIView(frame: CGRectMake(0, 0.25, screen_width, 0.25))
-        upLineView.backgroundColor = UIColor.getGrayColorFirst()
+        upLineView.backgroundColor = UIColor.getGrayColorSecond()
         headView.addSubview(upLineView)
         let downLineView = UIView(frame: CGRectMake(0, 14 - 0.25, screen_width, 0.25))
-        downLineView.backgroundColor = UIColor.getGrayColorFirst()
+        downLineView.backgroundColor = UIColor.getGrayColorSecond()
         headView.addSubview(downLineView)
         return headView
     }

@@ -32,6 +32,13 @@ extension UIColor{
     }
     
     /**
+     * 获取颜色 -- 灰色 -- UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
+     */
+    class func getGrayColorFourth() -> UIColor{
+        return UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1.0)
+    }
+    
+    /**
      * 获取颜色 -- 红色 -- UIColor(red:0.99, green:0.33, blue:0.17, alpha:1.00)
      */
     class func getRedColorFirst() -> UIColor{

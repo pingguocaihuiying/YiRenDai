@@ -85,6 +85,22 @@ class DataProvider {
         }
     }
     
+    /**
+     支付 - 获取charge
+     - parameter product_id:   产品id
+     - parameter member_id:    用户id
+     - parameter order_amount: 支付金额
+     - parameter pay_method:   支付方式
+     - parameter handler:      回调方法
+     */
+    func getCharge(product_id: String, member_id: String, order_amount: String, pay_method: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/order/create"
+        let params = ["json":"{\"product_id\":\"\(product_id)\",\"member_id\":\"\(member_id)\",\"order_amount\":\"\(order_amount)\",\"pay_method\":\"\(pay_method)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
     //MARK: - 产品列表
     /**
      获取产品列表

@@ -74,14 +74,14 @@ class CustomTabBarViewController: UITabBarController {
         }
         
         //第四个tabbar面板
-        let lcqVC = LcqViewController()
-        lcqVC.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0)
-        lcqVC.tabBarItem.image = UIImage(named: "huisewoyaojiekuan")
-        lcqVC.tabBarItem.selectedImage = UIImage(named: "hongsewoyaojiekuan")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
-        let navLcqVC = UINavigationController(rootViewController: lcqVC)
-        navLcqVC.navigationBar.hidden = true
-        if (lcqVC.navigationController!.navigationBar.translucent) {
-            lcqVC.automaticallyAdjustsScrollViewInsets = false;
+        let iBorrowVC = IBorrowViewController()
+        iBorrowVC.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0)
+        iBorrowVC.tabBarItem.image = UIImage(named: "huisewoyaojiekuan")
+        iBorrowVC.tabBarItem.selectedImage = UIImage(named: "hongsewoyaojiekuan")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
+        let navIBorrowVC = UINavigationController(rootViewController: iBorrowVC)
+        navIBorrowVC.navigationBar.hidden = true
+        if (iBorrowVC.navigationController!.navigationBar.translucent) {
+            iBorrowVC.automaticallyAdjustsScrollViewInsets = false;
         }
         
         //第五个tabbar面板
@@ -97,7 +97,7 @@ class CustomTabBarViewController: UITabBarController {
         
         //将view添加到tabbar
         let isLogin = ToolKit.isLogin()
-        self.viewControllers = [navHomePageVC, navProductListVC, isLogin ? navMyWealthVC : navLoginVC, navLcqVC, navMoreVC]
+        self.viewControllers = [navHomePageVC, navProductListVC, isLogin ? navMyWealthVC : navLoginVC, navIBorrowVC, navMoreVC]
         
         //设置tabbar的选中时颜色
         UITabBar.appearance().tintColor = UIColor(red:0.99, green:0.33, blue:0.04, alpha:1)

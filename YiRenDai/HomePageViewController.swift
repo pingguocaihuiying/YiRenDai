@@ -110,7 +110,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
                     imageArray.append(cycleImage![i]["slide_img"].stringValue)
                 }
             }
-            cycleScrollView = CycleScrollView(frame: CGRectMake(0, 0, screen_width, 200), imageArray: imageArray, placeholder: UIImage(named: "index1"))
+            cycleScrollView = CycleScrollView(frame: CGRectMake(0, 0, screen_width, 200), imageArray: imageArray, placeholder: UIImage(named: "default_bgimg"))
             cycleScrollView.delegate = self
             cycleScrollView.currentPageControlColor = UIColor.blackColor()
             cycleScrollView.pageControlTintColor = UIColor.whiteColor()
@@ -154,7 +154,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             imageBtn3.addTarget(self, action: #selector(clickEvent), forControlEvents: .TouchUpInside)
             cell.contentView.addSubview(imageBtn3)
         case 2:
-            cell.backgroundColor = UIColor.getGrayColorSecond()
+            cell.backgroundColor = UIColor.getGrayColorThird()
         case 3:
             // leftView
             let leftView = UIView(frame: CGRectMake(0, 0, (screen_width - 0.5) / 2, cell.viewHeight))

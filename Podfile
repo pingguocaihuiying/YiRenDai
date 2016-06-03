@@ -21,7 +21,7 @@ target 'YiRenDai' do
     pod 'SMSSDK' #SMSSDK必须
     
     #支付 ping++
-    #pod 'Pingpp', '~> 2.1.0'
+    pod 'Pingpp'
     
     #分享、第三方登陆
     # 主模块(必须)

@@ -19,16 +19,16 @@ class CLButton: UIButton {
         initView()
     }
     
-    init(frame: CGRect, imageName: String, title: String, detail: String){
+    init(frame: CGRect, imageName: String, title: String, detail: String, titleColor: UIColor = UIColor.darkGrayColor(), detailColor: UIColor = UIColor.lightGrayColor()){
         super.init(frame: frame)
         //mImageView
-        let mImageView = UIImageView(frame: CGRectMake((frame.size.width - 30) / 2, 5, frame.size.width * 0.3, frame.size.height * 0.35))
+        let mImageView = UIImageView(frame: CGRectMake((frame.size.width - 30) / 2, 5, frame.size.height * 0.35, frame.size.height * 0.35))
         mImageView.image = UIImage(named: imageName)
         self.addSubview(mImageView)
         //mTitleLbl
         let mTitleLbl = UILabel(frame: CGRectMake((frame.size.width - 60) / 2, mImageView.viewBottomY + 5, 60, 12))
         mTitleLbl.font = UIFont.systemFontOfSize(12)
-        mTitleLbl.textColor = UIColor.darkGrayColor()
+        mTitleLbl.textColor = titleColor
         mTitleLbl.textAlignment = .Center
         mTitleLbl.text = title
         self.addSubview(mTitleLbl)
@@ -40,7 +40,7 @@ class CLButton: UIButton {
         mDetailLbl.font = UIFont.systemFontOfSize(11)
         mDetailLbl.numberOfLines = 0
         mDetailLbl.textAlignment = .Center
-        mDetailLbl.textColor = UIColor.getGrayColorFirst()
+        mDetailLbl.textColor = detailColor
         mDetailLbl.text = detail
         self.addSubview(mDetailLbl)
     }

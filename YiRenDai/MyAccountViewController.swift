@@ -145,6 +145,16 @@ extension MyAccountViewController: UITableViewDataSource, UITableViewDelegate{
         }
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 1 {
+            let vipVC = VIPViewController()
+            navigationController?.pushViewController(vipVC, animated: true)
+        }else if indexPath.section == 2{
+            let myBankCardVC = MyBankCardViewController()
+            navigationController?.pushViewController(myBankCardVC, animated: true)
+        }
+    }
+    
     //section
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {

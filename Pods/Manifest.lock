@@ -5,6 +5,17 @@ PODS:
     - AFImageHelper (~> 3.0.2)
   - MJRefresh (3.1.0)
   - MOBFoundation_IDFA (1.5.4)
+  - Pingpp (2.2.4):
+    - Pingpp/Alipay (= 2.2.4)
+    - Pingpp/Core (= 2.2.4)
+    - Pingpp/UnionPay (= 2.2.4)
+  - Pingpp/Alipay (2.2.4):
+    - Pingpp/Core
+  - Pingpp/Core (2.2.4):
+    - Pingpp/Network
+  - Pingpp/Network (2.2.4)
+  - Pingpp/UnionPay (2.2.4):
+    - Pingpp/Core
   - ShareSDK3 (3.3.1):
     - ShareSDK3/ShareSDK (= 3.3.1)
   - ShareSDK3/ShareSDK (3.3.1)
@@ -20,6 +31,7 @@ DEPENDENCIES:
   - CLCircularPicture
   - MJRefresh
   - MOBFoundation_IDFA
+  - Pingpp
   - ShareSDK3
   - ShareSDK3/ShareSDKPlatforms/QQ
   - ShareSDK3/ShareSDKPlatforms/SinaWeibo
@@ -34,10 +46,11 @@ SPEC CHECKSUMS:
   CLCircularPicture: 4d7ba2c7c5fa46583485e62aa8dc9d4b7949ad9c
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   MOBFoundation_IDFA: bde858415b935fb39d7ea0e9a3b80251e0de1645
+  Pingpp: 89c262bc06cd559b318595c43af3926f1d851334
   ShareSDK3: 8423b4dca9f5a3a210d536fc4f0c4b1555022810
   SMSSDK: 642b6a8c55fd382be44487cd5e0b0710681895f9
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 4aedb6be6d32e6ce03020e5c7409ffb68d64d9e0
+PODFILE CHECKSUM: e905b24e1df209e07d06241aab0168960b57eaf4
 
 COCOAPODS: 1.0.0

@@ -88,7 +88,7 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
             switch indexPath.row {
             case 0:
                 let imageView = UIImageView(frame: CGRectMake(0, 0, screen_width, 130))
-                imageView.image = UIImage(named: "more_video")
+                imageView.image = UIImage(named: "default_bgimg")
                 cell.addSubview(imageView)
             case 1:
                 //customBtn1
@@ -99,7 +99,7 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
                 lineView1.backgroundColor = UIColor.getGrayColorFirst()
                 cell.addSubview(lineView1)
                 //customBtn2
-                let customBtn2 = CLButton(frame: CGRectMake(screen_width / 3, 3, screen_width / 3, 85), imageName: "zhanweitu", title: "安全保障", detail: "中国知名P2P平台纽交所上市公司")
+                let customBtn2 = CLButton(frame: CGRectMake(screen_width / 3, 3, screen_width / 3, 85), imageName: "anquanbaozhang", title: "安全保障", detail: "中国知名P2P平台纽交所上市公司")
                 cell.addSubview(customBtn2)
                 //lineView1
                 let lineView2 = UIView(frame: CGRectMake(screen_width / 3 * 2 + 0.25, 0, 0.25, 90))
@@ -250,10 +250,10 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
         let headView = UIView(frame: CGRectMake(0, 0, screen_width, 14))
         headView.backgroundColor = UIColor.getGrayColorThird()
         let upLineView = UIView(frame: CGRectMake(0, 0.25, screen_width, 0.25))
-        upLineView.backgroundColor = UIColor.getGrayColorFirst()
+        upLineView.backgroundColor = UIColor.getGrayColorSecond()
         headView.addSubview(upLineView)
         let downLineView = UIView(frame: CGRectMake(0, 14 - 0.25, screen_width, 0.25))
-        downLineView.backgroundColor = UIColor.getGrayColorFirst()
+        downLineView.backgroundColor = UIColor.getGrayColorSecond()
         headView.addSubview(downLineView)
         return headView
     }

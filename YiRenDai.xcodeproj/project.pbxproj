@@ -20,6 +20,8 @@
 		B7248FA41CC5CFA7000A4D78 /* ProductListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7248FA21CC5CFA7000A4D78 /* ProductListTableViewCell.xib */; };
 		B72CBF641CC7010F003FFBC2 /* MyWealthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72CBF631CC7010F003FFBC2 /* MyWealthViewController.swift */; };
 		B72CBF6B1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72CBF6A1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m */; };
+		B74C7ABE1D0109020048FF2A /* MyCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74C7ABC1D0109020048FF2A /* MyCardTableViewCell.swift */; };
+		B74C7ABF1D0109020048FF2A /* MyCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B74C7ABD1D0109020048FF2A /* MyCardTableViewCell.xib */; };
 		B75E1D621CCF3F99001F0B44 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E1D611CCF3F99001F0B44 /* MyAccountViewController.swift */; };
 		B75E1D641CCF55E1001F0B44 /* TixianViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E1D631CCF55E1001F0B44 /* TixianViewController.swift */; };
 		B76794AE1CE5B5E800404794 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76794AD1CE5B5E800404794 /* AlertView.swift */; };
@@ -30,6 +32,10 @@
 		B76DF5A21CE31A9200BF7912 /* FAQViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DF5A11CE31A9200BF7912 /* FAQViewController.swift */; };
 		B76DF5A51CE31B6E00BF7912 /* FAQTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DF5A31CE31B6E00BF7912 /* FAQTableViewCell.swift */; };
 		B76DF5A61CE31B6E00BF7912 /* FAQTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B76DF5A41CE31B6E00BF7912 /* FAQTableViewCell.xib */; };
+		B771EB021D00204C00E22D3A /* UpgradeStrategyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B771EB011D00204C00E22D3A /* UpgradeStrategyViewController.swift */; };
+		B771EB051D00212800E22D3A /* UpgradeStrategyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B771EB031D00212800E22D3A /* UpgradeStrategyTableViewCell.swift */; };
+		B771EB061D00212800E22D3A /* UpgradeStrategyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B771EB041D00212800E22D3A /* UpgradeStrategyTableViewCell.xib */; };
+		B771EB081D002B2D00E22D3A /* MyBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B771EB071D002B2D00E22D3A /* MyBankCardViewController.swift */; };
 		B7782CA01CDDFD9600D67594 /* ToolKitObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = B7782C9F1CDDFD9600D67594 /* ToolKitObjC.m */; };
 		B77C93131CD03FC700739CBE /* MyGiftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C93121CD03FC700739CBE /* MyGiftViewController.swift */; };
 		B77C93151CD047F400739CBE /* YirenbiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B77C93141CD047F400739CBE /* YirenbiViewController.swift */; };
@@ -62,6 +68,8 @@
 		B7819AC01CD72BC30078E02F /* RetrievePwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7819ABF1CD72BC30078E02F /* RetrievePwdViewController.swift */; };
 		B7819AC21CD733B90078E02F /* VerificationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7819AC11CD733B90078E02F /* VerificationCodeViewController.swift */; };
 		B7819AC41CD73BCA0078E02F /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7819AC31CD73BCA0078E02F /* Timer.swift */; };
+		B78AA59F1CFD316A009D9B1D /* IBorrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78AA59E1CFD316A009D9B1D /* IBorrowViewController.swift */; };
+		B78AA5A11CFD6E95009D9B1D /* ApplyBorrowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78AA5A01CFD6E95009D9B1D /* ApplyBorrowViewController.swift */; };
 		B78B669A1CDB216A005232FF /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78B66991CDB216A005232FF /* DataProvider.swift */; };
 		B78B669C1CDB23CD005232FF /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78B669B1CDB23CD005232FF /* NetworkRequest.swift */; };
 		B78B66A41CDB2F16005232FF /* ContactUsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78B66A31CDB2F16005232FF /* ContactUsViewController.swift */; };
@@ -80,6 +88,8 @@
 		B7DBC3291CC8ACDB00D2C214 /* LcqTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DBC3271CC8ACDB00D2C214 /* LcqTableViewCell.swift */; };
 		B7DBC32A1CC8ACDB00D2C214 /* LcqTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7DBC3281CC8ACDB00D2C214 /* LcqTableViewCell.xib */; };
 		B7DBC32D1CC8B50200D2C214 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7DBC32C1CC8B50200D2C214 /* MoreViewController.swift */; };
+		B7FDFEF71CFE7FFC00DA1867 /* IntroductionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FDFEF61CFE7FFC00DA1867 /* IntroductionsViewController.swift */; };
+		B7FDFEFD1CFE8FAC00DA1867 /* VIPViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7FDFEFC1CFE8FAC00DA1867 /* VIPViewController.swift */; };
 		BE4F5736F93C53F05AACE9E4 /* Pods_YiRenDai.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE9751B2B3F016075AF71AC2 /* Pods_YiRenDai.framework */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +134,8 @@
 		B72CBF681CC70B9C003FFBC2 /* YiRenDai-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YiRenDai-Bridging-Header.h"; sourceTree = "<group>"; };
 		B72CBF691CC70B9C003FFBC2 /* HFStretchableTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFStretchableTableHeaderView.h; sourceTree = "<group>"; };
 		B72CBF6A1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HFStretchableTableHeaderView.m; sourceTree = "<group>"; };
+		B74C7ABC1D0109020048FF2A /* MyCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCardTableViewCell.swift; sourceTree = "<group>"; };
+		B74C7ABD1D0109020048FF2A /* MyCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCardTableViewCell.xib; sourceTree = "<group>"; };
 		B75E1D611CCF3F99001F0B44 /* MyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		B75E1D631CCF55E1001F0B44 /* TixianViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TixianViewController.swift; sourceTree = "<group>"; };
 		B76794AD1CE5B5E800404794 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
@@ -134,6 +146,10 @@
 		B76DF5A11CE31A9200BF7912 /* FAQViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQViewController.swift; sourceTree = "<group>"; };
 		B76DF5A31CE31B6E00BF7912 /* FAQTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQTableViewCell.swift; sourceTree = "<group>"; };
 		B76DF5A41CE31B6E00BF7912 /* FAQTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FAQTableViewCell.xib; sourceTree = "<group>"; };
+		B771EB011D00204C00E22D3A /* UpgradeStrategyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpgradeStrategyViewController.swift; sourceTree = "<group>"; };
+		B771EB031D00212800E22D3A /* UpgradeStrategyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpgradeStrategyTableViewCell.swift; sourceTree = "<group>"; };
+		B771EB041D00212800E22D3A /* UpgradeStrategyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpgradeStrategyTableViewCell.xib; sourceTree = "<group>"; };
+		B771EB071D002B2D00E22D3A /* MyBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBankCardViewController.swift; sourceTree = "<group>"; };
 		B7782C9E1CDDFD9600D67594 /* ToolKitObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToolKitObjC.h; sourceTree = "<group>"; };
 		B7782C9F1CDDFD9600D67594 /* ToolKitObjC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToolKitObjC.m; sourceTree = "<group>"; };
 		B77C93121CD03FC700739CBE /* MyGiftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyGiftViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +189,8 @@
 		B7819ABF1CD72BC30078E02F /* RetrievePwdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetrievePwdViewController.swift; sourceTree = "<group>"; };
 		B7819AC11CD733B90078E02F /* VerificationCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerificationCodeViewController.swift; sourceTree = "<group>"; };
 		B7819AC31CD73BCA0078E02F /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
+		B78AA59E1CFD316A009D9B1D /* IBorrowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IBorrowViewController.swift; sourceTree = "<group>"; };
+		B78AA5A01CFD6E95009D9B1D /* ApplyBorrowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplyBorrowViewController.swift; sourceTree = "<group>"; };
 		B78B66991CDB216A005232FF /* DataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		B78B669B1CDB23CD005232FF /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
 		B78B66A31CDB2F16005232FF /* ContactUsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +209,8 @@
 		B7DBC3271CC8ACDB00D2C214 /* LcqTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcqTableViewCell.swift; sourceTree = "<group>"; };
 		B7DBC3281CC8ACDB00D2C214 /* LcqTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LcqTableViewCell.xib; sourceTree = "<group>"; };
 		B7DBC32C1CC8B50200D2C214 /* MoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		B7FDFEF61CFE7FFC00DA1867 /* IntroductionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntroductionsViewController.swift; sourceTree = "<group>"; };
+		B7FDFEFC1CFE8FAC00DA1867 /* VIPViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VIPViewController.swift; sourceTree = "<group>"; };
 		E38ED6B2209DCB145AA6A689 /* Pods-YiRenDai.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YiRenDai.release.xcconfig"; path = "Pods/Target Support Files/Pods-YiRenDai/Pods-YiRenDai.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -257,8 +277,8 @@
 		B72CBF621CC7001B003FFBC2 /* MyWealth */ = {
 			isa = PBXGroup;
 			children = (
+				B771EB091D002B3600E22D3A /* UserCenter */,
 				B72CBF631CC7010F003FFBC2 /* MyWealthViewController.swift */,
-				B75E1D611CCF3F99001F0B44 /* MyAccountViewController.swift */,
 				B75E1D631CCF55E1001F0B44 /* TixianViewController.swift */,
 				B77C93121CD03FC700739CBE /* MyGiftViewController.swift */,
 				B77C93141CD047F400739CBE /* YirenbiViewController.swift */,
@@ -321,6 +341,21 @@
 				B70CC12C1CE411D1002C1445 /* FAQDetailTableViewCell.xib */,
 			);
 			name = FAQ;
+			sourceTree = "<group>";
+		};
+		B771EB091D002B3600E22D3A /* UserCenter */ = {
+			isa = PBXGroup;
+			children = (
+				B75E1D611CCF3F99001F0B44 /* MyAccountViewController.swift */,
+				B7FDFEFC1CFE8FAC00DA1867 /* VIPViewController.swift */,
+				B771EB011D00204C00E22D3A /* UpgradeStrategyViewController.swift */,
+				B771EB031D00212800E22D3A /* UpgradeStrategyTableViewCell.swift */,
+				B771EB041D00212800E22D3A /* UpgradeStrategyTableViewCell.xib */,
+				B771EB071D002B2D00E22D3A /* MyBankCardViewController.swift */,
+				B74C7ABC1D0109020048FF2A /* MyCardTableViewCell.swift */,
+				B74C7ABD1D0109020048FF2A /* MyCardTableViewCell.xib */,
+			);
+			name = UserCenter;
 			sourceTree = "<group>";
 		};
 		B7816E3F1CC46AA800EC4B77 = {
@@ -427,7 +462,7 @@
 				B7816E901CC48C3700EC4B77 /* HomePage */,
 				B7816E931CC48C9700EC4B77 /* ProductList */,
 				B72CBF621CC7001B003FFBC2 /* MyWealth */,
-				B7DBC3241CC8A4F600D2C214 /* Lcq */,
+				B7DBC3241CC8A4F600D2C214 /* IBorrow */,
 				B7DBC32B1CC8B4E800D2C214 /* More */,
 			);
 			name = UILayer;
@@ -516,15 +551,18 @@
 			name = ContactUs;
 			sourceTree = "<group>";
 		};
-		B7DBC3241CC8A4F600D2C214 /* Lcq */ = {
+		B7DBC3241CC8A4F600D2C214 /* IBorrow */ = {
 			isa = PBXGroup;
 			children = (
 				B7DBC3251CC8A6C100D2C214 /* LcqViewController.swift */,
 				B7DBC3271CC8ACDB00D2C214 /* LcqTableViewCell.swift */,
 				B7DBC3281CC8ACDB00D2C214 /* LcqTableViewCell.xib */,
 				B76DF5921CE2C76F00BF7912 /* LcqDetailViewController.swift */,
+				B78AA59E1CFD316A009D9B1D /* IBorrowViewController.swift */,
+				B78AA5A01CFD6E95009D9B1D /* ApplyBorrowViewController.swift */,
+				B7FDFEF61CFE7FFC00DA1867 /* IntroductionsViewController.swift */,
 			);
-			name = Lcq;
+			name = IBorrow;
 			sourceTree = "<group>";
 		};
 		B7DBC32B1CC8B4E800D2C214 /* More */ = {
@@ -668,6 +706,8 @@
 				B7816E531CC46AA800EC4B77 /* Assets.xcassets in Resources */,
 				B76DF5A61CE31B6E00BF7912 /* FAQTableViewCell.xib in Resources */,
 				B7DBC32A1CC8ACDB00D2C214 /* LcqTableViewCell.xib in Resources */,
+				B771EB061D00212800E22D3A /* UpgradeStrategyTableViewCell.xib in Resources */,
+				B74C7ABF1D0109020048FF2A /* MyCardTableViewCell.xib in Resources */,
 				B7816E511CC46AA800EC4B77 /* Main.storyboard in Resources */,
 				B7801BCE1CCB66F0003EDEFA /* ActivityCenterTableViewCell.xib in Resources */,
 				B76DF59F1CE2D98000BF7912 /* ManageTeamTableViewCell.xib in Resources */,
@@ -821,6 +861,7 @@
 			files = (
 				B7816E9B1CC4CF5700EC4B77 /* CLButton.swift in Sources */,
 				B7BEB90D1CE5736E0089D20D /* GesturePasswordView.swift in Sources */,
+				B7FDFEFD1CFE8FAC00DA1867 /* VIPViewController.swift in Sources */,
 				B75E1D641CCF55E1001F0B44 /* TixianViewController.swift in Sources */,
 				B7248FA31CC5CFA7000A4D78 /* ProductListTableViewCell.swift in Sources */,
 				B70CC12A1CE40CA6002C1445 /* FAQDetailViewController.swift in Sources */,
@@ -830,17 +871,21 @@
 				B7816E841CC48A4800EC4B77 /* ToolKit.swift in Sources */,
 				B7816E8B1CC48AAC00EC4B77 /* CustomTabBarViewController.swift in Sources */,
 				B7DBC3291CC8ACDB00D2C214 /* LcqTableViewCell.swift in Sources */,
+				B74C7ABE1D0109020048FF2A /* MyCardTableViewCell.swift in Sources */,
 				B72CBF6B1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m in Sources */,
 				B7BEB90E1CE5736E0089D20D /* TentacleView.swift in Sources */,
 				B75E1D621CCF3F99001F0B44 /* MyAccountViewController.swift in Sources */,
+				B78AA5A11CFD6E95009D9B1D /* ApplyBorrowViewController.swift in Sources */,
 				B70CC12D1CE411D1002C1445 /* FAQDetailTableViewCell.swift in Sources */,
 				B7819AC41CD73BCA0078E02F /* Timer.swift in Sources */,
 				B70CC1311CE42D22002C1445 /* SettingsViewController.swift in Sources */,
 				B76DF59E1CE2D98000BF7912 /* ManageTeamTableViewCell.swift in Sources */,
+				B771EB081D002B2D00E22D3A /* MyBankCardViewController.swift in Sources */,
 				B7801BCA1CCB589E003EDEFA /* ActivityCenterViewController.swift in Sources */,
 				B7816E991CC48FC900EC4B77 /* BaseViewController.swift in Sources */,
 				B77C93191CD05F1700739CBE /* CLMenu.swift in Sources */,
 				B78B669C1CDB23CD005232FF /* NetworkRequest.swift in Sources */,
+				B771EB021D00204C00E22D3A /* UpgradeStrategyViewController.swift in Sources */,
 				B7819AC01CD72BC30078E02F /* RetrievePwdViewController.swift in Sources */,
 				B7782CA01CDDFD9600D67594 /* ToolKitObjC.m in Sources */,
 				B72CBF641CC7010F003FFBC2 /* MyWealthViewController.swift in Sources */,
@@ -852,11 +897,13 @@
 				B76DF5A21CE31A9200BF7912 /* FAQViewController.swift in Sources */,
 				B76DF59B1CE2D54C00BF7912 /* ManageTeamViewController.swift in Sources */,
 				B78B66A81CDB2FD8005232FF /* ContactUsTableViewCell.swift in Sources */,
+				B78AA59F1CFD316A009D9B1D /* IBorrowViewController.swift in Sources */,
 				B78B66A41CDB2F16005232FF /* ContactUsViewController.swift in Sources */,
 				B7816E8C1CC48AAC00EC4B77 /* StartScrollViewController.swift in Sources */,
 				B7816E9D1CC4DBE800EC4B77 /* UIColorExtension.swift in Sources */,
 				B7AEA4BA1CD84FA8006194C6 /* RegisterFinishViewController.swift in Sources */,
 				B77C93131CD03FC700739CBE /* MyGiftViewController.swift in Sources */,
+				B7FDFEF71CFE7FFC00DA1867 /* IntroductionsViewController.swift in Sources */,
 				B76DF5931CE2C76F00BF7912 /* LcqDetailViewController.swift in Sources */,
 				B7DBC32D1CC8B50200D2C214 /* MoreViewController.swift in Sources */,
 				B7816E801CC48A2400EC4B77 /* UITextViewExtension.swift in Sources */,
@@ -876,6 +923,7 @@
 				B7816E4C1CC46AA800EC4B77 /* AppDelegate.swift in Sources */,
 				B76DF5A51CE31B6E00BF7912 /* FAQTableViewCell.swift in Sources */,
 				B79474061CDD6AEC00F78C26 /* FeedbackViewController.swift in Sources */,
+				B771EB051D00212800E22D3A /* UpgradeStrategyTableViewCell.swift in Sources */,
 				B78143251CE038D500BE13A7 /* UserInfo.swift in Sources */,
 				B77C93151CD047F400739CBE /* YirenbiViewController.swift in Sources */,
 			);
@@ -1025,6 +1073,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = YiRenDai/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1044,6 +1093,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = YiRenDai/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
