@@ -25,7 +25,7 @@ class IBorrowViewController: BaseNavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        setTopViewTitle("理财圈")
+        setTopViewTitle("我要借款")
         
         initView()
     }
@@ -305,7 +305,7 @@ extension IBorrowViewController: UITableViewDataSource, UITableViewDelegate{
             return 40
         case 1:
             if indexPath.row == 0 {
-                return 150
+                return 120
             }else{
                 return 86
             }

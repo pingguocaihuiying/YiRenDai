@@ -81,9 +81,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSettingGesturePwd {
-            return 4
+            return 5
         }else{
-            return 3
+            return 4
         }
     }
     
@@ -143,6 +143,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
                 editionLbl.font = UIFont.systemFontOfSize(14)
                 editionLbl.text = "0.0.1"
                 cell.addSubview(editionLbl)
+            }else if indexPath.row == 4{
+                //titleLbl
+                let titleLbl = UILabel(frame: CGRectMake(10, 0, 200, cell.viewHeight))
+                titleLbl.textAlignment = .Left
+                titleLbl.font = UIFont.systemFontOfSize(15)
+                titleLbl.text = "修改密码"
+                cell.addSubview(titleLbl)
             }
         }else{
             if indexPath.row == 0 {
@@ -186,6 +193,13 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
                 editionLbl.font = UIFont.systemFontOfSize(14)
                 editionLbl.text = "0.0.1"
                 cell.addSubview(editionLbl)
+            }else if indexPath.row == 3{
+                //titleLbl
+                let titleLbl = UILabel(frame: CGRectMake(10, 0, 200, cell.viewHeight))
+                titleLbl.textAlignment = .Left
+                titleLbl.font = UIFont.systemFontOfSize(15)
+                titleLbl.text = "修改密码"
+                cell.addSubview(titleLbl)
             }
         }
         return cell
@@ -207,6 +221,21 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if isSettingGesturePwd {
+            if indexPath.row == 4{
+                let resetPwdVC = ResetPwdViewController()
+                resetPwdVC.accountVale = ToolKit.getUserPhone
+                resetPwdVC.navtitle = "重设密码"
+                self.navigationController?.pushViewController(resetPwdVC, animated: true)
+            }
+        }else{
+            if indexPath.row == 3{
+                let resetPwdVC = ResetPwdViewController()
+                resetPwdVC.accountVale = ToolKit.getUserPhone
+                resetPwdVC.navtitle = "重设密码"
+                self.navigationController?.pushViewController(resetPwdVC, animated: true)
+            }
+        }
         
     }
     //section

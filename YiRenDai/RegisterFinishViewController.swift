@@ -177,7 +177,9 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
     }
     
     func clickEvent(sender: UIButton){
+        LoadingAnimation.show()
         SMSSDK.commitVerificationCode(verificationTxt.text, phoneNumber: accountValue, zone: areaCode) { (error) in
+            LoadingAnimation.dismiss()
             if error == nil{
                 //注册
                 DataProvider.sharedInstance.register(self.accountValue, password: self.pwdTxt.text!, userName: self.userName, IDNo: self.IDNo, handler: { (state, message) in

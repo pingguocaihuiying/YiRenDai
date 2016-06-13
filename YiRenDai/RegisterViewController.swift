@@ -157,8 +157,9 @@ class RegisterViewController: BaseNavigationController, UITextFieldDelegate {
             view.viewAlert(self, title: "提示", msg: "输入的身份号格式不正确", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
             return
         }
-        
+        LoadingAnimation.show()
         SMSSDK.getVerificationCodeByMethod(SMSGetCodeMethodSMS, phoneNumber: phoneNoTxt.text, zone: "86", customIdentifier: nil) { (error) in
+            LoadingAnimation.dismiss()
             if error == nil{
                 let registerFinishVC = RegisterFinishViewController()
                 registerFinishVC.navtitle = "注册"

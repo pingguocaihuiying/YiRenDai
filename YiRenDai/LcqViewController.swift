@@ -19,7 +19,7 @@ class LcqViewController: BaseNavigationController {
     var tableView: UITableView!
     
     //data
-    var lcqData: JSON?
+    var lcqData = [JSON]()
     var pagenumber: Int!
     var pagesize = 15
     
@@ -53,10 +53,10 @@ class LcqViewController: BaseNavigationController {
         pagenumber = 1
         DataProvider.sharedInstance.getArticleList("1", status_code: "1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
             if data["status"]["succeed"].intValue == 1{
-                self.lcqData = data["data"]["articlelist"]
+                self.lcqData = data["data"].dictionaryValue["articlelist"]!.arrayValue
                 //刷新结束
                 self.tableView.mj_header.endRefreshing()
-                if self.lcqData!.count == data["data"]["page"]["total"].intValue{
+                if self.lcqData.count == data["data"]["page"]["total"].intValue{
                     // 所有数据加载完毕，没有更多的数据了
                     self.tableView.mj_footer.state = MJRefreshState.NoMoreData
                 }else{
@@ -79,7 +79,7 @@ class LcqViewController: BaseNavigationController {
         //刷新结束
         tableView.mj_footer.endRefreshing()
         //判断数据是否全部加载完
-        if lcqData!.count >= 30{
+        if lcqData.count >= 30{
             tableView.mj_footer.state = MJRefreshState.NoMoreData
         }
         //刷新数据
@@ -90,7 +90,7 @@ class LcqViewController: BaseNavigationController {
 
 extension LcqViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1 + (lcqData == nil ? 0 : lcqData!.count)
+        return 1 + lcqData.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -120,11 +120,11 @@ extension LcqViewController: UITableViewDataSource, UITableViewDelegate{
             return cell
         default:
             let cell = tableView.dequeueReusableCellWithIdentifier(lcqCell, forIndexPath: indexPath) as! LcqTableViewCell
-            cell.titleLbl.text = lcqData![indexPath.section - 1]["article_title"].stringValue
-            cell.detailLbl.text = lcqData![indexPath.section - 1]["article_content"].stringValue
+            cell.titleLbl.text = lcqData[indexPath.section - 1]["article_title"].stringValue
+            cell.detailLbl.text = lcqData[indexPath.section - 1]["article_content"].stringValue
             cell.typeIv.image = UIImage(named: "community_article")
-            cell.dateLbl.text = lcqData![indexPath.section - 1]["create_time"].stringValue
-            let url = "\(lcqData![indexPath.section - 1]["article_image"].stringValue)"
+            cell.dateLbl.text = lcqData[indexPath.section - 1]["create_time"].stringValue
+            let url = "\(lcqData[indexPath.section - 1]["article_image"].stringValue)"
             cell.imageIv.imageFromURL(url, placeholder: UIImage())
             return cell
         }
@@ -159,7 +159,7 @@ extension LcqViewController: UITableViewDataSource, UITableViewDelegate{
             
         }else{
             let lcqDetailVC = LcqDetailViewController()
-            lcqDetailVC.navtitle = lcqData![indexPath.section - 1]["article_title"].stringValue
+            lcqDetailVC.navtitle = lcqData[indexPath.section - 1]["article_title"].stringValue
             lcqDetailVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(lcqDetailVC, animated: true)
         }

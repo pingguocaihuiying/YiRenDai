@@ -10,6 +10,7 @@
 
 @implementation ToolKitObjC
 
+#pragma mark 判断身份证格式是否正确
 + (BOOL)hyb_isValidPersonID:(NSString *)personId {
     // 判断位数
     if (personId.length != 15 && personId.length != 18) {

@@ -18,7 +18,7 @@ class ActivityCenterViewController: BaseNavigationController {
     var tableView: UITableView!
     
     //data
-    var activityListData: JSON?
+    var activityListData = [JSON]()
     var pagenumber: Int!
     var pagesize = 15
     
@@ -52,10 +52,10 @@ class ActivityCenterViewController: BaseNavigationController {
         pagenumber = 1
         DataProvider.sharedInstance.getArticleList("2", status_code: "1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
             if data["status"]["succeed"].intValue == 1{
-                self.activityListData = data["data"]["articlelist"]
+                self.activityListData = data["data"].dictionaryValue["articlelist"]!.arrayValue
                 //刷新结束
                 self.tableView.mj_header.endRefreshing()
-                if self.activityListData!.count == data["data"]["page"]["total"].intValue{
+                if self.activityListData.count == data["data"]["page"]["total"].intValue{
                     // 所有数据加载完毕，没有更多的数据了
                     self.tableView.mj_footer.state = MJRefreshState.NoMoreData
                 }else{
@@ -77,7 +77,7 @@ class ActivityCenterViewController: BaseNavigationController {
         //刷新结束
         tableView.mj_footer.endRefreshing()
         //判断数据是否全部加载完
-        if activityListData!.count >= 30{
+        if activityListData.count >= 30{
             tableView.mj_footer.state = MJRefreshState.NoMoreData
         }
         //刷新数据
@@ -88,7 +88,7 @@ class ActivityCenterViewController: BaseNavigationController {
 
 extension ActivityCenterViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return activityListData == nil ? 0 : activityListData!.count
+        return activityListData.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -98,7 +98,7 @@ extension ActivityCenterViewController: UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(activityCenterCell, forIndexPath: indexPath) as! ActivityCenterTableViewCell
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        cell.titleLbl.text = activityListData![indexPath.section]["article_title"].stringValue
+        cell.titleLbl.text = activityListData[indexPath.section]["article_title"].stringValue
         cell.dateLbl.text = "2016.04.20 - 2016.04.27"
         cell.stateLbl.textColor = UIColor.getRedColorSecond()
         cell.stateLbl.text = "已结束"
@@ -106,8 +106,8 @@ extension ActivityCenterViewController: UITableViewDataSource, UITableViewDelega
         cell.stateLbl.layer.cornerRadius = 8
         cell.stateLbl.layer.borderWidth = 1
         cell.stateLbl.layer.borderColor = UIColor.getRedColorSecond().CGColor
-        cell.imageIv.imageFromURL(activityListData![indexPath.section]["article_image"].stringValue, placeholder: UIImage())
-        cell.detailLbl.text = activityListData![indexPath.section]["article_content"].stringValue
+        cell.imageIv.imageFromURL(activityListData[indexPath.section]["article_image"].stringValue, placeholder: UIImage())
+        cell.detailLbl.text = activityListData[indexPath.section]["article_content"].stringValue
         return cell
     }
     

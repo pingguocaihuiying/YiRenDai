@@ -155,6 +155,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             cell.contentView.addSubview(imageBtn3)
         case 2:
             cell.backgroundColor = UIColor.getGrayColorThird()
+            break
         case 3:
             // leftView
             let leftView = UIView(frame: CGRectMake(0, 0, (screen_width - 0.5) / 2, cell.viewHeight))
@@ -285,11 +286,11 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
         case 1:
             return 100
         case 2:
-            return 20
+            return 15
         case 3:
             return 70
         case 4:
-            return 130 * 2
+            return 110 * 2
         default:
             return 0
         }

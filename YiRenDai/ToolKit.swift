@@ -26,8 +26,17 @@ let SMSSDK_Secret = "1a5a8f3bf629f5f834cca96f8b25ab8d"
 // ShareSDK
 let ShareSDK_AppKey = "1339d65a3e93b"
 
-// MARK: - 全局方法
+// MARK: - ToolKit
 class ToolKit{
+    // MARK: - 属性
+    /// 获取用户手机号
+    static var getUserPhone: String{
+        get{
+            return getValueByKey("userPhone") as! String
+        }
+    }
+    
+    // MARK: - 方法
     /**
      判断是否登录
      - returns: true：登录  false：退出
@@ -46,6 +55,20 @@ class ToolKit{
             return userId as! String
         }
         return ""
+    }
+    
+    /**
+     根据key获取value
+     - parameter key: key
+     - returns: 返回value
+     */
+    static func getValueByKey(key: String) -> AnyObject{
+        let value = NSUserDefaults.getUserDefaultValue(key)
+        if value == nil {
+            return ""
+        }else{
+            return value!
+        }
     }
     
     /**

@@ -54,7 +54,11 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
         let retrievePwdVC = RetrievePwdViewController()
         retrievePwdVC.navtitle = "找回密码"
         retrievePwdVC.hidesBottomBarWhenPushed = true
-        targetNav.pushViewController(retrievePwdVC, animated: true)
+        if isShowBackBtn{
+            navigationController!.pushViewController(retrievePwdVC, animated: true)
+        }else{
+            targetNav.pushViewController(retrievePwdVC, animated: true)
+        }
     }
     
     //MARK: - 自定义方法
@@ -71,7 +75,8 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
         //accountTxt
         accountTxt = UITextField(frame: CGRectMake(accountIv.viewRightX + 15, 0, accountPwdView.viewWidth - 28, 47))
         accountTxt.delegate = self
-        accountTxt.placeholder = "邮箱/手机号码"
+        accountTxt.placeholder = "手机号码"
+        accountTxt.keyboardType = .PhonePad
         accountTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
         accountPwdView.addSubview(accountTxt)
         //lineView1
@@ -133,8 +138,10 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
     func loginEvent(){
         DataProvider.sharedInstance.login(accountTxt.text!, password: passwordTxt.text!) { (state, message, data) in
             if state == 1{
+                print(data)
                 NSUserDefaults.setUserDefaultValue(true, forKey: "isLogin")
                 NSUserDefaults.setUserDefaultValue(data["member_id"].stringValue, forKey: "userId")
+                NSUserDefaults.setUserDefaultValue(data["member_phone"].stringValue, forKey: "userPhone")
                 NSNotificationCenter.defaultCenter().postNotificationName("updateMoreData", object: nil)
                 let customTabBarVC = CustomTabBarViewController()
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -151,7 +158,11 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
         let registerVC = RegisterViewController()
         registerVC.navtitle = "注册"
         registerVC.hidesBottomBarWhenPushed = true
-        targetNav.pushViewController(registerVC, animated: true)
+        if isShowBackBtn{
+            navigationController!.pushViewController(registerVC, animated: true)
+        }else{
+            targetNav.pushViewController(registerVC, animated: true)
+        }
     }
     
     //MARK: - UITextFieldDelegate

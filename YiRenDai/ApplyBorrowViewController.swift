@@ -23,6 +23,16 @@ class ApplyBorrowViewController: BaseNavigationController {
     
     //view
     var tableView: UITableView!
+    var amountTxt: UITextField!
+    var purposeTxt: UITextField!
+    var deadlineTxt: UITextField!
+    var cityTxt: UITextField!
+    var timeTxt: UITextField!
+    var nameTxt: UITextField!
+    var birthdayTxt: UITextField!
+    var phoneTxt: UITextField!
+    var contactTimeTxt: UITextField!
+    var incomeTxt: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +46,39 @@ class ApplyBorrowViewController: BaseNavigationController {
     override func clickRightBtnEvent() {
         let introductionsVC = IntroductionsViewController()
         navigationController?.pushViewController(introductionsVC, animated: true)
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if amountTxt != nil{
+            amountTxt.resignFirstResponder()
+        }
+        if purposeTxt != nil{
+            purposeTxt.resignFirstResponder()
+        }
+        if deadlineTxt != nil{
+            deadlineTxt.resignFirstResponder()
+        }
+        if cityTxt != nil{
+            cityTxt.resignFirstResponder()
+        }
+        if timeTxt != nil{
+            timeTxt.resignFirstResponder()
+        }
+        if nameTxt != nil{
+            nameTxt.resignFirstResponder()
+        }
+        if birthdayTxt != nil{
+            birthdayTxt.resignFirstResponder()
+        }
+        if phoneTxt != nil{
+            phoneTxt.resignFirstResponder()
+        }
+        if contactTimeTxt != nil{
+            contactTimeTxt.resignFirstResponder()
+        }
+        if incomeTxt != nil{
+            incomeTxt.resignFirstResponder()
+        }
     }
     
     //MARK:自定义方法
@@ -130,7 +173,7 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 amountTitleLbl.text = "借款金额"
                 cell.contentView.addSubview(amountTitleLbl)
                 // amountTxt
-                let amountTxt = UITextField(frame: CGRectMake(amountTitleLbl.viewRightX, typeTitleLbl.viewBottomY + 10, screen_width * 0.6, 30))
+                amountTxt = UITextField(frame: CGRectMake(amountTitleLbl.viewRightX, typeTitleLbl.viewBottomY + 10, screen_width * 0.6, 30))
                 amountTxt.placeholder = "最高5000"
                 amountTxt.textAlignment = .Center
                 amountTxt.layer.borderWidth = 1
@@ -151,7 +194,7 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 purposeTitleLbl.text = "借款目的"
                 cell.contentView.addSubview(purposeTitleLbl)
                 // purposeTxt
-                let purposeTxt = UITextField(frame: CGRectMake(amountTitleLbl.viewRightX, amountTxt.viewBottomY + 10, screen_width * 0.6, 30))
+                purposeTxt = UITextField(frame: CGRectMake(amountTitleLbl.viewRightX, amountTxt.viewBottomY + 10, screen_width * 0.6, 30))
                 purposeTxt.placeholder = "请选择"
                 purposeTxt.textAlignment = .Center
                 purposeTxt.layer.borderWidth = 1
@@ -172,7 +215,7 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 deadlineTitleLbl.text = "借款期限"
                 cell.contentView.addSubview(deadlineTitleLbl)
                 // deadlineTxt
-                let deadlineTxt = UITextField(frame: CGRectMake(deadlineTitleLbl.viewRightX, purposeTxt.viewBottomY + 10, screen_width * 0.6, 30))
+                deadlineTxt = UITextField(frame: CGRectMake(deadlineTitleLbl.viewRightX, purposeTxt.viewBottomY + 10, screen_width * 0.6, 30))
                 deadlineTxt.placeholder = "请选择"
                 deadlineTxt.textAlignment = .Center
                 deadlineTxt.layer.borderWidth = 1
@@ -205,7 +248,7 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 cityTitleLbl.text = "居住城市"
                 cell.contentView.addSubview(cityTitleLbl)
                 // cityTxt
-                let cityTxt = UITextField(frame: CGRectMake(cityTitleLbl.viewRightX, cityTitleLbl.viewY, screen_width * 0.6, 30))
+                cityTxt = UITextField(frame: CGRectMake(cityTitleLbl.viewRightX, cityTitleLbl.viewY, screen_width * 0.6, 30))
                 cityTxt.placeholder = "请选择居住城市"
                 cityTxt.textAlignment = .Center
                 cityTxt.layer.borderWidth = 1
@@ -220,7 +263,7 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 timeTitleLbl.text = "居住时长"
                 cell.contentView.addSubview(timeTitleLbl)
                 // timeTxt
-                let timeTxt = UITextField(frame: CGRectMake(timeTitleLbl.viewRightX, timeTitleLbl.viewY, screen_width * 0.6, 30))
+                timeTxt = UITextField(frame: CGRectMake(timeTitleLbl.viewRightX, timeTitleLbl.viewY, screen_width * 0.6, 30))
                 timeTxt.placeholder = "请选择"
                 timeTxt.textAlignment = .Center
                 timeTxt.layer.borderWidth = 1
@@ -241,7 +284,7 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 nameTitleLbl.text = "您的姓名"
                 cell.contentView.addSubview(nameTitleLbl)
                 // nameTxt
-                let nameTxt = UITextField(frame: CGRectMake(nameTitleLbl.viewRightX, nameTitleLbl.viewY, screen_width * 0.6, 30))
+                nameTxt = UITextField(frame: CGRectMake(nameTitleLbl.viewRightX, nameTitleLbl.viewY, screen_width * 0.6, 30))
                 nameTxt.placeholder = "请填写您的姓名"
                 nameTxt.textAlignment = .Center
                 nameTxt.layer.borderWidth = 1
@@ -286,7 +329,7 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 birthdayTitleLbl.text = "出生年份"
                 cell.contentView.addSubview(birthdayTitleLbl)
                 // birthdayTxt
-                let birthdayTxt = UITextField(frame: CGRectMake(birthdayTitleLbl.viewRightX, birthdayTitleLbl.viewY, screen_width * 0.6, 30))
+                birthdayTxt = UITextField(frame: CGRectMake(birthdayTitleLbl.viewRightX, birthdayTitleLbl.viewY, screen_width * 0.6, 30))
                 birthdayTxt.placeholder = "请选择"
                 birthdayTxt.textAlignment = .Center
                 birthdayTxt.layer.borderWidth = 1
@@ -307,7 +350,7 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 phoneTitleLbl.text = "手机号码"
                 cell.contentView.addSubview(phoneTitleLbl)
                 // phoneTxt
-                let phoneTxt = UITextField(frame: CGRectMake(phoneTitleLbl.viewRightX, phoneTitleLbl.viewY, screen_width * 0.6, 30))
+                phoneTxt = UITextField(frame: CGRectMake(phoneTitleLbl.viewRightX, phoneTitleLbl.viewY, screen_width * 0.6, 30))
                 phoneTxt.placeholder = "请填写您的手机号"
                 phoneTxt.textAlignment = .Center
                 phoneTxt.layer.borderWidth = 1
@@ -322,7 +365,7 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 contactTimeTitleLbl.text = "联系时间"
                 cell.contentView.addSubview(contactTimeTitleLbl)
                 // contactTimeTxt
-                let contactTimeTxt = UITextField(frame: CGRectMake(contactTimeTitleLbl.viewRightX, contactTimeTitleLbl.viewY, screen_width * 0.6, 30))
+                contactTimeTxt = UITextField(frame: CGRectMake(contactTimeTitleLbl.viewRightX, contactTimeTitleLbl.viewY, screen_width * 0.6, 30))
                 contactTimeTxt.placeholder = "请选择"
                 contactTimeTxt.textAlignment = .Center
                 contactTimeTxt.layer.borderWidth = 1
@@ -437,7 +480,7 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 incomeTitleLbl.text = "月均收入"
                 cell.contentView.addSubview(incomeTitleLbl)
                 // incomeTxt
-                let incomeTxt = UITextField(frame: CGRectMake(incomeTitleLbl.viewRightX, incomeTitleLbl.viewY, screen_width * 0.6, 30))
+                incomeTxt = UITextField(frame: CGRectMake(incomeTitleLbl.viewRightX, incomeTitleLbl.viewY, screen_width * 0.6, 30))
                 incomeTxt.placeholder = "请选择"
                 incomeTxt.textAlignment = .Center
                 incomeTxt.layer.borderWidth = 1

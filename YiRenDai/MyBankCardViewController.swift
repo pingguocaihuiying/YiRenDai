@@ -48,8 +48,8 @@ class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
         let str = NSMutableAttributedString(string: "支持银行及限额")
         str.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: NSMakeRange(0, str.length))
         let titleBtn = UIButton(frame: CGRectMake(10, 10, 100, 14))
+        titleBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
         titleBtn.setAttributedTitle(str, forState: .Normal)
-        titleBtn.setTitleColor(UIColor.lightGrayColor(), forState: .Normal)
         titleBtn.titleLabel?.font = UIFont.systemFontOfSize(14)
         footerView.addSubview(titleBtn)
     }
@@ -76,6 +76,7 @@ extension MyBankCardViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(myCardTableViewCell, forIndexPath: indexPath) as! MyCardTableViewCell
+            cell.selectionStyle = .None
             cell.headerIv.imageFromURL("", placeholder: UIImage(named: "touxiang")!)
             cell.titleLbl.text = "中国银行"
             cell.detailLbl.text = "限额：5万/笔"

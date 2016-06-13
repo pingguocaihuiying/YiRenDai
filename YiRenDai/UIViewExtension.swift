@@ -69,46 +69,50 @@ extension UIView {
      * alert弹框
      */
     func viewAlert(target: AnyObject, title: String?, msg: String?, cancelButtonTitle: String?, otherButtonTitle: String?, handler: ((buttonIndex: Int,action: UIAlertAction) -> Void)?){
-        let alertController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.Alert)
-        if cancelButtonTitle != nil{
-            let cancelAction = UIAlertAction(title: cancelButtonTitle, style: UIAlertActionStyle.Cancel, handler: { (action) -> Void in
-                if handler != nil{
-                    handler!(buttonIndex: 0,action: action)
-                }
-            })
-            alertController.addAction(cancelAction)
+        dispatch_async(dispatch_get_main_queue()) { 
+            let alertController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.Alert)
+            if cancelButtonTitle != nil{
+                let cancelAction = UIAlertAction(title: cancelButtonTitle, style: UIAlertActionStyle.Cancel, handler: { (action) -> Void in
+                    if handler != nil{
+                        handler!(buttonIndex: 0,action: action)
+                    }
+                })
+                alertController.addAction(cancelAction)
+            }
+            if otherButtonTitle != nil{
+                let otherAction = UIAlertAction(title: otherButtonTitle, style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                    if handler != nil{
+                        handler!(buttonIndex: 1,action: action)
+                    }
+                })
+                alertController.addAction(otherAction)
+            }
+            target.presentViewController(alertController, animated: true, completion: nil)
         }
-        if otherButtonTitle != nil{
-            let otherAction = UIAlertAction(title: otherButtonTitle, style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-                if handler != nil{
-                    handler!(buttonIndex: 1,action: action)
-                }
-            })
-            alertController.addAction(otherAction)
-        }
-        target.presentViewController(alertController, animated: true, completion: nil)
     }
     
     //ActionSheet
     func viewActionSheet(target: AnyObject, title: String?, msg: String?, cancelButtonTitle: String?, otherButtonTitles: [String], handler: ((buttonIndex: Int,action: UIAlertAction) -> Void)?){
-        let alertController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.ActionSheet)
-        if cancelButtonTitle != nil{
-            let cancelAction = UIAlertAction(title: cancelButtonTitle, style: UIAlertActionStyle.Cancel, handler: { (action) -> Void in
-                if handler != nil{
-                    handler!(buttonIndex: 0,action: action)
-                }
-            })
-            alertController.addAction(cancelAction)
+        dispatch_async(dispatch_get_main_queue()) { 
+            let alertController = UIAlertController(title: title, message: msg, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            if cancelButtonTitle != nil{
+                let cancelAction = UIAlertAction(title: cancelButtonTitle, style: UIAlertActionStyle.Cancel, handler: { (action) -> Void in
+                    if handler != nil{
+                        handler!(buttonIndex: 0,action: action)
+                    }
+                })
+                alertController.addAction(cancelAction)
+            }
+            for i in 0 ..< otherButtonTitles.count {
+                let otherAction = UIAlertAction(title: otherButtonTitles[i], style: UIAlertActionStyle.Default, handler: { (action) -> Void in
+                    if handler != nil{
+                        handler!(buttonIndex: i + 1,action: action)
+                    }
+                })
+                alertController.addAction(otherAction)
+            }
+            target.presentViewController(alertController, animated: true, completion: nil)
         }
-        for i in 0 ..< otherButtonTitles.count {
-            let otherAction = UIAlertAction(title: otherButtonTitles[i], style: UIAlertActionStyle.Default, handler: { (action) -> Void in
-                if handler != nil{
-                    handler!(buttonIndex: i + 1,action: action)
-                }
-            })
-            alertController.addAction(otherAction)
-        }
-        target.presentViewController(alertController, animated: true, completion: nil)
     }
     
     /**
@@ -118,12 +122,9 @@ extension UIView {
         var telStrs = [String]()
         for i in 0 ..< tels.count {
             let telStr:NSMutableString = NSMutableString(string: tels[i])
-            if telStr.length == 10 {
+            if telStr.length == 11 {
                 telStr.insertString("-", atIndex: 3)
-                telStr.insertString("-", atIndex: 7)
-            }else if telStr.length == 11 {
-                telStr.insertString("-", atIndex: 3)
-                telStr.insertString("-", atIndex: 8)
+                telStr.insertString("-", atIndex: telStr.length - 4)
             }
             telStrs.append(telStr as String)
         }

@@ -10,6 +10,7 @@
 
 @interface ToolKitObjC : NSObject
 
+#pragma mark 判断身份证格式是否正确
 + (BOOL)hyb_isValidPersonID:(NSString *)personId;
 
 @end

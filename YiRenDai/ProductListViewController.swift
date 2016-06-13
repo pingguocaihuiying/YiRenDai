@@ -19,7 +19,7 @@ class ProductListViewController: BaseNavigationController {
     var tableView: UITableView!
     
     //data
-    var productListData: JSON?
+    var productListData = [JSON]()
     var pagenumber: Int!
     let pagesize = 15
     
@@ -50,13 +50,14 @@ class ProductListViewController: BaseNavigationController {
     }
     
     func refreshData(){
+        productListData.removeAll()
         pagenumber = 1
         DataProvider.sharedInstance.getProductList("1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
             if data["status"]["succeed"].intValue == 1{
-                self.productListData = data["data"]["productlist"]
+                self.productListData = data["data"].dictionaryValue["productlist"]!.arrayValue
                 //刷新结束
                 self.tableView.mj_header.endRefreshing()
-                if self.productListData!.count == data["data"]["page"]["total"].intValue{
+                if self.productListData.count == data["data"]["page"]["total"].intValue{
                     // 所有数据加载完毕，没有更多的数据了
                     self.tableView.mj_footer.state = MJRefreshState.NoMoreData
                 }else{
@@ -72,23 +73,35 @@ class ProductListViewController: BaseNavigationController {
     }
     
     func loadMore(){
-        for _ in 1...3{
-            //dataArray.append("新数据")
+        pagenumber = pagenumber + 1
+        DataProvider.sharedInstance.getProductList("1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
+            if data["status"]["succeed"].intValue == 1{
+                let dataArray = data["data"].dictionaryValue["productlist"]!.arrayValue
+                for i in 0 ..< dataArray.count{
+                    self.productListData.append(dataArray[i])
+                }
+                //刷新结束
+                self.tableView.mj_header.endRefreshing()
+                if self.productListData.count == data["data"]["page"]["total"].intValue{
+                    // 所有数据加载完毕，没有更多的数据了
+                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
+                }else{
+                    // mj_footer设置为:普通闲置状态(Idle)
+                    self.tableView.mj_footer.state = MJRefreshState.Idle
+                }
+                //刷新数据
+                self.tableView.reloadData()
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
         }
-        //刷新结束
-        tableView.mj_footer.endRefreshing()
-        //判断数据是否全部加载完
-        if productListData!.count >= 30{
-            tableView.mj_footer.state = MJRefreshState.NoMoreData
-        }
-        //刷新数据
-        tableView.reloadData()
+
     }
 }
 
 extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1 + (productListData == nil ? 0 : productListData!.count)
+        return 1 + productListData.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -116,10 +129,10 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
                     itemView.removeFromSuperview()
                 }
             }
-            let remainMoney = productListData![indexPath.section - 1]["remaining_amount"].floatValue
-            let startMoney = productListData![indexPath.section - 1]["min_amount"].floatValue
+            let remainMoney = productListData[indexPath.section - 1]["remaining_amount"].floatValue
+            let startMoney = productListData[indexPath.section - 1]["min_amount"].floatValue
             let isSoldOut = remainMoney < startMoney ? true : false
-            let is_tiro = productListData![indexPath.section - 1]["is_tiro"].intValue
+            let is_tiro = productListData[indexPath.section - 1]["is_tiro"].intValue
             if is_tiro == 1 {
                 // starIv
                 let starIv = UIImageView(frame: CGRectMake(0, (cell.titleView.viewHeight - 16) / 2, 16, 16))
@@ -135,12 +148,12 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
                 let titleLbl = UILabel(frame: CGRectMake(0, 0, cell.titleView.viewWidth, cell.titleView.viewHeight))
                 titleLbl.textColor = isSoldOut ? UIColor.getGrayColorFirst() : UIColor.darkGrayColor()
                 titleLbl.font = UIFont.systemFontOfSize(16)
-                titleLbl.text = productListData![indexPath.section - 1]["product_name"].stringValue
+                titleLbl.text = productListData[indexPath.section - 1]["product_name"].stringValue
                 cell.titleView.addSubview(titleLbl)
             }
-            cell.shouyiLbl.text = "\(productListData![indexPath.section - 1]["interest_rate"].stringValue)%"
-            cell.fengbiqiLbl.text = productListData![indexPath.section - 1]["duration_type"].stringValue
-            cell.amountLbl.text = "\(productListData![indexPath.section - 1]["min_amount"].stringValue)元"
+            cell.shouyiLbl.text = "\(productListData[indexPath.section - 1]["interest_rate"].stringValue)%"
+            cell.fengbiqiLbl.text = productListData[indexPath.section - 1]["duration_type"].stringValue
+            cell.amountLbl.text = "\(productListData[indexPath.section - 1]["min_amount"].stringValue)元"
             if isSoldOut{
                 let soldOutIv = UIImageView(frame: CGRectMake(screen_width - 50, 10, 50, 17))
                 soldOutIv.tag = 2001
@@ -183,8 +196,8 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section > 0 {
             let ljInvestBtnVC = LjInvestBtnViewController()
-            ljInvestBtnVC.productID = productListData![indexPath.section - 1]["product_id"].stringValue
-            ljInvestBtnVC.navtitle = productListData![indexPath.section - 1]["product_name"].stringValue
+            ljInvestBtnVC.productID = productListData[indexPath.section - 1]["product_id"].stringValue
+            ljInvestBtnVC.navtitle = productListData[indexPath.section - 1]["product_name"].stringValue
             ljInvestBtnVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(ljInvestBtnVC, animated: true)
         }

@@ -52,7 +52,8 @@ class RetrievePwdViewController: BaseNavigationController, UITextFieldDelegate {
         //accountTxt
         accountTxt = UITextField(frame: CGRectMake(accountIv.viewRightX + 15, 0, accountView.viewWidth - 28, 47))
         accountTxt.delegate = self
-        accountTxt.placeholder = "邮箱/手机号码"
+        accountTxt.placeholder = "手机号码"
+        accountTxt.keyboardType = .PhonePad
         accountTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
         accountView.addSubview(accountTxt)
         //lineView2
