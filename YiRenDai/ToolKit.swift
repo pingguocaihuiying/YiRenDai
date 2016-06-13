@@ -28,56 +28,60 @@ let ShareSDK_AppKey = "1339d65a3e93b"
 
 // MARK: - ToolKit
 class ToolKit{
+    
     // MARK: - 属性
-    /// 获取用户手机号
-    static var getUserPhone: String{
+    /// 获取最顶层的view
+    static var getTopView: UIView{
         get{
-            return getValueByKey("userPhone") as! String
+            let view = UIApplication.sharedApplication().keyWindow?.subviews[0]
+            return view!
         }
     }
     
     // MARK: - 方法
     /**
-     判断是否登录
-     - returns: true：登录  false：退出
-     */
-    static func isLogin() ->Bool{
-        let isLogin = NSUserDefaults.getUserDefaultValue("isLogin") == nil ? false : (NSUserDefaults.getUserDefaultValue("isLogin")?.boolValue)!
-        return isLogin
-    }
-    
-    /**
-     获取登陆用户Id
-     - returns: 返回用户Id
-     */
-    static func getUserId() -> String{
-        if let userId = NSUserDefaults.getUserDefaultValue("userId"){
-            return userId as! String
-        }
-        return ""
-    }
-    
-    /**
-     根据key获取value
+     根据key获取String值
      - parameter key: key
-     - returns: 返回value
+     - parameter defaultValue: 默认值
+     - returns: 返回String值
      */
-    static func getValueByKey(key: String) -> AnyObject{
+    static func getStringByKey(key: String, defaultValue: String = "") -> String{
         let value = NSUserDefaults.getUserDefaultValue(key)
         if value == nil {
-            return ""
+            return defaultValue
+        }else{
+            return value as! String
+        }
+    }
+    
+    /**
+     根据key获取Bool值
+     - parameter key: key
+     - parameter defaultValue: 默认值
+     - returns: 返回Bool值
+     */
+    static func getBoolByKey(key: String, defaultValue: Bool = false) -> Bool{
+        let value = NSUserDefaults.getUserDefaultValue(key)
+        if value == nil {
+            return defaultValue
+        }else{
+            return value as! Bool
+        }
+    }
+    
+    /**
+     根据key获取AnyObject值
+     - parameter key: key
+     - parameter defaultValue: 默认值
+     - returns: 返回AnyObject值
+     */
+    static func getAnyObjectByKey(key: String, defaultValue: AnyObject = "") -> AnyObject{
+        let value = NSUserDefaults.getUserDefaultValue(key)
+        if value == nil {
+            return defaultValue
         }else{
             return value!
         }
-    }
-    
-    /**
-     获取最顶层的view
-     - returns: return view
-     */
-    static func getTopView() -> UIView{
-        let view = UIApplication.sharedApplication().keyWindow?.subviews[0]
-        return view!
     }
     
     /**

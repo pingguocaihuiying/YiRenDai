@@ -38,13 +38,13 @@ class AlertView: UIView, UITextFieldDelegate {
         bgView.alpha = 0.5
         bgView.tag = 0
         bgView.addTarget(self, action: #selector(clickEvent(_:)), forControlEvents: .TouchUpInside)
-        ToolKit.getTopView().addSubview(bgView)
+        ToolKit.getTopView.addSubview(bgView)
         //showView
         showView = UIView(frame: frame)
         showView.backgroundColor = UIColor.whiteColor()
         showView.layer.masksToBounds = true
         showView.layer.cornerRadius = 8
-        ToolKit.getTopView().addSubview(showView)
+        ToolKit.getTopView.addSubview(showView)
         //titleLbl
         let titleLbl = UILabel(frame: CGRectMake(0, 20, frame.size.width, 17))
         titleLbl.textAlignment = .Center

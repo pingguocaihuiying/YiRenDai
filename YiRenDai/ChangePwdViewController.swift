@@ -8,11 +8,12 @@
 
 import UIKit
 
-class ResetPwdViewController: BaseNavigationController, UITextFieldDelegate {
-
+class ChangePwdViewController: BaseNavigationController, UITextFieldDelegate {
+    
     var accountVale: String!
     
     var pwdIv: UIImageView!
+    var oldPwdTxt: UITextField!
     var pwdTxt: UITextField!
     var rePwdTxt: UITextField!
     var finishBtn: UIButton!
@@ -41,7 +42,7 @@ class ResetPwdViewController: BaseNavigationController, UITextFieldDelegate {
         view.addSubview(detailLbl)
         
         //密码view
-        let pwdView = UIView(frame: CGRectMake(0, detailLbl.viewBottomY + 10, screen_width, 94 + 1.5))
+        let pwdView = UIView(frame: CGRectMake(0, detailLbl.viewBottomY + 10, screen_width, 47 * 3 + 2))
         pwdView.backgroundColor = UIColor.whiteColor()
         view.addSubview(pwdView)
         //lineView1
@@ -53,26 +54,36 @@ class ResetPwdViewController: BaseNavigationController, UITextFieldDelegate {
         pwdIv.contentMode = .ScaleAspectFit
         pwdIv.image = UIImage(named: "lg_psd_normal")
         pwdView.addSubview(pwdIv)
+        //oldPwdTxt
+        oldPwdTxt = UITextField(frame: CGRectMake(pwdIv.viewRightX + 15, 0, pwdView.viewWidth - 28, 47))
+        oldPwdTxt.delegate = self
+        oldPwdTxt.placeholder = "请输入原密码"
+        oldPwdTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
+        pwdView.addSubview(oldPwdTxt)
+        //lineView2
+        let lineView2 = UIView(frame: CGRectMake(oldPwdTxt.viewX, oldPwdTxt.viewBottomY, screen_width, 0.5))
+        lineView2.backgroundColor = UIColor.lightGrayColor()
+        pwdView.addSubview(lineView2)
         //pwdTxt
-        pwdTxt = UITextField(frame: CGRectMake(pwdIv.viewRightX + 15, 0, pwdView.viewWidth - 28, 47))
+        pwdTxt = UITextField(frame: CGRectMake(oldPwdTxt.viewX, lineView2.viewBottomY, oldPwdTxt.viewWidth - 28, 47))
         pwdTxt.delegate = self
         pwdTxt.placeholder = "新密码（6-16位字符）"
         pwdTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
         pwdView.addSubview(pwdTxt)
-        //lineView2
-        let lineView2 = UIView(frame: CGRectMake(pwdTxt.viewX, pwdTxt.viewBottomY, screen_width, 0.5))
-        lineView2.backgroundColor = UIColor.lightGrayColor()
-        pwdView.addSubview(lineView2)
+        //lineView3
+        let lineView3 = UIView(frame: CGRectMake(pwdTxt.viewX, pwdTxt.viewBottomY, lineView2.viewWidth, 0.5))
+        lineView3.backgroundColor = UIColor.lightGrayColor()
+        pwdView.addSubview(lineView3)
         //rePwdTxt
-        rePwdTxt = UITextField(frame: CGRectMake(pwdIv.viewRightX + 15, lineView2.viewBottomY, pwdView.viewWidth - 28, 47))
+        rePwdTxt = UITextField(frame: CGRectMake(pwdIv.viewRightX + 15, lineView3.viewBottomY, pwdView.viewWidth - 28, 47))
         rePwdTxt.delegate = self
         rePwdTxt.placeholder = "请再次输入密码"
         rePwdTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
         pwdView.addSubview(rePwdTxt)
-        //lineView3
-        let lineView3 = UIView(frame: CGRectMake(0, rePwdTxt.viewBottomY, screen_width, 0.5))
-        lineView3.backgroundColor = UIColor.lightGrayColor()
-        pwdView.addSubview(lineView3)
+        //lineView4
+        let lineView4 = UIView(frame: CGRectMake(0, rePwdTxt.viewBottomY, screen_width, 0.5))
+        lineView4.backgroundColor = UIColor.lightGrayColor()
+        pwdView.addSubview(lineView4)
         
         //nextBtn
         finishBtn = UIButton(frame: CGRectMake(14, pwdView.viewBottomY + 40, screen_width - 28, 45))
@@ -85,7 +96,7 @@ class ResetPwdViewController: BaseNavigationController, UITextFieldDelegate {
     }
     
     func clickEvent(sender: UIButton){
-        if pwdTxt.text == "" || rePwdTxt.text == "" {
+        if oldPwdTxt.text == "" || pwdTxt.text == "" || rePwdTxt.text == "" {
             view.viewAlert(self, title: "提示", msg: "密码不能为空", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
             return
         }
@@ -93,13 +104,13 @@ class ResetPwdViewController: BaseNavigationController, UITextFieldDelegate {
             view.viewAlert(self, title: "提示", msg: "两次输入的密码不一致", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
             return
         }
-        DataProvider.sharedInstance.resetPwd(accountVale, password: pwdTxt.text!) { (data) in
+        DataProvider.sharedInstance.changePwd(accountVale, password: oldPwdTxt.text!, newPwd: pwdTxt.text!) { (data) in
             if data["status"]["succeed"].intValue == 1{
-                NSUserDefaults.setUserDefaultValue(true, forKey: "isLogin")
                 let customTabBarVC = CustomTabBarViewController()
                 let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 appDelegate.window?.rootViewController = customTabBarVC
                 NSNotificationCenter.defaultCenter().postNotificationName("setDefaultSelectTabBarItem", object: nil, userInfo: ["index":2])
+                LoadingAnimation.showSuccess(CustomTabBarViewController(), msg: "修改成功~")
             }else{
                 self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
             }
@@ -113,12 +124,12 @@ class ResetPwdViewController: BaseNavigationController, UITextFieldDelegate {
     }
     
     func textFieldDidChange(textField: UITextField){
-        if pwdTxt.text == "" {
+        if oldPwdTxt.text == "" {
             pwdIv.image = UIImage(named: "lg_psd_normal")
         }else{
             pwdIv.image = UIImage(named: "lg_psd_click")
             
-            if pwdTxt.text?.characters.count >= 6 && rePwdTxt.text?.characters.count >= 6 {
+            if oldPwdTxt.text?.characters.count > 0 && pwdTxt.text?.characters.count >= 6 && rePwdTxt.text?.characters.count >= 6 {
                 finishBtn.enabled = true
                 finishBtn.setBackgroundImage(UIImage(named: "button_normal"), forState: .Normal)
             }else{
@@ -127,5 +138,5 @@ class ResetPwdViewController: BaseNavigationController, UITextFieldDelegate {
             }
         }
     }
-
+    
 }

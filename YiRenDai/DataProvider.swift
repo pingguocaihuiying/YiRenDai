@@ -30,13 +30,11 @@ class DataProvider {
      - parameter IDNo:     身份证号
      - parameter handler:  回调方法
      */
-    func register(account: String, password: String, userName: String, IDNo: String, handler: (state: Int, message: String) -> Void){
+    func register(account: String, password: String, userName: String, IDNo: String, handler: (data: JSON) -> Void){
         let url = "\(URL)/member/register"
         let params = ["json":"{\"member_username\":\"\(account)\",\"member_password\":\"\(password)\",\"member_truename\":\"\(userName)\",\"member_card\":\"\(IDNo)\"}"]
         obj.postRequest(url: url, params: params) { (json) in
-            let state = json["status"]["succeed"].intValue
-            let message = json["status"]["message"].stringValue
-            handler(state: state, message: message)
+            handler(data: json)
         }
     }
     
@@ -66,6 +64,21 @@ class DataProvider {
     func resetPwd(account: String, password: String, handler: (data: JSON) -> Void){
         let url = "\(URL)/member/resetPassword"
         let params = ["json":"{\"member_username\":\"\(account)\",\"member_password\":\"\(password)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
+    /**
+     修改密码
+     - parameter account:  账号
+     - parameter password: 原密码
+     - parameter newPwd:   新密码
+     - parameter handler:  回调方法
+     */
+    func changePwd(account: String, password: String, newPwd: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/member/updatePassword"
+        let params = ["json":"{\"member_username\":\"\(account)\",\"member_password\":\"\(password)\",\"member_new_password\":\"\(newPwd)\"}"]
         obj.postRequest(url: url, params: params) { (json) in
             handler(data: json)
         }

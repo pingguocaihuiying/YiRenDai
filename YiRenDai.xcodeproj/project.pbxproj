@@ -24,6 +24,8 @@
 		B74C7ABF1D0109020048FF2A /* MyCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B74C7ABD1D0109020048FF2A /* MyCardTableViewCell.xib */; };
 		B75E1D621CCF3F99001F0B44 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E1D611CCF3F99001F0B44 /* MyAccountViewController.swift */; };
 		B75E1D641CCF55E1001F0B44 /* TixianViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E1D631CCF55E1001F0B44 /* TixianViewController.swift */; };
+		B7622E651D0E44EB00BB1726 /* ChangePwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7622E641D0E44EB00BB1726 /* ChangePwdViewController.swift */; };
+		B7622E671D0E880400BB1726 /* AddBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7622E661D0E880400BB1726 /* AddBankCardViewController.swift */; };
 		B76794AE1CE5B5E800404794 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76794AD1CE5B5E800404794 /* AlertView.swift */; };
 		B76DF5931CE2C76F00BF7912 /* LcqDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DF5921CE2C76F00BF7912 /* LcqDetailViewController.swift */; };
 		B76DF59B1CE2D54C00BF7912 /* ManageTeamViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B76DF59A1CE2D54C00BF7912 /* ManageTeamViewController.swift */; };
@@ -138,6 +140,8 @@
 		B74C7ABD1D0109020048FF2A /* MyCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCardTableViewCell.xib; sourceTree = "<group>"; };
 		B75E1D611CCF3F99001F0B44 /* MyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
 		B75E1D631CCF55E1001F0B44 /* TixianViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TixianViewController.swift; sourceTree = "<group>"; };
+		B7622E641D0E44EB00BB1726 /* ChangePwdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangePwdViewController.swift; sourceTree = "<group>"; };
+		B7622E661D0E880400BB1726 /* AddBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddBankCardViewController.swift; sourceTree = "<group>"; };
 		B76794AD1CE5B5E800404794 /* AlertView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		B76DF5921CE2C76F00BF7912 /* LcqDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LcqDetailViewController.swift; sourceTree = "<group>"; };
 		B76DF59A1CE2D54C00BF7912 /* ManageTeamViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManageTeamViewController.swift; sourceTree = "<group>"; };
@@ -260,6 +264,7 @@
 			children = (
 				B70CC1301CE42D22002C1445 /* SettingsViewController.swift */,
 				B70CC13F1CE47C1B002C1445 /* GesturePasswordViewController.swift */,
+				B7622E641D0E44EB00BB1726 /* ChangePwdViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 				B771EB071D002B2D00E22D3A /* MyBankCardViewController.swift */,
 				B74C7ABC1D0109020048FF2A /* MyCardTableViewCell.swift */,
 				B74C7ABD1D0109020048FF2A /* MyCardTableViewCell.xib */,
+				B7622E661D0E880400BB1726 /* AddBankCardViewController.swift */,
 			);
 			name = UserCenter;
 			sourceTree = "<group>";
@@ -867,6 +873,7 @@
 				B70CC12A1CE40CA6002C1445 /* FAQDetailViewController.swift in Sources */,
 				B76794AE1CE5B5E800404794 /* AlertView.swift in Sources */,
 				B7BEB90C1CE5736E0089D20D /* GesturePasswordButton.swift in Sources */,
+				B7622E671D0E880400BB1726 /* AddBankCardViewController.swift in Sources */,
 				B7801BCD1CCB66F0003EDEFA /* ActivityCenterTableViewCell.swift in Sources */,
 				B7816E841CC48A4800EC4B77 /* ToolKit.swift in Sources */,
 				B7816E8B1CC48AAC00EC4B77 /* CustomTabBarViewController.swift in Sources */,
@@ -875,6 +882,7 @@
 				B72CBF6B1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m in Sources */,
 				B7BEB90E1CE5736E0089D20D /* TentacleView.swift in Sources */,
 				B75E1D621CCF3F99001F0B44 /* MyAccountViewController.swift in Sources */,
+				B7622E651D0E44EB00BB1726 /* ChangePwdViewController.swift in Sources */,
 				B78AA5A11CFD6E95009D9B1D /* ApplyBorrowViewController.swift in Sources */,
 				B70CC12D1CE411D1002C1445 /* FAQDetailTableViewCell.swift in Sources */,
 				B7819AC41CD73BCA0078E02F /* Timer.swift in Sources */,

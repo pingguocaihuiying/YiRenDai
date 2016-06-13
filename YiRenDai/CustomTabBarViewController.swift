@@ -43,7 +43,7 @@ class CustomTabBarViewController: UITabBarController {
         let productListVC = ProductListViewController()
         productListVC.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0)
         productListVC.tabBarItem.image = UIImage(named: "huisewoyaotouzi")
-        productListVC.tabBarItem.selectedImage = UIImage(named: "hongsewoyaotouzi")
+        productListVC.tabBarItem.selectedImage = UIImage(named: "hongsewoyaotouzi")?.imageWithRenderingMode(UIImageRenderingMode.AlwaysOriginal)
         let navProductListVC = UINavigationController(rootViewController: productListVC)
         navProductListVC.navigationBar.hidden = true
         if (productListVC.navigationController!.navigationBar.translucent) {
@@ -96,7 +96,7 @@ class CustomTabBarViewController: UITabBarController {
         }
         
         //将view添加到tabbar
-        let isLogin = ToolKit.isLogin()
+        let isLogin = ToolKit.getBoolByKey("isLogin")
         self.viewControllers = [navHomePageVC, navProductListVC, isLogin ? navMyWealthVC : navLoginVC, navIBorrowVC, navMoreVC]
         
         //设置tabbar的选中时颜色

@@ -223,17 +223,17 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if isSettingGesturePwd {
             if indexPath.row == 4{
-                let resetPwdVC = ResetPwdViewController()
-                resetPwdVC.accountVale = ToolKit.getUserPhone
-                resetPwdVC.navtitle = "重设密码"
-                self.navigationController?.pushViewController(resetPwdVC, animated: true)
+                let changePwdVC = ChangePwdViewController()
+                changePwdVC.accountVale = ToolKit.getStringByKey("userPhone")
+                changePwdVC.navtitle = "修改密码"
+                self.navigationController?.pushViewController(changePwdVC, animated: true)
             }
         }else{
             if indexPath.row == 3{
-                let resetPwdVC = ResetPwdViewController()
-                resetPwdVC.accountVale = ToolKit.getUserPhone
-                resetPwdVC.navtitle = "重设密码"
-                self.navigationController?.pushViewController(resetPwdVC, animated: true)
+                let changePwdVC = ChangePwdViewController()
+                changePwdVC.accountVale = ToolKit.getStringByKey("userPhone")
+                changePwdVC.navtitle = "修改密码"
+                self.navigationController?.pushViewController(changePwdVC, animated: true)
             }
         }
         

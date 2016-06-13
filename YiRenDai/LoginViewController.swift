@@ -119,7 +119,7 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
         registerBtn.addTarget(self, action: #selector(registerEvent), forControlEvents: .TouchUpInside)
         view.addSubview(registerBtn)
         
-        //转换身份
+        /*//转换身份
         //detailLbl
         let detailLbl = UILabel(frame: CGRectMake(0, screen_height - tabBar_height - 50, screen_width, 14))
         detailLbl.textColor = UIColor.lightGrayColor()
@@ -132,13 +132,12 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
         changeSfBtn.setTitleColor(UIColor(red:0.15, green:0.52, blue:0.70, alpha:1.00), forState: .Normal)
         changeSfBtn.titleLabel?.font = UIFont.systemFontOfSize(14)
         changeSfBtn.setTitle("去转换身份", forState: .Normal)
-        view.addSubview(changeSfBtn)
+        view.addSubview(changeSfBtn)*/
     }
     
     func loginEvent(){
         DataProvider.sharedInstance.login(accountTxt.text!, password: passwordTxt.text!) { (state, message, data) in
             if state == 1{
-                print(data)
                 NSUserDefaults.setUserDefaultValue(true, forKey: "isLogin")
                 NSUserDefaults.setUserDefaultValue(data["member_id"].stringValue, forKey: "userId")
                 NSUserDefaults.setUserDefaultValue(data["member_phone"].stringValue, forKey: "userPhone")

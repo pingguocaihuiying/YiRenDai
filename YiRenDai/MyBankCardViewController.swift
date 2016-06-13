@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftyJSON
+import MJRefresh
 
 class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
 
@@ -15,7 +17,10 @@ class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
     
     // view
     var tableView: UITableView!
-    var _createItemLbl: UILabel?
+    
+    // data
+    var cardData = [JSON]()
+    var selectItemIndex: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,10 +41,13 @@ class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
         tableView.backgroundColor = UIColor.getGrayColorThird()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.bounces = false
         tableView.registerNib(UINib(nibName: "MyCardTableViewCell", bundle: nil), forCellReuseIdentifier: myCardTableViewCell)
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         view.addSubview(tableView)
+        
+        //下拉刷新
+        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(self.refreshData))
+        tableView.mj_header.beginRefreshing()
         
         // footerView
         let footerView = UIView(frame: CGRectMake(0, 0, 100, 40))
@@ -54,9 +62,25 @@ class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
         footerView.addSubview(titleBtn)
     }
     
+    func refreshData(){
+        cardData.removeAll()
+        tableView.mj_header.endRefreshing()
+        if selectItemIndex == 0 {
+            var item = Dictionary<String, String>()
+            item["name"] = "中国银行"
+            item["detail"] = "限额：5万/笔"
+            item["endNo"] = "（尾号7997）"
+            cardData.append(JSON(item))
+        }else if selectItemIndex == 1{
+            cardData = []
+        }
+        tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+    }
+    
     // CLMenuDelegate
     func clickMenuEvent(sender: UIButton) {
-        
+        selectItemIndex = sender.tag
+        tableView.mj_header.beginRefreshing()
     }
 }
 
@@ -67,7 +91,7 @@ extension MyBankCardViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 3
+            return cardData.count
         }else{
             return 1
         }
@@ -77,10 +101,11 @@ extension MyBankCardViewController: UITableViewDataSource, UITableViewDelegate{
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(myCardTableViewCell, forIndexPath: indexPath) as! MyCardTableViewCell
             cell.selectionStyle = .None
+            print(cardData)
             cell.headerIv.imageFromURL("", placeholder: UIImage(named: "touxiang")!)
-            cell.titleLbl.text = "中国银行"
-            cell.detailLbl.text = "限额：5万/笔"
-            cell.endNoLbl.text = "(尾号7997)"
+            cell.titleLbl.text = cardData[indexPath.row]["name"].stringValue
+            cell.detailLbl.text = cardData[indexPath.row]["detail"].stringValue
+            cell.endNoLbl.text = cardData[indexPath.row]["endNo"].stringValue
             return cell
         }else{
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)

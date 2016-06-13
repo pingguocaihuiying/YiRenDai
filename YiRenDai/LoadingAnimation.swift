@@ -160,7 +160,7 @@ extension LoadingAnimation{
     class func show(){
         let loadingAnimation = LoadingAnimation(frame: CGRectMake(0, 0, screen_width, screen_height))
         loadingAnimation.tag = 1
-        let view = ToolKit.getTopView()
+        let view = ToolKit.getTopView
         view.addSubview(loadingAnimation)
     }
     
@@ -221,7 +221,7 @@ extension LoadingAnimation{
     }
     
     class func dismiss(){
-        let view = ToolKit.getTopView()
+        let view = ToolKit.getTopView
         for itemView in view.subviews {
             if itemView.tag == 1 {
                 itemView.removeFromSuperview()

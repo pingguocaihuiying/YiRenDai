@@ -120,14 +120,14 @@ class LjInvestBtnViewController: BaseNavigationController {
     }
     
     func ljBuyBtnFunc(){
-        if !ToolKit.isLogin() {
+        if ToolKit.getBoolByKey("isLogin") {
+            DataProvider.sharedInstance.getCharge(productID, member_id: ToolKit.getStringByKey("userId"), order_amount: "0.01", pay_method: "2") { (data) in
+                print(data)
+            }
+        }else{
             let loginVC = LoginViewController()
             loginVC.isShowBackBtn = true
             navigationController?.pushViewController(loginVC, animated: true)
-            return
-        }
-        DataProvider.sharedInstance.getCharge(productID, member_id: ToolKit.getUserId(), order_amount: "0.01", pay_method: "2") { (data) in
-            print(data)
         }
         
 //        view.viewActionSheet(self, title: "选择支付方式", msg: nil, cancelButtonTitle: "取消", otherButtonTitles: ["支付宝支付","微信支付","银行卡支付","余额支付"]) { (buttonIndex, action) in

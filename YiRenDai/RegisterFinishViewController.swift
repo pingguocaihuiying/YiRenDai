@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegate, ReSendSMSDelegate {
     
@@ -182,15 +183,18 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
             LoadingAnimation.dismiss()
             if error == nil{
                 //注册
-                DataProvider.sharedInstance.register(self.accountValue, password: self.pwdTxt.text!, userName: self.userName, IDNo: self.IDNo, handler: { (state, message) in
-                    if state == 1{
+                DataProvider.sharedInstance.register(self.accountValue, password: self.pwdTxt.text!, userName: self.userName, IDNo: self.IDNo, handler: { (data) in
+                    if data["status"]["succeed"].intValue == 1{
                         NSUserDefaults.setUserDefaultValue(true, forKey: "isLogin")
+                        NSUserDefaults.setUserDefaultValue(data["member_id"].stringValue, forKey: "userId")
+                        NSUserDefaults.setUserDefaultValue(data["member_phone"].stringValue, forKey: "userPhone")
+                        NSNotificationCenter.defaultCenter().postNotificationName("updateMoreData", object: nil)
                         let customTabBarVC = CustomTabBarViewController()
                         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                         appDelegate.window?.rootViewController = customTabBarVC
                         NSNotificationCenter.defaultCenter().postNotificationName("setDefaultSelectTabBarItem", object: nil, userInfo: ["index":2])
-                    }else if state == 1{
-                        self.view.viewAlert(self, title: "提示", msg: message, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+                    }else{
+                        self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
                     }
                 })
             }else{
