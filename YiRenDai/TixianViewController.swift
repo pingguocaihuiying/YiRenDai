@@ -154,6 +154,13 @@ extension TixianViewController: UITableViewDataSource, UITableViewDelegate{
         }
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 1 {
+            let addBankCardVC = AddBankCardViewController()
+            navigationController?.pushViewController(addBankCardVC, animated: true)
+        }
+    }
+    
     //section
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 2 {

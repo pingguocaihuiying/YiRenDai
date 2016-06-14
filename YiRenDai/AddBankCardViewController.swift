@@ -17,7 +17,7 @@ class AddBankCardViewController: BaseNavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setTopViewTitle("添加支付银行卡")
+        setTopViewTitle("添加提现银行卡")
         setTopViewLeftBtnImg("left")
 
         initView()

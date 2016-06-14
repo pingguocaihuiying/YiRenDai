@@ -20,6 +20,7 @@
 		B7248FA41CC5CFA7000A4D78 /* ProductListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7248FA21CC5CFA7000A4D78 /* ProductListTableViewCell.xib */; };
 		B72CBF641CC7010F003FFBC2 /* MyWealthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72CBF631CC7010F003FFBC2 /* MyWealthViewController.swift */; };
 		B72CBF6B1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72CBF6A1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m */; };
+		B72E47441D0FF10D00584465 /* AddPaymentBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72E47431D0FF10D00584465 /* AddPaymentBankCardViewController.swift */; };
 		B73AD2DA1D0F907F00BC0D9B /* DotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73AD2D91D0F907F00BC0D9B /* DotsView.swift */; };
 		B74C7ABE1D0109020048FF2A /* MyCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74C7ABC1D0109020048FF2A /* MyCardTableViewCell.swift */; };
 		B74C7ABF1D0109020048FF2A /* MyCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B74C7ABD1D0109020048FF2A /* MyCardTableViewCell.xib */; };
@@ -137,6 +138,7 @@
 		B72CBF681CC70B9C003FFBC2 /* YiRenDai-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YiRenDai-Bridging-Header.h"; sourceTree = "<group>"; };
 		B72CBF691CC70B9C003FFBC2 /* HFStretchableTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFStretchableTableHeaderView.h; sourceTree = "<group>"; };
 		B72CBF6A1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HFStretchableTableHeaderView.m; sourceTree = "<group>"; };
+		B72E47431D0FF10D00584465 /* AddPaymentBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPaymentBankCardViewController.swift; sourceTree = "<group>"; };
 		B73AD2D91D0F907F00BC0D9B /* DotsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotsView.swift; sourceTree = "<group>"; };
 		B74C7ABC1D0109020048FF2A /* MyCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCardTableViewCell.swift; sourceTree = "<group>"; };
 		B74C7ABD1D0109020048FF2A /* MyCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCardTableViewCell.xib; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 				B74C7ABC1D0109020048FF2A /* MyCardTableViewCell.swift */,
 				B74C7ABD1D0109020048FF2A /* MyCardTableViewCell.xib */,
 				B7622E661D0E880400BB1726 /* AddBankCardViewController.swift */,
+				B72E47431D0FF10D00584465 /* AddPaymentBankCardViewController.swift */,
 			);
 			name = UserCenter;
 			sourceTree = "<group>";
@@ -919,6 +922,7 @@
 				B76DF5931CE2C76F00BF7912 /* LcqDetailViewController.swift in Sources */,
 				B7DBC32D1CC8B50200D2C214 /* MoreViewController.swift in Sources */,
 				B7816E801CC48A2400EC4B77 /* UITextViewExtension.swift in Sources */,
+				B72E47441D0FF10D00584465 /* AddPaymentBankCardViewController.swift in Sources */,
 				B78B669A1CDB216A005232FF /* DataProvider.swift in Sources */,
 				B7816E7F1CC48A2400EC4B77 /* NSDateExtension.swift in Sources */,
 				B7816E921CC48C7300EC4B77 /* HomePageViewController.swift in Sources */,

@@ -42,6 +42,7 @@ class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
         tableView.backgroundColor = UIColor.getGrayColorThird()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
         tableView.registerNib(UINib(nibName: "MyCardTableViewCell", bundle: nil), forCellReuseIdentifier: myCardTableViewCell)
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         view.addSubview(tableView)
@@ -49,18 +50,6 @@ class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
         //下拉刷新
         tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(self.refreshData))
         tableView.mj_header.beginRefreshing()
-        
-        // footerView
-        let footerView = UIView(frame: CGRectMake(0, 0, 100, 40))
-        tableView.tableFooterView = footerView
-        // titleBtn
-        let str = NSMutableAttributedString(string: "支持银行及限额")
-        str.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: NSMakeRange(0, str.length))
-        let titleBtn = UIButton(frame: CGRectMake(10, 10, 100, 14))
-        titleBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
-        titleBtn.setAttributedTitle(str, forState: .Normal)
-        titleBtn.titleLabel?.font = UIFont.systemFontOfSize(14)
-        footerView.addSubview(titleBtn)
     }
     
     func refreshData(){
@@ -75,7 +64,7 @@ class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
         }else if selectItemIndex == 1{
             cardData = []
         }
-        tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
+        tableView.reloadData()
     }
     
     // CLMenuDelegate
@@ -94,7 +83,7 @@ extension MyBankCardViewController: UITableViewDataSource, UITableViewDelegate{
         if section == 0 {
             return cardData.count
         }else{
-            return 1
+            return 2
         }
     }
     
@@ -111,15 +100,37 @@ extension MyBankCardViewController: UITableViewDataSource, UITableViewDelegate{
         }else{
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
             cell.selectionStyle = .None
-            cell.accessoryType = .DisclosureIndicator
             for itemView in cell.contentView.subviews {
                 itemView.removeFromSuperview()
             }
-            let titleLbl = UILabel(frame: CGRectMake(10, 0, 200, cell.viewHeight))
-            titleLbl.textAlignment = .Left
-            titleLbl.font = UIFont.systemFontOfSize(16)
-            titleLbl.text = "添加支付银行卡"
-            cell.contentView.addSubview(titleLbl)
+            if indexPath.row == 0{
+                cell.accessoryType = .DisclosureIndicator
+                let titleLbl = UILabel(frame: CGRectMake(10, 0, 200, cell.viewHeight))
+                titleLbl.textAlignment = .Left
+                titleLbl.font = UIFont.systemFontOfSize(16)
+                titleLbl.text = selectItemIndex == 0 ? "添加支付银行卡" : "添加提现银行卡"
+                cell.contentView.addSubview(titleLbl)
+            }else{
+                cell.backgroundColor = UIColor.getGrayColorThird()
+                if selectItemIndex == 0 {
+                    // titleBtn
+                    let str = NSMutableAttributedString(string: "支持银行及限额")
+                    str.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: NSMakeRange(0, str.length))
+                    let titleBtn = UIButton(frame: CGRectMake(10, 0, 100, cell.viewHeight))
+                    titleBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
+                    titleBtn.setAttributedTitle(str, forState: .Normal)
+                    titleBtn.titleLabel?.font = UIFont.systemFontOfSize(14)
+                    cell.contentView.addSubview(titleBtn)
+                }else{
+                    // detailLbl
+                    let detailLbl = UILabel(frame: CGRectMake(15, 5, screen_width  - 30, 60))
+                    detailLbl.font = UIFont.systemFontOfSize(14)
+                    detailLbl.textColor = UIColor.darkGrayColor()
+                    detailLbl.numberOfLines = 0
+                    detailLbl.text = "目前支持：建行、工行、招行、农行、中行、民生银行、兴大、光大、平安、浦发、广发、华夏、邮政、交行、中信。"
+                    cell.contentView.addSubview(detailLbl)
+                }
+            }
             return cell
         }
     }
@@ -128,29 +139,56 @@ extension MyBankCardViewController: UITableViewDataSource, UITableViewDelegate{
         if indexPath.section == 0 {
             return 70
         }else{
-            return 45
+            if indexPath.row == 0 {
+                return 45
+            }else{
+                if selectItemIndex == 0 {
+                    return 45
+                }else{
+                    return 70
+                }
+            }
         }
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if cell.respondsToSelector(Selector("setLayoutMargins:")) {
-            cell.layoutMargins = UIEdgeInsetsZero
-        }
-        
-        if cell.respondsToSelector(Selector("setSeparatorInset:")){
-            cell.separatorInset = UIEdgeInsetsZero
-        }
-        
-        if cell .respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")){
-            cell.preservesSuperviewLayoutMargins = false
+        if indexPath.section == 1 {
+            if cell.respondsToSelector(Selector("setLayoutMargins:")) {
+                cell.layoutMargins = UIEdgeInsets(top: 0, left: screen_width, bottom: 0, right: 0)
+            }
+            
+            if cell.respondsToSelector(Selector("setSeparatorInset:")){
+                cell.separatorInset = UIEdgeInsets(top: 0, left: screen_width, bottom: 0, right: 0)
+            }
+            
+            if cell .respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")){
+                cell.preservesSuperviewLayoutMargins = false
+            }
+        }else{
+            if cell.respondsToSelector(Selector("setLayoutMargins:")) {
+                cell.layoutMargins = UIEdgeInsetsZero
+            }
+            
+            if cell.respondsToSelector(Selector("setSeparatorInset:")){
+                cell.separatorInset = UIEdgeInsetsZero
+            }
+            
+            if cell .respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")){
+                cell.preservesSuperviewLayoutMargins = false
+            }
         }
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 1 {
-            let addBankCardVC = AddBankCardViewController()
-            navigationController?.pushViewController(addBankCardVC, animated: true)
+            if selectItemIndex == 0 {
+                let addPaymentBankCardVC = AddPaymentBankCardViewController()
+                navigationController?.pushViewController(addPaymentBankCardVC, animated: true)
+            }else{
+                let addBankCardVC = AddBankCardViewController()
+                navigationController?.pushViewController(addBankCardVC, animated: true)
+            }
         }
     }
     
