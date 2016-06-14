@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AFImageHelper
 
 class ManageTeamViewController: BaseNavigationController {
     

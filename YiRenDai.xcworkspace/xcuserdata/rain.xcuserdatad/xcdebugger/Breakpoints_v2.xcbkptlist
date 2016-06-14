@@ -2288,11 +2288,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/LcqViewController.swift"
-            timestampString = "484565339.601634"
+            timestampString = "487558076.546204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "refreshData()"
             landmarkType = "5">
             <Locations>
@@ -2336,11 +2336,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/LcqViewController.swift"
-            timestampString = "484565358.785271"
+            timestampString = "487558076.546204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "refreshData()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2368,11 +2368,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/LcqViewController.swift"
-            timestampString = "486023235.303518"
+            timestampString = "487558076.546204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2384,11 +2384,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/LcqViewController.swift"
-            timestampString = "486023235.303518"
+            timestampString = "487558076.546204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "127"
+            endingLineNumber = "127"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2400,11 +2400,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/LcqViewController.swift"
-            timestampString = "486023235.303518"
+            timestampString = "487558076.546204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2416,11 +2416,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/LcqViewController.swift"
-            timestampString = "484623239.781732"
+            timestampString = "487558076.546204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
             landmarkName = "refreshData()"
             landmarkType = "5">
          </BreakpointContent>
@@ -2432,11 +2432,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/ManageTeamViewController.swift"
-            timestampString = "484652644.911673"
+            timestampString = "487558076.546204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -2448,11 +2448,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/ManageTeamViewController.swift"
-            timestampString = "484710975.352252"
+            timestampString = "487558076.546204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "tableView(_:didSelectRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3224,11 +3224,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/ActivityCenterViewController.swift"
-            timestampString = "486031702.422614"
+            timestampString = "487558076.546204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "refreshData()"
             landmarkType = "5">
          </BreakpointContent>
@@ -3240,11 +3240,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/ActivityCenterViewController.swift"
-            timestampString = "486031702.422614"
+            timestampString = "487558076.546204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3256,11 +3256,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/SaveSecurityViewController.swift"
-            timestampString = "486027971.319427"
+            timestampString = "487558076.546204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "initData()"
             landmarkType = "5">
          </BreakpointContent>
@@ -3272,11 +3272,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/SaveSecurityViewController.swift"
-            timestampString = "486034927.142585"
+            timestampString = "487558076.546204"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "initView()"
             landmarkType = "5">
          </BreakpointContent>

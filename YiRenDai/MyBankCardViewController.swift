@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import MJRefresh
+import AFImageHelper
 
 class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
 
@@ -142,6 +143,14 @@ extension MyBankCardViewController: UITableViewDataSource, UITableViewDelegate{
         
         if cell .respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")){
             cell.preservesSuperviewLayoutMargins = false
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        if indexPath.section == 1 {
+            let addBankCardVC = AddBankCardViewController()
+            navigationController?.pushViewController(addBankCardVC, animated: true)
         }
     }
     

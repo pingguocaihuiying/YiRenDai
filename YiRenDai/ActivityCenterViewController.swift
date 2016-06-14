@@ -9,6 +9,7 @@
 import UIKit
 import MJRefresh
 import SwiftyJSON
+import AFImageHelper
 
 class ActivityCenterViewController: BaseNavigationController {
 

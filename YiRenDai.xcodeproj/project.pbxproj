@@ -20,6 +20,7 @@
 		B7248FA41CC5CFA7000A4D78 /* ProductListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7248FA21CC5CFA7000A4D78 /* ProductListTableViewCell.xib */; };
 		B72CBF641CC7010F003FFBC2 /* MyWealthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72CBF631CC7010F003FFBC2 /* MyWealthViewController.swift */; };
 		B72CBF6B1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72CBF6A1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m */; };
+		B73AD2DA1D0F907F00BC0D9B /* DotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73AD2D91D0F907F00BC0D9B /* DotsView.swift */; };
 		B74C7ABE1D0109020048FF2A /* MyCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74C7ABC1D0109020048FF2A /* MyCardTableViewCell.swift */; };
 		B74C7ABF1D0109020048FF2A /* MyCardTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B74C7ABD1D0109020048FF2A /* MyCardTableViewCell.xib */; };
 		B75E1D621CCF3F99001F0B44 /* MyAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B75E1D611CCF3F99001F0B44 /* MyAccountViewController.swift */; };
@@ -136,6 +137,7 @@
 		B72CBF681CC70B9C003FFBC2 /* YiRenDai-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YiRenDai-Bridging-Header.h"; sourceTree = "<group>"; };
 		B72CBF691CC70B9C003FFBC2 /* HFStretchableTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFStretchableTableHeaderView.h; sourceTree = "<group>"; };
 		B72CBF6A1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HFStretchableTableHeaderView.m; sourceTree = "<group>"; };
+		B73AD2D91D0F907F00BC0D9B /* DotsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotsView.swift; sourceTree = "<group>"; };
 		B74C7ABC1D0109020048FF2A /* MyCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCardTableViewCell.swift; sourceTree = "<group>"; };
 		B74C7ABD1D0109020048FF2A /* MyCardTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyCardTableViewCell.xib; sourceTree = "<group>"; };
 		B75E1D611CCF3F99001F0B44 /* MyAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountViewController.swift; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				B7AEA4BB1CD88E89006194C6 /* LoadingAnimation.swift */,
 				B716E9771CDC7B62004AC76D /* UICopyLabel.swift */,
 				B76794AD1CE5B5E800404794 /* AlertView.swift */,
+				B73AD2D91D0F907F00BC0D9B /* DotsView.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -881,6 +884,7 @@
 				B74C7ABE1D0109020048FF2A /* MyCardTableViewCell.swift in Sources */,
 				B72CBF6B1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m in Sources */,
 				B7BEB90E1CE5736E0089D20D /* TentacleView.swift in Sources */,
+				B73AD2DA1D0F907F00BC0D9B /* DotsView.swift in Sources */,
 				B75E1D621CCF3F99001F0B44 /* MyAccountViewController.swift in Sources */,
 				B7622E651D0E44EB00BB1726 /* ChangePwdViewController.swift in Sources */,
 				B78AA5A11CFD6E95009D9B1D /* ApplyBorrowViewController.swift in Sources */,

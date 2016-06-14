@@ -9,10 +9,11 @@
 import UIKit
 import CLCycleScrollView
 import SwiftyJSON
+import CLCircularPicture
 
 class SaveSecurityViewController: BaseNavigationController {
     
-    var cycleScrollView: CycleScrollView!
+    var cycleScrollView: CLCircularPicture!
     var saveSecurityData: JSON?
 
     override func viewDidLoad() {
@@ -43,7 +44,7 @@ class SaveSecurityViewController: BaseNavigationController {
                 imageArray.append(saveSecurityData![i]["slide_img"].stringValue)
             }
         }
-        cycleScrollView = CycleScrollView(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height), imageArray: imageArray, placeholder: UIImage(named: "default_bgimg"))
+        cycleScrollView = CLCircularPicture(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height), imageArray: imageArray, placeholder: UIImage(named: "default_bgimg"))
         cycleScrollView.currentPageControlColor = UIColor.redColor()
         cycleScrollView.pageControlTintColor = UIColor.whiteColor()
         cycleScrollView.setUpCircleView()

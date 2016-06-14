@@ -7,17 +7,17 @@
 //
 
 import UIKit
-import CLCycleScrollView
+import CLCircularPicture
 import MJRefresh
 import SwiftyJSON
 
-class HomePageViewController: BaseViewController, CycleScrollViewDelegate {
+class HomePageViewController: BaseViewController, CLCircularPictureDelegate {
     
     let cellIdentifier = "CellIdentifier"
     
     //view
     var tableView: UITableView!
-    var cycleScrollView: CycleScrollView!
+    var cycleScrollView: CLCircularPicture!
     
     //data
     var homeData: JSON?
@@ -110,7 +110,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
                     imageArray.append(cycleImage![i]["slide_img"].stringValue)
                 }
             }
-            cycleScrollView = CycleScrollView(frame: CGRectMake(0, 0, screen_width, 200), imageArray: imageArray, placeholder: UIImage(named: "default_bgimg"))
+            cycleScrollView = CLCircularPicture(frame: CGRectMake(0, 0, screen_width, 200), imageArray: imageArray, placeholder: UIImage(named: "default_bgimg"))
             cycleScrollView.delegate = self
             cycleScrollView.currentPageControlColor = UIColor.blackColor()
             cycleScrollView.pageControlTintColor = UIColor.whiteColor()
