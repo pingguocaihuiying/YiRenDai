@@ -77,11 +77,19 @@ class MyWealthViewController: BaseViewController {
             myGiftVC.navtitle = "我的礼品"
             myGiftVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(myGiftVC, animated: true)
+        case 3:
+            let vipVC = VIPViewController()
+            vipVC.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(vipVC, animated: true)
         case 4:
             let yirenbiVC = YirenbiViewController()
             yirenbiVC.navtitle = "宜人币"
             yirenbiVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(yirenbiVC, animated: true)
+        case 5:
+            let youhuiquanVC = YouhuiquanViewController()
+            youhuiquanVC.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(youhuiquanVC, animated: true)
         case 6:
             NSNotificationCenter.defaultCenter().postNotificationName("setDefaultSelectTabBarItem", object: nil, userInfo: ["index" : 1])
         default:

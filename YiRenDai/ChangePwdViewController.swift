@@ -29,6 +29,7 @@ class ChangePwdViewController: BaseNavigationController, UITextFieldDelegate {
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        oldPwdTxt.resignFirstResponder()
         pwdTxt.resignFirstResponder()
         rePwdTxt.resignFirstResponder()
     }

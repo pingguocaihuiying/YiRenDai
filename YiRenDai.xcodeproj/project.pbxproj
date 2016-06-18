@@ -16,6 +16,10 @@
 		B70CC1311CE42D22002C1445 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70CC1301CE42D22002C1445 /* SettingsViewController.swift */; };
 		B70CC1401CE47C1B002C1445 /* GesturePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70CC13F1CE47C1B002C1445 /* GesturePasswordViewController.swift */; };
 		B716E9781CDC7B62004AC76D /* UICopyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B716E9771CDC7B62004AC76D /* UICopyLabel.swift */; };
+		B72323A61D10DC8B00A4DECC /* CLPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72323A51D10DC8A00A4DECC /* CLPickerView.swift */; };
+		B72323A81D1131A500A4DECC /* OpenBankViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72323A71D1131A500A4DECC /* OpenBankViewController.swift */; };
+		B72323AA1D113D8500A4DECC /* OpenBankAddressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72323A91D113D8500A4DECC /* OpenBankAddressViewController.swift */; };
+		B72323AC1D11528600A4DECC /* YouhuiquanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72323AB1D11528600A4DECC /* YouhuiquanViewController.swift */; };
 		B7248FA31CC5CFA7000A4D78 /* ProductListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7248FA11CC5CFA7000A4D78 /* ProductListTableViewCell.swift */; };
 		B7248FA41CC5CFA7000A4D78 /* ProductListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7248FA21CC5CFA7000A4D78 /* ProductListTableViewCell.xib */; };
 		B72CBF641CC7010F003FFBC2 /* MyWealthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72CBF631CC7010F003FFBC2 /* MyWealthViewController.swift */; };
@@ -132,6 +136,10 @@
 		B70CC1301CE42D22002C1445 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		B70CC13F1CE47C1B002C1445 /* GesturePasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GesturePasswordViewController.swift; sourceTree = "<group>"; };
 		B716E9771CDC7B62004AC76D /* UICopyLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UICopyLabel.swift; sourceTree = "<group>"; };
+		B72323A51D10DC8A00A4DECC /* CLPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CLPickerView.swift; sourceTree = "<group>"; };
+		B72323A71D1131A500A4DECC /* OpenBankViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenBankViewController.swift; sourceTree = "<group>"; };
+		B72323A91D113D8500A4DECC /* OpenBankAddressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OpenBankAddressViewController.swift; sourceTree = "<group>"; };
+		B72323AB1D11528600A4DECC /* YouhuiquanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouhuiquanViewController.swift; sourceTree = "<group>"; };
 		B7248FA11CC5CFA7000A4D78 /* ProductListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListTableViewCell.swift; sourceTree = "<group>"; };
 		B7248FA21CC5CFA7000A4D78 /* ProductListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductListTableViewCell.xib; sourceTree = "<group>"; };
 		B72CBF631CC7010F003FFBC2 /* MyWealthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWealthViewController.swift; sourceTree = "<group>"; };
@@ -292,6 +300,7 @@
 				B77C93121CD03FC700739CBE /* MyGiftViewController.swift */,
 				B77C93141CD047F400739CBE /* YirenbiViewController.swift */,
 				B77C93161CD0502F00739CBE /* HistoryRecordViewController.swift */,
+				B72323AB1D11528600A4DECC /* YouhuiquanViewController.swift */,
 			);
 			name = MyWealth;
 			sourceTree = "<group>";
@@ -317,6 +326,7 @@
 				B716E9771CDC7B62004AC76D /* UICopyLabel.swift */,
 				B76794AD1CE5B5E800404794 /* AlertView.swift */,
 				B73AD2D91D0F907F00BC0D9B /* DotsView.swift */,
+				B72323A51D10DC8A00A4DECC /* CLPickerView.swift */,
 			);
 			name = Swift;
 			sourceTree = "<group>";
@@ -366,6 +376,8 @@
 				B74C7ABD1D0109020048FF2A /* MyCardTableViewCell.xib */,
 				B7622E661D0E880400BB1726 /* AddBankCardViewController.swift */,
 				B72E47431D0FF10D00584465 /* AddPaymentBankCardViewController.swift */,
+				B72323A71D1131A500A4DECC /* OpenBankViewController.swift */,
+				B72323A91D113D8500A4DECC /* OpenBankAddressViewController.swift */,
 			);
 			name = UserCenter;
 			sourceTree = "<group>";
@@ -879,6 +891,7 @@
 				B70CC12A1CE40CA6002C1445 /* FAQDetailViewController.swift in Sources */,
 				B76794AE1CE5B5E800404794 /* AlertView.swift in Sources */,
 				B7BEB90C1CE5736E0089D20D /* GesturePasswordButton.swift in Sources */,
+				B72323A81D1131A500A4DECC /* OpenBankViewController.swift in Sources */,
 				B7622E671D0E880400BB1726 /* AddBankCardViewController.swift in Sources */,
 				B7801BCD1CCB66F0003EDEFA /* ActivityCenterTableViewCell.swift in Sources */,
 				B7816E841CC48A4800EC4B77 /* ToolKit.swift in Sources */,
@@ -892,6 +905,7 @@
 				B7622E651D0E44EB00BB1726 /* ChangePwdViewController.swift in Sources */,
 				B78AA5A11CFD6E95009D9B1D /* ApplyBorrowViewController.swift in Sources */,
 				B70CC12D1CE411D1002C1445 /* FAQDetailTableViewCell.swift in Sources */,
+				B72323A61D10DC8B00A4DECC /* CLPickerView.swift in Sources */,
 				B7819AC41CD73BCA0078E02F /* Timer.swift in Sources */,
 				B70CC1311CE42D22002C1445 /* SettingsViewController.swift in Sources */,
 				B76DF59E1CE2D98000BF7912 /* ManageTeamTableViewCell.swift in Sources */,
@@ -910,6 +924,7 @@
 				B7816E811CC48A2400EC4B77 /* UIViewExtension.swift in Sources */,
 				B7D3FD3E1CCD98B600E67ABF /* LjInvestBtnViewController.swift in Sources */,
 				B76DF5A21CE31A9200BF7912 /* FAQViewController.swift in Sources */,
+				B72323AA1D113D8500A4DECC /* OpenBankAddressViewController.swift in Sources */,
 				B76DF59B1CE2D54C00BF7912 /* ManageTeamViewController.swift in Sources */,
 				B78B66A81CDB2FD8005232FF /* ContactUsTableViewCell.swift in Sources */,
 				B78AA59F1CFD316A009D9B1D /* IBorrowViewController.swift in Sources */,
@@ -917,6 +932,7 @@
 				B7816E8C1CC48AAC00EC4B77 /* StartScrollViewController.swift in Sources */,
 				B7816E9D1CC4DBE800EC4B77 /* UIColorExtension.swift in Sources */,
 				B7AEA4BA1CD84FA8006194C6 /* RegisterFinishViewController.swift in Sources */,
+				B72323AC1D11528600A4DECC /* YouhuiquanViewController.swift in Sources */,
 				B77C93131CD03FC700739CBE /* MyGiftViewController.swift in Sources */,
 				B7FDFEF71CFE7FFC00DA1867 /* IntroductionsViewController.swift in Sources */,
 				B76DF5931CE2C76F00BF7912 /* LcqDetailViewController.swift in Sources */,

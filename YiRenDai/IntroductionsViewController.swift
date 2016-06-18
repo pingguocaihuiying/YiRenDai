@@ -66,25 +66,74 @@ extension IntroductionsViewController: UITableViewDataSource, UITableViewDelegat
             let titleLbl = UILabel(frame: CGRectMake(20, 15, 200, 20))
             titleLbl.text = "申请条件:"
             cell.contentView.addSubview(titleLbl)
-            // detailLbl
-            let detailLbl = UILabel(frame: CGRectMake(22, titleLbl.viewBottomY, screen_width, 80))
-            detailLbl.numberOfLines = 0
-            detailLbl.font = UIFont.systemFontOfSize(15)
-            detailLbl.textColor = UIColor.grayColor()
-            detailLbl.text = "中国大陆居民（不含港澳台）\n22-60周岁\n实体店经营1年以上，网店经营3年以上\n月均营业收入大于1万元"
-            cell.contentView.addSubview(detailLbl)
+            // dotsView1
+            let dotsView1 = DotsView(frame: CGRectMake(25, titleLbl.viewBottomY + 8, 6, 6))
+            cell.contentView.addSubview(dotsView1)
+            // detailLbl1
+            let detailLbl1 = UILabel(frame: CGRectMake(dotsView1.viewRightX + 3, titleLbl.viewBottomY, screen_width, 20))
+            detailLbl1.font = UIFont.systemFontOfSize(15)
+            detailLbl1.textColor = UIColor.grayColor()
+            detailLbl1.text = "中国大陆居民（不含港澳台)"
+            cell.contentView.addSubview(detailLbl1)
+            // dotsView2
+            let dotsView2 = DotsView(frame: CGRectMake(25, detailLbl1.viewBottomY + 8, 6, 6))
+            cell.contentView.addSubview(dotsView2)
+            // detailLbl2
+            let detailLbl2 = UILabel(frame: CGRectMake(dotsView2.viewRightX + 3, detailLbl1.viewBottomY, screen_width, 20))
+            detailLbl2.font = UIFont.systemFontOfSize(15)
+            detailLbl2.textColor = UIColor.grayColor()
+            detailLbl2.text = "22-60周岁"
+            cell.contentView.addSubview(detailLbl2)
+            // dotsView3
+            let dotsView3 = DotsView(frame: CGRectMake(25, detailLbl2.viewBottomY + 8, 6, 6))
+            cell.contentView.addSubview(dotsView3)
+            // detailLbl3
+            let detailLbl3 = UILabel(frame: CGRectMake(dotsView3.viewRightX + 3, detailLbl2.viewBottomY, screen_width, 20))
+            detailLbl3.font = UIFont.systemFontOfSize(15)
+            detailLbl3.textColor = UIColor.grayColor()
+            detailLbl3.text = "实体店经营1年以上"
+            cell.contentView.addSubview(detailLbl3)
+            // dotsView4
+            let dotsView4 = DotsView(frame: CGRectMake(25, detailLbl3.viewBottomY + 8, 6, 6))
+            cell.contentView.addSubview(dotsView4)
+            // detailLbl4
+            let detailLbl4 = UILabel(frame: CGRectMake(dotsView4.viewRightX + 3, detailLbl3.viewBottomY, screen_width, 20))
+            detailLbl4.font = UIFont.systemFontOfSize(15)
+            detailLbl4.textColor = UIColor.grayColor()
+            detailLbl4.text = "网店经营3年以上\n月均营业收入大于1万元"
+            cell.contentView.addSubview(detailLbl4)
         }else if indexPath.row == 1{
             // titleLbl
             let titleLbl = UILabel(frame: CGRectMake(20, 15, 200, 20))
             titleLbl.text = "申请资料:"
             cell.contentView.addSubview(titleLbl)
-            // detailLbl
-            let detailLbl = UILabel(frame: CGRectMake(22, titleLbl.viewBottomY, screen_width, 60))
-            detailLbl.numberOfLines = 0
-            detailLbl.font = UIFont.systemFontOfSize(15)
-            detailLbl.textColor = UIColor.grayColor()
-            detailLbl.text = "有效身份证明\n微信授权证明\n企业经营证明及收入证明"
-            cell.contentView.addSubview(detailLbl)
+            // dotsView1
+            let dotsView1 = DotsView(frame: CGRectMake(25, titleLbl.viewBottomY + 8, 6, 6))
+            cell.contentView.addSubview(dotsView1)
+            // detailLbl1
+            let detailLbl1 = UILabel(frame: CGRectMake(dotsView1.viewRightX + 3, titleLbl.viewBottomY, screen_width, 20))
+            detailLbl1.font = UIFont.systemFontOfSize(15)
+            detailLbl1.textColor = UIColor.grayColor()
+            detailLbl1.text = "有效身份证明"
+            cell.contentView.addSubview(detailLbl1)
+            // dotsView2
+            let dotsView2 = DotsView(frame: CGRectMake(25, detailLbl1.viewBottomY + 8, 6, 6))
+            cell.contentView.addSubview(dotsView2)
+            // detailLbl2
+            let detailLbl2 = UILabel(frame: CGRectMake(dotsView2.viewRightX + 3, detailLbl1.viewBottomY, screen_width, 20))
+            detailLbl2.font = UIFont.systemFontOfSize(15)
+            detailLbl2.textColor = UIColor.grayColor()
+            detailLbl2.text = "微信授权证明"
+            cell.contentView.addSubview(detailLbl2)
+            // dotsView3
+            let dotsView3 = DotsView(frame: CGRectMake(25, detailLbl2.viewBottomY + 8, 6, 6))
+            cell.contentView.addSubview(dotsView3)
+            // detailLbl3
+            let detailLbl3 = UILabel(frame: CGRectMake(dotsView3.viewRightX + 3, detailLbl2.viewBottomY, screen_width, 20))
+            detailLbl3.font = UIFont.systemFontOfSize(15)
+            detailLbl3.textColor = UIColor.grayColor()
+            detailLbl3.text = "企业经营证明及收入证明"
+            cell.contentView.addSubview(detailLbl3)
         }else{
             // titleLbl
             let titleLbl = UILabel(frame: CGRectMake(20, 15, 200, 20))

@@ -28,6 +28,7 @@ class VIPViewController: BaseNavigationController {
     
     override func clickRightBtnEvent() {
         let upgradeStrategyVC = UpgradeStrategyViewController()
+        upgradeStrategyVC.upgradeStrategyType = UpgradeStrategyType.UpgradeStrategy
         navigationController?.pushViewController(upgradeStrategyVC, animated: true)
     }
 

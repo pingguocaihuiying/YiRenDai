@@ -15,13 +15,13 @@ enum ApplyType {
     case Chezhudai
 }
 
-class ApplyBorrowViewController: BaseNavigationController {
+class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate {
 
     let cellIdentifier = "CellIdentifier"
     
     var applyType: ApplyType!
     
-    //view
+    // view
     var tableView: UITableView!
     var amountTxt: UITextField!
     var purposeTxt: UITextField!
@@ -33,6 +33,22 @@ class ApplyBorrowViewController: BaseNavigationController {
     var phoneTxt: UITextField!
     var contactTimeTxt: UITextField!
     var incomeTxt: UITextField!
+    
+    var amountValue: String!
+    var purposeValue: String!
+    var deadlineValue: String!
+    var cityValue: String!
+    var timeValue: String!
+    var birthdayValue: String!
+    var contactTimeValue: String!
+    var incomeValue: String!
+    
+    var bgView: CLPickerView!
+    var pickerView: UIPickerView!
+    
+    // data
+    var clickControl: Int!
+    var currentShowData = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +107,7 @@ class ApplyBorrowViewController: BaseNavigationController {
         view.addSubview(tableView)
         
         // footerView
-        let footerView = UIView(frame: CGRectMake(0, screen_height - 100, screen_width, 100))
+        let footerView = UIView(frame: CGRectMake(0, screen_height - 105, screen_width, 105))
         //footerView.backgroundColor = UIColor.lightTextColor()
         tableView.tableFooterView = footerView
         // protocolBtn
@@ -107,11 +123,69 @@ class ApplyBorrowViewController: BaseNavigationController {
         protocolIv.image = UIImage(named: "xuanze")
         footerView.addSubview(protocolIv)
         // okBtn
-        let okBtn = UIButton(frame: CGRectMake(20, protocolBtn.viewBottomY + 15, footerView.viewWidth - 40, 35))
+        let okBtn = UIButton(frame: CGRectMake(20, protocolBtn.viewBottomY + 15, footerView.viewWidth - 40, 40))
         okBtn.setTitle("完成", forState: .Normal)
         okBtn.backgroundColor = UIColor.getRedColorFirst()
         okBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         footerView.addSubview(okBtn)
+    }
+    
+    func clickTextField(sender: UIButton) {
+        currentShowData = []
+        clickControl = sender.tag
+        if bgView == nil {
+            bgView = CLPickerView(target: self)
+            bgView.delegate = self
+        }
+        bgView.show()
+        clickControl = sender.tag
+        if sender.tag == 1 {
+            currentShowData = ["消费","装修","深造","医疗","创业","扩大经营","资金周转","其它用途"]
+        }else if sender.tag == 2{
+            currentShowData = ["3月期"]
+        }else if sender.tag == 3{
+            currentShowData = ["临沂","济南","青岛"]
+        }else if sender.tag == 4{
+            currentShowData = ["小于6个月","6个月-1年","1年-3年","3年-5年","5年以上"]
+        }else if sender.tag == 5{
+            for i in 1954 ... 2016  {
+                currentShowData.append("\(i)")
+            }
+        }else if sender.tag == 6{
+            currentShowData = ["不限时间","请尽快联系我","周一至周五9：00-18：00","周一至周五18：00-21：00","周末9：00-18：00","周末18：00-21：00"]
+        }
+        bgView.showData = currentShowData
+    }
+    
+    func clickEvent(sender: UITextField){
+        
+    }
+    
+    // CLPickerViewDelegate
+    func selectRow(value: String) {
+        print(value)
+        switch clickControl {
+        case 1:
+            purposeValue = value
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: .Automatic)
+        case 2:
+            deadlineValue = value
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: .Automatic)
+        case 3:
+            cityValue = value
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 1)], withRowAnimation: .Automatic)
+        case 4:
+            timeValue = value
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 1)], withRowAnimation: .Automatic)
+        case 5:
+            birthdayValue = value
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 1)], withRowAnimation: .Automatic)
+        case 6:
+            contactTimeValue = value
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 1)], withRowAnimation: .Automatic)
+        default:
+            break
+        }
     }
 
 }
@@ -175,6 +249,7 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 // amountTxt
                 amountTxt = UITextField(frame: CGRectMake(amountTitleLbl.viewRightX, typeTitleLbl.viewBottomY + 10, screen_width * 0.6, 30))
                 amountTxt.placeholder = "最高5000"
+                amountTxt.keyboardType = .NumberPad
                 amountTxt.textAlignment = .Center
                 amountTxt.layer.borderWidth = 1
                 amountTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
@@ -197,13 +272,18 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 purposeTxt = UITextField(frame: CGRectMake(amountTitleLbl.viewRightX, amountTxt.viewBottomY + 10, screen_width * 0.6, 30))
                 purposeTxt.placeholder = "请选择"
                 purposeTxt.textAlignment = .Center
+                purposeTxt.text = purposeValue
                 purposeTxt.layer.borderWidth = 1
                 purposeTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
                 cell.contentView.addSubview(purposeTxt)
+                // purposeBtn
+                let purposeBtn = UIButton(frame: purposeTxt.frame)
+                purposeBtn.tag = 1
+                purposeBtn.addTarget(self, action: #selector(clickTextField(_:)), forControlEvents: .TouchUpInside)
+                cell.contentView.addSubview(purposeBtn)
                 // dropdownIv1
                 let dropdownIv1 = UIImageView(frame: CGRectMake(purposeTxt.viewWidth - 20, (30 - 12) / 2, 15, 12))
                 dropdownIv1.image = UIImage(named: "sanjiaoxing")
-                cell.contentView.addSubview(dropdownIv1)
                 // add dropdownIv1
                 purposeTxt.addSubview(dropdownIv1)
                 
@@ -217,14 +297,19 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 // deadlineTxt
                 deadlineTxt = UITextField(frame: CGRectMake(deadlineTitleLbl.viewRightX, purposeTxt.viewBottomY + 10, screen_width * 0.6, 30))
                 deadlineTxt.placeholder = "请选择"
+                deadlineTxt.text = deadlineValue
                 deadlineTxt.textAlignment = .Center
                 deadlineTxt.layer.borderWidth = 1
                 deadlineTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
                 cell.contentView.addSubview(deadlineTxt)
+                // deadlineBtn
+                let deadlineBtn = UIButton(frame: deadlineTxt.frame)
+                deadlineBtn.tag = 2
+                deadlineBtn.addTarget(self, action: #selector(clickTextField(_:)), forControlEvents: .TouchUpInside)
+                cell.contentView.addSubview(deadlineBtn)
                 // dropdownIv2
                 let dropdownIv2 = UIImageView(frame: CGRectMake(purposeTxt.viewWidth - 20, (30 - 12) / 2, 15, 12))
                 dropdownIv2.image = UIImage(named: "sanjiaoxing")
-                cell.contentView.addSubview(dropdownIv2)
                 // add dropdownIv2
                 deadlineTxt.addSubview(dropdownIv2)
             }
@@ -250,10 +335,21 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 // cityTxt
                 cityTxt = UITextField(frame: CGRectMake(cityTitleLbl.viewRightX, cityTitleLbl.viewY, screen_width * 0.6, 30))
                 cityTxt.placeholder = "请选择居住城市"
+                cityTxt.text = cityValue
                 cityTxt.textAlignment = .Center
                 cityTxt.layer.borderWidth = 1
                 cityTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
                 cell.contentView.addSubview(cityTxt)
+                // cityBtn
+                let cityBtn = UIButton(frame: cityTxt.frame)
+                cityBtn.tag = 3
+                cityBtn.addTarget(self, action: #selector(clickTextField(_:)), forControlEvents: .TouchUpInside)
+                cell.contentView.addSubview(cityBtn)
+                // dropdownIv0
+                let dropdownIv0 = UIImageView(frame: CGRectMake(cityTxt.viewWidth - 20, (30 - 12) / 2, 15, 12))
+                dropdownIv0.image = UIImage(named: "sanjiaoxing")
+                // add dropdownIv0
+                cityTxt.addSubview(dropdownIv0)
                 
                 // timeTitleLbl
                 let timeTitleLbl = UILabel(frame: CGRectMake(20, cityTxt.viewBottomY + 10, 65, 30))
@@ -265,15 +361,20 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 // timeTxt
                 timeTxt = UITextField(frame: CGRectMake(timeTitleLbl.viewRightX, timeTitleLbl.viewY, screen_width * 0.6, 30))
                 timeTxt.placeholder = "请选择"
+                timeTxt.text = timeValue
                 timeTxt.textAlignment = .Center
                 timeTxt.layer.borderWidth = 1
                 timeTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
                 cell.contentView.addSubview(timeTxt)
+                // timeBtn
+                let timeBtn = UIButton(frame: timeTxt.frame)
+                timeBtn.tag = 4
+                timeBtn.addTarget(self, action: #selector(clickTextField(_:)), forControlEvents: .TouchUpInside)
+                cell.contentView.addSubview(timeBtn)
                 // dropdownIv1
                 let dropdownIv1 = UIImageView(frame: CGRectMake(timeTxt.viewWidth - 20, (30 - 12) / 2, 15, 12))
                 dropdownIv1.image = UIImage(named: "sanjiaoxing")
-                cell.contentView.addSubview(dropdownIv1)
-                // add dropdownIv2
+                // add dropdownIv1
                 timeTxt.addSubview(dropdownIv1)
                 
                 // nameTitleLbl
@@ -331,16 +432,21 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 // birthdayTxt
                 birthdayTxt = UITextField(frame: CGRectMake(birthdayTitleLbl.viewRightX, birthdayTitleLbl.viewY, screen_width * 0.6, 30))
                 birthdayTxt.placeholder = "请选择"
+                birthdayTxt.text = birthdayValue
                 birthdayTxt.textAlignment = .Center
                 birthdayTxt.layer.borderWidth = 1
                 birthdayTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
                 cell.contentView.addSubview(birthdayTxt)
+                // birthdayBtn
+                let birthdayBtn = UIButton(frame: birthdayTxt.frame)
+                birthdayBtn.tag = 5
+                birthdayBtn.addTarget(self, action: #selector(clickTextField(_:)), forControlEvents: .TouchUpInside)
+                cell.contentView.addSubview(birthdayBtn)
                 // dropdownIv2
                 let dropdownIv2 = UIImageView(frame: CGRectMake(birthdayTxt.viewWidth - 20, (30 - 12) / 2, 15, 12))
                 dropdownIv2.image = UIImage(named: "sanjiaoxing")
-                cell.contentView.addSubview(dropdownIv2)
                 // add dropdownIv2
-                nameTxt.addSubview(dropdownIv2)
+                birthdayTxt.addSubview(dropdownIv2)
                 
                 // phoneTitleLbl
                 let phoneTitleLbl = UILabel(frame: CGRectMake(20, birthdayTxt.viewBottomY + 10, 65, 30))
@@ -352,6 +458,7 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 // phoneTxt
                 phoneTxt = UITextField(frame: CGRectMake(phoneTitleLbl.viewRightX, phoneTitleLbl.viewY, screen_width * 0.6, 30))
                 phoneTxt.placeholder = "请填写您的手机号"
+                phoneTxt.keyboardType = .PhonePad
                 phoneTxt.textAlignment = .Center
                 phoneTxt.layer.borderWidth = 1
                 phoneTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
@@ -367,14 +474,19 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 // contactTimeTxt
                 contactTimeTxt = UITextField(frame: CGRectMake(contactTimeTitleLbl.viewRightX, contactTimeTitleLbl.viewY, screen_width * 0.6, 30))
                 contactTimeTxt.placeholder = "请选择"
+                contactTimeTxt.text = contactTimeValue
                 contactTimeTxt.textAlignment = .Center
                 contactTimeTxt.layer.borderWidth = 1
                 contactTimeTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
                 cell.contentView.addSubview(contactTimeTxt)
+                // contactTimeBtn
+                let contactTimeBtn = UIButton(frame: contactTimeTxt.frame)
+                contactTimeBtn.tag = 6
+                contactTimeBtn.addTarget(self, action: #selector(clickTextField(_:)), forControlEvents: .TouchUpInside)
+                cell.contentView.addSubview(contactTimeBtn)
                 // dropdownIv3
                 let dropdownIv3 = UIImageView(frame: CGRectMake(contactTimeTxt.viewWidth - 20, (30 - 12) / 2, 15, 12))
                 dropdownIv3.image = UIImage(named: "sanjiaoxing")
-                cell.contentView.addSubview(dropdownIv3)
                 // add dropdownIv3
                 contactTimeTxt.addSubview(dropdownIv3)
             }
@@ -482,16 +594,18 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 // incomeTxt
                 incomeTxt = UITextField(frame: CGRectMake(incomeTitleLbl.viewRightX, incomeTitleLbl.viewY, screen_width * 0.6, 30))
                 incomeTxt.placeholder = "请选择"
+                incomeTxt.keyboardType = .NumberPad
+                incomeTxt.text = incomeValue
                 incomeTxt.textAlignment = .Center
                 incomeTxt.layer.borderWidth = 1
                 incomeTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
                 cell.contentView.addSubview(incomeTxt)
-                // dropdownIv
-                let dropdownIv = UIImageView(frame: CGRectMake(incomeTxt.viewWidth - 20, (30 - 12) / 2, 15, 12))
-                dropdownIv.image = UIImage(named: "sanjiaoxing")
-                cell.contentView.addSubview(dropdownIv)
-                // add dropdownIv
-                incomeTxt.addSubview(dropdownIv)
+                // yuanLbl
+                let yuanLbl = UILabel(frame: CGRectMake(incomeTxt.viewRightX + 2, incomeTxt.viewY, 30, 30))
+                yuanLbl.text = "元"
+                yuanLbl.textColor = UIColor.grayColor()
+                yuanLbl.font = UIFont.systemFontOfSize(15)
+                cell.contentView.addSubview(yuanLbl)
                 
                 // cardTitleLbl
                 let cardTitleLbl = UILabel(frame: CGRectMake(20, incomeTxt.viewBottomY + 10, 65, 30))

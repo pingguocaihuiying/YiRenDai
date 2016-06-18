@@ -8,11 +8,21 @@
 
 import UIKit
 
-class AddBankCardViewController: BaseNavigationController {
+class AddBankCardViewController: BaseNavigationController, UITextFieldDelegate, OpenBankViewControllerDellegate, OpenBankAddressViewControllerDellegate {
     
     let cellIdentifier = "CellIdentifier"
     
+    // view
     var tableView: UITableView!
+    var nameTxt: UITextField!
+    var cardTxt: UITextField!
+    var openBankTxt: UITextField!
+    var openBankAddressTxt: UITextField!
+    var zhihangTxt: UITextField!
+    var OKBtn: UIButton!
+    
+    var openBankValue: String!
+    var openBankAddressValue: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +31,14 @@ class AddBankCardViewController: BaseNavigationController {
         setTopViewLeftBtnImg("left")
 
         initView()
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        nameTxt.resignFirstResponder()
+        cardTxt.resignFirstResponder()
+        openBankTxt.resignFirstResponder()
+        openBankAddressTxt.resignFirstResponder()
+        zhihangTxt.resignFirstResponder()
     }
     
     // MARK: - 自定义方法
@@ -35,6 +53,33 @@ class AddBankCardViewController: BaseNavigationController {
     
     func OKFunc(){
         
+    }
+    
+    func textFieldDidChange(textField: UITextField){
+        if nameTxt.text != "" && cardTxt.text != "" && openBankTxt.text != "" && openBankAddressTxt.text != "" && zhihangTxt.text != ""{
+            OKBtn.setBackgroundImage(UIImage(named: "button_normal"), forState: .Normal)
+            OKBtn.enabled = true
+        }else{
+            OKBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Normal)
+            OKBtn.enabled = false
+        }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    // MARK: - OpenBankViewControllerDellegate
+    func selectValue(value: String) {
+        openBankValue = value
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: 2)], withRowAnimation: .Automatic)
+    }
+    
+    // MARK: - OpenBankAddressViewControllerDellegate
+    func selectAddressValue(value: String) {
+        openBankAddressValue = value
+        tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Automatic)
     }
 
 }
@@ -73,8 +118,8 @@ extension AddBankCardViewController: UITableViewDataSource, UITableViewDelegate{
         }
         if indexPath.section == 0 {
             // iv
-            let iv = UIImageView(frame: CGRectMake(15, (cell.viewHeight - 20) / 2, 20, 20))
-            iv.image = UIImage(named: "lg_us_normal")
+            let iv = UIImageView(frame: CGRectMake(15, (cell.viewHeight - 22) / 2, 22, 22))
+            iv.image = UIImage(named: "add_bank_card")
             cell.contentView.addSubview(iv)
             // detailLbl
             let detailLbl = UILabel(frame: CGRectMake(iv.viewRightX + 5, 0, screen_width - iv.viewRightX - 5, cell.viewHeight))
@@ -86,7 +131,7 @@ extension AddBankCardViewController: UITableViewDataSource, UITableViewDelegate{
         }else if indexPath.section == 1{
             if indexPath.row == 0 {
                 // iv
-                let iv = UIImageView(frame: CGRectMake(15, (cell.viewHeight - 20) / 2, 20, 20))
+                let iv = UIImageView(frame: CGRectMake(17, (cell.viewHeight - 19) / 2, 19, 19))
                 iv.image = UIImage(named: "lg_us_normal")
                 cell.contentView.addSubview(iv)
                 // detailLbl
@@ -96,13 +141,14 @@ extension AddBankCardViewController: UITableViewDataSource, UITableViewDelegate{
                 detailLbl.text = "真实姓名"
                 cell.contentView.addSubview(detailLbl)
                 // nameTxt
-                let nameTxt = UITextField(frame: CGRectMake(detailLbl.viewRightX + 5, (cell.viewHeight - 17) / 2, 200, 17))
+                nameTxt = UITextField(frame: CGRectMake(detailLbl.viewRightX + 5, (cell.viewHeight - 17) / 2, 200, 17))
                 nameTxt.placeholder = "您的真实姓名"
+                nameTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
                 cell.contentView.addSubview(nameTxt)
             }else{
                 // iv
-                let iv = UIImageView(frame: CGRectMake(15, (cell.viewHeight - 20) / 2, 20, 20))
-                iv.image = UIImage(named: "lg_us_normal")
+                let iv = UIImageView(frame: CGRectMake(17, (cell.viewHeight - 19) / 2, 19, 19))
+                iv.image = UIImage(named: "add_bank_cardnum")
                 cell.contentView.addSubview(iv)
                 // detailLbl
                 let detailLbl = UILabel(frame: CGRectMake(iv.viewRightX + 5, 0, 70, cell.viewHeight))
@@ -110,54 +156,60 @@ extension AddBankCardViewController: UITableViewDataSource, UITableViewDelegate{
                 detailLbl.textColor = UIColor.darkGrayColor()
                 detailLbl.text = "卡号"
                 cell.contentView.addSubview(detailLbl)
-                // nameTxt
-                let nameTxt = UITextField(frame: CGRectMake(detailLbl.viewRightX + 5, (cell.viewHeight - 17) / 2, 200, 17))
-                nameTxt.placeholder = "银行卡号"
-                cell.contentView.addSubview(nameTxt)
+                // cardTxt
+                cardTxt = UITextField(frame: CGRectMake(detailLbl.viewRightX + 5, (cell.viewHeight - 17) / 2, 200, 17))
+                cardTxt.placeholder = "银行卡号"
+                cardTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
+                cell.contentView.addSubview(cardTxt)
             }
         }else if indexPath.section == 2{
             if indexPath.row == 0 {
                 cell.accessoryType = .DisclosureIndicator
                 // detailLbl
-                let detailLbl = UILabel(frame: CGRectMake(15, 0, 105, cell.viewHeight))
+                let detailLbl = UILabel(frame: CGRectMake(17, 0, 105, cell.viewHeight))
                 detailLbl.textAlignment = .Left
                 detailLbl.textColor = UIColor.darkGrayColor()
                 detailLbl.text = "开户银行"
                 cell.contentView.addSubview(detailLbl)
                 // openBankTxt
-                let openBankTxt = UITextField(frame: CGRectMake(detailLbl.viewRightX + 5, (cell.viewHeight - 17) / 2, 200, 17))
+                openBankTxt = UITextField(frame: CGRectMake(detailLbl.viewRightX + 5, (cell.viewHeight - 17) / 2, 200, 17))
                 openBankTxt.placeholder = "请选择银行"
+                openBankTxt.text = openBankValue
+                openBankTxt.userInteractionEnabled = false
                 cell.contentView.addSubview(openBankTxt)
             }else if indexPath.row == 1{
                 cell.accessoryType = .DisclosureIndicator
                 // detailLbl
-                let detailLbl = UILabel(frame: CGRectMake(15, 0, 105, cell.viewHeight))
+                let detailLbl = UILabel(frame: CGRectMake(17, 0, 105, cell.viewHeight))
                 detailLbl.textAlignment = .Left
                 detailLbl.textColor = UIColor.darkGrayColor()
                 detailLbl.text = "开户银行地区"
                 cell.contentView.addSubview(detailLbl)
                 // openBankAddressTxt
-                let openBankAddressTxt = UITextField(frame: CGRectMake(detailLbl.viewRightX + 5, (cell.viewHeight - 17) / 2, 200, 17))
+                openBankAddressTxt = UITextField(frame: CGRectMake(detailLbl.viewRightX + 5, (cell.viewHeight - 17) / 2, 200, 17))
                 openBankAddressTxt.placeholder = "请选择地区"
+                openBankAddressTxt.text = openBankAddressValue
+                openBankAddressTxt.userInteractionEnabled = false
                 cell.contentView.addSubview(openBankAddressTxt)
             }else if indexPath.row == 2{
                 // detailLbl
-                let detailLbl = UILabel(frame: CGRectMake(15, 0, 105, cell.viewHeight))
+                let detailLbl = UILabel(frame: CGRectMake(17, 0, 105, cell.viewHeight))
                 detailLbl.textAlignment = .Left
                 detailLbl.textColor = UIColor.darkGrayColor()
                 detailLbl.text = "支行"
                 cell.contentView.addSubview(detailLbl)
                 // zhihangTxt
-                let zhihangTxt = UITextField(frame: CGRectMake(detailLbl.viewRightX + 5, (cell.viewHeight - 17) / 2, 200, 17))
+                zhihangTxt = UITextField(frame: CGRectMake(detailLbl.viewRightX + 5, (cell.viewHeight - 17) / 2, 200, 17))
                 zhihangTxt.placeholder = "填写支行名称"
+                zhihangTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
                 cell.contentView.addSubview(zhihangTxt)
             }
         }else{
             // OKBtn
-            let OKBtn = UIButton(frame: CGRectMake(15, 10, screen_width - 15 * 2, 40))
+            OKBtn = UIButton(frame: CGRectMake(17, 10, screen_width - 17 * 2, 40))
             OKBtn.setTitle("确定", forState: .Normal)
             OKBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-            OKBtn.setBackgroundImage(UIImage(named: "button_normal"), forState: .Normal)
+            OKBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Normal)
             OKBtn.addTarget(self, action: #selector(OKFunc), forControlEvents: .TouchUpInside)
             cell.contentView.addSubview(OKBtn)
             // promptLbl
@@ -182,16 +234,44 @@ extension AddBankCardViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if cell.respondsToSelector(Selector("setLayoutMargins:")) {
-            cell.layoutMargins = UIEdgeInsetsZero
+        if indexPath.section == 3 {
+            if cell.respondsToSelector(Selector("setLayoutMargins:")) {
+                cell.layoutMargins = UIEdgeInsets(top: 0, left: screen_width, bottom: 0, right: 0)
+            }
+            
+            if cell.respondsToSelector(Selector("setSeparatorInset:")){
+                cell.separatorInset = UIEdgeInsets(top: 0, left: screen_width, bottom: 0, right: 0)
+            }
+            
+            if cell .respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")){
+                cell.preservesSuperviewLayoutMargins = false
+            }
+        }else{
+            if cell.respondsToSelector(Selector("setLayoutMargins:")) {
+                cell.layoutMargins = UIEdgeInsetsZero
+            }
+            
+            if cell.respondsToSelector(Selector("setSeparatorInset:")){
+                cell.separatorInset = UIEdgeInsetsZero
+            }
+            
+            if cell .respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")){
+                cell.preservesSuperviewLayoutMargins = false
+            }
         }
-        
-        if cell.respondsToSelector(Selector("setSeparatorInset:")){
-            cell.separatorInset = UIEdgeInsetsZero
-        }
-        
-        if cell .respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")){
-            cell.preservesSuperviewLayoutMargins = false
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 2 {
+            if indexPath.row == 0 {
+                let openBankVC = OpenBankViewController()
+                openBankVC.delegate = self
+                navigationController?.pushViewController(openBankVC, animated: true)
+            }else if indexPath.row == 1{
+                let  openBankAddressVC = OpenBankAddressViewController()
+                openBankAddressVC.delegate = self
+                navigationController?.pushViewController(openBankAddressVC, animated: true)
+            }
         }
     }
     

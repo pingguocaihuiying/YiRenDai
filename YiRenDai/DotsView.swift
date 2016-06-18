@@ -12,7 +12,7 @@ class DotsView: UIView {
     
     var dotsColor: UIColor!
     
-    init(frame: CGRect, dotsColor: UIColor = UIColor.grayColor()) {
+    init(frame: CGRect, dotsColor: UIColor = UIColor.lightGrayColor()) {
         super.init(frame: frame)
         self.dotsColor = dotsColor
         

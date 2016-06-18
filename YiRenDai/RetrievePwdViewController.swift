@@ -72,7 +72,9 @@ class RetrievePwdViewController: BaseNavigationController, UITextFieldDelegate {
     }
     
     func clickEvent(sender: UIButton){
+        LoadingAnimation.show()
         SMSSDK.getVerificationCodeByMethod(SMSGetCodeMethodSMS, phoneNumber: accountTxt.text, zone: "86", customIdentifier: nil) { (error) in
+            LoadingAnimation.dismiss()
             if error == nil{
                 let verificationCodeVC = VerificationCodeViewController()
                 verificationCodeVC.accountValue = self.accountTxt.text

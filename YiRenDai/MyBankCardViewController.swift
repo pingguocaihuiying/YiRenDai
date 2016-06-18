@@ -113,13 +113,16 @@ extension MyBankCardViewController: UITableViewDataSource, UITableViewDelegate{
             }else{
                 cell.backgroundColor = UIColor.getGrayColorThird()
                 if selectItemIndex == 0 {
+                    let iv = UIImageView(frame: CGRectMake(10, (cell.viewHeight - 20) / 2, 30, 20))
+                    iv.image = UIImage(named: "bank")
+                    cell.contentView.addSubview(iv)
                     // titleBtn
                     let str = NSMutableAttributedString(string: "支持银行及限额")
                     str.addAttribute(NSUnderlineStyleAttributeName, value: NSUnderlineStyle.StyleSingle.rawValue, range: NSMakeRange(0, str.length))
-                    let titleBtn = UIButton(frame: CGRectMake(10, 0, 100, cell.viewHeight))
+                    let titleBtn = UIButton(frame: CGRectMake(iv.viewRightX + 3, 0, 120, cell.viewHeight))
                     titleBtn.setTitleColor(UIColor.grayColor(), forState: .Normal)
                     titleBtn.setAttributedTitle(str, forState: .Normal)
-                    titleBtn.titleLabel?.font = UIFont.systemFontOfSize(14)
+                    titleBtn.titleLabel?.font = UIFont.systemFontOfSize(15)
                     cell.contentView.addSubview(titleBtn)
                 }else{
                     // detailLbl

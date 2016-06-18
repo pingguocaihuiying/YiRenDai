@@ -89,8 +89,8 @@ extension AddPaymentBankCardViewController: UITableViewDataSource, UITableViewDe
         }
         if indexPath.row == 0 {
             // iv
-            let iv = UIImageView(frame: CGRectMake(15, (cell.viewHeight - 20) / 2, 20, 20))
-            iv.image = UIImage(named: "lg_us_normal")
+            let iv = UIImageView(frame: CGRectMake(15, (cell.viewHeight - 22) / 2, 22, 22))
+            iv.image = UIImage(named: "add_bank_card")
             cell.contentView.addSubview(iv)
             // detailLbl
             let detailLbl = UILabel(frame: CGRectMake(iv.viewRightX + 5, 0, screen_width - iv.viewRightX - 5, cell.viewHeight))
@@ -101,7 +101,7 @@ extension AddPaymentBankCardViewController: UITableViewDataSource, UITableViewDe
             cell.contentView.addSubview(detailLbl)
         }else if indexPath.row == 1{
             // iv
-            let iv = UIImageView(frame: CGRectMake(15, (cell.viewHeight - 20) / 2, 20, 20))
+            let iv = UIImageView(frame: CGRectMake(17, (cell.viewHeight - 19) / 2, 19, 19))
             iv.image = UIImage(named: "lg_us_normal")
             cell.contentView.addSubview(iv)
             // detailLbl
@@ -118,8 +118,8 @@ extension AddPaymentBankCardViewController: UITableViewDataSource, UITableViewDe
             cell.contentView.addSubview(nameTxt)
         }else if indexPath.row == 2{
             // iv
-            let iv = UIImageView(frame: CGRectMake(15, (cell.viewHeight - 20) / 2, 20, 20))
-            iv.image = UIImage(named: "lg_us_normal")
+            let iv = UIImageView(frame: CGRectMake(17, (cell.viewHeight - 19) / 2, 19, 19))
+            iv.image = UIImage(named: "add_bank_cardnum")
             cell.contentView.addSubview(iv)
             // detailLbl
             let detailLbl = UILabel(frame: CGRectMake(iv.viewRightX + 5, 0, 70, cell.viewHeight))
@@ -135,8 +135,8 @@ extension AddPaymentBankCardViewController: UITableViewDataSource, UITableViewDe
             cell.contentView.addSubview(cardTxt)
         }else if indexPath.row == 3{
             // iv
-            let iv = UIImageView(frame: CGRectMake(15, (cell.viewHeight - 20) / 2, 20, 20))
-            iv.image = UIImage(named: "lg_us_normal")
+            let iv = UIImageView(frame: CGRectMake(17, (cell.viewHeight - 19) / 2, 19, 19))
+            iv.image = UIImage(named: "add_bank_phone")
             cell.contentView.addSubview(iv)
             // detailLbl
             let detailLbl = UILabel(frame: CGRectMake(iv.viewRightX + 5, 0, 70, cell.viewHeight))
@@ -153,7 +153,7 @@ extension AddPaymentBankCardViewController: UITableViewDataSource, UITableViewDe
         }else if indexPath.row == 4{
             cell.backgroundColor = UIColor.getGrayColorThird()
             // titleLbl
-            let titleLbl = UILabel(frame: CGRectMake(15, 0, screen_width - 15, cell.viewHeight))
+            let titleLbl = UILabel(frame: CGRectMake(17, 0, screen_width - 15, cell.viewHeight))
             titleLbl.textAlignment = .Left
             titleLbl.font = UIFont.systemFontOfSize(15)
             titleLbl.textColor = UIColor.darkGrayColor()
@@ -162,7 +162,7 @@ extension AddPaymentBankCardViewController: UITableViewDataSource, UITableViewDe
         }else if indexPath.row == 5{
             cell.backgroundColor = UIColor.getGrayColorThird()
             // 下一步按钮
-            nextBtn = UIButton(frame: CGRectMake(15, 5, screen_width - 30, cell.viewHeight - 10))
+            nextBtn = UIButton(frame: CGRectMake(17, 5, screen_width - 30, cell.viewHeight - 10))
             nextBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Disabled)
             nextBtn.titleLabel?.font = UIFont.systemFontOfSize(16)
             nextBtn.enabled = false
