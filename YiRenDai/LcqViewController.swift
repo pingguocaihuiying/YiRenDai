@@ -52,24 +52,24 @@ class LcqViewController: BaseNavigationController {
     
     func refreshData(){
         pagenumber = 1
-        DataProvider.sharedInstance.getArticleList("1", status_code: "1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
-            if data["status"]["succeed"].intValue == 1{
-                self.lcqData = data["data"].dictionaryValue["articlelist"]!.arrayValue
-                //刷新结束
-                self.tableView.mj_header.endRefreshing()
-                if self.lcqData.count == data["data"]["page"]["total"].intValue{
-                    // 所有数据加载完毕，没有更多的数据了
-                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
-                }else{
-                    // mj_footer设置为:普通闲置状态(Idle)
-                    self.tableView.mj_footer.state = MJRefreshState.Idle
-                }
-                //刷新数据
-                self.tableView.reloadData()
-            }else{
-                self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
-            }
-        }
+//        DataProvider.sharedInstance.getArticleList("1", status_code: "1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
+//            if data["status"]["succeed"].intValue == 1{
+//                self.lcqData = data["data"].dictionaryValue["articlelist"]!.arrayValue
+//                //刷新结束
+//                self.tableView.mj_header.endRefreshing()
+//                if self.lcqData.count == data["data"]["page"]["total"].intValue{
+//                    // 所有数据加载完毕，没有更多的数据了
+//                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
+//                }else{
+//                    // mj_footer设置为:普通闲置状态(Idle)
+//                    self.tableView.mj_footer.state = MJRefreshState.Idle
+//                }
+//                //刷新数据
+//                self.tableView.reloadData()
+//            }else{
+//                self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+//            }
+//        }
     }
     
     func loadMore(){

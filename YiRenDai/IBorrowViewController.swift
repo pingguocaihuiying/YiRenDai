@@ -48,10 +48,10 @@ class IBorrowViewController: BaseNavigationController {
     
     func refreshData(){
         pagenumber = 1
-        DataProvider.sharedInstance.getArticleList("1", status_code: "1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
-            //刷新结束
-            self.tableView.mj_header.endRefreshing()
-            if data["status"]["succeed"].intValue == 1{
+//        DataProvider.sharedInstance.getArticleList("1", status_code: "1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
+//            //刷新结束
+//            self.tableView.mj_header.endRefreshing()
+//            if data["status"]["succeed"].intValue == 1{
 //                self.iBorrowData = data["data"]["articlelist"]
 //                //刷新结束
 //                self.tableView.mj_header.endRefreshing()
@@ -64,10 +64,10 @@ class IBorrowViewController: BaseNavigationController {
 //                }
 //                //刷新数据
 //                self.tableView.reloadData()
-            }else{
-                self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
-            }
-        }
+//            }else{
+//                self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+//            }
+//        }
     }
     
     func applyBorrowFunc(sender: UIButton){

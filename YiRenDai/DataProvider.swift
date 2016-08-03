@@ -85,6 +85,18 @@ class DataProvider {
     }
     
     //MARK: - 首页
+    
+    /**
+     获取活动列表
+     - parameter handler: 回调方法
+     */
+    func getActivities(handler: (data: JSON) -> Void){
+        let url = "\(URL)/activity/GetActivities"
+        obj.postRequest(url: url, params: nil) { (json) in
+            handler(data: json)
+        }
+    }
+    
     /**
      获取安全保障
      - parameter slide_type: 1 首页  2 安全保障
@@ -145,31 +157,36 @@ class DataProvider {
     
     //MARK: - 我的财富
     
-    //MARK: - 理财圈
-    /**
-     获取文章列表
-     - parameter channel_id:  文章分类ID,1:理财圈；2：活动中心
-     - parameter status_code: 隐藏或者显示的标识，1：显示；0：隐藏
-     - parameter pagenumber:  页码
-     - parameter pagesize:    每页个数
-     - parameter handler:     回调方法
+    //MARK: - 我要借款
+    /*
+    loans_id-贷款id
+    loan_kinds-贷款类型：1-工薪贷，2-助业贷，3-物业贷，4-车主贷
+    amounts-借款金额
+    loan_purpose-借款目的
+    loan_term-借款期限
+    city-居住城市
+    live_time-居住时间
+    name-姓名
+    sex-性别
+    year-出生年份
+    tel-手机号
+    contact_time-联系时间
+    house-房产情况
+    car_port-车况情况
+    avg_salary-月均收入
+    card-信用卡
+    brand-车辆信息
+    model_of_car-车辆型号
+    record_data-登记日期
+    gearbox-变速箱
+    list_the_mileage-表里里程
+    price-购买价格
+    cc-排量
+    member_id-用户id
      */
-    func getArticleList(channel_id: String, status_code: String, pagenumber: String, pagesize: String, handler: (data: JSON) -> Void){
-        let url = "\(URL)/article/getArticles"
-        let params = ["json":"{\"channel_id\":\"\(channel_id)\",\"status_code\":\"\(status_code)\"}","page":"{\"pagenumber\":\"\(pagenumber)\",\"pagesize\":\"\(pagesize)\"}"]
-        obj.postRequest(url: url, params: params) { (json) in
-            handler(data: json)
-        }
-    }
-    
-    /**
-     根据ID获取文章详情
-     - parameter article_id: 文章ID
-     - parameter handler:    回调方法
-     */
-    func getArticleDetail(article_id: String, handler: (data: JSON) -> Void){
-        let url = "\(URL)/article/getArticles"
-        let params = ["json":"{\"article_id\":\"\(article_id)\"}"]
+    func jiekuanSubmit(loan_kinds: String, amounts: String, loan_purpose: String, loan_term: String, city: String, live_time: String, name: String, sex: String, year: String, tel: String, contact_time: String, house: String, car_port: String, avg_salary: String, card: String, brand: String, model_of_car: String, record_data: String, gearbox: String, list_the_mileage: String, price: String, cc: String, member_id: String, handler:(data: JSON) -> Void){
+        let url = "\(URL)/owner/submit"
+        let params = ["json":"{\"loan_kinds\":\"\(loan_kinds)\",\"amounts\":\"\(amounts)\",\"loan_purpose\":\"\(loan_purpose)\",\"loan_term\":\"\(loan_term)\",\"city\":\"\(city)\",\"live_time\":\"\(live_time)\",\"name\":\"\(name)\",\"sex\":\"\(sex)\",\"year\":\"\(year)\",\"tel\":\"\(tel)\",\"contact_time\":\"\(contact_time)\",\"house\":\"\(house)\",\"car_port\":\"\(car_port)\",\"avg_salary\":\"\(avg_salary)\",\"card\":\"\(card)\",\"brand\":\"\(brand)\",\"model_of_car\":\"\(model_of_car)\",\"record_data\":\"\(record_data)\",\"gearbox\":\"\(gearbox)\",\"list_the_mileage\":\"\(list_the_mileage)\",\"price\":\"\(price)\",\"cc\":\"\(cc)\",\"member_id\":\"\(member_id)\"}"];
         obj.postRequest(url: url, params: params) { (json) in
             handler(data: json)
         }

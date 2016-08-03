@@ -74,6 +74,7 @@ class CLMenu: UIView {
         itemBtn.setTitleColor(UIColor.blackColor(), forState: .Normal)
         lineView.backgroundColor = UIColor.getRedColorFirst()
         
+        
         //CLMenuDelegate
         if delegate != nil {
             self.delegate?.clickMenuEvent(sender)

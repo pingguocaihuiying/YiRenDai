@@ -39,9 +39,13 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
     var deadlineValue: String!
     var cityValue: String!
     var timeValue: String!
+    var checkSexValue: Int!
     var birthdayValue: String!
     var contactTimeValue: String!
+    var houseValue: Int!
+    var carValue: Int!
     var incomeValue: String!
+    var cardValue: Int!
     
     var bgView: CLPickerView!
     var pickerView: UIPickerView!
@@ -127,7 +131,14 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
         okBtn.setTitle("完成", forState: .Normal)
         okBtn.backgroundColor = UIColor.getRedColorFirst()
         okBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        okBtn.addTarget(self, action: #selector(clickCompleteEvent), forControlEvents: UIControlEvents.TouchUpInside)
         footerView.addSubview(okBtn)
+    }
+    
+    func clickCompleteEvent(){
+        DataProvider.sharedInstance.jiekuanSubmit("1", amounts: "5000", loan_purpose: "消费", loan_term: "三个月", city: "临沂", live_time: "半年", name: "姓名", sex: "男", year: "22", tel: "12345678901", contact_time: "不限时间", house: "无", car_port: "无", avg_salary: "5000", card: "无", brand: "无", model_of_car: "无", record_data: "无", gearbox: "无", list_the_mileage: "无", price: "无", cc: "无", member_id: ToolKit.getStringByKey("userId")) { (data) in
+            print(data)
+        }
     }
     
     func clickTextField(sender: UIButton) {
@@ -157,8 +168,22 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
         bgView.showData = currentShowData
     }
     
-    func clickEvent(sender: UITextField){
-        
+    func checkEvent(tap: UITapGestureRecognizer){
+        let view = tap.view
+        let iFlagValue = view!.tag
+        if iFlagValue == 1 || iFlagValue == 2 {
+            checkSexValue = iFlagValue
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 1)], withRowAnimation: .Automatic)
+        }else if iFlagValue == 3 || iFlagValue == 4 || iFlagValue == 5{
+            houseValue = iFlagValue
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Automatic)
+        }else if iFlagValue == 6 || iFlagValue == 7 || iFlagValue == 8{
+            carValue = iFlagValue
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Automatic)
+        }else if iFlagValue == 9 || iFlagValue == 10{
+            cardValue = iFlagValue
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Automatic)
+        }
     }
     
     // CLPickerViewDelegate
@@ -401,8 +426,13 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.contentView.addSubview(sexTitleLbl)
                 // manIv
                 let manIv = UIImageView(frame: CGRectMake(sexTitleLbl.viewRightX + 30, sexTitleLbl.viewY + (30 - 20) / 2, 20, 20))
-                manIv.image = UIImage(named: "wuxuanze")
+                manIv.image = UIImage(named: checkSexValue == nil || checkSexValue == 1 ? "xuanze" : "wuxuanze")
                 cell.contentView.addSubview(manIv)
+                manIv.tag = 1
+                let tapMan = UITapGestureRecognizer(target: self, action: #selector(checkEvent(_:)))
+                manIv.userInteractionEnabled = true
+                manIv.addGestureRecognizer(tapMan)
+                
                 // manTitleLbl
                 let manTitleLbl = UILabel(frame: CGRectMake(manIv.viewRightX + 5, sexTitleLbl.viewY, 20, 30))
                 manTitleLbl.textAlignment = .Left
@@ -412,8 +442,13 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.contentView.addSubview(manTitleLbl)
                 // womanIv
                 let womanIv = UIImageView(frame: CGRectMake(manTitleLbl.viewRightX + 30, sexTitleLbl.viewY + (30 - 20) / 2, 20, 20))
-                womanIv.image = UIImage(named: "xuanze")
+                womanIv.image = UIImage(named: checkSexValue != nil && checkSexValue == 2 ? "xuanze" : "wuxuanze")
                 cell.contentView.addSubview(womanIv)
+                womanIv.tag = 2
+                let tapWoman = UITapGestureRecognizer(target: self, action: #selector(checkEvent(_:)))
+                womanIv.userInteractionEnabled = true
+                womanIv.addGestureRecognizer(tapWoman)
+                
                 // womanTitleLbl
                 let womanTitleLbl = UILabel(frame: CGRectMake(womanIv.viewRightX + 5, sexTitleLbl.viewY, 20, 30))
                 womanTitleLbl.textAlignment = .Left
@@ -511,8 +546,12 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.contentView.addSubview(houseTitleLbl)
                 // firstIv
                 let firstIv = UIImageView(frame: CGRectMake(houseTitleLbl.viewRightX + 3, houseTitleLbl.viewY + (30 - 20) / 2, 20, 20))
-                firstIv.image = UIImage(named: "wuxuanze")
+                firstIv.image = UIImage(named: houseValue != nil && houseValue == 3 ? "xuanze" : "wuxuanze")
                 cell.contentView.addSubview(firstIv)
+                firstIv.tag = 3
+                let tapFirst = UITapGestureRecognizer(target: self, action: #selector(checkEvent(_:)))
+                firstIv.userInteractionEnabled = true
+                firstIv.addGestureRecognizer(tapFirst)
                 // firstTitleLbl
                 let firstTitleLbl = UILabel(frame: CGRectMake(firstIv.viewRightX + 3, houseTitleLbl.viewY, 30, 30))
                 firstTitleLbl.textAlignment = .Left
@@ -522,8 +561,12 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.contentView.addSubview(firstTitleLbl)
                 // secondIv
                 let secondIv = UIImageView(frame: CGRectMake(firstTitleLbl.viewRightX + 3, houseTitleLbl.viewY + (30 - 20) / 2, 20, 20))
-                secondIv.image = UIImage(named: "xuanze")
+                secondIv.image = UIImage(named: houseValue == nil || houseValue == 4 ? "xuanze" : "wuxuanze")
                 cell.contentView.addSubview(secondIv)
+                secondIv.tag = 4
+                let tapSecond = UITapGestureRecognizer(target: self, action: #selector(checkEvent(_:)))
+                secondIv.userInteractionEnabled = true
+                secondIv.addGestureRecognizer(tapSecond)
                 // secondTitleLbl
                 let secondTitleLbl = UILabel(frame: CGRectMake(secondIv.viewRightX + 3, houseTitleLbl.viewY, 60, 30))
                 secondTitleLbl.textAlignment = .Left
@@ -533,8 +576,12 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.contentView.addSubview(secondTitleLbl)
                 // thirdIv
                 let thirdIv = UIImageView(frame: CGRectMake(secondTitleLbl.viewRightX + 3, houseTitleLbl.viewY + (30 - 20) / 2, 20, 20))
-                thirdIv.image = UIImage(named: "wuxuanze")
+                thirdIv.image = UIImage(named: houseValue != nil && houseValue == 5 ? "xuanze" : "wuxuanze")
                 cell.contentView.addSubview(thirdIv)
+                thirdIv.tag = 5
+                let tapThird = UITapGestureRecognizer(target: self, action: #selector(checkEvent(_:)))
+                thirdIv.userInteractionEnabled = true
+                thirdIv.addGestureRecognizer(tapThird)
                 // thirdTitleLbl
                 let thirdTitleLbl = UILabel(frame: CGRectMake(thirdIv.viewRightX + 3, houseTitleLbl.viewY, 60, 30))
                 thirdTitleLbl.textAlignment = .Left
@@ -548,40 +595,52 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 carTitleLbl.textAlignment = .Left
                 carTitleLbl.font = UIFont.systemFontOfSize(15)
                 carTitleLbl.textColor = UIColor.grayColor()
-                carTitleLbl.text = "房产情况"
+                carTitleLbl.text = "车产情况"
                 cell.contentView.addSubview(carTitleLbl)
                 // firstIv2
                 let firstIv2 = UIImageView(frame: CGRectMake(carTitleLbl.viewRightX + 3, carTitleLbl.viewY + (30 - 20) / 2, 20, 20))
-                firstIv2.image = UIImage(named: "wuxuanze")
+                firstIv2.image = UIImage(named: carValue != nil && carValue == 6 ? "xuanze" : "wuxuanze")
                 cell.contentView.addSubview(firstIv2)
+                firstIv2.tag = 6
+                let tapFirstIv2 = UITapGestureRecognizer(target: self, action: #selector(checkEvent(_:)))
+                firstIv2.userInteractionEnabled = true
+                firstIv2.addGestureRecognizer(tapFirstIv2)
                 // firstTitleLbl2
                 let firstTitleLbl2 = UILabel(frame: CGRectMake(firstIv2.viewRightX + 3, carTitleLbl.viewY, 30, 30))
                 firstTitleLbl2.textAlignment = .Left
                 firstTitleLbl2.font = UIFont.systemFontOfSize(15)
                 firstTitleLbl2.textColor = UIColor.grayColor()
-                firstTitleLbl2.text = "无房"
+                firstTitleLbl2.text = "无车"
                 cell.contentView.addSubview(firstTitleLbl2)
                 // secondIv2
                 let secondIv2 = UIImageView(frame: CGRectMake(firstTitleLbl2.viewRightX + 3, carTitleLbl.viewY + (30 - 20) / 2, 20, 20))
-                secondIv2.image = UIImage(named: "xuanze")
+                secondIv2.image = UIImage(named: carValue == nil || carValue == 7 ? "xuanze" : "wuxuanze")
                 cell.contentView.addSubview(secondIv2)
+                secondIv2.tag = 7
+                let tapSecondIv2 = UITapGestureRecognizer(target: self, action: #selector(checkEvent(_:)))
+                secondIv2.userInteractionEnabled = true
+                secondIv2.addGestureRecognizer(tapSecondIv2)
                 // secondTitleLbl2
                 let secondTitleLbl2 = UILabel(frame: CGRectMake(secondIv2.viewRightX + 3, carTitleLbl.viewY, 60, 30))
                 secondTitleLbl2.textAlignment = .Left
                 secondTitleLbl2.font = UIFont.systemFontOfSize(15)
                 secondTitleLbl2.textColor = UIColor.grayColor()
-                secondTitleLbl2.text = "有房无贷"
+                secondTitleLbl2.text = "有车无贷"
                 cell.contentView.addSubview(secondTitleLbl2)
                 // thirdIv2
                 let thirdIv2 = UIImageView(frame: CGRectMake(secondTitleLbl2.viewRightX + 3, carTitleLbl.viewY + (30 - 20) / 2, 20, 20))
-                thirdIv2.image = UIImage(named: "wuxuanze")
+                thirdIv2.image = UIImage(named: carValue != nil && carValue == 8 ? "xuanze" : "wuxuanze")
                 cell.contentView.addSubview(thirdIv2)
+                thirdIv2.tag = 8
+                let tapThirdIv2 = UITapGestureRecognizer(target: self, action: #selector(checkEvent(_:)))
+                thirdIv2.userInteractionEnabled = true
+                thirdIv2.addGestureRecognizer(tapThirdIv2)
                 // thirdTitleLbl2
                 let thirdTitleLbl2 = UILabel(frame: CGRectMake(thirdIv2.viewRightX + 3, carTitleLbl.viewY, 60, 30))
                 thirdTitleLbl2.textAlignment = .Left
                 thirdTitleLbl2.font = UIFont.systemFontOfSize(15)
                 thirdTitleLbl2.textColor = UIColor.grayColor()
-                thirdTitleLbl2.text = "有房有贷"
+                thirdTitleLbl2.text = "有车有贷"
                 cell.contentView.addSubview(thirdTitleLbl2)
                 
                 // incomeTitleLbl
@@ -616,8 +675,12 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.contentView.addSubview(cardTitleLbl)
                 // noIv
                 let noIv = UIImageView(frame: CGRectMake(cardTitleLbl.viewRightX + 30, cardTitleLbl.viewY + (30 - 20) / 2, 20, 20))
-                noIv.image = UIImage(named: "wuxuanze")
+                noIv.image = UIImage(named: cardValue != nil && cardValue == 9 ? "xuanze" : "wuxuanze")
                 cell.contentView.addSubview(noIv)
+                noIv.tag = 9
+                let tapNoIv = UITapGestureRecognizer(target: self, action: #selector(checkEvent(_:)))
+                noIv.userInteractionEnabled = true
+                noIv.addGestureRecognizer(tapNoIv)
                 // noTitleLbl
                 let noTitleLbl = UILabel(frame: CGRectMake(noIv.viewRightX + 5, cardTitleLbl.viewY, 20, 30))
                 noTitleLbl.textAlignment = .Left
@@ -627,8 +690,12 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.contentView.addSubview(noTitleLbl)
                 // yesIv
                 let yesIv = UIImageView(frame: CGRectMake(noTitleLbl.viewRightX + 30, cardTitleLbl.viewY + (30 - 20) / 2, 20, 20))
-                yesIv.image = UIImage(named: "xuanze")
+                yesIv.image = UIImage(named: cardValue == nil || cardValue == 10 ? "xuanze" : "wuxuanze")
                 cell.contentView.addSubview(yesIv)
+                yesIv.tag = 10
+                let tapYesIv = UITapGestureRecognizer(target: self, action: #selector(checkEvent(_:)))
+                yesIv.userInteractionEnabled = true
+                yesIv.addGestureRecognizer(tapYesIv)
                 // yesTitleLbl
                 let yesTitleLbl = UILabel(frame: CGRectMake(yesIv.viewRightX + 5, cardTitleLbl.viewY, 20, 30))
                 yesTitleLbl.textAlignment = .Left

@@ -23,7 +23,6 @@
 		B7248FA31CC5CFA7000A4D78 /* ProductListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7248FA11CC5CFA7000A4D78 /* ProductListTableViewCell.swift */; };
 		B7248FA41CC5CFA7000A4D78 /* ProductListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7248FA21CC5CFA7000A4D78 /* ProductListTableViewCell.xib */; };
 		B72CBF641CC7010F003FFBC2 /* MyWealthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72CBF631CC7010F003FFBC2 /* MyWealthViewController.swift */; };
-		B72CBF6B1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = B72CBF6A1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m */; };
 		B72E47441D0FF10D00584465 /* AddPaymentBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72E47431D0FF10D00584465 /* AddPaymentBankCardViewController.swift */; };
 		B73AD2DA1D0F907F00BC0D9B /* DotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73AD2D91D0F907F00BC0D9B /* DotsView.swift */; };
 		B74C7ABE1D0109020048FF2A /* MyCardTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B74C7ABC1D0109020048FF2A /* MyCardTableViewCell.swift */; };
@@ -54,7 +53,6 @@
 		B7801BCA1CCB589E003EDEFA /* ActivityCenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7801BC91CCB589E003EDEFA /* ActivityCenterViewController.swift */; };
 		B7801BCD1CCB66F0003EDEFA /* ActivityCenterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7801BCB1CCB66F0003EDEFA /* ActivityCenterTableViewCell.swift */; };
 		B7801BCE1CCB66F0003EDEFA /* ActivityCenterTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7801BCC1CCB66F0003EDEFA /* ActivityCenterTableViewCell.xib */; };
-		B78143251CE038D500BE13A7 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78143241CE038D500BE13A7 /* UserInfo.swift */; };
 		B7816E4C1CC46AA800EC4B77 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7816E4B1CC46AA800EC4B77 /* AppDelegate.swift */; };
 		B7816E511CC46AA800EC4B77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7816E4F1CC46AA800EC4B77 /* Main.storyboard */; };
 		B7816E531CC46AA800EC4B77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7816E521CC46AA800EC4B77 /* Assets.xcassets */; };
@@ -144,8 +142,6 @@
 		B7248FA21CC5CFA7000A4D78 /* ProductListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductListTableViewCell.xib; sourceTree = "<group>"; };
 		B72CBF631CC7010F003FFBC2 /* MyWealthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWealthViewController.swift; sourceTree = "<group>"; };
 		B72CBF681CC70B9C003FFBC2 /* YiRenDai-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YiRenDai-Bridging-Header.h"; sourceTree = "<group>"; };
-		B72CBF691CC70B9C003FFBC2 /* HFStretchableTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HFStretchableTableHeaderView.h; sourceTree = "<group>"; };
-		B72CBF6A1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HFStretchableTableHeaderView.m; sourceTree = "<group>"; };
 		B72E47431D0FF10D00584465 /* AddPaymentBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPaymentBankCardViewController.swift; sourceTree = "<group>"; };
 		B73AD2D91D0F907F00BC0D9B /* DotsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DotsView.swift; sourceTree = "<group>"; };
 		B74C7ABC1D0109020048FF2A /* MyCardTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCardTableViewCell.swift; sourceTree = "<group>"; };
@@ -177,7 +173,6 @@
 		B7801BC91CCB589E003EDEFA /* ActivityCenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCenterViewController.swift; sourceTree = "<group>"; };
 		B7801BCB1CCB66F0003EDEFA /* ActivityCenterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCenterTableViewCell.swift; sourceTree = "<group>"; };
 		B7801BCC1CCB66F0003EDEFA /* ActivityCenterTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCenterTableViewCell.xib; sourceTree = "<group>"; };
-		B78143241CE038D500BE13A7 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		B7816E481CC46AA800EC4B77 /* YiRenDai.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YiRenDai.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7816E4B1CC46AA800EC4B77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B7816E501CC46AA800EC4B77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -308,7 +303,6 @@
 		B72CBF651CC70B69003FFBC2 /* OC */ = {
 			isa = PBXGroup;
 			children = (
-				B72CBF671CC70B7C003FFBC2 /* StretchTableHeader */,
 				B7782C9E1CDDFD9600D67594 /* ToolKitObjC.h */,
 				B7782C9F1CDDFD9600D67594 /* ToolKitObjC.m */,
 			);
@@ -329,15 +323,6 @@
 				B72323A51D10DC8A00A4DECC /* CLPickerView.swift */,
 			);
 			name = Swift;
-			sourceTree = "<group>";
-		};
-		B72CBF671CC70B7C003FFBC2 /* StretchTableHeader */ = {
-			isa = PBXGroup;
-			children = (
-				B72CBF691CC70B9C003FFBC2 /* HFStretchableTableHeaderView.h */,
-				B72CBF6A1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m */,
-			);
-			name = StretchTableHeader;
 			sourceTree = "<group>";
 		};
 		B76DF5991CE2D51400BF7912 /* ManageTeam */ = {
@@ -410,7 +395,6 @@
 				B7816E821CC48A3900EC4B77 /* Common */,
 				B7816E791CC46B8F00EC4B77 /* ClassLibrary */,
 				B78B66961CDB1EEF005232FF /* DataProvider */,
-				B78B66981CDB1FB9005232FF /* Model */,
 				B7816E851CC48A5800EC4B77 /* UILayer */,
 				B7816E4B1CC46AA800EC4B77 /* AppDelegate.swift */,
 				B72CBF681CC70B9C003FFBC2 /* YiRenDai-Bridging-Header.h */,
@@ -546,22 +530,6 @@
 				B78B669B1CDB23CD005232FF /* NetworkRequest.swift */,
 			);
 			name = DataProvider;
-			sourceTree = "<group>";
-		};
-		B78B66981CDB1FB9005232FF /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				B78B66A01CDB2AEE005232FF /* LoginAndRegister */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
-		B78B66A01CDB2AEE005232FF /* LoginAndRegister */ = {
-			isa = PBXGroup;
-			children = (
-				B78143241CE038D500BE13A7 /* UserInfo.swift */,
-			);
-			name = LoginAndRegister;
 			sourceTree = "<group>";
 		};
 		B78B66A51CDB2FB5005232FF /* ContactUs */ = {
@@ -898,7 +866,6 @@
 				B7816E8B1CC48AAC00EC4B77 /* CustomTabBarViewController.swift in Sources */,
 				B7DBC3291CC8ACDB00D2C214 /* LcqTableViewCell.swift in Sources */,
 				B74C7ABE1D0109020048FF2A /* MyCardTableViewCell.swift in Sources */,
-				B72CBF6B1CC70B9C003FFBC2 /* HFStretchableTableHeaderView.m in Sources */,
 				B7BEB90E1CE5736E0089D20D /* TentacleView.swift in Sources */,
 				B73AD2DA1D0F907F00BC0D9B /* DotsView.swift in Sources */,
 				B75E1D621CCF3F99001F0B44 /* MyAccountViewController.swift in Sources */,
@@ -956,7 +923,6 @@
 				B76DF5A51CE31B6E00BF7912 /* FAQTableViewCell.swift in Sources */,
 				B79474061CDD6AEC00F78C26 /* FeedbackViewController.swift in Sources */,
 				B771EB051D00212800E22D3A /* UpgradeStrategyTableViewCell.swift in Sources */,
-				B78143251CE038D500BE13A7 /* UserInfo.swift in Sources */,
 				B77C93151CD047F400739CBE /* YirenbiViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

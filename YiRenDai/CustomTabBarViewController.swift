@@ -98,9 +98,6 @@ class CustomTabBarViewController: UITabBarController {
         //将view添加到tabbar
         let isLogin = ToolKit.getBoolByKey("isLogin")
         self.viewControllers = [navHomePageVC, navProductListVC, isLogin ? navMyWealthVC : navLoginVC, navIBorrowVC, navMoreVC]
-        
-        //设置tabbar的选中时颜色
-        UITabBar.appearance().tintColor = UIColor(red:0.99, green:0.33, blue:0.04, alpha:1)
     }
     
     func setDefaultSelectTabBarItem(sender: AnyObject){

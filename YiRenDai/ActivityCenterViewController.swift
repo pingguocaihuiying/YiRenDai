@@ -46,23 +46,23 @@ class ActivityCenterViewController: BaseNavigationController {
         tableView.mj_header.beginRefreshing()
         
         //上拉加载更多
-        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(self.loadMore))
+        //tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(self.loadMore))
     }
     
     func refreshData(){
         pagenumber = 1
-        DataProvider.sharedInstance.getArticleList("2", status_code: "1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
+        DataProvider.sharedInstance.getActivities { (data) in
             if data["status"]["succeed"].intValue == 1{
-                self.activityListData = data["data"].dictionaryValue["articlelist"]!.arrayValue
+                self.activityListData = data["data"].dictionaryValue["activitylist"]!.arrayValue
                 //刷新结束
                 self.tableView.mj_header.endRefreshing()
-                if self.activityListData.count == data["data"]["page"]["total"].intValue{
-                    // 所有数据加载完毕，没有更多的数据了
-                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
-                }else{
-                    // mj_footer设置为:普通闲置状态(Idle)
-                    self.tableView.mj_footer.state = MJRefreshState.Idle
-                }
+//                if self.activityListData.count == data["data"]["page"]["total"].intValue{
+//                    // 所有数据加载完毕，没有更多的数据了
+//                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
+//                }else{
+//                    // mj_footer设置为:普通闲置状态(Idle)
+//                    self.tableView.mj_footer.state = MJRefreshState.Idle
+//                }
                 //刷新数据
                 self.tableView.reloadData()
             }else{
@@ -99,16 +99,20 @@ extension ActivityCenterViewController: UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(activityCenterCell, forIndexPath: indexPath) as! ActivityCenterTableViewCell
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        cell.titleLbl.text = activityListData[indexPath.section]["article_title"].stringValue
-        cell.dateLbl.text = "2016.04.20 - 2016.04.27"
+        cell.titleLbl.text = activityListData[indexPath.section]["activity_name"].stringValue
+        var startDate = activityListData[indexPath.section]["start_time"].stringValue
+        startDate = startDate.stringByReplacingOccurrencesOfString("-", withString: ".")
+        var endDate = activityListData[indexPath.section]["end_time"].stringValue
+        endDate = endDate.stringByReplacingOccurrencesOfString("-", withString: ".")
+        cell.dateLbl.text = "\(startDate) - \(endDate)"
         cell.stateLbl.textColor = UIColor.getRedColorSecond()
-        cell.stateLbl.text = "已结束"
+        cell.stateLbl.text = "热门"
         cell.stateLbl.layer.masksToBounds = true
         cell.stateLbl.layer.cornerRadius = 8
         cell.stateLbl.layer.borderWidth = 1
         cell.stateLbl.layer.borderColor = UIColor.getRedColorSecond().CGColor
-        cell.imageIv.imageFromURL(activityListData[indexPath.section]["article_image"].stringValue, placeholder: UIImage())
-        cell.detailLbl.text = activityListData[indexPath.section]["article_content"].stringValue
+        cell.imageIv.imageFromURL(activityListData[indexPath.section]["activity_image"].stringValue, placeholder: UIImage())
+        cell.detailLbl.text = activityListData[indexPath.section]["activity_content"].stringValue
         return cell
     }
     
