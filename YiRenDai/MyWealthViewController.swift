@@ -21,6 +21,8 @@ class MyWealthViewController: BaseViewController {
     // data
     var buyProductData: JSON?
     var buyProductIsEmpty: Bool = false
+    var memberlist: JSON?
+    var moneylist: JSON?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,10 +61,17 @@ class MyWealthViewController: BaseViewController {
     }
     
     func refreshData(){
-        //刷新结束
-        tableView.mj_header.endRefreshing()
-        //刷新数据
-        tableView.reloadData()
+        DataProvider.sharedInstance.getMyWealth(ToolKit.getStringByKey("userId")) { (data) in
+            print(data)
+            //刷新结束
+            self.tableView.mj_header.endRefreshing()
+            if data["status"].dictionaryValue["succeed"]?.intValue == 1{
+                self.memberlist = data["data"].dictionaryValue["memberlist"]?.arrayValue[0]
+                self.moneylist = data["data"].dictionaryValue["moneylist"]
+            }
+            //刷新数据
+            self.tableView.reloadData()
+        }
     }
     
     func clickEvent(sender: UIButton){
@@ -115,7 +124,7 @@ extension MyWealthViewController: UITableViewDataSource, UITableViewDelegate{
         case 1:
             if true {
                 buyProductIsEmpty = false
-                return 1 + 5
+                return 1 + (moneylist == nil ? 0 : moneylist!.count)
             }else{
                 buyProductIsEmpty = true
                 return 1
@@ -157,13 +166,13 @@ extension MyWealthViewController: UITableViewDataSource, UITableViewDelegate{
                 contentView.addSubview(imageView2)
                 //name
                 let nameLbl = UILabel(frame: CGRectMake(imageView2.viewRightX + 5, imageView2.viewY + 2, 100, 21))
-                nameLbl.text = "姓名"
+                nameLbl.text = memberlist == nil ? "匿名" : memberlist!["member_truename"].stringValue
                 nameLbl.font = UIFont.systemFontOfSize(17)
                 nameLbl.textColor = UIColor.whiteColor()
                 contentView.addSubview(nameLbl)
                 //会员等级
                 let vipLevelLbl = UILabel(frame: CGRectMake(nameLbl.viewX, nameLbl.viewBottomY + 2, 100, 21))
-                vipLevelLbl.text = "会员等级V0"
+                vipLevelLbl.text = "会员等级V\(memberlist == nil ? "0" : memberlist!["member_points"].stringValue)"
                 vipLevelLbl.textColor = UIColor.whiteColor()
                 vipLevelLbl.font = UIFont.systemFontOfSize(13)
                 contentView.addSubview(vipLevelLbl)
@@ -181,7 +190,7 @@ extension MyWealthViewController: UITableViewDataSource, UITableViewDelegate{
                 let LcAmountLbl = UILabel(frame: CGRectMake(lcAmountTitleLbl.viewX, lcAmountTitleLbl.viewBottomY + 5, 100, 21))
                 LcAmountLbl.font = UIFont.systemFontOfSize(25)
                 LcAmountLbl.textColor = UIColor.whiteColor()
-                LcAmountLbl.text = "0"
+                LcAmountLbl.text = memberlist == nil ? "0.00" : memberlist!["member_money"].stringValue
                 contentView.addSubview(LcAmountLbl)
                 //在中间添加一条竖线
                 let lineView = UIView(frame: CGRectMake(screen_width / 2, imageView2.viewBottomY + 5, 0.5, lcAmountTitleLbl.viewHeight + 5 + LcAmountLbl.viewHeight + 10))
@@ -305,7 +314,7 @@ extension MyWealthViewController: UITableViewDataSource, UITableViewDelegate{
                         detaiLbl1.textAlignment = .Center
                         detaiLbl1.textColor = UIColor.getRedColorSecond()
                         detaiLbl1.font = UIFont.systemFontOfSize(16)
-                        detaiLbl1.text = "退出中"
+                        detaiLbl1.text = "购买成功"
                         leftView.addSubview(detaiLbl1)
                         // detaiLbl2
                         let detaiLbl2 = UILabel(frame: CGRectMake(0, (leftView.viewHeight - 16) / 2, leftView.viewWidth, 16))
@@ -331,19 +340,19 @@ extension MyWealthViewController: UITableViewDataSource, UITableViewDelegate{
                         cell.contentView.addSubview(titleLbl)
                         // moneyLbl
                         let moneyLbl = UILabel(frame: CGRectMake(titleLbl.viewX, (cell.viewHeight - 21) / 2, 150, 21))
-                        moneyLbl.text = "金额：500000"
+                        moneyLbl.text = "金额：\(moneylist == nil ? "" : moneylist![indexPath.row - 1].dictionaryValue["finance_money"]!.stringValue)"
                         moneyLbl.textColor = UIColor.grayColor()
                         moneyLbl.font = UIFont.systemFontOfSize(15)
                         cell.contentView.addSubview(moneyLbl)
                         // shouyiLbl
                         let shouyiLbl = UILabel(frame: CGRectMake(titleLbl.viewX, moneyLbl.viewBottomY + 5, 150, 21))
-                        shouyiLbl.text = "金额：500"
+                        shouyiLbl.text = "收益：\(moneylist == nil ? "" : moneylist![indexPath.row - 1].dictionaryValue["income"]!                   .stringValue)"
                         shouyiLbl.textColor = UIColor.grayColor()
                         shouyiLbl.font = UIFont.systemFontOfSize(15)
                         cell.contentView.addSubview(shouyiLbl)
                         // stateLbl
                         let stateLbl = UILabel(frame: CGRectMake(screen_width - 10 - 70, titleLbl.viewY, 65, 25))
-                        stateLbl.text = "退出中"
+                        stateLbl.text = "购买成功"
                         stateLbl.font = UIFont.systemFontOfSize(14)
                         stateLbl.textColor = UIColor.getRedColorSecond()
                         stateLbl.textAlignment = .Center

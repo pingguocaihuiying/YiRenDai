@@ -72,12 +72,22 @@ class IBorrowViewController: BaseNavigationController {
     
     func applyBorrowFunc(sender: UIButton){
         let applyBorrowVC = ApplyBorrowViewController()
-        applyBorrowVC.navtitle = "上班族 - 工薪贷"
+        if sender.tag == 1 {
+            applyBorrowVC.applyType = ApplyType.Gongxindai
+            applyBorrowVC.navtitle = "上班族 - 工薪贷"
+        }else if sender.tag == 2{
+            applyBorrowVC.applyType = ApplyType.Zhuyedai
+            applyBorrowVC.navtitle = "创业族 - 助业贷"
+        }else if sender.tag == 3{
+            applyBorrowVC.applyType = ApplyType.Wuyedai
+            applyBorrowVC.navtitle = "有房族 - 物业贷"
+        }else if sender.tag == 4{
+            applyBorrowVC.applyType = ApplyType.Chezhudai
+            applyBorrowVC.navtitle = "有车族 - 车主贷"
+        }
         applyBorrowVC.hidesBottomBarWhenPushed = true
-        applyBorrowVC.applyType = ApplyType.Gongxindai
         navigationController?.pushViewController(applyBorrowVC, animated: true)
     }
-
 }
 
 extension IBorrowViewController: UITableViewDataSource, UITableViewDelegate{

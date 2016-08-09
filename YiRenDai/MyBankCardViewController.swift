@@ -22,6 +22,8 @@ class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
     // data
     var cardData = [JSON]()
     var selectItemIndex: Int = 0
+    var pagenumber: Int!
+    let pagesize = 15
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,16 +57,17 @@ class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
     func refreshData(){
         cardData.removeAll()
         tableView.mj_header.endRefreshing()
+        pagenumber = 1
         if selectItemIndex == 0 {
-            var item = Dictionary<String, String>()
-            item["name"] = "中国银行"
-            item["detail"] = "限额：5万/笔"
-            item["endNo"] = "（尾号7997）"
-            cardData.append(JSON(item))
+            DataProvider.sharedInstance.getBanCardkList(ToolKit.getStringByKey("userId"), status_id: "1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)", handler: { (data) in
+                if data["status"].dictionaryValue["succeed"]?.intValue == 1{
+                    self.cardData = data["data"].dictionaryValue["cardlist"]!.arrayValue
+                    self.tableView.reloadData()
+                }
+            })
         }else if selectItemIndex == 1{
             cardData = []
         }
-        tableView.reloadData()
     }
     
     // CLMenuDelegate
@@ -93,9 +96,9 @@ extension MyBankCardViewController: UITableViewDataSource, UITableViewDelegate{
             cell.selectionStyle = .None
             print(cardData)
             cell.headerIv.imageFromURL("", placeholder: UIImage(named: "touxiang")!)
-            cell.titleLbl.text = cardData[indexPath.row]["name"].stringValue
-            cell.detailLbl.text = cardData[indexPath.row]["detail"].stringValue
-            cell.endNoLbl.text = cardData[indexPath.row]["endNo"].stringValue
+            cell.titleLbl.text = ToolKitObjC.returnBankName(cardData[indexPath.row]["card_number"].stringValue)
+            cell.detailLbl.text = "限额：5万/笔"
+            cell.endNoLbl.text = cardData[indexPath.row]["card_number"].stringValue
             return cell
         }else{
             let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)

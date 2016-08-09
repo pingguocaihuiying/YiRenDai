@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CLCycleScrollView
 import SwiftyJSON
 import CLCircularPicture
 

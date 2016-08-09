@@ -19,6 +19,8 @@ class YouhuiquanViewController: BaseNavigationController {
     
     // data
     var youhuiquanData = [JSON]()
+    var pagenumber: Int!
+    let pagesize = 15
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,7 +48,22 @@ class YouhuiquanViewController: BaseNavigationController {
     }
     
     func refreshData(){
-        tableView.mj_header.endRefreshing()
+        pagenumber = 1
+        DataProvider.sharedInstance.getYouhuiquanList(ToolKit.getStringByKey("userId"), pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
+            self.tableView.mj_header.endRefreshing()
+            print(data)
+            if data["status"]["succeed"].intValue == 1{
+                self.youhuiquanData = data["data"]["couponlist"].arrayValue;
+                if self.youhuiquanData.count == data["data"]["page"]["total"].intValue{
+                    // 所有数据加载完毕，没有更多的数据了
+                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
+                }else{
+                    // mj_footer设置为:普通闲置状态(Idle)
+                    self.tableView.mj_footer.state = MJRefreshState.Idle
+                }
+                self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Automatic)
+            }
+        }
     }
     
     func alertAddYouhuiquanView(){
@@ -61,7 +78,11 @@ class YouhuiquanViewController: BaseNavigationController {
             alertController.addAction(cancelAction)
             let okAction = UIAlertAction(title: "添加", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
                 let youhuiquanTxt = alertController.textFields?.first
-                print(youhuiquanTxt?.text)
+                if !youhuiquanTxt!.text!.isEmpty{
+                    DataProvider.sharedInstance.addYouhuiquan(ToolKit.getStringByKey("userId"), coupon_code: youhuiquanTxt!.text!, handler: { (data) in
+                        print(data)
+                    })
+                }
             })
             alertController.addAction(okAction)
             self.presentViewController(alertController, animated: true, completion: nil)

@@ -60,6 +60,16 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
         setTopViewLeftBtnImg("left")
         setTopViewRightBtn("借款说明")
         
+        if applyType ==  ApplyType.Gongxindai {
+            self.setTopViewTitle("上班族 - 工薪贷")
+        }else if applyType ==  ApplyType.Zhuyedai{
+            self.setTopViewTitle("创业族 - 助业贷")
+        }else if applyType ==  ApplyType.Wuyedai{
+            self.setTopViewTitle("有房族 - 物业贷")
+        }else if applyType ==  ApplyType.Chezhudai{
+            self.setTopViewTitle("有车族 - 车主贷")
+        }
+        
         initView()
     }
     
@@ -137,7 +147,13 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
     
     func clickCompleteEvent(){
         DataProvider.sharedInstance.jiekuanSubmit("1", amounts: "5000", loan_purpose: "消费", loan_term: "三个月", city: "临沂", live_time: "半年", name: "姓名", sex: "男", year: "22", tel: "12345678901", contact_time: "不限时间", house: "无", car_port: "无", avg_salary: "5000", card: "无", brand: "无", model_of_car: "无", record_data: "无", gearbox: "无", list_the_mileage: "无", price: "无", cc: "无", member_id: ToolKit.getStringByKey("userId")) { (data) in
-            print(data)
+            if data["status"]["succeed"].intValue == 1{
+                self.view.viewAlert(self, title: "提示", msg: "提交成功", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: { (buttonIndex, action) in
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: "提交失败", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
         }
     }
     

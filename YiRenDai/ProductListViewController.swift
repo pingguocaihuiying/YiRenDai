@@ -52,11 +52,11 @@ class ProductListViewController: BaseNavigationController {
     func refreshData(){
         productListData.removeAll()
         pagenumber = 1
+        //刷新结束
+        self.tableView.mj_header.endRefreshing()
         DataProvider.sharedInstance.getProductList("1", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
             if data["status"]["succeed"].intValue == 1{
                 self.productListData = data["data"].dictionaryValue["productlist"]!.arrayValue
-                //刷新结束
-                self.tableView.mj_header.endRefreshing()
                 if self.productListData.count == data["data"]["page"]["total"].intValue{
                     // 所有数据加载完毕，没有更多的数据了
                     self.tableView.mj_footer.state = MJRefreshState.NoMoreData

@@ -10,6 +10,8 @@
 		58C40453D71A1C9F629E85DA /* Pods_YiRenDaiTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 627D2ED297966B1F9C187631 /* Pods_YiRenDaiTests.framework */; };
 		7F3AD6AAC5CE34C9658FEF7F /* Pods_YiRenDaiUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9717C836CA00144C5FCE24F7 /* Pods_YiRenDaiUITests.framework */; };
 		B7033D781CF82AD600810E81 /* SaveSecurityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7033D771CF82AD500810E81 /* SaveSecurityViewController.swift */; };
+		B708B2951D58B09400A3449B /* PinpaijieshaoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B708B2941D58B09400A3449B /* PinpaijieshaoViewController.swift */; };
+		B708B2971D58B32900A3449B /* ZijintuoguanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B708B2961D58B32900A3449B /* ZijintuoguanViewController.swift */; };
 		B70CC12A1CE40CA6002C1445 /* FAQDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70CC1291CE40CA6002C1445 /* FAQDetailViewController.swift */; };
 		B70CC12D1CE411D1002C1445 /* FAQDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B70CC12B1CE411D1002C1445 /* FAQDetailTableViewCell.swift */; };
 		B70CC12E1CE411D2002C1445 /* FAQDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B70CC12C1CE411D1002C1445 /* FAQDetailTableViewCell.xib */; };
@@ -128,6 +130,8 @@
 		B7033D751CF7F2F300810E81 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		B7033D761CF7F2F400810E81 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		B7033D771CF82AD500810E81 /* SaveSecurityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveSecurityViewController.swift; sourceTree = "<group>"; };
+		B708B2941D58B09400A3449B /* PinpaijieshaoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PinpaijieshaoViewController.swift; sourceTree = "<group>"; };
+		B708B2961D58B32900A3449B /* ZijintuoguanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZijintuoguanViewController.swift; sourceTree = "<group>"; };
 		B70CC1291CE40CA6002C1445 /* FAQDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQDetailViewController.swift; sourceTree = "<group>"; };
 		B70CC12B1CE411D1002C1445 /* FAQDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FAQDetailTableViewCell.swift; sourceTree = "<group>"; };
 		B70CC12C1CE411D1002C1445 /* FAQDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FAQDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -565,6 +569,8 @@
 				B76DF5991CE2D51400BF7912 /* ManageTeam */,
 				B78B66A51CDB2FB5005232FF /* ContactUs */,
 				B7DBC32C1CC8B50200D2C214 /* MoreViewController.swift */,
+				B708B2941D58B09400A3449B /* PinpaijieshaoViewController.swift */,
+				B708B2961D58B32900A3449B /* ZijintuoguanViewController.swift */,
 			);
 			name = More;
 			sourceTree = "<group>";
@@ -898,8 +904,10 @@
 				B78B66A41CDB2F16005232FF /* ContactUsViewController.swift in Sources */,
 				B7816E8C1CC48AAC00EC4B77 /* StartScrollViewController.swift in Sources */,
 				B7816E9D1CC4DBE800EC4B77 /* UIColorExtension.swift in Sources */,
+				B708B2971D58B32900A3449B /* ZijintuoguanViewController.swift in Sources */,
 				B7AEA4BA1CD84FA8006194C6 /* RegisterFinishViewController.swift in Sources */,
 				B72323AC1D11528600A4DECC /* YouhuiquanViewController.swift in Sources */,
+				B708B2951D58B09400A3449B /* PinpaijieshaoViewController.swift in Sources */,
 				B77C93131CD03FC700739CBE /* MyGiftViewController.swift in Sources */,
 				B7FDFEF71CFE7FFC00DA1867 /* IntroductionsViewController.swift in Sources */,
 				B76DF5931CE2C76F00BF7912 /* LcqDetailViewController.swift in Sources */,

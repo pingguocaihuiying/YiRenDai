@@ -54,6 +54,15 @@ class MoreViewController: BaseNavigationController {
                     }
                 })
             }
+        case 2:
+            let pinpaijieshaoVC = PinpaijieshaoViewController()
+            pinpaijieshaoVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(pinpaijieshaoVC, animated: true)
+        case 3:
+            let saveSecurityVC = SaveSecurityViewController()
+            saveSecurityVC.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(saveSecurityVC, animated: true)
+            
         default:
             break
         }
@@ -93,6 +102,8 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
             case 1:
                 //customBtn1
                 let customBtn1 = CLButton(frame: CGRectMake(0, 3, screen_width / 3, 85), imageName: "pinpaijieshao", title: "品牌介绍", detail: "中国知名P2P平台纽交所上市公司")
+                customBtn1.tag = 2
+                customBtn1.addTarget(self, action: #selector(clickEvent(_:)), forControlEvents: .TouchUpInside)
                 cell.addSubview(customBtn1)
                 //lineView1
                 let lineView1 = UIView(frame: CGRectMake(screen_width / 3, 0, 0.25, 90))
@@ -100,6 +111,8 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.addSubview(lineView1)
                 //customBtn2
                 let customBtn2 = CLButton(frame: CGRectMake(screen_width / 3, 3, screen_width / 3, 85), imageName: "anquanbaozhang", title: "安全保障", detail: "中国知名P2P平台纽交所上市公司")
+                customBtn2.tag = 3
+                customBtn2.addTarget(self, action: #selector(clickEvent(_:)), forControlEvents: .TouchUpInside)
                 cell.addSubview(customBtn2)
                 //lineView1
                 let lineView2 = UIView(frame: CGRectMake(screen_width / 3 * 2 + 0.25, 0, 0.25, 90))
@@ -107,6 +120,8 @@ extension MoreViewController: UITableViewDataSource, UITableViewDelegate{
                 cell.addSubview(lineView2)
                 //customBtn3
                 let customBtn3 = CLButton(frame: CGRectMake(screen_width / 3 * 2, 3, screen_width / 3, 85), imageName: "zijintuoguan", title: "资金托管", detail: "中国知名P2P平台纽交所上市公司")
+                customBtn3.tag = 4
+                customBtn3.addTarget(self, action: #selector(clickEvent(_:)), forControlEvents: .TouchUpInside)
                 cell.addSubview(customBtn3)
             default:
                 break

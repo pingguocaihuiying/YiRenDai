@@ -47,7 +47,15 @@ class AddPaymentBankCardViewController: BaseNavigationController, UITextFieldDel
     }
     
     func nextFunc(){
-        
+        DataProvider.sharedInstance.addBankCard(nameTxt.text!, card_number: cardTxt.text!, tbl: phoneTxt.text!, member_id: ToolKit.getStringByKey("userId"), status_id: "1") { (data) in
+            if data["status"].dictionaryValue["succeed"]?.intValue == 1{
+                self.view.viewAlert(self, title: "提示", msg: "保存成功", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: { (buttonIndex, action) in
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: "保存失败", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
     }
     
     func textFieldDidChange(textField: UITextField){
@@ -130,6 +138,7 @@ extension AddPaymentBankCardViewController: UITableViewDataSource, UITableViewDe
             // cardTxt
             cardTxt = UITextField(frame: CGRectMake(detailLbl.viewRightX + 5, (cell.viewHeight - 17) / 2, 200, 17))
             cardTxt.placeholder = "银行卡号"
+            cardTxt.keyboardType = UIKeyboardType.NumberPad
             cardTxt.delegate = self
             cardTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
             cell.contentView.addSubview(cardTxt)
@@ -147,6 +156,7 @@ extension AddPaymentBankCardViewController: UITableViewDataSource, UITableViewDe
             // phoneTxt
             phoneTxt = UITextField(frame: CGRectMake(detailLbl.viewRightX + 5, (cell.viewHeight - 17) / 2, 200, 17))
             phoneTxt.placeholder = "填写手机号"
+            phoneTxt.keyboardType = UIKeyboardType.NumberPad
             phoneTxt.delegate = self
             phoneTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
             cell.contentView.addSubview(phoneTxt)

@@ -20,12 +20,17 @@ class HomePageViewController: BaseViewController, CLCircularPictureDelegate {
     var cycleScrollView: CLCircularPicture!
     
     //data
-    var homeData: JSON?
+    var productData: JSON?
     var cycleImage: JSON?
+    var sumMoney: String?
+    var sumMember: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        sumMoney = "0.00"
+        sumMember = "0"
+        
         initView()
     }
 
@@ -46,11 +51,19 @@ class HomePageViewController: BaseViewController, CLCircularPictureDelegate {
     
     func refreshData(){
         initCycleScrollView()
-        homeData = []
+        productData = []
         //刷新结束
         tableView.mj_header.endRefreshing()
-        //刷新数据
-        self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0), NSIndexPath(forRow: 2, inSection: 0),NSIndexPath(forRow: 3, inSection: 0) ,NSIndexPath(forRow: 4, inSection: 0)], withRowAnimation: .Automatic)
+        DataProvider.sharedInstance.getHome { (data) in
+            if data["status"].intValue == 1{
+                self.sumMoney = data["data"].dictionaryValue["summoney"]?.arrayValue[0].dictionaryValue["sum"]?.stringValue
+                self.sumMember = data["data"].dictionaryValue["summember"]?.arrayValue[0].dictionaryValue["$count"]?.stringValue
+                self.productData = data["data"].dictionaryValue["productarray"]
+            }
+            print(self.productData)
+            //刷新数据
+            self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0), NSIndexPath(forRow: 2, inSection: 0),NSIndexPath(forRow: 3, inSection: 0) ,NSIndexPath(forRow: 4, inSection: 0)], withRowAnimation: .Automatic)
+        }
     }
     
     func initCycleScrollView(){
@@ -171,7 +184,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             let leftDetailLbl = UILabel(frame: CGRectMake(0, leftDetailTitleLbl.viewBottomY + 5, leftView.viewWidth, 21))
             let formatter = NSNumberFormatter()
             formatter.numberStyle = .DecimalStyle
-            leftDetailLbl.text = formatter.stringFromNumber(1234567890)
+            leftDetailLbl.text = formatter.stringFromNumber(Float(self.sumMoney!)!)
             leftDetailLbl.textColor = UIColor.getRedColorSecond()
             leftDetailLbl.textAlignment = .Center
             leftDetailLbl.font = UIFont.systemFontOfSize(19)
@@ -193,7 +206,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             rightView.addSubview(rightDetailTitleLbl)
             // leftDetailLbl
             let rightDetailLbl = UILabel(frame: CGRectMake(0, rightDetailTitleLbl.viewBottomY + 5, leftView.viewWidth, 21))
-            rightDetailLbl.text = formatter.stringFromNumber(1234567890)
+            rightDetailLbl.text = formatter.stringFromNumber(Float(self.sumMember!)!)
             rightDetailLbl.textColor = UIColor.getRedColorSecond()
             rightDetailLbl.textAlignment = .Center
             rightDetailLbl.font = UIFont.systemFontOfSize(19)
@@ -208,14 +221,14 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             cell.contentView.addSubview(leftView)
             // leftDetailLbl1
             let leftDetailLbl1 = UILabel(frame: CGRectMake(0, leftView.viewHeight / 2 - 21, leftView.viewWidth, 21))
-            leftDetailLbl1.text = "20%"
+            leftDetailLbl1.text = "\(self.productData == nil ? "0" : self.productData![0].dictionaryValue["interest_rate"]!.stringValue)%"
             leftDetailLbl1.font = UIFont.systemFontOfSize(20)
             leftDetailLbl1.textAlignment = .Center
             leftDetailLbl1.textColor = UIColor.getRedColorSecond()
             leftView.addSubview(leftDetailLbl1)
             // leftDetailLbl2
             let leftDetailLbl2 = UILabel(frame: CGRectMake(0, leftDetailLbl1.viewBottomY + 5, leftView.viewWidth, 21))
-            leftDetailLbl2.text = "500元起投"
+            leftDetailLbl2.text = "\(self.productData == nil ? "0" : self.productData![0].dictionaryValue["min_amount"]!.stringValue)元起投"
             leftDetailLbl2.font = UIFont.systemFontOfSize(14)
             leftDetailLbl2.textAlignment = .Center
             leftDetailLbl2.textColor = UIColor.getRedColorSecond()

@@ -8,6 +8,8 @@
 
 import UIKit
 import AFImageHelper
+import MJRefresh
+import SwiftyJSON
 
 class ManageTeamViewController: BaseNavigationController {
     
@@ -19,6 +21,9 @@ class ManageTeamViewController: BaseNavigationController {
     //data
     var isExtension = Bool()
     var currentIndexPath: NSIndexPath?
+    var teamManagerData = [JSON]()
+    var pagenumber: Int!
+    let pagesize = 15
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +42,39 @@ class ManageTeamViewController: BaseNavigationController {
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
         tableView.registerNib(UINib(nibName: "ManageTeamTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
+        
+        //下拉刷新
+        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(refreshData))
+        tableView.mj_header.beginRefreshing()
+        
+        //上拉加载更多
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(self.loadMore))
     }
+    
+    func refreshData(){
+        teamManagerData.removeAll()
+        pagenumber = 1
+        //刷新结束
+        self.tableView.mj_header.endRefreshing()
+        DataProvider.sharedInstance.getTeamManage("\(pagenumber)", pagesize: "\(pagesize)") { (data) in
+            print(data)
+            self.teamManagerData = data["data"]["managelist"].arrayValue
+            if self.teamManagerData.count == data["data"]["page"]["total"].intValue{
+                // 所有数据加载完毕，没有更多的数据了
+                self.tableView.mj_footer.state = MJRefreshState.NoMoreData
+            }else{
+                // mj_footer设置为:普通闲置状态(Idle)
+                self.tableView.mj_footer.state = MJRefreshState.Idle
+            }
+            //刷新数据
+            self.tableView.reloadData()
+        }
+    }
+    
+    func loadMore(){
+        pagenumber = pagenumber + 1
+    }
+
 }
 
 extension ManageTeamViewController: UITableViewDelegate, UITableViewDataSource{
@@ -47,7 +84,7 @@ extension ManageTeamViewController: UITableViewDelegate, UITableViewDataSource{
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return teamManagerData.count
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -65,15 +102,22 @@ extension ManageTeamViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ManageTeamTableViewCell
         cell.headIv.imageFromURL("", placeholder: UIImage(named: "acc_yrb_y")!)
-        cell.nameLbl.text = "唐宁先生"
-        cell.positionLbl.text = "董事局主席 / 创始人"
-        let detailStr = "唐宁先生是宜人贷也是宜信的创始人，自宜信公司创立以来一直担任公司董事长以及首席执行官一职，并兼任宜人贷董事长。\n2014年12月，唐宁当选北京市网贷行业协会会长"
+        cell.nameLbl.text = teamManagerData[indexPath.row]["manage_team_name"].stringValue
+        cell.positionLbl.text = teamManagerData[indexPath.row]["manage_team_tag"].stringValue
+        let detailStr = teamManagerData[indexPath.row]["manage_team_about"].stringValue
         let number = Int(cell.detailLbl.frame.size.width / 13)
-        
-        cell.detailLbl.text = detailStr.substringToIndex(detailStr.startIndex.advancedBy(number * 2))
+        if detailStr.characters.count > number * 2 {
+            cell.detailLbl.text = detailStr.substringToIndex(detailStr.startIndex.advancedBy(number * 2))
+        }else{
+            cell.detailLbl.text = detailStr
+        }
         if indexPath == currentIndexPath && isExtension {
             cell.moreDetailTv.hidden = false
-            cell.moreDetailTv.text = detailStr.substringFromIndex(detailStr.startIndex.advancedBy(number * 2))
+            if detailStr.characters.count > number * 2 {
+                cell.moreDetailTv.text = detailStr.substringFromIndex(detailStr.startIndex.advancedBy(number * 2))
+            }else{
+                cell.moreDetailTv.text = ""
+            }
             cell.moreIv.backgroundColor = UIColor.redColor()
         }else{
             cell.moreDetailTv.hidden = true

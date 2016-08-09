@@ -87,12 +87,24 @@ class DataProvider {
     //MARK: - 首页
     
     /**
+     获取首页数据
+     - parameter handler: 回调方法
+     */
+    func getHome(handler: (data: JSON) -> Void){
+        let url = "\(URL)/Home/getHome"
+        obj.postRequest(url: url, params: nil) { (json) in
+            handler(data: json)
+        }
+    }
+    
+    /**
      获取活动列表
      - parameter handler: 回调方法
      */
-    func getActivities(handler: (data: JSON) -> Void){
+    func getActivities(pagenumber: String, pagesize: String,handler: (data: JSON) -> Void){
         let url = "\(URL)/activity/GetActivities"
-        obj.postRequest(url: url, params: nil) { (json) in
+        let params = ["page":"{\"pagenumber\":\"\(pagenumber)\",\"pagesize\":\"\(pagesize)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
             handler(data: json)
         }
     }
@@ -157,6 +169,79 @@ class DataProvider {
     
     //MARK: - 我的财富
     
+    /**
+     我的财富首页
+     - parameter member_id: 用户Id
+     - parameter handler:   回调方法
+     */
+    func getMyWealth(member_id: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/money/getmoney"
+        let params = ["json":"{\"member_id\":\"\(member_id)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
+    /**
+     添加银行卡
+     - parameter true_name:   真实姓名
+     - parameter card_number: 卡号
+     - parameter tbl:         手机号
+     - parameter member_id:   用户Id
+     - parameter status_id:   状态Id  1：支出银行卡   2：提现银行卡
+     - parameter handler:     回调方法
+     */
+    func addBankCard(true_name: String, card_number: String, tbl: String, member_id: String, status_id: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/card/cardSubmit"
+        let params = ["json":"{\"true_name\":\"\(true_name)\",\"card_number\":\"\(card_number)\",\"tbl\":\"\(tbl)\",\"member_id\":\"\(member_id)\",\"status_id\":\"\(status_id)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
+    /**
+     获取银行卡列表
+     - parameter member_id: 用户Id
+     - parameter status_id: 状态Id  1：支出银行卡   2：提现银行卡
+     - parameter handler:   回调方法
+     */
+    func getBanCardkList(member_id: String, status_id: String, pagenumber: String, pagesize: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/card/Card"
+        let params = ["json":"{\"member_id\":\"\(member_id)\",\"status_id\":\"\(status_id)\"}","page":"{\"pagenumber\":\"\(pagenumber)\",\"pagesize\":\"\(pagesize)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
+    /**
+     添加优惠券
+     - parameter member_id:   用户Id
+     - parameter coupon_code: 优惠码
+     - parameter handler:     回调方法
+     */
+    func addYouhuiquan(member_id: String, coupon_code: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/coupon/create"
+        let params = ["json":"{\"member_id\":\"\(member_id)\",\"coupon_code\":\"\(coupon_code)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
+    /**
+     获取优惠券列表
+     - parameter member_id:  用户Id
+     - parameter pagenumber: 页码
+     - parameter pagesize:   每页个数
+     - parameter handler:    回调方法
+     */
+    func getYouhuiquanList(member_id: String, pagenumber: String, pagesize: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/coupon/getCoupons"
+        let params = ["json":"{\"member_id\":\"\(member_id)\"}","page":"{\"pagenumber\":\"\(pagenumber)\",\"pagesize\":\"\(pagesize)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
     //MARK: - 我要借款
     /*
     loans_id-贷款id
@@ -193,4 +278,12 @@ class DataProvider {
     }
     
     //MARK: - 更多
+    
+    func getTeamManage(pagenumber: String, pagesize: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/manage/getManage"
+        let params = ["page":"{\"pagenumber\":\"\(pagenumber)\",\"pagesize\":\"\(pagesize)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
 }

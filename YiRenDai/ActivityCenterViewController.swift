@@ -46,23 +46,26 @@ class ActivityCenterViewController: BaseNavigationController {
         tableView.mj_header.beginRefreshing()
         
         //上拉加载更多
-        //tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(self.loadMore))
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(self.loadMore))
     }
     
     func refreshData(){
         pagenumber = 1
-        DataProvider.sharedInstance.getActivities { (data) in
+        
+        DataProvider.sharedInstance.getActivities("\(pagenumber)", pagesize: "\(pagesize)") { (data) in
             if data["status"]["succeed"].intValue == 1{
                 self.activityListData = data["data"].dictionaryValue["activitylist"]!.arrayValue
                 //刷新结束
                 self.tableView.mj_header.endRefreshing()
-//                if self.activityListData.count == data["data"]["page"]["total"].intValue{
-//                    // 所有数据加载完毕，没有更多的数据了
-//                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
-//                }else{
-//                    // mj_footer设置为:普通闲置状态(Idle)
-//                    self.tableView.mj_footer.state = MJRefreshState.Idle
-//                }
+                
+                if self.activityListData.count == data["data"]["page"]["total"].intValue{
+                    // 所有数据加载完毕，没有更多的数据了
+                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
+                }else{
+                    // mj_footer设置为:普通闲置状态(Idle)
+                    self.tableView.mj_footer.state = MJRefreshState.Idle
+                }
+                
                 //刷新数据
                 self.tableView.reloadData()
             }else{
