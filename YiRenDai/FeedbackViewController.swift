@@ -30,7 +30,12 @@ class FeedbackViewController: BaseNavigationController, UITextViewDelegate {
     }
     
     override func clickRightBtnEvent() {
-        
+        if contentTv.text.isEmpty {
+            return
+        }
+        DataProvider.sharedInstance.feedback(ToolKit.getStringByKey("userId"), feedback_content: contentTv.text) { (data) in
+            print(data)
+        }
     }
     
     //MARK: - 自定义方法

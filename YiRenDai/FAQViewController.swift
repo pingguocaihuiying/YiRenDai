@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import MJRefresh
+import SwiftyJSON
 
 class FAQViewController: BaseNavigationController {
     
@@ -14,6 +16,9 @@ class FAQViewController: BaseNavigationController {
     var tableView: UITableView!
     
     //data
+    var questionListData = [JSON]()
+    var pagenumber: Int!
+    let pagesize = 15
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +37,62 @@ class FAQViewController: BaseNavigationController {
         tableView.backgroundColor = UIColor.getGrayColorThird()
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
+        
+        //下拉刷新
+        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(self.refreshData))
+        tableView.mj_header.beginRefreshing()
+        
+        //上拉加载更多
+        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(self.loadMore))
+    }
+    
+    func refreshData(){
+        questionListData.removeAll()
+        pagenumber = 1
+        //刷新结束
+        self.tableView.mj_header.endRefreshing()
+        DataProvider.sharedInstance.getQuestionList("\(pagenumber)", pagesize: "\(pagesize)") { (data) in
+            if data["status"]["succeed"].intValue == 1{
+                self.questionListData = data["data"].dictionaryValue["questionlist"]!.arrayValue
+                if self.questionListData.count == data["data"]["page"]["total"].intValue{
+                    // 所有数据加载完毕，没有更多的数据了
+                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
+                }else{
+                    // mj_footer设置为:普通闲置状态(Idle)
+                    self.tableView.mj_footer.state = MJRefreshState.Idle
+                }
+                //刷新数据
+                self.tableView.reloadData()
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
+    }
+    
+    func loadMore(){
+        pagenumber = pagenumber + 1
+        DataProvider.sharedInstance.getQuestionList("\(pagenumber)", pagesize: "\(pagesize)") { (data) in
+            if data["status"]["succeed"].intValue == 1{
+                let dataArray = data["data"].dictionaryValue["productlist"]!.arrayValue
+                for i in 0 ..< dataArray.count{
+                    self.questionListData.append(dataArray[i])
+                }
+                //刷新结束
+                self.tableView.mj_header.endRefreshing()
+                if self.questionListData.count == data["data"]["page"]["total"].intValue{
+                    // 所有数据加载完毕，没有更多的数据了
+                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
+                }else{
+                    // mj_footer设置为:普通闲置状态(Idle)
+                    self.tableView.mj_footer.state = MJRefreshState.Idle
+                }
+                //刷新数据
+                self.tableView.reloadData()
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
+        
     }
 }
 
@@ -43,7 +104,7 @@ extension FAQViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
-            return 8
+            return questionListData.count
         }else{
             return 1
         }

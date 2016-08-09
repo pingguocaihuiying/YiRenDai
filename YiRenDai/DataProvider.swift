@@ -286,4 +286,40 @@ class DataProvider {
             handler(data: json)
         }
     }
+    
+    /**
+     意见反馈
+     - parameter member_id:        用户Id
+     - parameter feedback_content: 意见反馈内容
+     - parameter handler:          回调方法
+     */
+    func feedback(member_id: String, feedback_content: String,  handler: (data: JSON) -> Void){
+        let url = "\(URL)/feedback/submit"
+        let params = ["json":"{\"member_id\":\"\(member_id)\",\"feedback_content\":\"\(feedback_content)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
+    /**
+     获取常见问题列表
+     - parameter pagenumber: 页码
+     - parameter pagesize:   每页个数
+     - parameter handler:    回调方法
+     */
+    func getQuestionList(pagenumber: String, pagesize: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/question/getquestion"
+        let params = ["page":"{\"pagenumber\":\"\(pagenumber)\",\"pagesize\":\"\(pagesize)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
+//    func contactUs(handler: (data: JSON) -> Void){
+//        let url = "\(URL)/manage/getManage"
+//        let params = ["page":"{\"pagenumber\":\"\(pagenumber)\",\"pagesize\":\"\(pagesize)\"}"]
+//        obj.postRequest(url: url, params: params) { (json) in
+//            handler(data: json)
+//        }
+//    }
 }

@@ -62,7 +62,10 @@ class MoreViewController: BaseNavigationController {
             let saveSecurityVC = SaveSecurityViewController()
             saveSecurityVC.hidesBottomBarWhenPushed = true
             navigationController?.pushViewController(saveSecurityVC, animated: true)
-            
+        case 4:
+            let zijintuoguanVC = ZijintuoguanViewController()
+            zijintuoguanVC.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(zijintuoguanVC, animated: true)
         default:
             break
         }

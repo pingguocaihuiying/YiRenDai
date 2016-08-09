@@ -101,7 +101,8 @@ extension ManageTeamViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath) as! ManageTeamTableViewCell
-        cell.headIv.imageFromURL("", placeholder: UIImage(named: "acc_yrb_y")!)
+        let photoStr = teamManagerData[indexPath.row]["manage_team_image"].stringValue
+        cell.headIv.imageFromURL(photoStr, placeholder: UIImage(named: "acc_yrb_y")!)
         cell.nameLbl.text = teamManagerData[indexPath.row]["manage_team_name"].stringValue
         cell.positionLbl.text = teamManagerData[indexPath.row]["manage_team_tag"].stringValue
         let detailStr = teamManagerData[indexPath.row]["manage_team_about"].stringValue
@@ -118,10 +119,10 @@ extension ManageTeamViewController: UITableViewDelegate, UITableViewDataSource{
             }else{
                 cell.moreDetailTv.text = ""
             }
-            cell.moreIv.backgroundColor = UIColor.redColor()
+            cell.moreIv.image = UIImage(named: "more_intro_up")
         }else{
             cell.moreDetailTv.hidden = true
-            cell.moreIv.backgroundColor = UIColor.blueColor()
+            cell.moreIv.image = UIImage(named: "guanlituandui_extend1")
         }
         return cell
     }
