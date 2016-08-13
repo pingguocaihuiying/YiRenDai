@@ -3080,11 +3080,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492330114.935702"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "getProductList(_:pagenumber:pagesize:handler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3368,11 +3368,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492330114.935702"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "getCharge(_:member_id:order_amount:pay_method:handler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -3432,11 +3432,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492330114.935702"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "getCharge(_:member_id:order_amount:pay_method:handler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -4218,11 +4218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492336195.467926"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "196"
-            endingLineNumber = "196"
+            startingLineNumber = "208"
+            endingLineNumber = "208"
             landmarkName = "addBankCard(_:card_number:tbl:member_id:status_id:handler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -4234,11 +4234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/ToolKit.swift"
-            timestampString = "492336822.549942"
+            timestampString = "492797777.773701"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "getStringByKey(_:defaultValue:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -4266,11 +4266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492340600.516478"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "195"
-            endingLineNumber = "195"
+            startingLineNumber = "207"
+            endingLineNumber = "207"
             landmarkName = "addBankCard(_:card_number:tbl:member_id:status_id:handler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -4278,7 +4278,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/ActivityCenterViewController.swift"
@@ -4314,11 +4314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492748553.358594"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "256"
-            endingLineNumber = "256"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
             landmarkName = "addYouhuiquan(_:coupon_code:handler:)"
             landmarkType = "5">
             <Locations>
@@ -4458,11 +4458,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492765458.299187"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "340"
-            endingLineNumber = "340"
+            startingLineNumber = "352"
+            endingLineNumber = "352"
             landmarkName = "feedback(_:feedback_content:handler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -4586,11 +4586,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492765458.299187"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "341"
-            endingLineNumber = "341"
+            startingLineNumber = "353"
+            endingLineNumber = "353"
             landmarkName = "feedback(_:feedback_content:handler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -4730,11 +4730,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492599005.78253"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
             landmarkName = "getProductDetail(_:handler:)"
             landmarkType = "5">
             <Locations>
@@ -4922,11 +4922,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492694893.057378"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "229"
-            endingLineNumber = "229"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "getBanCardkList(_:status_id:pagenumber:pagesize:handler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -5050,11 +5050,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492748553.358594"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "241"
-            endingLineNumber = "241"
+            startingLineNumber = "253"
+            endingLineNumber = "253"
             landmarkName = "deleteCard(_:handler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -5258,11 +5258,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492749014.406084"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "282"
+            endingLineNumber = "282"
             landmarkName = "getYouhuiquanList(_:pagenumber:pagesize:handler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -5274,11 +5274,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492749756.767547"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
+            startingLineNumber = "267"
+            endingLineNumber = "267"
             landmarkName = "addYouhuiquan(_:coupon_code:handler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -5370,11 +5370,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "YiRenDai/DataProvider.swift"
-            timestampString = "492765874.783411"
+            timestampString = "492798650.809926"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
+            startingLineNumber = "294"
+            endingLineNumber = "294"
             landmarkName = "getYirenbi(_:handler:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -5440,6 +5440,22 @@
             startingLineNumber = "196"
             endingLineNumber = "196"
             landmarkName = "tableView(_:cellForRowAtIndexPath:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "YiRenDai/DataProvider.swift"
+            timestampString = "492798985.579775"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
+            landmarkName = "getMyWealth(_:handler:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

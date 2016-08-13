@@ -114,7 +114,7 @@ extension ActivityCenterViewController: UITableViewDataSource, UITableViewDelega
         cell.stateLbl.layer.cornerRadius = 8
         cell.stateLbl.layer.borderWidth = 1
         cell.stateLbl.layer.borderColor = UIColor.getRedColorSecond().CGColor
-        cell.imageIv.imageFromURL(activityListData[indexPath.section]["activity_image"].stringValue, placeholder: UIImage())
+        cell.imageIv.imageFromURL("\(ImgUrl)\(activityListData[indexPath.section]["activity_image"].stringValue)", placeholder: UIImage())
         cell.detailLbl.text = activityListData[indexPath.section]["activity_content"].stringValue
         return cell
     }
@@ -135,6 +135,13 @@ extension ActivityCenterViewController: UITableViewDataSource, UITableViewDelega
         if cell .respondsToSelector(Selector("setPreservesSuperviewLayoutMargins:")){
             cell.preservesSuperviewLayoutMargins = false
         }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        print(activityListData)
+        let activityDetailVC = ActivityDetailViewController()
+        activityDetailVC.activityId = activityListData[indexPath.section]["activity_id"].stringValue
+        self.navigationController?.pushViewController(activityDetailVC, animated: true)
     }
     
     //section

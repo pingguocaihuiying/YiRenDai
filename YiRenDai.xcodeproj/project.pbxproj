@@ -84,6 +84,7 @@
 		B78B66A81CDB2FD8005232FF /* ContactUsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78B66A61CDB2FD8005232FF /* ContactUsTableViewCell.swift */; };
 		B78B66A91CDB2FD8005232FF /* ContactUsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B78B66A71CDB2FD8005232FF /* ContactUsTableViewCell.xib */; };
 		B78C4F991D5EA77100351DC7 /* city.plist in Resources */ = {isa = PBXBuildFile; fileRef = B78C4F981D5EA77100351DC7 /* city.plist */; };
+		B78C4F9E1D5F81FE00351DC7 /* ActivityDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78C4F9D1D5F81FE00351DC7 /* ActivityDetailViewController.swift */; };
 		B79474061CDD6AEC00F78C26 /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B79474051CDD6AEC00F78C26 /* FeedbackViewController.swift */; };
 		B7AEA4B61CD82580006194C6 /* ResetPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AEA4B51CD82580006194C6 /* ResetPwdViewController.swift */; };
 		B7AEA4B81CD834DC006194C6 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7AEA4B71CD834DC006194C6 /* RegisterViewController.swift */; };
@@ -213,6 +214,7 @@
 		B78B66A61CDB2FD8005232FF /* ContactUsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactUsTableViewCell.swift; sourceTree = "<group>"; };
 		B78B66A71CDB2FD8005232FF /* ContactUsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ContactUsTableViewCell.xib; sourceTree = "<group>"; };
 		B78C4F981D5EA77100351DC7 /* city.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = city.plist; sourceTree = "<group>"; };
+		B78C4F9D1D5F81FE00351DC7 /* ActivityDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDetailViewController.swift; sourceTree = "<group>"; };
 		B79474051CDD6AEC00F78C26 /* FeedbackViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		B7AEA4B51CD82580006194C6 /* ResetPwdViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPwdViewController.swift; sourceTree = "<group>"; };
 		B7AEA4B71CD834DC006194C6 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -514,6 +516,7 @@
 				B7801BC91CCB589E003EDEFA /* ActivityCenterViewController.swift */,
 				B7801BCB1CCB66F0003EDEFA /* ActivityCenterTableViewCell.swift */,
 				B7801BCC1CCB66F0003EDEFA /* ActivityCenterTableViewCell.xib */,
+				B78C4F9D1D5F81FE00351DC7 /* ActivityDetailViewController.swift */,
 				B7D3FD3D1CCD98B600E67ABF /* LjInvestBtnViewController.swift */,
 				B7033D771CF82AD500810E81 /* SaveSecurityViewController.swift */,
 			);
@@ -664,7 +667,7 @@
 				TargetAttributes = {
 					B7816E471CC46AA800EC4B77 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = 7X578356T4;
+						DevelopmentTeam = M7YC435M3S;
 					};
 					B7816E5B1CC46AA900EC4B77 = {
 						CreatedOnToolsVersion = 7.3;
@@ -897,6 +900,7 @@
 				B72CBF641CC7010F003FFBC2 /* MyWealthViewController.swift in Sources */,
 				B7801BC61CCB18D6003EDEFA /* BaseNavigationController.swift in Sources */,
 				B7AEA4B81CD834DC006194C6 /* RegisterViewController.swift in Sources */,
+				B78C4F9E1D5F81FE00351DC7 /* ActivityDetailViewController.swift in Sources */,
 				B77C93171CD0502F00739CBE /* HistoryRecordViewController.swift in Sources */,
 				B7816E811CC48A2400EC4B77 /* UIViewExtension.swift in Sources */,
 				B7D3FD3E1CCD98B600E67ABF /* LjInvestBtnViewController.swift in Sources */,

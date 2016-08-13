@@ -101,10 +101,22 @@ class DataProvider {
      获取活动列表
      - parameter handler: 回调方法
      */
-    func getActivities(pagenumber: String, pagesize: String,handler: (data: JSON) -> Void){
+    func getActivities(pagenumber: String, pagesize: String, handler: (data: JSON) -> Void){
         let url = "\(URL)/activity/GetActivities"
         let params = ["page":"{\"pagenumber\":\"\(pagenumber)\",\"pagesize\":\"\(pagesize)\"}"]
         obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
+    /**
+     获取活动详情
+     - parameter activitiesId: 活动Id
+     - parameter handler:      回调方法
+     */
+    func getActivitiesDetail(activitiesId: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/web/ViewActivity&id=\(activitiesId)"
+        obj.postRequest(url: url, params: nil) { (json) in
             handler(data: json)
         }
     }
