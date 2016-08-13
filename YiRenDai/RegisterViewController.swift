@@ -117,6 +117,7 @@ class RegisterViewController: BaseNavigationController, UITextFieldDelegate {
         IDNoTxt = UITextField(frame: CGRectMake(IDNoIv.viewRightX + 15, 47, contentView.viewWidth - 28, 47))
         IDNoTxt.delegate = self
         IDNoTxt.font = UIFont.systemFontOfSize(15)
+        IDNoTxt.keyboardType = .NumberPad
         IDNoTxt.placeholder = "身份证号"
         IDNoTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
         contentView.addSubview(IDNoTxt)

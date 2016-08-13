@@ -21,6 +21,7 @@ class AddBankCardViewController: BaseNavigationController, UITextFieldDelegate, 
     var zhihangTxt: UITextField!
     var OKBtn: UIButton!
     
+    // data
     var openBankValue: String!
     var openBankAddressValue: String!
 
@@ -52,7 +53,23 @@ class AddBankCardViewController: BaseNavigationController, UITextFieldDelegate, 
     }
     
     func OKFunc(){
+        let vericationCard = ToolKitObjC.returnBankName(cardTxt.text)
+        if vericationCard == "" {
+            self.view.viewAlert(self, title: "提示", msg: "输入的银行卡格式不正确", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            return
+        }
         
+        DataProvider.sharedInstance.addTixianBankCard(nameTxt.text!, card_number: cardTxt.text!, bank_name: openBankValue, bank_area: openBankAddressValue, bank_branch: zhihangTxt.text!, member_id: ToolKit.getStringByKey("userId"), status_id: "2") { (data) in
+            print(data)
+            if data["status"]["succeed"].intValue == 1{
+                self.view.viewAlert(self, title: "提示", msg: "保存成功", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: { (buttonIndex, action) in
+                    NSNotificationCenter.defaultCenter().postNotificationName("refreshData", object: nil)
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: "保存失败", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
     }
     
     func textFieldDidChange(textField: UITextField){
@@ -159,6 +176,7 @@ extension AddBankCardViewController: UITableViewDataSource, UITableViewDelegate{
                 // cardTxt
                 cardTxt = UITextField(frame: CGRectMake(detailLbl.viewRightX + 5, (cell.viewHeight - 17) / 2, 200, 17))
                 cardTxt.placeholder = "银行卡号"
+                cardTxt.keyboardType = .NumberPad
                 cardTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
                 cell.contentView.addSubview(cardTxt)
             }
@@ -263,6 +281,7 @@ extension AddBankCardViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 2 {
+            self.view.endEditing(true)
             if indexPath.row == 0 {
                 let openBankVC = OpenBankViewController()
                 openBankVC.delegate = self

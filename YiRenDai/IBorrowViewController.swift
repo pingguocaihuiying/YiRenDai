@@ -42,7 +42,7 @@ class IBorrowViewController: BaseNavigationController {
         view.addSubview(tableView)
         
         //下拉刷新
-        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(self.refreshData))
+        //tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(self.refreshData))
         //tableView.mj_header.beginRefreshing()
     }
     
@@ -71,34 +71,38 @@ class IBorrowViewController: BaseNavigationController {
     }
     
     func applyBorrowFunc(sender: UIButton){
-        let applyBorrowVC = ApplyBorrowViewController()
-        if sender.tag == 1 {
-            applyBorrowVC.applyType = ApplyType.Gongxindai
-            applyBorrowVC.navtitle = "上班族 - 工薪贷"
-        }else if sender.tag == 2{
-            applyBorrowVC.applyType = ApplyType.Zhuyedai
-            applyBorrowVC.navtitle = "创业族 - 助业贷"
-        }else if sender.tag == 3{
-            applyBorrowVC.applyType = ApplyType.Wuyedai
-            applyBorrowVC.navtitle = "有房族 - 物业贷"
-        }else if sender.tag == 4{
-            applyBorrowVC.applyType = ApplyType.Chezhudai
-            applyBorrowVC.navtitle = "有车族 - 车主贷"
+        if ToolKit.getBoolByKey("isLogin") {
+            let applyBorrowVC = ApplyBorrowViewController()
+            if sender.tag == 1 {
+                applyBorrowVC.applyType = ApplyType.Gongxindai
+                applyBorrowVC.navtitle = "上班族 - 工薪贷"
+            }else if sender.tag == 2{
+                applyBorrowVC.applyType = ApplyType.Zhuyedai
+                applyBorrowVC.navtitle = "创业族 - 助业贷"
+            }else if sender.tag == 3{
+                applyBorrowVC.applyType = ApplyType.Wuyedai
+                applyBorrowVC.navtitle = "有房族 - 物业贷"
+            }else if sender.tag == 4{
+                applyBorrowVC.applyType = ApplyType.Chezhudai
+                applyBorrowVC.navtitle = "有车族 - 车主贷"
+            }
+            applyBorrowVC.hidesBottomBarWhenPushed = true
+            navigationController?.pushViewController(applyBorrowVC, animated: true)
+        }else{
+            let loginVC = LoginViewController()
+            loginVC.isShowBackBtn = true
+            navigationController?.pushViewController(loginVC, animated: true)
         }
-        applyBorrowVC.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(applyBorrowVC, animated: true)
     }
 }
 
 extension IBorrowViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        return 2
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 1
-        }else if section == 1{
+        if section == 0{
             return 2
         }else{
             return 2
@@ -110,19 +114,7 @@ extension IBorrowViewController: UITableViewDataSource, UITableViewDelegate{
         for itemView in cell.contentView.subviews {
             itemView.removeFromSuperview()
         }
-        if indexPath.section == 0 {
-            // iv
-            let iv = UIImageView(frame: CGRectMake(10, (cell.viewHeight - 16) / 2, 16, 16))
-            iv.image = UIImage(named: "woyaojiekuan")
-            cell.contentView.addSubview(iv)
-            // titleLbl
-            let titleLbl = UILabel(frame: CGRectMake(iv.viewRightX + 2, 0, 200, cell.viewHeight))
-            titleLbl.font = UIFont.systemFontOfSize(16)
-            titleLbl.contentMode = .Left
-            titleLbl.text = "借款的方式和流程"
-            titleLbl.textColor = UIColor.grayColor()
-            cell.contentView.addSubview(titleLbl)
-        }else if indexPath.section == 1{
+        if indexPath.section == 0{
             if indexPath.row == 0 {
                 let iv = UIImageView(frame: CGRectMake(0, 0, screen_width, cell.viewHeight))
                 iv.image = UIImage(named: "default_bgimg")
@@ -312,14 +304,12 @@ extension IBorrowViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         switch indexPath.section {
         case 0:
-            return 40
-        case 1:
             if indexPath.row == 0 {
                 return 120
             }else{
                 return 86
             }
-        case 2:
+        case 1:
             return 220
         default:
             return 0

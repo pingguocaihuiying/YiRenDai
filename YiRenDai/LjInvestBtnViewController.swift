@@ -79,6 +79,7 @@ class LjInvestBtnViewController: BaseNavigationController {
                 self.productData = data["data"]["productlist"][0]
                 //刷新结束
                 self.tableView.mj_header.endRefreshing()
+                self.setTopViewTitle(data["data"].dictionaryValue["productlist"]!.arrayValue[0].dictionaryValue["product_name"]!.stringValue)
                 //刷新数据
                 self.tableView.reloadData()
             }else{
@@ -269,7 +270,8 @@ extension LjInvestBtnViewController: UITableViewDataSource, UITableViewDelegate{
             detail4.textColor = UIColor.lightGrayColor()
             detail4.textAlignment = .Right
             detail4.textColor = UIColor.getRedColorFirst()
-            detail4.text = NSString(format: "%.2f", productData!["min_amount"].floatValue * productData!["interest_rate"].floatValue / 100 / 12) as String
+            let fengbiqiValue = productData!["duration_type"].stringValue.substringToIndex(productData!["duration_type"].stringValue.startIndex.advancedBy(productData!["duration_type"].stringValue.characters.count - 2))
+            detail4.text = NSString(format: "%.2f", productData!["min_amount"].floatValue * productData!["interest_rate"].floatValue / 100 / 12 * Float(fengbiqiValue)!) as String
             view1.addSubview(detail4)
             
             //view2

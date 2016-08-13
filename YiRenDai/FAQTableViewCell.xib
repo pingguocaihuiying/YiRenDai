@@ -46,7 +46,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ax-Pg-6T5">
-                        <rect key="frame" x="154" y="23" width="133" height="20"/>
+                        <rect key="frame" x="95" y="23" width="192" height="20"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -66,7 +66,7 @@
                     <constraint firstItem="Wjz-VW-Von" firstAttribute="top" secondItem="yqg-7s-Nsk" secondAttribute="top" id="6u5-Xs-gw2"/>
                     <constraint firstItem="Ed6-rP-gos" firstAttribute="leading" secondItem="yqg-7s-Nsk" secondAttribute="leadingMargin" id="Buf-f0-304"/>
                     <constraint firstItem="Wjz-VW-Von" firstAttribute="leading" secondItem="Ed6-rP-gos" secondAttribute="trailing" constant="8" symbolic="YES" id="F6j-V1-lEj"/>
-                    <constraint firstItem="Wjz-VW-Von" firstAttribute="leading" secondItem="9ax-Pg-6T5" secondAttribute="leading" id="LgF-tw-6rv"/>
+                    <constraint firstItem="Wjz-VW-Von" firstAttribute="leading" secondItem="9ax-Pg-6T5" secondAttribute="leading" constant="59" id="LgF-tw-6rv"/>
                     <constraint firstItem="Wjz-VW-Von" firstAttribute="trailing" secondItem="9ax-Pg-6T5" secondAttribute="trailing" id="OYa-q7-ZoC"/>
                     <constraint firstItem="Ed6-rP-gos" firstAttribute="top" secondItem="yqg-7s-Nsk" secondAttribute="topMargin" constant="4" id="ToS-Ss-ItF"/>
                     <constraint firstItem="9ax-Pg-6T5" firstAttribute="top" secondItem="Wjz-VW-Von" secondAttribute="bottom" constant="2" id="WF5-BH-z5m"/>

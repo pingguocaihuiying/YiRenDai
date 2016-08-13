@@ -23,6 +23,7 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
     
     // view
     var tableView: UITableView!
+    
     var amountTxt: UITextField!
     var purposeTxt: UITextField!
     var deadlineTxt: UITextField!
@@ -33,19 +34,25 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
     var phoneTxt: UITextField!
     var contactTimeTxt: UITextField!
     var incomeTxt: UITextField!
+    var carPinpaiTxt: UITextField!
+    var carXinghaoTxt: UITextField!
+    var dengjiDateTxt: UITextField!
+    var lichengTxt: UITextField!
+    var priceTxt: UITextField!
+    var pailiangTxt: UITextField!
     
-    var amountValue: String!
     var purposeValue: String!
     var deadlineValue: String!
     var cityValue: String!
     var timeValue: String!
-    var checkSexValue: Int!
+    var checkSexValue: Int! // 1 男  2 女
     var birthdayValue: String!
     var contactTimeValue: String!
     var houseValue: Int!
     var carValue: Int!
     var incomeValue: String!
     var cardValue: Int!
+    var biansuxiangValue: Int!
     
     var bgView: CLPickerView!
     var pickerView: UIPickerView!
@@ -53,6 +60,7 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
     // data
     var clickControl: Int!
     var currentShowData = [String]()
+    var loan_kinds: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,13 +70,23 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
         
         if applyType ==  ApplyType.Gongxindai {
             self.setTopViewTitle("上班族 - 工薪贷")
+            loan_kinds = "1"
         }else if applyType ==  ApplyType.Zhuyedai{
             self.setTopViewTitle("创业族 - 助业贷")
+            loan_kinds = "2"
         }else if applyType ==  ApplyType.Wuyedai{
             self.setTopViewTitle("有房族 - 物业贷")
+            loan_kinds = "3"
         }else if applyType ==  ApplyType.Chezhudai{
             self.setTopViewTitle("有车族 - 车主贷")
+            loan_kinds = "4"
         }
+        
+        checkSexValue = 1;
+        houseValue = 4;
+        carValue = 7
+        cardValue = 10
+        biansuxiangValue = 11
         
         initView()
     }
@@ -79,6 +97,9 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        if bgView != nil{
+            bgView.dismiss()
+        }
         if amountTxt != nil{
             amountTxt.resignFirstResponder()
         }
@@ -108,6 +129,24 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
         }
         if incomeTxt != nil{
             incomeTxt.resignFirstResponder()
+        }
+        if carPinpaiTxt != nil{
+            carPinpaiTxt.resignFirstResponder()
+        }
+        if carXinghaoTxt != nil{
+            carXinghaoTxt.resignFirstResponder()
+        }
+        if dengjiDateTxt != nil{
+            dengjiDateTxt.resignFirstResponder()
+        }
+        if lichengTxt != nil{
+            lichengTxt.resignFirstResponder()
+        }
+        if priceTxt != nil{
+            priceTxt.resignFirstResponder()
+        }
+        if pailiangTxt != nil{
+            pailiangTxt.resignFirstResponder()
         }
     }
     
@@ -146,18 +185,98 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
     }
     
     func clickCompleteEvent(){
-        DataProvider.sharedInstance.jiekuanSubmit("1", amounts: "5000", loan_purpose: "消费", loan_term: "三个月", city: "临沂", live_time: "半年", name: "姓名", sex: "男", year: "22", tel: "12345678901", contact_time: "不限时间", house: "无", car_port: "无", avg_salary: "5000", card: "无", brand: "无", model_of_car: "无", record_data: "无", gearbox: "无", list_the_mileage: "无", price: "无", cc: "无", member_id: ToolKit.getStringByKey("userId")) { (data) in
-            if data["status"]["succeed"].intValue == 1{
-                self.view.viewAlert(self, title: "提示", msg: "提交成功", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: { (buttonIndex, action) in
-                    self.navigationController?.popViewControllerAnimated(true)
-                })
-            }else{
-                self.view.viewAlert(self, title: "提示", msg: "提交失败", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+        if loan_kinds == "4" {
+            if amountTxt.text! == "" || purposeValue == nil || deadlineValue == nil || cityValue == nil || timeValue == nil || nameTxt.text! == "" || birthdayValue == nil || phoneTxt.text! == "" || contactTimeValue == nil || incomeTxt.text! == "" || carPinpaiTxt.text! == "" || carXinghaoTxt.text! == "" || dengjiDateTxt.text! == "" || lichengTxt.text! == "" || priceTxt.text == "" || pailiangTxt.text == "" {
+                self.view.viewAlert(self, title: "提示", msg: "请先完善信息", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+                return
+            }
+            
+            var houseStr = "";
+            if houseValue == 3 {
+                houseStr = "无房";
+            }else if houseValue == 4{
+                houseStr = "有房无贷"
+            }else if houseValue == 5{
+                houseStr = "有房有贷"
+            }
+            
+            var carStr = ""
+            if carValue == 6 {
+                carStr = "无车";
+            }else if carValue == 7{
+                carStr = "有车无贷"
+            }else if carValue == 8{
+                carStr = "有车有贷"
+            }
+            
+            DataProvider.sharedInstance.jiekuanSubmit(loan_kinds, amounts: amountTxt.text!, loan_purpose: purposeValue, loan_term: deadlineValue, city: cityValue, live_time: timeValue, name: nameTxt.text!, sex: checkSexValue == 1 ? "男" : "女", year: birthdayValue, tel: phoneTxt.text!, contact_time: contactTimeValue, house: houseStr, car_port: carStr, avg_salary: incomeTxt.text!, card: cardValue == 9 ? "无" : "有", brand: carPinpaiTxt.text!, model_of_car: carXinghaoTxt.text!, record_data: dengjiDateTxt.text!, gearbox: biansuxiangValue == 11 ? "手动挡" : "自动挡", list_the_mileage: lichengTxt.text!, price: priceTxt.text!, cc: pailiangTxt.text!, member_id: ToolKit.getStringByKey("userId")) { (data) in
+                if data["status"]["succeed"].intValue == 1{
+                    self.view.viewAlert(self, title: "提示", msg: "提交成功", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: { (buttonIndex, action) in
+                        self.navigationController?.popViewControllerAnimated(true)
+                    })
+                }else{
+                    self.view.viewAlert(self, title: "提示", msg: "提交失败", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+                }
+            }
+        }else{
+            if amountTxt.text! == "" || purposeValue == nil || deadlineValue == nil || cityValue == nil || timeValue == nil || nameTxt.text! == "" || birthdayValue == nil || phoneTxt.text! == "" || contactTimeValue == nil || incomeTxt.text! == "" {
+                self.view.viewAlert(self, title: "提示", msg: "请先完善信息", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+                return
+            }
+            
+            var houseStr = "";
+            if houseValue == 3 {
+                houseStr = "无房";
+            }else if houseValue == 4{
+                houseStr = "有房无贷"
+            }else if houseValue == 5{
+                houseStr = "有房有贷"
+            }
+            
+            var carStr = ""
+            if carValue == 6 {
+                carStr = "无车";
+            }else if carValue == 7{
+                carStr = "有车无贷"
+            }else if carValue == 8{
+                carStr = "有车有贷"
+            }
+            
+            DataProvider.sharedInstance.jiekuanSubmit(loan_kinds, amounts: amountTxt.text!, loan_purpose: purposeValue, loan_term: deadlineValue, city: cityValue, live_time: timeValue, name: nameTxt.text!, sex: checkSexValue == 1 ? "男" : "女", year: birthdayValue, tel: phoneTxt.text!, contact_time: contactTimeValue, house: houseStr, car_port: carStr, avg_salary: incomeTxt.text!, card: cardValue == 9 ? "无" : "有", brand: "无", model_of_car: "无", record_data: "无", gearbox: "无", list_the_mileage: "无", price: "无", cc: "无", member_id: ToolKit.getStringByKey("userId")) { (data) in
+                if data["status"]["succeed"].intValue == 1{
+                    self.view.viewAlert(self, title: "提示", msg: "提交成功", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: { (buttonIndex, action) in
+                        self.navigationController?.popViewControllerAnimated(true)
+                    })
+                }else{
+                    self.view.viewAlert(self, title: "提示", msg: "提交失败", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+                }
             }
         }
     }
     
     func clickTextField(sender: UIButton) {
+        if amountTxt != nil {
+            amountTxt.resignFirstResponder()
+        }
+        if nameTxt != nil{
+            nameTxt.resignFirstResponder()
+        }
+        if phoneTxt != nil{
+            phoneTxt.resignFirstResponder()
+        }
+        if incomeTxt != nil{
+            incomeTxt.resignFirstResponder()
+        }
+        if carPinpaiTxt != nil{
+            carPinpaiTxt.resignFirstResponder()
+        }
+        if carXinghaoTxt != nil{
+            carXinghaoTxt.resignFirstResponder()
+        }
+        if dengjiDateTxt != nil{
+            dengjiDateTxt.resignFirstResponder()
+        }
+        
         currentShowData = []
         clickControl = sender.tag
         if bgView == nil {
@@ -199,6 +318,9 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
         }else if iFlagValue == 9 || iFlagValue == 10{
             cardValue = iFlagValue
             tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 2)], withRowAnimation: .Automatic)
+        }else if iFlagValue == 11 || iFlagValue == 12{
+            biansuxiangValue = iFlagValue
+            tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 3)], withRowAnimation: .Automatic)
         }
     }
     
@@ -234,7 +356,11 @@ class ApplyBorrowViewController: BaseNavigationController, CLPickerViewDelegate 
 extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
     // UITableViewDataSource
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
+        if loan_kinds == "4" {
+            return 4
+        }else{
+            return 3
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -249,8 +375,10 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 return 155
             }else if indexPath.section == 1{
                 return 295
-            }else{
+            }else if indexPath.section == 2{
                 return 165
+            }else{
+                return 300;
             }
         }
     }
@@ -288,12 +416,14 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 amountTitleLbl.text = "借款金额"
                 cell.contentView.addSubview(amountTitleLbl)
                 // amountTxt
-                amountTxt = UITextField(frame: CGRectMake(amountTitleLbl.viewRightX, typeTitleLbl.viewBottomY + 10, screen_width * 0.6, 30))
-                amountTxt.placeholder = "最高5000"
-                amountTxt.keyboardType = .NumberPad
-                amountTxt.textAlignment = .Center
-                amountTxt.layer.borderWidth = 1
-                amountTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                if amountTxt == nil {
+                    amountTxt = UITextField(frame: CGRectMake(amountTitleLbl.viewRightX, typeTitleLbl.viewBottomY + 10, screen_width * 0.6, 30))
+                    amountTxt.placeholder = "最高5000"
+                    amountTxt.keyboardType = .NumberPad
+                    amountTxt.textAlignment = .Center
+                    amountTxt.layer.borderWidth = 1
+                    amountTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                }
                 cell.contentView.addSubview(amountTxt)
                 // yuanLbl
                 let yuanLbl = UILabel(frame: CGRectMake(amountTxt.viewRightX + 2, amountTxt.viewY, 30, 30))
@@ -426,11 +556,13 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 nameTitleLbl.text = "您的姓名"
                 cell.contentView.addSubview(nameTitleLbl)
                 // nameTxt
-                nameTxt = UITextField(frame: CGRectMake(nameTitleLbl.viewRightX, nameTitleLbl.viewY, screen_width * 0.6, 30))
-                nameTxt.placeholder = "请填写您的姓名"
-                nameTxt.textAlignment = .Center
-                nameTxt.layer.borderWidth = 1
-                nameTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                if nameTxt == nil {
+                    nameTxt = UITextField(frame: CGRectMake(nameTitleLbl.viewRightX, nameTitleLbl.viewY, screen_width * 0.6, 30))
+                    nameTxt.placeholder = "请填写您的姓名"
+                    nameTxt.textAlignment = .Center
+                    nameTxt.layer.borderWidth = 1
+                    nameTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                }
                 cell.contentView.addSubview(nameTxt)
                 
                 // sexTitleLbl
@@ -507,12 +639,14 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 phoneTitleLbl.text = "手机号码"
                 cell.contentView.addSubview(phoneTitleLbl)
                 // phoneTxt
-                phoneTxt = UITextField(frame: CGRectMake(phoneTitleLbl.viewRightX, phoneTitleLbl.viewY, screen_width * 0.6, 30))
-                phoneTxt.placeholder = "请填写您的手机号"
-                phoneTxt.keyboardType = .PhonePad
-                phoneTxt.textAlignment = .Center
-                phoneTxt.layer.borderWidth = 1
-                phoneTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                if phoneTxt == nil{
+                    phoneTxt = UITextField(frame: CGRectMake(phoneTitleLbl.viewRightX, phoneTitleLbl.viewY, screen_width * 0.6, 30))
+                    phoneTxt.placeholder = "请填写您的手机号"
+                    phoneTxt.keyboardType = .PhonePad
+                    phoneTxt.textAlignment = .Center
+                    phoneTxt.layer.borderWidth = 1
+                    phoneTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                }
                 cell.contentView.addSubview(phoneTxt)
                 
                 // contactTimeTitleLbl
@@ -541,7 +675,7 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 // add dropdownIv3
                 contactTimeTxt.addSubview(dropdownIv3)
             }
-        }else{
+        }else if (indexPath.section == 2){
             if indexPath.row == 0{
                 // iv
                 let iv = UIImageView(frame: CGRectMake(20, (cell.viewHeight - 20) / 2, 20, 20))
@@ -667,13 +801,15 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 incomeTitleLbl.text = "月均收入"
                 cell.contentView.addSubview(incomeTitleLbl)
                 // incomeTxt
-                incomeTxt = UITextField(frame: CGRectMake(incomeTitleLbl.viewRightX, incomeTitleLbl.viewY, screen_width * 0.6, 30))
-                incomeTxt.placeholder = "请选择"
-                incomeTxt.keyboardType = .NumberPad
-                incomeTxt.text = incomeValue
-                incomeTxt.textAlignment = .Center
-                incomeTxt.layer.borderWidth = 1
-                incomeTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                if incomeTxt == nil {
+                    incomeTxt = UITextField(frame: CGRectMake(incomeTitleLbl.viewRightX, incomeTitleLbl.viewY, screen_width * 0.6, 30))
+                    incomeTxt.placeholder = "请选择"
+                    incomeTxt.keyboardType = .NumberPad
+                    incomeTxt.text = incomeValue
+                    incomeTxt.textAlignment = .Center
+                    incomeTxt.layer.borderWidth = 1
+                    incomeTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                }
                 cell.contentView.addSubview(incomeTxt)
                 // yuanLbl
                 let yuanLbl = UILabel(frame: CGRectMake(incomeTxt.viewRightX + 2, incomeTxt.viewY, 30, 30))
@@ -719,6 +855,177 @@ extension ApplyBorrowViewController: UITableViewDataSource, UITableViewDelegate{
                 yesTitleLbl.textColor = UIColor.grayColor()
                 yesTitleLbl.text = "有"
                 cell.contentView.addSubview(yesTitleLbl)
+            }
+        }else{
+            if indexPath.row == 0{
+                // iv
+                let iv = UIImageView(frame: CGRectMake(20, (cell.viewHeight - 20) / 2, 20, 20))
+                iv.image = UIImage(named: "cheliangxinxi")
+                cell.contentView.addSubview(iv)
+                // titleLbl
+                let titleLbl = UILabel(frame: CGRectMake(iv.viewRightX + 5, 0, 200, cell.viewHeight))
+                titleLbl.text = "车辆信息"
+                titleLbl.textAlignment = .Left
+                cell.contentView.addSubview(titleLbl)
+            }else{
+                // carPinpaiLbl
+                let carPinpaiLbl = UILabel(frame: CGRectMake(20, 10, 65, 30))
+                carPinpaiLbl.textAlignment = .Left
+                carPinpaiLbl.font = UIFont.systemFontOfSize(15)
+                carPinpaiLbl.textColor = UIColor.grayColor()
+                carPinpaiLbl.text = "车辆品牌"
+                cell.contentView.addSubview(carPinpaiLbl)
+                // carPinpaiTxt
+                if carPinpaiTxt == nil {
+                    carPinpaiTxt = UITextField(frame: CGRectMake(CGRectGetMaxX(carPinpaiLbl.frame), 10, screen_width * 0.6, 30))
+                    carPinpaiTxt.placeholder = "请输入车辆品牌"
+                    carPinpaiTxt.textAlignment = .Center
+                    carPinpaiTxt.layer.borderWidth = 1
+                    carPinpaiTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                }
+                cell.contentView.addSubview(carPinpaiTxt)
+                
+                // carXinghaoLbl
+                let carXinghaoLbl = UILabel(frame: CGRectMake(20, carPinpaiLbl.viewBottomY + 10, 65, 30))
+                carXinghaoLbl.textAlignment = .Left
+                carXinghaoLbl.font = UIFont.systemFontOfSize(15)
+                carXinghaoLbl.textColor = UIColor.grayColor()
+                carXinghaoLbl.text = "车辆型号"
+                cell.contentView.addSubview(carXinghaoLbl)
+                // carXinghaoTxt
+                if carXinghaoTxt == nil {
+                    carXinghaoTxt = UITextField(frame: CGRectMake(CGRectGetMaxX(carPinpaiLbl.frame), carXinghaoLbl.viewY, screen_width * 0.6, 30))
+                    carXinghaoTxt.placeholder = "请输入车辆型号"
+                    carXinghaoTxt.textAlignment = .Center
+                    carXinghaoTxt.layer.borderWidth = 1
+                    carXinghaoTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                }
+                cell.contentView.addSubview(carXinghaoTxt)
+                
+                // dengjiDateLbl
+                let dengjiDateLbl = UILabel(frame: CGRectMake(20, carXinghaoLbl.viewBottomY + 10, 65, 30))
+                dengjiDateLbl.textAlignment = .Left
+                dengjiDateLbl.font = UIFont.systemFontOfSize(15)
+                dengjiDateLbl.textColor = UIColor.grayColor()
+                dengjiDateLbl.text = "登记日期"
+                cell.contentView.addSubview(dengjiDateLbl)
+                // dengjiDateTxt
+                if dengjiDateTxt == nil {
+                    dengjiDateTxt = UITextField(frame: CGRectMake(CGRectGetMaxX(dengjiDateLbl.frame), dengjiDateLbl.viewY, screen_width * 0.6, 30))
+                    dengjiDateTxt.placeholder = "请输入登记日期"
+                    dengjiDateTxt.keyboardType = .Default
+                    dengjiDateTxt.textAlignment = .Center
+                    dengjiDateTxt.layer.borderWidth = 1
+                    dengjiDateTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                }
+                cell.contentView.addSubview(dengjiDateTxt)
+                
+                // biansuxiangLbl
+                let biansuxiangLbl = UILabel(frame: CGRectMake(20, dengjiDateLbl.viewBottomY + 10, 65, 30))
+                biansuxiangLbl.textAlignment = .Left
+                biansuxiangLbl.font = UIFont.systemFontOfSize(15)
+                biansuxiangLbl.textColor = UIColor.grayColor()
+                biansuxiangLbl.text = "信用卡"
+                cell.contentView.addSubview(biansuxiangLbl)
+                // noIv
+                let noIv = UIImageView(frame: CGRectMake(biansuxiangLbl.viewRightX + 30, biansuxiangLbl.viewY + (30 - 20) / 2, 20, 20))
+                noIv.image = UIImage(named: biansuxiangValue != nil && biansuxiangValue == 11 ? "xuanze" : "wuxuanze")
+                cell.contentView.addSubview(noIv)
+                noIv.tag = 11
+                let tapNoIv = UITapGestureRecognizer(target: self, action: #selector(checkEvent(_:)))
+                noIv.userInteractionEnabled = true
+                noIv.addGestureRecognizer(tapNoIv)
+                // noTitleLbl
+                let noTitleLbl = UILabel(frame: CGRectMake(noIv.viewRightX + 5, biansuxiangLbl.viewY, 45, 30))
+                noTitleLbl.textAlignment = .Left
+                noTitleLbl.font = UIFont.systemFontOfSize(15)
+                noTitleLbl.textColor = UIColor.grayColor()
+                noTitleLbl.text = "手动挡"
+                cell.contentView.addSubview(noTitleLbl)
+                // yesIv
+                let yesIv = UIImageView(frame: CGRectMake(noTitleLbl.viewRightX + 30, biansuxiangLbl.viewY + (30 - 20) / 2, 20, 20))
+                yesIv.image = UIImage(named: biansuxiangValue == nil || biansuxiangValue == 12 ? "xuanze" : "wuxuanze")
+                cell.contentView.addSubview(yesIv)
+                yesIv.tag = 12
+                let tapYesIv = UITapGestureRecognizer(target: self, action: #selector(checkEvent(_:)))
+                yesIv.userInteractionEnabled = true
+                yesIv.addGestureRecognizer(tapYesIv)
+                // yesTitleLbl
+                let yesTitleLbl = UILabel(frame: CGRectMake(yesIv.viewRightX + 5, biansuxiangLbl.viewY, 45, 30))
+                yesTitleLbl.textAlignment = .Left
+                yesTitleLbl.font = UIFont.systemFontOfSize(15)
+                yesTitleLbl.textColor = UIColor.grayColor()
+                yesTitleLbl.text = "自动挡"
+                cell.contentView.addSubview(yesTitleLbl)
+                
+                // lichengLbl
+                let lichengLbl = UILabel(frame: CGRectMake(20, biansuxiangLbl.viewBottomY + 10, 65, 30))
+                lichengLbl.textAlignment = .Left
+                lichengLbl.font = UIFont.systemFontOfSize(15)
+                lichengLbl.textColor = UIColor.grayColor()
+                lichengLbl.text = "表里里程"
+                cell.contentView.addSubview(lichengLbl)
+                // lichengTxt
+                if lichengTxt == nil {
+                    lichengTxt = UITextField(frame: CGRectMake(CGRectGetMaxX(lichengLbl.frame), lichengLbl.viewY, screen_width * 0.6, 30))
+                    lichengTxt.keyboardType = .DecimalPad
+                    lichengTxt.textAlignment = .Center
+                    lichengTxt.layer.borderWidth = 1
+                    lichengTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                }
+                cell.contentView.addSubview(lichengTxt)
+                // gongliLbl
+                let gongliLbl = UILabel(frame: CGRectMake(lichengTxt.viewRightX + 2, lichengTxt.viewY, 30, 30))
+                gongliLbl.text = "公里"
+                gongliLbl.textColor = UIColor.grayColor()
+                gongliLbl.font = UIFont.systemFontOfSize(15)
+                cell.contentView.addSubview(gongliLbl)
+                
+                // priceLbl
+                let priceLbl = UILabel(frame: CGRectMake(20, lichengLbl.viewBottomY + 10, 65, 30))
+                priceLbl.textAlignment = .Left
+                priceLbl.font = UIFont.systemFontOfSize(15)
+                priceLbl.textColor = UIColor.grayColor()
+                priceLbl.text = "购置价格"
+                cell.contentView.addSubview(priceLbl)
+                // priceTxt
+                if priceTxt == nil {
+                    priceTxt = UITextField(frame: CGRectMake(CGRectGetMaxX(priceLbl.frame), priceLbl.viewY, screen_width * 0.6, 30))
+                    priceTxt.keyboardType = .DecimalPad
+                    priceTxt.textAlignment = .Center
+                    priceTxt.layer.borderWidth = 1
+                    priceTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                }
+                cell.contentView.addSubview(priceTxt)
+                // yuanLbl
+                let yuanLbl = UILabel(frame: CGRectMake(priceTxt.viewRightX + 2, priceTxt.viewY, 30, 30))
+                yuanLbl.text = "元"
+                yuanLbl.textColor = UIColor.grayColor()
+                yuanLbl.font = UIFont.systemFontOfSize(15)
+                cell.contentView.addSubview(yuanLbl)
+                
+                // pailiangLbl
+                let pailiangLbl = UILabel(frame: CGRectMake(20, priceLbl.viewBottomY + 10, 65, 30))
+                pailiangLbl.textAlignment = .Left
+                pailiangLbl.font = UIFont.systemFontOfSize(15)
+                pailiangLbl.textColor = UIColor.grayColor()
+                pailiangLbl.text = "排量"
+                cell.contentView.addSubview(pailiangLbl)
+                // pailiangTxt
+                if pailiangTxt == nil {
+                    pailiangTxt = UITextField(frame: CGRectMake(CGRectGetMaxX(pailiangLbl.frame), pailiangLbl.viewY, screen_width * 0.6, 30))
+                    pailiangTxt.keyboardType = .DecimalPad
+                    pailiangTxt.textAlignment = .Center
+                    pailiangTxt.layer.borderWidth = 1
+                    pailiangTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+                }
+                cell.contentView.addSubview(pailiangTxt)
+                // shengLbl
+                let shengLbl = UILabel(frame: CGRectMake(pailiangTxt.viewRightX + 2, pailiangTxt.viewY, 30, 30))
+                shengLbl.text = "升"
+                shengLbl.textColor = UIColor.grayColor()
+                shengLbl.font = UIFont.systemFontOfSize(15)
+                cell.contentView.addSubview(shengLbl)
             }
         }
         return cell

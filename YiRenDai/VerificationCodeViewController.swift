@@ -42,7 +42,7 @@ class VerificationCodeViewController: BaseNavigationController, UITextFieldDeleg
         let verificationCodeView = UIView(frame: CGRectMake(0, detailLbl.viewBottomY + 10, screen_width, 47 + 1))
         verificationCodeView.backgroundColor = UIColor.whiteColor()
         view.addSubview(verificationCodeView)
-        //accountTxt
+        //verificationTxt
         verificationTxt = UITextField(frame: CGRectMake(20, 0, verificationCodeView.viewWidth - 40, 47))
         verificationTxt.delegate = self
         verificationTxt.placeholder = "请输入验证码"

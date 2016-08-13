@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -80,7 +80,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XUZ-mH-cUO">
-                        <rect key="frame" x="154" y="23" width="133" height="21"/>
+                        <rect key="frame" x="109" y="23" width="178" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -97,18 +97,18 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="JhO-nI-CQ7" firstAttribute="centerY" secondItem="ptd-st-6es" secondAttribute="centerY" id="0QW-hv-9T8"/>
-                    <constraint firstItem="GKb-zo-0ar" firstAttribute="trailing" secondItem="XUZ-mH-cUO" secondAttribute="trailing" id="1CL-zr-BMb"/>
                     <constraint firstItem="GKb-zo-0ar" firstAttribute="top" secondItem="ptd-st-6es" secondAttribute="top" id="2Mo-7z-9e4"/>
                     <constraint firstItem="JhO-nI-CQ7" firstAttribute="centerY" secondItem="dTH-SS-Uvg" secondAttribute="centerY" id="E0r-SV-h8z"/>
-                    <constraint firstItem="XUZ-mH-cUO" firstAttribute="leading" secondItem="dTH-SS-Uvg" secondAttribute="trailing" constant="6" id="I4N-03-htd"/>
                     <constraint firstAttribute="trailing" secondItem="GKb-zo-0ar" secondAttribute="trailing" id="LLd-QB-aoa"/>
-                    <constraint firstAttribute="bottom" secondItem="XUZ-mH-cUO" secondAttribute="bottom" id="c7d-wQ-5rF"/>
+                    <constraint firstItem="XUZ-mH-cUO" firstAttribute="trailing" secondItem="GKb-zo-0ar" secondAttribute="trailing" id="Sdl-ep-XQ4"/>
                     <constraint firstItem="dTH-SS-Uvg" firstAttribute="leading" secondItem="JhO-nI-CQ7" secondAttribute="trailing" constant="11" id="gQN-CE-c3F"/>
                     <constraint firstItem="JhO-nI-CQ7" firstAttribute="top" secondItem="ptd-st-6es" secondAttribute="topMargin" constant="3" id="lE4-vc-lcf"/>
                     <constraint firstItem="GKb-zo-0ar" firstAttribute="leading" secondItem="dTH-SS-Uvg" secondAttribute="trailing" constant="26" id="nUX-7f-MIZ"/>
+                    <constraint firstItem="XUZ-mH-cUO" firstAttribute="leading" secondItem="JhO-nI-CQ7" secondAttribute="trailing" constant="67" id="nzg-oE-dyK"/>
                     <constraint firstItem="JhO-nI-CQ7" firstAttribute="leading" secondItem="ptd-st-6es" secondAttribute="leadingMargin" constant="12" id="qIb-zk-1Pl"/>
                     <constraint firstItem="JhO-nI-CQ7" firstAttribute="bottom" secondItem="dTH-SS-Uvg" secondAttribute="bottom" id="rhT-iR-1eu"/>
-                    <constraint firstItem="XUZ-mH-cUO" firstAttribute="top" secondItem="GKb-zo-0ar" secondAttribute="bottom" constant="2" id="tIx-oe-v0N"/>
+                    <constraint firstItem="XUZ-mH-cUO" firstAttribute="top" secondItem="GKb-zo-0ar" secondAttribute="bottom" constant="2" id="tQ1-LR-BrV"/>
+                    <constraint firstAttribute="bottom" secondItem="XUZ-mH-cUO" secondAttribute="bottom" id="u4q-Ug-RuJ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

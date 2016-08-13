@@ -20,7 +20,7 @@ class YouhuiquanViewController: BaseNavigationController {
     // data
     var youhuiquanData = [JSON]()
     var pagenumber: Int!
-    let pagesize = 15
+    let pagesize = 10000
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,15 +52,9 @@ class YouhuiquanViewController: BaseNavigationController {
         DataProvider.sharedInstance.getYouhuiquanList(ToolKit.getStringByKey("userId"), pagenumber: "\(pagenumber)", pagesize: "\(pagesize)") { (data) in
             self.tableView.mj_header.endRefreshing()
             print(data)
+            
             if data["status"]["succeed"].intValue == 1{
                 self.youhuiquanData = data["data"]["couponlist"].arrayValue;
-                if self.youhuiquanData.count == data["data"]["page"]["total"].intValue{
-                    // 所有数据加载完毕，没有更多的数据了
-                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
-                }else{
-                    // mj_footer设置为:普通闲置状态(Idle)
-                    self.tableView.mj_footer.state = MJRefreshState.Idle
-                }
                 self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: UITableViewRowAnimation.Automatic)
             }
         }
@@ -79,8 +73,13 @@ class YouhuiquanViewController: BaseNavigationController {
             let okAction = UIAlertAction(title: "添加", style: UIAlertActionStyle.Default, handler: { (action) -> Void in
                 let youhuiquanTxt = alertController.textFields?.first
                 if !youhuiquanTxt!.text!.isEmpty{
-                    DataProvider.sharedInstance.addYouhuiquan(ToolKit.getStringByKey("userId"), coupon_code: youhuiquanTxt!.text!, handler: { (data) in
-                        print(data)
+                    DataProvider.sharedInstance.addYouhuiquan(ToolKit.getStringByKey("userId"), coupon_code: "f7214a737af8626f"/*youhuiquanTxt!.text!*/, handler: { (data) in
+                        if data["status"]["succeed"].intValue == 1{
+                            print(data)
+                            LoadingAnimation.showSuccess(self, msg: "添加成功")
+                        }else{
+                            self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+                        }
                     })
                 }
             })
@@ -107,7 +106,7 @@ extension YouhuiquanViewController: UITableViewDataSource, UITableViewDelegate{
         if section == 0 {
             return 1
         }else{
-            return 2//youhuiquanData.count
+            return youhuiquanData.count
         }
     }
     
@@ -185,7 +184,7 @@ extension YouhuiquanViewController: UITableViewDataSource, UITableViewDelegate{
             bgRightIv.addSubview(titleRightLbl)
             // detailRightLbl1
             let detailRightLbl1 = UILabel(frame: CGRectMake(titleRightLbl.viewX, titleRightLbl.viewBottomY, 200, 21))
-            detailRightLbl1.text = "2016-2-11已过期"
+            detailRightLbl1.text = "2016-2-11过期"
             detailRightLbl1.textColor = UIColor.grayColor()
             detailRightLbl1.font = UIFont.systemFontOfSize(12)
             bgRightIv.addSubview(detailRightLbl1)

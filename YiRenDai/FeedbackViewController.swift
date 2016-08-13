@@ -33,8 +33,14 @@ class FeedbackViewController: BaseNavigationController, UITextViewDelegate {
         if contentTv.text.isEmpty {
             return
         }
-        DataProvider.sharedInstance.feedback(ToolKit.getStringByKey("userId"), feedback_content: contentTv.text) { (data) in
-            print(data)
+        DataProvider.sharedInstance.feedback("1", feedback_content: contentTv.text) { (data) in
+            if data["status"]["succeed"].intValue == 1{
+                self.view.viewAlert(self, title: "提示", msg: "提交成功", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: { (buttonIndex, action) in
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: "提交失败", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
         }
     }
     

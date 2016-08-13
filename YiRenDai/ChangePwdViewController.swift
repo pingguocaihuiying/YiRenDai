@@ -58,6 +58,7 @@ class ChangePwdViewController: BaseNavigationController, UITextFieldDelegate {
         //oldPwdTxt
         oldPwdTxt = UITextField(frame: CGRectMake(pwdIv.viewRightX + 15, 0, pwdView.viewWidth - 28, 47))
         oldPwdTxt.delegate = self
+        oldPwdTxt.secureTextEntry = true
         oldPwdTxt.placeholder = "请输入原密码"
         oldPwdTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
         pwdView.addSubview(oldPwdTxt)
@@ -68,6 +69,7 @@ class ChangePwdViewController: BaseNavigationController, UITextFieldDelegate {
         //pwdTxt
         pwdTxt = UITextField(frame: CGRectMake(oldPwdTxt.viewX, lineView2.viewBottomY, oldPwdTxt.viewWidth - 28, 47))
         pwdTxt.delegate = self
+        pwdTxt.secureTextEntry = true
         pwdTxt.placeholder = "新密码（6-16位字符）"
         pwdTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
         pwdView.addSubview(pwdTxt)
@@ -78,6 +80,7 @@ class ChangePwdViewController: BaseNavigationController, UITextFieldDelegate {
         //rePwdTxt
         rePwdTxt = UITextField(frame: CGRectMake(pwdIv.viewRightX + 15, lineView3.viewBottomY, pwdView.viewWidth - 28, 47))
         rePwdTxt.delegate = self
+        rePwdTxt.secureTextEntry = true
         rePwdTxt.placeholder = "请再次输入密码"
         rePwdTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)
         pwdView.addSubview(rePwdTxt)
@@ -97,6 +100,7 @@ class ChangePwdViewController: BaseNavigationController, UITextFieldDelegate {
     }
     
     func clickEvent(sender: UIButton){
+        self.view.endEditing(true)
         if oldPwdTxt.text == "" || pwdTxt.text == "" || rePwdTxt.text == "" {
             view.viewAlert(self, title: "提示", msg: "密码不能为空", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
             return

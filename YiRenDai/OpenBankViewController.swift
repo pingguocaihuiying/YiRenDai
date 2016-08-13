@@ -31,10 +31,38 @@ class OpenBankViewController: BaseNavigationController {
         setTopViewTitle("选择开户银行")
         setTopViewLeftBtnImg("left")
         
-        initView()
+        initData()
+        
     }
     
     // MARK: - 自定义方法
+    func initData(){
+        var itemBank = JSON(dictionaryLiteral: ("image","icbc"),("name","工商银行"))
+        bankData.append(itemBank)
+        itemBank = JSON(dictionaryLiteral: ("image","abc"),("name","农业银行"))
+        bankData.append(itemBank)
+        itemBank = JSON(dictionaryLiteral: ("image","ccb"),("name","建设银行"))
+        bankData.append(itemBank)
+        itemBank = JSON(dictionaryLiteral: ("image","boc"),("name","中国银行"))
+        bankData.append(itemBank)
+        itemBank = JSON(dictionaryLiteral: ("image","cmb"),("name","招商银行"))
+        bankData.append(itemBank)
+        itemBank = JSON(dictionaryLiteral: ("image","cmbc"),("name","民生银行"))
+        bankData.append(itemBank)
+        itemBank = JSON(dictionaryLiteral: ("image","spdb"),("name","浦发银行"))
+        bankData.append(itemBank)
+        itemBank = JSON(dictionaryLiteral: ("image","psbc"),("name","邮政储蓄"))
+        bankData.append(itemBank)
+        itemBank = JSON(dictionaryLiteral: ("image","bocm"),("name","交通银行"))
+        bankData.append(itemBank)
+        itemBank = JSON(dictionaryLiteral: ("image","ceb"),("name","光大银行"))
+        bankData.append(itemBank)
+        itemBank = JSON(dictionaryLiteral: ("image","gdb"),("name","广发银行"))
+        bankData.append(itemBank)
+        
+        initView()
+    }
+    
     func initView(){
         tableView = UITableView(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height))
         tableView.dataSource = self
@@ -42,18 +70,7 @@ class OpenBankViewController: BaseNavigationController {
         tableView.tableFooterView = UIView()
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         self.view.addSubview(tableView)
-        
-        //下拉刷新
-        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(self.refreshData))
-        tableView.mj_header.beginRefreshing()
     }
-    
-    func refreshData(){
-        tableView.mj_header.endRefreshing()
-        bankData = ["工商银行","农业银行","建设银行","中国银行"]
-        tableView.reloadData()
-    }
-
 }
 
 extension OpenBankViewController: UITableViewDataSource, UITableViewDelegate{
@@ -77,14 +94,17 @@ extension OpenBankViewController: UITableViewDataSource, UITableViewDelegate{
         }
         // iv
         let iv = UIImageView(frame: CGRectMake(15, (cell.viewHeight - 45) / 2, 45, 45))
-        iv.image = UIImage(named: "touxiang")
+        
+        print(bankData)
+        let dict = bankData[indexPath.row].dictionaryValue
+        iv.image = UIImage(named: dict["image"]!.stringValue)
         cell.contentView.addSubview(iv)
         
         // nameLbl
         let nameLbl = UILabel(frame: CGRectMake(iv.viewRightX + 10, 0, 200, cell.viewHeight))
         nameLbl.font = UIFont.systemFontOfSize(16)
         nameLbl.textAlignment = .Left
-        nameLbl.text = bankData[indexPath.row].string
+        nameLbl.text = dict["name"]!.stringValue
         cell.contentView.addSubview(nameLbl)
         
         return cell
@@ -93,7 +113,8 @@ extension OpenBankViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if delegate != nil {
-            delegate?.selectValue(bankData[indexPath.row].stringValue)
+            let dict = bankData[indexPath.row].dictionaryValue
+            delegate?.selectValue(dict["name"]!.stringValue)
             self.navigationController?.popViewControllerAnimated(true)
         }
     }

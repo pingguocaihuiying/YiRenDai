@@ -9,9 +9,15 @@
 import UIKit
 
 class ContactUsViewController: BaseNavigationController {
-    
+    // view
     var tableView: UITableView!
     var logoutBtn: UIButton!
+    
+    // data
+    var mQQ: String!
+    var mWeixin: String!
+    var mPhone: String!
+    var mDate: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,10 +25,22 @@ class ContactUsViewController: BaseNavigationController {
         setTopViewLeftBtnImg("left")
         view.backgroundColor = UIColor.getGrayColorThird()
         
-        initView()
+        initData()
     }
     
     //MARK:自定义方法
+    func initData(){
+        DataProvider.sharedInstance.contactUs { (data) in
+            print(data)
+            self.mQQ = data["data"].dictionaryValue["touchlist"]!.arrayValue[3].dictionaryValue["touch_tag"]!.stringValue
+            self.mWeixin = data["data"].dictionaryValue["touchlist"]!.arrayValue[0].dictionaryValue["touch_tag"]!.stringValue
+            self.mPhone = data["data"].dictionaryValue["touchlist"]!.arrayValue[1].dictionaryValue["touch_tag"]!.stringValue
+            self.mDate = data["data"].dictionaryValue["touchlist"]!.arrayValue[1].dictionaryValue["touch_about"]!.stringValue
+            
+            self.initView()
+        }
+    }
+    
     private func initView(){
         tableView = UITableView(frame: CGRectMake(0, top_height, screen_width, 4 * 45 + 16))
         tableView.delegate = self
@@ -59,16 +77,16 @@ extension ContactUsViewController: UITableViewDataSource, UITableViewDelegate{
         if indexPath.row == 0 {
             cell.ivThree.image = UIImage(named: "more_contactus_qq")
             cell.nameThree.text = "官方QQ群"
-            cell.detailThree.text = "385469777"
+            cell.detailThree.text = mQQ
         }else if indexPath.row == 1{
             cell.ivOne.image = UIImage(named: "more_contactus_wechat")
             cell.nameOne.text = "官方微信号"
-            cell.detailOne.text = "yidingyinggw"
+            cell.detailOne.text = mWeixin
         }else if indexPath.row == 2{
             cell.ivTwo.image = UIImage(named: "more_contactus_call")
             cell.nameTwo.text = "客服热线"
-            cell.detail1Two.text = "400-060-9191"
-            cell.detail2Two.text = "客服时间8:00-20:00"
+            cell.detail1Two.text = mPhone
+            cell.detail2Two.text = mDate
         }else{
             cell.ivOne.image = UIImage(named: "more_contactus_feedback")
             cell.nameOne.text = "意见反馈"

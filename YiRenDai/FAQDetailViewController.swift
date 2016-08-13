@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class FAQDetailViewController: BaseNavigationController {
 
+    var questionId: String!
+    
     //view
     var tableView: UITableView!
     
     //data
-    var FAQDetailData = ["什么是宜定盈？","宜定盈通过智能投标、循环出借，帮助用户节约成本，增加资金利用率，从而实现预期年化收益。最低100元起投，封闭期最短1个月，预期年化收益最高可达10.2%以上","什么是宜人贷节节高？","节节高周期灵活、收益理想。用户在加入一个月之后，如不主动提出退出申请，资金将继续进行出借，收益将逐步递增，可以随时免费提现。最低1000元起投，预期年化收益率为6%~10.6%。","什么是宜定盈？","宜定盈通过智能投标、循环出借，帮助用户节约成本，增加资金利用率，从而实现预期年化收益。最低100元起投，封闭期最短1个月，预期年化收益最高可达10.2%以上","什么是宜人贷节节高？","节节高周期灵活、收益理想。用户在加入一个月之后，如不主动提出退出申请，资金将继续进行出借，收益将逐步递增，可以随时免费提现。最低1000元起投，预期年化收益率为6%~10.6%。"]
+    var FAQDetailData = [String]()
     var selectIndexPath: NSIndexPath?
     var isExtension = Bool()
     
@@ -24,10 +27,25 @@ class FAQDetailViewController: BaseNavigationController {
         setTopViewLeftBtnImg("left")
         view.backgroundColor = UIColor.getGrayColorThird()
         
-        initView()
+        initData()
     }
     
     //MARK: - 自定义方法
+    func initData(){
+        DataProvider.sharedInstance.getQuestionDetail(questionId) { (data) in
+            print(data)
+            if data["status"]["succeed"].intValue == 1{
+                let tempArray = data["data"].dictionaryValue["queslist"]!.arrayValue
+                for item in tempArray{
+                    self.FAQDetailData.append(item["ques_name"].stringValue)
+                    self.FAQDetailData.append(item["ques_content"].stringValue)
+                }
+                
+                self.initView()
+            }
+        }
+    }
+    
     func initView(){
         tableView = UITableView(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height))
         tableView.delegate = self

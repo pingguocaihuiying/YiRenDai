@@ -145,6 +145,7 @@ class RegisterFinishViewController: BaseNavigationController, UITextFieldDelegat
         //invitationCodeTxt
         invitationCodeTxt = UITextField(frame: CGRectMake(lineView5.viewX, 47 * 3, contentView.viewWidth - 28, 47))
         invitationCodeTxt.delegate = self
+        invitationCodeTxt.keyboardType = .NumberPad
         invitationCodeTxt.font = UIFont.systemFontOfSize(15)
         invitationCodeTxt.placeholder = "9位邀请码（选填）"
         invitationCodeTxt.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: .EditingChanged)

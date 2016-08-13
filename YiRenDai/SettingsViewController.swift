@@ -81,9 +81,9 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if isSettingGesturePwd {
-            return 5
+            return 3
         }else{
-            return 4
+            return 2
         }
     }
     
@@ -121,33 +121,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
                 let titleLbl = UILabel(frame: CGRectMake(10, 0, 200, cell.viewHeight))
                 titleLbl.textAlignment = .Left
                 titleLbl.font = UIFont.systemFontOfSize(15)
-                titleLbl.text = "接受推送消息"
-                cell.addSubview(titleLbl)
-                //switchBtn
-                let switchBtn = UISwitch(frame: CGRectMake(screen_width - 50 - 10, 0, 50, cell.viewHeight))
-                switchBtn.tag = 1
-                switchBtn.addTarget(self, action: #selector(clickEvent(_:)), forControlEvents: .ValueChanged)
-                switchBtn.center.y = titleLbl.center.y
-                cell.addSubview(switchBtn)
-            }else if indexPath.row == 3{
-                //titleLbl
-                let titleLbl = UILabel(frame: CGRectMake(10, 0, 200, cell.viewHeight))
-                titleLbl.textAlignment = .Left
-                titleLbl.font = UIFont.systemFontOfSize(15)
-                titleLbl.text = "当前版本"
-                cell.addSubview(titleLbl)
-                //editionLbl
-                let editionLbl = UILabel(frame: CGRectMake(screen_width - 80 - 10, 0, 80, cell.viewHeight))
-                editionLbl.textAlignment = .Right
-                editionLbl.textColor = UIColor.grayColor()
-                editionLbl.font = UIFont.systemFontOfSize(14)
-                editionLbl.text = "0.0.1"
-                cell.addSubview(editionLbl)
-            }else if indexPath.row == 4{
-                //titleLbl
-                let titleLbl = UILabel(frame: CGRectMake(10, 0, 200, cell.viewHeight))
-                titleLbl.textAlignment = .Left
-                titleLbl.font = UIFont.systemFontOfSize(15)
                 titleLbl.text = "修改密码"
                 cell.addSubview(titleLbl)
             }
@@ -167,33 +140,6 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
                 switchBtn.setOn(isSettingGesturePwd, animated: false)
                 cell.addSubview(switchBtn)
             }else if indexPath.row == 1{
-                //titleLbl
-                let titleLbl = UILabel(frame: CGRectMake(10, 0, 200, cell.viewHeight))
-                titleLbl.textAlignment = .Left
-                titleLbl.font = UIFont.systemFontOfSize(15)
-                titleLbl.text = "接受推送消息"
-                cell.addSubview(titleLbl)
-                //switchBtn
-                let switchBtn = UISwitch(frame: CGRectMake(screen_width - 50 - 10, 0, 50, cell.viewHeight))
-                switchBtn.center.y = titleLbl.center.y
-                switchBtn.tag = 1
-                switchBtn.addTarget(self, action: #selector(clickEvent(_:)), forControlEvents: UIControlEvents.ValueChanged)
-                cell.addSubview(switchBtn)
-            }else if indexPath.row == 2{
-                //titleLbl
-                let titleLbl = UILabel(frame: CGRectMake(10, 0, 200, cell.viewHeight))
-                titleLbl.textAlignment = .Left
-                titleLbl.font = UIFont.systemFontOfSize(15)
-                titleLbl.text = "当前版本"
-                cell.addSubview(titleLbl)
-                //editionLbl
-                let editionLbl = UILabel(frame: CGRectMake(screen_width - 80 - 10, 0, 80, cell.viewHeight))
-                editionLbl.textAlignment = .Right
-                editionLbl.textColor = UIColor.grayColor()
-                editionLbl.font = UIFont.systemFontOfSize(14)
-                editionLbl.text = "0.0.1"
-                cell.addSubview(editionLbl)
-            }else if indexPath.row == 3{
                 //titleLbl
                 let titleLbl = UILabel(frame: CGRectMake(10, 0, 200, cell.viewHeight))
                 titleLbl.textAlignment = .Left
@@ -222,21 +168,20 @@ extension SettingsViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if isSettingGesturePwd {
-            if indexPath.row == 4{
+            if indexPath.row == 2{
                 let changePwdVC = ChangePwdViewController()
                 changePwdVC.accountVale = ToolKit.getStringByKey("userPhone")
                 changePwdVC.navtitle = "修改密码"
                 self.navigationController?.pushViewController(changePwdVC, animated: true)
             }
         }else{
-            if indexPath.row == 3{
+            if indexPath.row == 1{
                 let changePwdVC = ChangePwdViewController()
                 changePwdVC.accountVale = ToolKit.getStringByKey("userPhone")
                 changePwdVC.navtitle = "修改密码"
                 self.navigationController?.pushViewController(changePwdVC, animated: true)
             }
         }
-        
     }
     //section
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

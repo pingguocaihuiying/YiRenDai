@@ -23,7 +23,9 @@ class VIPViewController: BaseNavigationController {
         setTopViewLeftBtnImg("left")
         setTopViewRightBtn("升级攻略")
         
-        initView()
+        
+        
+        initData()
     }
     
     override func clickRightBtnEvent() {
@@ -33,6 +35,10 @@ class VIPViewController: BaseNavigationController {
     }
 
     // MARK: - 自定义方法
+    func initData(){
+        
+    }
+    
     func initView(){
         tableView = UITableView(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height))
         tableView.dataSource = self

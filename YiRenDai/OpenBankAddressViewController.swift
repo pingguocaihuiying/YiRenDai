@@ -24,18 +24,48 @@ class OpenBankAddressViewController: BaseNavigationController {
     var delegate: OpenBankAddressViewControllerDellegate?
     
     // data
-    var openBankAddressData = [JSON]()
+    var dataArray = [JSON]()
+    var iFlag: String! // 1：省份  2：市
+    var selectProvince: String! // 当前选择的省份
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setTopViewTitle("选择开户地区")
         setTopViewLeftBtnImg("left")
+        
+        iFlag = "1"
 
-        initView()
+        initData()
     }
 
     //MARK: - 自定义方法
+    func initData(){
+        dataArray.removeAll()
+        let stationArray = NSArray(contentsOfFile: NSBundle.mainBundle().pathForResource("city", ofType: "plist")!)
+        if iFlag == "1" {
+            for i in 0 ..< stationArray!.count {
+                let proDic = stationArray![i] as! NSDictionary
+                let proName = proDic["state"]
+                dataArray.append(JSON(proName!))
+                
+                initView()
+            }
+        }else if iFlag == "2"{
+            for i in 0 ..< stationArray!.count {
+                let proDic = stationArray![i] as! NSDictionary
+                let proName = proDic["state"] as! String
+                let cityListArray = proDic["cities"]
+                if proName == selectProvince{
+                    dataArray = JSON(cityListArray!).arrayValue
+                    break
+                }
+            }
+            tableView.reloadData()
+        }
+    }
+    
     func initView(){
         tableView = UITableView(frame: CGRectMake(0, top_height, screen_width, screen_height - top_height))
         tableView.tableFooterView = UIView()
@@ -43,16 +73,6 @@ class OpenBankAddressViewController: BaseNavigationController {
         tableView.delegate = self
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         self.view.addSubview(tableView)
-        
-        //下拉刷新
-        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(self.refreshData))
-        tableView.mj_header.beginRefreshing()
-    }
-    
-    func refreshData(){
-        tableView.mj_header.endRefreshing()
-        openBankAddressData = ["北京市","天津市","河北省","陕西省"]
-        tableView.reloadData()
     }
 
 }
@@ -64,7 +84,7 @@ extension OpenBankAddressViewController: UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return openBankAddressData.count
+        return dataArray.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -77,7 +97,7 @@ extension OpenBankAddressViewController: UITableViewDataSource, UITableViewDeleg
         let nameLbl = UILabel(frame: CGRectMake(15, 0, 200, cell.viewHeight))
         nameLbl.font = UIFont.systemFontOfSize(16)
         nameLbl.textAlignment = .Left
-        nameLbl.text = openBankAddressData[indexPath.row].string
+        nameLbl.text = dataArray[indexPath.row].stringValue
         cell.contentView.addSubview(nameLbl)
         
         return cell
@@ -85,9 +105,21 @@ extension OpenBankAddressViewController: UITableViewDataSource, UITableViewDeleg
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        if delegate != nil {
-            delegate?.selectAddressValue(openBankAddressData[indexPath.row].stringValue)
-            self.navigationController?.popViewControllerAnimated(true)
+        if iFlag == "1"{
+            iFlag = "2"
+            selectProvince = dataArray[indexPath.row].stringValue
+            initData()
+        }else{
+            if delegate != nil {
+                var selectAddress: String!
+                if selectProvince == dataArray[indexPath.row].stringValue {
+                    selectAddress = selectProvince
+                }else{
+                    selectAddress = "\(selectProvince)\(dataArray[indexPath.row].stringValue)"
+                }
+                delegate?.selectAddressValue(selectAddress)
+                self.navigationController?.popViewControllerAnimated(true)
+            }
         }
     }
     

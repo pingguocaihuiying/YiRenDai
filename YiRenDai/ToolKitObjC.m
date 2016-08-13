@@ -144,6 +144,10 @@
 #pragma mark - 根据银行卡号获取银行名称
 + (NSString *)returnBankName:(NSString*) idCard{
     
+    if (idCard.length < 16 || idCard.length > 19) {
+        return @"";
+    }
+    
     //"发卡行.卡种名称",
     
     NSArray* bankName = @[

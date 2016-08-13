@@ -55,10 +55,10 @@ class HomePageViewController: BaseViewController, CLCircularPictureDelegate {
         //刷新结束
         tableView.mj_header.endRefreshing()
         DataProvider.sharedInstance.getHome { (data) in
-            if data["status"].intValue == 1{
+            if data["status"]["succeed"].intValue == 1{
                 self.sumMoney = data["data"].dictionaryValue["summoney"]?.arrayValue[0].dictionaryValue["sum"]?.stringValue
-                self.sumMember = data["data"].dictionaryValue["summember"]?.arrayValue[0].dictionaryValue["$count"]?.stringValue
-                self.productData = data["data"].dictionaryValue["productarray"]
+                self.sumMember = data["data"].dictionaryValue["summember"]?.arrayValue[0].dictionaryValue["count"]?.stringValue
+                self.productData = data["data"].dictionaryValue["productarray"]?.arrayValue[0].dictionaryValue["p"]
             }
             print(self.productData)
             //刷新数据
@@ -90,6 +90,16 @@ class HomePageViewController: BaseViewController, CLCircularPictureDelegate {
         default:
             break
         }
+    }
+    
+    func clickProduct(tap: UITapGestureRecognizer){
+        let productId = tap.view!.tag
+        
+        let ljInvestBtnVC = LjInvestBtnViewController()
+        ljInvestBtnVC.productID = "\(productId)"
+        //ljInvestBtnVC.navtitle = productListData[indexPath.section - 1]["product_name"].stringValue
+        ljInvestBtnVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(ljInvestBtnVC, animated: true)
     }
     
     //MARK: - CycleScrollViewDelegate delegate
@@ -219,6 +229,9 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             leftView.layer.borderWidth = 1
             leftView.layer.borderColor = UIColor.getRedColorSecond().CGColor
             cell.contentView.addSubview(leftView)
+            leftView.tag = self.productData == nil ? 0 : self.productData![0].dictionaryValue["product_id"]!.intValue
+            let leftTap = UITapGestureRecognizer(target: self, action: #selector(clickProduct(_:)))
+            leftView.addGestureRecognizer(leftTap)
             // leftDetailLbl1
             let leftDetailLbl1 = UILabel(frame: CGRectMake(0, leftView.viewHeight / 2 - 21, leftView.viewWidth, 21))
             leftDetailLbl1.text = "\(self.productData == nil ? "0" : self.productData![0].dictionaryValue["interest_rate"]!.stringValue)%"
@@ -240,16 +253,19 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             rightView.layer.borderWidth = 1
             rightView.layer.borderColor = UIColor.getRedColorSecond().CGColor
             cell.contentView.addSubview(rightView)
+            rightView.tag = self.productData == nil ? 0 : self.productData![2].dictionaryValue["product_id"]!.intValue
+            let rightTap = UITapGestureRecognizer(target: self, action: #selector(clickProduct(_:)))
+            rightView.addGestureRecognizer(rightTap)
             // rightDetailLbl1
             let rightDetailLbl1 = UILabel(frame: CGRectMake(0, leftView.viewHeight / 2 - 21, leftView.viewWidth, 21))
-            rightDetailLbl1.text = "15%"
+            rightDetailLbl1.text = "\(self.productData == nil ? "0" : self.productData![2].dictionaryValue["interest_rate"]!.stringValue)%"
             rightDetailLbl1.font = UIFont.systemFontOfSize(20)
             rightDetailLbl1.textAlignment = .Center
             rightDetailLbl1.textColor = UIColor.getRedColorSecond()
             rightView.addSubview(rightDetailLbl1)
             // rightDetailLbl2
             let rightDetailLbl2 = UILabel(frame: CGRectMake(0, leftDetailLbl1.viewBottomY + 5, leftView.viewWidth, 21))
-            rightDetailLbl2.text = "已售罄"
+            rightDetailLbl2.text = "\(self.productData == nil ? "0" : self.productData![2].dictionaryValue["min_amount"]!.stringValue)元起投"
             rightDetailLbl2.font = UIFont.systemFontOfSize(16)
             rightDetailLbl2.textAlignment = .Center
             rightDetailLbl2.textColor = UIColor.getGrayColorFirst()
@@ -258,6 +274,9 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             let centerBtn = UIButton(frame: CGRectMake(screen_width * 0.55 / 2, 20, screen_width * 0.45, screen_width * 0.45))
             centerBtn.setImage(UIImage(named: "hongyuan"), forState: .Normal)
             cell.contentView.addSubview(centerBtn)
+            centerBtn.tag = self.productData == nil ? 0 : self.productData![1].dictionaryValue["product_id"]!.intValue
+            let centerTap = UITapGestureRecognizer(target: self, action: #selector(clickProduct(_:)))
+            centerBtn.addGestureRecognizer(centerTap)
             // centerDetail1
             let centerDetail1 = UILabel(frame: CGRectMake(0, 30, centerBtn.viewWidth, 21))
             centerDetail1.textAlignment = .Center
@@ -268,7 +287,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             // centerDetail2
             let centerDetail2 = UILabel(frame: CGRectMake(0, (centerBtn.viewHeight - 21) / 2, centerBtn.viewWidth, 21))
             centerDetail2.textAlignment = .Center
-            let str = NSMutableAttributedString(string: "20%")
+            let str = NSMutableAttributedString(string: "\(self.productData == nil ? "0" : self.productData![1].dictionaryValue["interest_rate"]!.stringValue)%")
             str.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(30), range: NSMakeRange(0, str.length - 1))
             str.addAttribute(NSFontAttributeName, value: UIFont.systemFontOfSize(14), range: NSMakeRange(str.length - 1, 1))
             centerDetail2.attributedText = str
@@ -277,7 +296,7 @@ extension HomePageViewController: UITableViewDataSource, UITableViewDelegate{
             // centerDetail3
             let centerDetail3 = UILabel(frame: CGRectMake(0, centerDetail2.viewBottomY + 10, centerBtn.viewWidth, 21))
             centerDetail3.textAlignment = .Center
-            centerDetail3.text = "500元起投100天"
+            centerDetail3.text = "\(self.productData == nil ? "0" : self.productData![1].dictionaryValue["min_amount"]!.stringValue)元起投100天"
             centerDetail3.font = UIFont.systemFontOfSize(14)
             centerDetail3.textColor = UIColor.grayColor()
             centerBtn.addSubview(centerDetail3)

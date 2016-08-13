@@ -101,7 +101,7 @@ class ProductListViewController: BaseNavigationController {
 
 extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1 + productListData.count
+        return productListData.count
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,74 +109,55 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifier, forIndexPath: indexPath)
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
-            cell.accessoryType = UITableViewCellAccessoryType.DisclosureIndicator
-            let textLbl = UILabel(frame: CGRectMake(14, 0, screen_width - 28, cell.viewHeight))
-            textLbl.textColor = UIColor.grayColor()
-            textLbl.font = UIFont.systemFontOfSize(14)
-            textLbl.numberOfLines = 0
-            textLbl.text = "5.8亿元风险备用金为您的资产安全保驾护航"
-            cell.addSubview(textLbl)
-            return cell
-        default:
-            let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierNib, forIndexPath: indexPath) as! ProductListTableViewCell
-            cell.selectionStyle = UITableViewCellSelectionStyle.None
-            for itemView in cell.contentView.subviews {
-                if itemView.tag == 2001 {
-                    itemView.removeFromSuperview()
-                }
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellIdentifierNib, forIndexPath: indexPath) as! ProductListTableViewCell
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        for itemView in cell.contentView.subviews {
+            if itemView.tag == 2001 {
+                itemView.removeFromSuperview()
             }
-            let remainMoney = productListData[indexPath.section - 1]["remaining_amount"].floatValue
-            let startMoney = productListData[indexPath.section - 1]["min_amount"].floatValue
-            let isSoldOut = remainMoney < startMoney ? true : false
-            let is_tiro = productListData[indexPath.section - 1]["is_tiro"].intValue
-            if is_tiro == 1 {
-                // starIv
-                let starIv = UIImageView(frame: CGRectMake(0, (cell.titleView.viewHeight - 16) / 2, 16, 16))
-                starIv.image = UIImage(named: "xingji")
-                cell.titleView.addSubview(starIv)
-                // titleLbl
-                let titleLbl = UILabel(frame: CGRectMake(starIv.viewRightX + 5, 0, 100, cell.titleView.viewHeight))
-                titleLbl.text = "新手专区"
-                titleLbl.textColor = isSoldOut ? UIColor.getGrayColorFirst() : UIColor.getRedColorFirst()
-                titleLbl.font = UIFont.systemFontOfSize(16)
-                cell.titleView.addSubview(titleLbl)
-            }else{
-                let titleLbl = UILabel(frame: CGRectMake(0, 0, cell.titleView.viewWidth, cell.titleView.viewHeight))
-                titleLbl.textColor = isSoldOut ? UIColor.getGrayColorFirst() : UIColor.darkGrayColor()
-                titleLbl.font = UIFont.systemFontOfSize(16)
-                titleLbl.text = productListData[indexPath.section - 1]["product_name"].stringValue
-                cell.titleView.addSubview(titleLbl)
-            }
-            cell.shouyiLbl.text = "\(productListData[indexPath.section - 1]["interest_rate"].stringValue)%"
-            cell.fengbiqiLbl.text = productListData[indexPath.section - 1]["duration_type"].stringValue
-            cell.amountLbl.text = "\(productListData[indexPath.section - 1]["min_amount"].stringValue)元"
-            if isSoldOut{
-                let soldOutIv = UIImageView(frame: CGRectMake(screen_width - 50, 10, 50, 17))
-                soldOutIv.tag = 2001
-                soldOutIv.image = UIImage(named: "yishouqin")
-                cell.contentView.addSubview(soldOutIv)
-                cell.shouyiTitleLbl.textColor = UIColor.getGrayColorFirst()
-                cell.shouyiLbl.textColor = UIColor.getGrayColorFirst()
-                cell.fengbiqiTitleLbl.textColor = UIColor.getGrayColorFirst()
-                cell.fengbiqiLbl.textColor = UIColor.getGrayColorFirst()
-                cell.amountTitleLbl.textColor = UIColor.getGrayColorFirst()
-                cell.amountLbl.textColor = UIColor.getGrayColorFirst()
-            }
-            return cell
         }
+        let remainMoney = productListData[indexPath.section]["remaining_amount"].floatValue
+        let startMoney = productListData[indexPath.section]["min_amount"].floatValue
+        let isSoldOut = remainMoney < startMoney ? true : false
+        let is_tiro = productListData[indexPath.section]["is_tiro"].intValue
+        if is_tiro == 1 {
+            // starIv
+            let starIv = UIImageView(frame: CGRectMake(0, (cell.titleView.viewHeight - 16) / 2, 16, 16))
+            starIv.image = UIImage(named: "xingji")
+            cell.titleView.addSubview(starIv)
+            // titleLbl
+            let titleLbl = UILabel(frame: CGRectMake(starIv.viewRightX + 5, 0, 100, cell.titleView.viewHeight))
+            titleLbl.text = "新手专区"
+            titleLbl.textColor = isSoldOut ? UIColor.getGrayColorFirst() : UIColor.getRedColorFirst()
+            titleLbl.font = UIFont.systemFontOfSize(16)
+            cell.titleView.addSubview(titleLbl)
+        }else{
+            let titleLbl = UILabel(frame: CGRectMake(0, 0, cell.titleView.viewWidth, cell.titleView.viewHeight))
+            titleLbl.textColor = isSoldOut ? UIColor.getGrayColorFirst() : UIColor.darkGrayColor()
+            titleLbl.font = UIFont.systemFontOfSize(16)
+            titleLbl.text = productListData[indexPath.section]["product_name"].stringValue
+            cell.titleView.addSubview(titleLbl)
+        }
+        cell.shouyiLbl.text = "\(productListData[indexPath.section]["interest_rate"].stringValue)%"
+        cell.fengbiqiLbl.text = productListData[indexPath.section]["duration_type"].stringValue
+        cell.amountLbl.text = "\(productListData[indexPath.section]["min_amount"].stringValue)元"
+        if isSoldOut{
+            let soldOutIv = UIImageView(frame: CGRectMake(screen_width - 50, 10, 50, 17))
+            soldOutIv.tag = 2001
+            soldOutIv.image = UIImage(named: "yishouqin")
+            cell.contentView.addSubview(soldOutIv)
+            cell.shouyiTitleLbl.textColor = UIColor.getGrayColorFirst()
+            cell.shouyiLbl.textColor = UIColor.getGrayColorFirst()
+            cell.fengbiqiTitleLbl.textColor = UIColor.getGrayColorFirst()
+            cell.fengbiqiLbl.textColor = UIColor.getGrayColorFirst()
+            cell.amountTitleLbl.textColor = UIColor.getGrayColorFirst()
+            cell.amountLbl.textColor = UIColor.getGrayColorFirst()
+        }
+        return cell
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return 40
-        default:
-            return 100
-        }
+        return 100
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
@@ -194,13 +175,10 @@ extension ProductListViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section > 0 {
-            let ljInvestBtnVC = LjInvestBtnViewController()
-            ljInvestBtnVC.productID = productListData[indexPath.section - 1]["product_id"].stringValue
-            ljInvestBtnVC.navtitle = productListData[indexPath.section - 1]["product_name"].stringValue
-            ljInvestBtnVC.hidesBottomBarWhenPushed = true
-            navigationController?.pushViewController(ljInvestBtnVC, animated: true)
-        }
+        let ljInvestBtnVC = LjInvestBtnViewController()
+        ljInvestBtnVC.productID = productListData[indexPath.section]["product_id"].stringValue
+        ljInvestBtnVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(ljInvestBtnVC, animated: true)
     }
     
     //section

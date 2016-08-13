@@ -17,6 +17,7 @@ class FAQViewController: BaseNavigationController {
     
     //data
     var questionListData = [JSON]()
+    var calllistData: JSON!
     var pagenumber: Int!
     let pagesize = 15
     
@@ -41,9 +42,6 @@ class FAQViewController: BaseNavigationController {
         //下拉刷新
         tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(self.refreshData))
         tableView.mj_header.beginRefreshing()
-        
-        //上拉加载更多
-        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(self.loadMore))
     }
     
     func refreshData(){
@@ -53,13 +51,12 @@ class FAQViewController: BaseNavigationController {
         self.tableView.mj_header.endRefreshing()
         DataProvider.sharedInstance.getQuestionList("\(pagenumber)", pagesize: "\(pagesize)") { (data) in
             if data["status"]["succeed"].intValue == 1{
+                print(data)
                 self.questionListData = data["data"].dictionaryValue["questionlist"]!.arrayValue
+                self.calllistData = data["data"].dictionaryValue["calllist"]![0]
                 if self.questionListData.count == data["data"]["page"]["total"].intValue{
                     // 所有数据加载完毕，没有更多的数据了
                     self.tableView.mj_footer.state = MJRefreshState.NoMoreData
-                }else{
-                    // mj_footer设置为:普通闲置状态(Idle)
-                    self.tableView.mj_footer.state = MJRefreshState.Idle
                 }
                 //刷新数据
                 self.tableView.reloadData()
@@ -67,32 +64,6 @@ class FAQViewController: BaseNavigationController {
                 self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
             }
         }
-    }
-    
-    func loadMore(){
-        pagenumber = pagenumber + 1
-        DataProvider.sharedInstance.getQuestionList("\(pagenumber)", pagesize: "\(pagesize)") { (data) in
-            if data["status"]["succeed"].intValue == 1{
-                let dataArray = data["data"].dictionaryValue["productlist"]!.arrayValue
-                for i in 0 ..< dataArray.count{
-                    self.questionListData.append(dataArray[i])
-                }
-                //刷新结束
-                self.tableView.mj_header.endRefreshing()
-                if self.questionListData.count == data["data"]["page"]["total"].intValue{
-                    // 所有数据加载完毕，没有更多的数据了
-                    self.tableView.mj_footer.state = MJRefreshState.NoMoreData
-                }else{
-                    // mj_footer设置为:普通闲置状态(Idle)
-                    self.tableView.mj_footer.state = MJRefreshState.Idle
-                }
-                //刷新数据
-                self.tableView.reloadData()
-            }else{
-                self.view.viewAlert(self, title: "提示", msg: data["status"]["message"].stringValue, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
-            }
-        }
-        
     }
 }
 
@@ -117,27 +88,17 @@ extension FAQViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = FAQTableViewCell.tableViewCellWith(tableView, indexPath: indexPath)
         if indexPath.section == 0 {
-            if indexPath.row == 0 {
-                cell.firstTitleLbl.text = "产品介绍"
-            }else if indexPath.row == 1{
-                cell.firstTitleLbl.text = "安全保障"
-            }else if indexPath.row == 2{
-                cell.firstTitleLbl.text = "注册/登陆"
-            }else if indexPath.row == 3{
-                cell.firstTitleLbl.text = "购买理财"
-            }else if indexPath.row == 4{
-                cell.firstTitleLbl.text = "提现赎回"
-            }else if indexPath.row == 5{
-                cell.firstTitleLbl.text = "宜人币"
-            }else if indexPath.row == 6{
-                cell.firstTitleLbl.text = "优惠券"
-            }else if indexPath.row == 7{
-                cell.firstTitleLbl.text = "会员中心"
-            }
+            cell.firstTitleLbl.text = questionListData[indexPath.row]["question_name"].stringValue
         }else{
-            cell.secondTitleLbl.text = "客服热线"
-            cell.secondDetail1Lbl.text = "400-060-9191"
-            cell.secondDetail2Lbl.text = "服务时间8:00-20:00"
+            if calllistData != nil {
+                cell.secondTitleLbl.text = "客服热线"
+                cell.secondDetail1Lbl.text = calllistData!["question_tel"].stringValue
+                cell.secondDetail2Lbl.text = calllistData!["question_time"].stringValue
+            }else{
+                cell.secondTitleLbl.text = ""
+                cell.secondDetail1Lbl.text = ""
+                cell.secondDetail2Lbl.text = ""
+            }
         }
         return cell
     }
@@ -159,13 +120,12 @@ extension FAQViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         if indexPath.section == 0 {
-            if indexPath.row == 0 {
-                let faqDetailVC = FAQDetailViewController()
-                faqDetailVC.navtitle = "产品介绍"
-                navigationController?.pushViewController(faqDetailVC, animated: true)
-            }
+            let faqDetailVC = FAQDetailViewController()
+            faqDetailVC.questionId = questionListData[indexPath.row]["question_id"].stringValue
+            faqDetailVC.navtitle = questionListData[indexPath.row]["question_name"].stringValue
+            navigationController?.pushViewController(faqDetailVC, animated: true)
         }else if indexPath.section == 1{
-            view.callPhone(self, title: "立即拨打宜人贷理财客服电话", tels: "4000609191")
+            view.callPhone(self, title: "立即拨打北部湾理财客服电话", tels: calllistData!["question_tel"].stringValue)
         }
     }
     //section

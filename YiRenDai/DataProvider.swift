@@ -183,7 +183,7 @@ class DataProvider {
     }
     
     /**
-     添加银行卡
+     添加支出银行卡
      - parameter true_name:   真实姓名
      - parameter card_number: 卡号
      - parameter tbl:         手机号
@@ -200,6 +200,25 @@ class DataProvider {
     }
     
     /**
+     添加提现银行卡
+     - parameter true_name:   真实姓名
+     - parameter card_number: 卡号
+     - parameter bank_name:   银行名称
+     - parameter bank_area:   银行地区
+     - parameter bank_branch: 支行
+     - parameter member_id:   用户Id
+     - parameter status_id:   状态Id  1：支出银行卡   2：提现银行卡
+     - parameter handler:     回调方法
+     */
+    func addTixianBankCard(true_name: String, card_number: String, bank_name: String, bank_area: String, bank_branch: String, member_id: String, status_id: String,  handler: (data: JSON) -> Void){
+        let url = "\(URL)/card/cardSubmit"
+        let params = ["json":"{\"true_name\":\"\(true_name)\",\"card_number\":\"\(card_number)\",\"bank_name\":\"\(bank_name)\",\"bank_area\":\"\(bank_area)\",\"bank_branch\":\"\(bank_branch)\",\"member_id\":\"\(member_id)\",\"status_id\":\"\(status_id)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
+    /**
      获取银行卡列表
      - parameter member_id: 用户Id
      - parameter status_id: 状态Id  1：支出银行卡   2：提现银行卡
@@ -209,6 +228,18 @@ class DataProvider {
         let url = "\(URL)/card/Card"
         let params = ["json":"{\"member_id\":\"\(member_id)\",\"status_id\":\"\(status_id)\"}","page":"{\"pagenumber\":\"\(pagenumber)\",\"pagesize\":\"\(pagesize)\"}"]
         obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
+    /**
+     删除银行卡列表
+     - parameter cardId:  银行卡Id
+     - parameter handler: 回调方法
+     */
+    func deleteCard(cardId: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/card/DeleCard&id=\(cardId)"
+        obj.postRequest(url: url, params: nil) { (json) in
             handler(data: json)
         }
     }
@@ -238,6 +269,18 @@ class DataProvider {
         let url = "\(URL)/coupon/getCoupons"
         let params = ["json":"{\"member_id\":\"\(member_id)\"}","page":"{\"pagenumber\":\"\(pagenumber)\",\"pagesize\":\"\(pagesize)\"}"]
         obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
+    /**
+     获取宜人币
+     - parameter userId:  用户Id
+     - parameter handler: 回调方法
+     */
+    func getYirenbi(userId: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/yirenbi/GetYirenbi&id=\(userId)"
+        obj.postRequest(url: url, params: nil) { (json) in
             handler(data: json)
         }
     }
@@ -315,11 +358,27 @@ class DataProvider {
         }
     }
     
-//    func contactUs(handler: (data: JSON) -> Void){
-//        let url = "\(URL)/manage/getManage"
-//        let params = ["page":"{\"pagenumber\":\"\(pagenumber)\",\"pagesize\":\"\(pagesize)\"}"]
-//        obj.postRequest(url: url, params: params) { (json) in
-//            handler(data: json)
-//        }
-//    }
+    /**
+     根据Id获取问题详情信息
+     - parameter questionId: 问题Id
+     - parameter handler:    回调方法
+     */
+    func getQuestionDetail(questionId: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/question/getTable&id=\(questionId)"
+        obj.postRequest(url: url, params: nil) { (json) in
+            handler(data: json)
+        }
+    }
+    
+    /**
+     获取联系我们数据
+     - parameter handler: 回调方法
+     */
+    func contactUs(handler: (data: JSON) -> Void){
+        let url = "\(URL)/touch/getTouch"
+        let params = ["page":"{\"pagenumber\":\"0\",\"pagesize\":\"1000\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
 }

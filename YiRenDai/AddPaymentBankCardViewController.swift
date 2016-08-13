@@ -18,6 +18,9 @@ class AddPaymentBankCardViewController: BaseNavigationController, UITextFieldDel
     var cardTxt: UITextField!
     var phoneTxt: UITextField!
     var nextBtn: UIButton!
+    var bgView: UIButton!
+    var showView: UIButton!
+    var verificationTxt: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,16 +47,40 @@ class AddPaymentBankCardViewController: BaseNavigationController, UITextFieldDel
         tableView.tableFooterView = UIView()
         tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         view.addSubview(tableView)
+        
+        bgView = UIButton(frame: CGRectMake(0, 0, screen_width, screen_height))
+        bgView.backgroundColor = UIColor.lightGrayColor()
+        bgView.alpha = 0.4
+        bgView.addTarget(self, action: #selector(clickBgEvent), forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    
+    func clickBgEvent(){
+        if bgView != nil {
+            bgView.removeFromSuperview()
+        }
+        if showView != nil {
+            showView.removeFromSuperview()
+        }
     }
     
     func nextFunc(){
-        DataProvider.sharedInstance.addBankCard(nameTxt.text!, card_number: cardTxt.text!, tbl: phoneTxt.text!, member_id: ToolKit.getStringByKey("userId"), status_id: "1") { (data) in
-            if data["status"].dictionaryValue["succeed"]?.intValue == 1{
-                self.view.viewAlert(self, title: "提示", msg: "保存成功", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: { (buttonIndex, action) in
-                    self.navigationController?.popViewControllerAnimated(true)
-                })
+        if nameTxt.text == nil || cardTxt.text == nil || phoneTxt.text == nil{
+            self.view.viewAlert(self, title: "提示", msg: "请先完善数据", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            return
+        }
+        let vericationCard = ToolKitObjC.returnBankName(cardTxt.text)
+        if vericationCard == "" {
+            self.view.viewAlert(self, title: "提示", msg: "输入的银行卡格式不正确", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            return
+        }
+
+        LoadingAnimation.show()
+        SMSSDK.getVerificationCodeByMethod(SMSGetCodeMethodSMS, phoneNumber: phoneTxt.text, zone: "86", customIdentifier: nil) { (error) in
+            LoadingAnimation.dismiss()
+            if error == nil{
+                self.alertVericationView(CGRectMake((screen_width - 250) / 2, screen_height / 2 - 150, 250, 200))
             }else{
-                self.view.viewAlert(self, title: "提示", msg: "保存失败", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+                self.view.viewAlert(self, title: "提示", msg: error.userInfo["getVerificationCode"]!.debugDescription, cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
             }
         }
     }
@@ -71,6 +98,75 @@ class AddPaymentBankCardViewController: BaseNavigationController, UITextFieldDel
     func textFieldShouldReturn(textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func alertVericationView(frame: CGRect){
+        
+        self.view.endEditing(true)
+        
+        self.view.addSubview(bgView)
+        // showView
+        showView = UIButton(frame: CGRectMake((screen_width - frame.size.width) / 2, (screen_height - frame.size.height) / 2, frame.size.width, frame.size.height))
+        showView.addTarget(self, action: #selector(clickShowView), forControlEvents: UIControlEvents.TouchUpInside)
+        showView.backgroundColor = UIColor.whiteColor()
+        showView.layer.masksToBounds = true
+        showView.layer.cornerRadius = 5;
+        UIView.animateWithDuration(2) { 
+            self.view.addSubview(self.showView)
+        }
+        // titleLbl
+        let titleLbl = UILabel(frame: CGRectMake(0, 10, showView.viewWidth, 30))
+        titleLbl.textAlignment = .Center
+        titleLbl.font = UIFont.systemFontOfSize(15)
+        titleLbl.textColor = UIColor.darkGrayColor()
+        titleLbl.text = "验证手机号"
+        showView.addSubview(titleLbl)
+        // lineView
+        let lineView = UIView(frame: CGRectMake(12, titleLbl.viewBottomY + 5, showView.viewWidth - 24, 0.5))
+        lineView.backgroundColor = UIColor(red: 0.90, green: 0.90, blue: 0.90, alpha: 1.00)
+        showView.addSubview(lineView)
+        // detailLbl
+        let detailLbl = UILabel(frame: CGRectMake(12, lineView.viewBottomY + 10, screen_width - 24, 21))
+        detailLbl.font = UIFont.systemFontOfSize(13)
+        detailLbl.textColor = UIColor.darkGrayColor()
+        detailLbl.text = "已向您的手机\(phoneTxt.text!)发送验证码"
+        showView.addSubview(detailLbl)
+        //verificationTxt
+        verificationTxt = UITextField(frame: CGRectMake(12, detailLbl.viewBottomY + 15, showView.viewWidth - 24, 35))
+        verificationTxt.delegate = self
+        verificationTxt.keyboardType = .NumberPad
+        verificationTxt.placeholder = "请输入验证码"
+        verificationTxt.layer.masksToBounds = true
+        verificationTxt.layer.cornerRadius = 6
+        verificationTxt.layer.borderWidth = 1
+        verificationTxt.layer.borderColor = UIColor.lightGrayColor().CGColor
+        showView.addSubview(verificationTxt)
+        //okBtn
+        let okBtn = UIButton(frame: CGRectMake(12, verificationTxt.viewBottomY + 15, showView.viewWidth - 24, 35))
+        okBtn.setBackgroundImage(UIImage(named: "button_normal"), forState: .Normal)
+        okBtn.titleLabel?.font = UIFont.systemFontOfSize(16)
+        okBtn.setTitle("确定", forState: .Normal)
+        okBtn.addTarget(self, action: #selector(clickOkEvent), forControlEvents: .TouchUpInside)
+        showView.addSubview(okBtn)
+    }
+    
+    func clickOkEvent(){
+        DataProvider.sharedInstance.addBankCard(nameTxt.text!, card_number: cardTxt.text!, tbl: phoneTxt.text!, member_id: ToolKit.getStringByKey("userId"), status_id: "1") { (data) in
+            if data["status"].dictionaryValue["succeed"]?.intValue == 1{
+                self.view.viewAlert(self, title: "提示", msg: "保存成功", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: { (buttonIndex, action) in
+                    NSNotificationCenter.defaultCenter().postNotificationName("refreshData", object: nil)
+                    self.navigationController?.popViewControllerAnimated(true)
+                })
+            }else{
+                self.view.viewAlert(self, title: "提示", msg: "保存失败", cancelButtonTitle: "确定", otherButtonTitle: nil, handler: nil)
+            }
+        }
+    }
+    
+    func clickShowView(){
+        if verificationTxt != nil {
+            verificationTxt.resignFirstResponder()
+        }
     }
 
 }

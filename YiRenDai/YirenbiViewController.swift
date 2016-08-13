@@ -9,6 +9,8 @@
 import UIKit
 
 class YirenbiViewController: BaseNavigationController {
+    
+    var yirenbiNum: String!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,8 +18,10 @@ class YirenbiViewController: BaseNavigationController {
         view.backgroundColor = UIColor.getGrayColorThird()
         setTopViewLeftBtnImg("left")
         setTopViewRightBtn("历史记录")
-
-        initView()
+        
+        yirenbiNum = "0"
+        
+        initData()
     }
     
     override func clickRightBtnEvent() {
@@ -27,7 +31,17 @@ class YirenbiViewController: BaseNavigationController {
         navigationController?.pushViewController(historyRecordVC, animated: true)
     }
 
-    //MARK: - 自定义发放
+    //MARK: - 自定义方法
+    func initData(){
+        DataProvider.sharedInstance.getYirenbi(ToolKit.getStringByKey("userId")) { (data) in
+            print(data)
+            if data["status"]["succeed"].intValue == 1{
+                self.yirenbiNum = data["data"].dictionaryValue["yirenbi"]!.arrayValue[0]["yirenbi_count"].stringValue
+            }
+            self.initView()
+        }
+    }
+    
     func initView(){
         //headerView
         let headerView = UIView(frame: CGRectMake(0, top_height, screen_width, 180))
@@ -48,15 +62,21 @@ class YirenbiViewController: BaseNavigationController {
         detailLbl1.textColor = UIColor.whiteColor()
         detailLbl1.font = UIFont.systemFontOfSize(14)
         detailLbl1.textAlignment = .Center
-        detailLbl1.text = "我的宜人币：0.00个"
+        detailLbl1.text = "我的宜人币：\(yirenbiNum)个"
         imageView2.addSubview(detailLbl1)
         //ljsyBtn
         let ljsyBtn = UIButton(frame: CGRectMake(14, headerView.viewBottomY + 15, screen_width - 28, 40))
-        ljsyBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Disabled)
-        ljsyBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        if true {
+            ljsyBtn.setBackgroundImage(UIImage(named: "button_normal"), forState: .Normal)
+            ljsyBtn.enabled = true
+        }else{
+            ljsyBtn.setBackgroundImage(UIImage(named: "button_no"), forState: .Normal)
+            ljsyBtn.enabled = false
+        }
         ljsyBtn.titleLabel?.font = UIFont.systemFontOfSize(14)
-        ljsyBtn.enabled = false
+        ljsyBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         ljsyBtn.setTitle("立即使用", forState: .Normal)
+        ljsyBtn.addTarget(self, action: #selector(ljsyBtnEvent(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         view.addSubview(ljsyBtn)
         
         // titleIv
@@ -119,6 +139,10 @@ class YirenbiViewController: BaseNavigationController {
         detailTv3.editable = false
         view.addSubview(detailTv3)
         detailTv3.autoHeight()
+    }
+    
+    func ljsyBtnEvent(sender: UIButton){
+        NSNotificationCenter.defaultCenter().postNotificationName("setDefaultSelectTabBarItem", object: nil, userInfo: ["index":1])
     }
 
 }

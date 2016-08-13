@@ -23,7 +23,7 @@ class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
     var cardData = [JSON]()
     var selectItemIndex: Int = 0
     var pagenumber: Int!
-    let pagesize = 15
+    let pagesize = 10000
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +32,8 @@ class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
         setTopViewLeftBtnImg("left")
         
         initView()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(refreshData), name: "refreshData", object: nil)
     }
     
     // MARK:自定义方法
@@ -66,7 +68,12 @@ class MyBankCardViewController: BaseNavigationController, CLMenuDelegate {
                 }
             })
         }else if selectItemIndex == 1{
-            cardData = []
+            DataProvider.sharedInstance.getBanCardkList(ToolKit.getStringByKey("userId"), status_id: "2", pagenumber: "\(pagenumber)", pagesize: "\(pagesize)", handler: { (data) in
+                if data["status"].dictionaryValue["succeed"]?.intValue == 1{
+                    self.cardData = data["data"].dictionaryValue["cardlist"]!.arrayValue
+                    self.tableView.reloadData()
+                }
+            })
         }
     }
     
@@ -94,7 +101,6 @@ extension MyBankCardViewController: UITableViewDataSource, UITableViewDelegate{
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCellWithIdentifier(myCardTableViewCell, forIndexPath: indexPath) as! MyCardTableViewCell
             cell.selectionStyle = .None
-            print(cardData)
             cell.headerIv.imageFromURL("", placeholder: UIImage(named: "touxiang")!)
             cell.titleLbl.text = ToolKitObjC.returnBankName(cardData[indexPath.row]["card_number"].stringValue)
             cell.detailLbl.text = "限额：5万/笔"
@@ -195,6 +201,25 @@ extension MyBankCardViewController: UITableViewDataSource, UITableViewDelegate{
                 let addBankCardVC = AddBankCardViewController()
                 navigationController?.pushViewController(addBankCardVC, animated: true)
             }
+        }
+    }
+    
+    func tableView(tableView: UITableView, titleForDeleteConfirmationButtonForRowAtIndexPath indexPath: NSIndexPath) -> String? {
+        return "删除"
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == .Delete {
+            DataProvider.sharedInstance.deleteCard(cardData[indexPath.row]["card_id"].stringValue, handler: { (data) in
+                if data["status"]["succeed"].intValue == 1{
+                    tableView.mj_header.beginRefreshing()
+                    LoadingAnimation.showError(self, msg: "删除成功")
+                }
+            })
         }
     }
     
