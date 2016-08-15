@@ -122,7 +122,7 @@ extension MyWealthViewController: UITableViewDataSource, UITableViewDelegate{
         case 0:
             return 3
         case 1:
-            if true {
+            if false {
                 buyProductIsEmpty = false
                 return 1 + (moneylist == nil ? 0 : moneylist!.count)
             }else{
