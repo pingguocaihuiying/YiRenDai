@@ -55,7 +55,7 @@ class SettingsViewController: BaseNavigationController, ChangeGesturePwdDelegate
                 gesturePasswordVC.gesturePasswordType = 2
                 navigationController?.pushViewController(gesturePasswordVC, animated: true)
             }
-            sender.setOn(isSettingGesturePwd, animated: false)
+            sender.setOn(!isSettingGesturePwd, animated: false)
         default:
             break
         }

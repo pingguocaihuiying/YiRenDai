@@ -17,8 +17,11 @@ let top_height:CGFloat = 64
 let tabBar_height:CGFloat = 49
 
 //网络请求链接前缀
-let URL = "http://115.28.67.86:8083/index.php?r=api"
-let ImgUrl = "http://115.28.67.86:8083/uploads/article/"
+let URL = "http://115.28.67.86:8085/index.php?r=api"
+let ImgUrl = "http://115.28.67.86:8085/uploads/article/"
+
+// 这个是你定义的 URL Scheme，支付宝、微信支付和测试模式需要。
+let kUrlScheme = "com.zykj.YiRenDai"
 
 //SMSSDK
 let SMSSDK_AppKey = "1283183fef2d8"

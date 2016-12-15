@@ -139,6 +139,7 @@ class LoginViewController: BaseNavigationController, UITextFieldDelegate {
         DataProvider.sharedInstance.login(accountTxt.text!, password: passwordTxt.text!) { (state, message, data) in
             if state == 1{
                 NSUserDefaults.setUserDefaultValue(true, forKey: "isLogin")
+                NSUserDefaults.setUserDefaultValue(self.passwordTxt.text!, forKey: "password")
                 NSUserDefaults.setUserDefaultValue(data["member_id"].stringValue, forKey: "userId")
                 NSUserDefaults.setUserDefaultValue(data["member_phone"].stringValue, forKey: "userPhone")
                 NSNotificationCenter.defaultCenter().postNotificationName("updateMoreData", object: nil)

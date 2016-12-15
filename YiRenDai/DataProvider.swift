@@ -332,6 +332,15 @@ class DataProvider {
         }
     }
     
+    // 借款列表
+    func getBorrowList(member_id:String, pagenumber: String, pagesize: String, handler: (data: JSON) -> Void){
+        let url = "\(URL)/owner/getowner"
+        let params = ["json":"{\"member_id\":\"\(member_id)\"}","page":"{\"pagenumber\":\"\(pagenumber)\",\"pagesize\":\"\(pagesize)\"}"]
+        obj.postRequest(url: url, params: params) { (json) in
+            handler(data: json)
+        }
+    }
+    
     //MARK: - 更多
     
     func getTeamManage(pagenumber: String, pagesize: String, handler: (data: JSON) -> Void){

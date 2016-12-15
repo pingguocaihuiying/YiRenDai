@@ -62,7 +62,6 @@ class MyWealthViewController: BaseViewController {
     
     func refreshData(){
         DataProvider.sharedInstance.getMyWealth(ToolKit.getStringByKey("userId")) { (data) in
-            print(data)
             //刷新结束
             self.tableView.mj_header.endRefreshing()
             if data["status"].dictionaryValue["succeed"]?.intValue == 1{
@@ -122,7 +121,7 @@ extension MyWealthViewController: UITableViewDataSource, UITableViewDelegate{
         case 0:
             return 3
         case 1:
-            if false {
+            if true {
                 buyProductIsEmpty = false
                 return 1 + (moneylist == nil ? 0 : moneylist!.count)
             }else{
@@ -359,7 +358,7 @@ extension MyWealthViewController: UITableViewDataSource, UITableViewDelegate{
                         stateLbl.layer.masksToBounds = true
                         stateLbl.layer.borderWidth = 1
                         stateLbl.layer.borderColor = UIColor.getRedColorSecond().CGColor
-                        stateLbl.layer.cornerRadius = 10
+                        stateLbl.layer.cornerRadius = 6
                         cell.contentView.addSubview(stateLbl)
                     }
                 }

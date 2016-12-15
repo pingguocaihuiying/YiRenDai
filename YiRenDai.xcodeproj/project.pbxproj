@@ -24,6 +24,9 @@
 		B72323AC1D11528600A4DECC /* YouhuiquanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72323AB1D11528600A4DECC /* YouhuiquanViewController.swift */; };
 		B7248FA31CC5CFA7000A4D78 /* ProductListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7248FA11CC5CFA7000A4D78 /* ProductListTableViewCell.swift */; };
 		B7248FA41CC5CFA7000A4D78 /* ProductListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7248FA21CC5CFA7000A4D78 /* ProductListTableViewCell.xib */; };
+		B729C3821D6D7945007D2B2C /* BorrowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B729C3811D6D7945007D2B2C /* BorrowListViewController.swift */; };
+		B729C3861D6D8436007D2B2C /* BorrowListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B729C3841D6D8436007D2B2C /* BorrowListTableViewCell.swift */; };
+		B729C3871D6D8436007D2B2C /* BorrowListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B729C3851D6D8436007D2B2C /* BorrowListTableViewCell.xib */; };
 		B72CBF641CC7010F003FFBC2 /* MyWealthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72CBF631CC7010F003FFBC2 /* MyWealthViewController.swift */; };
 		B72E47441D0FF10D00584465 /* AddPaymentBankCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B72E47431D0FF10D00584465 /* AddPaymentBankCardViewController.swift */; };
 		B73AD2DA1D0F907F00BC0D9B /* DotsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B73AD2D91D0F907F00BC0D9B /* DotsView.swift */; };
@@ -146,6 +149,9 @@
 		B72323AB1D11528600A4DECC /* YouhuiquanViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YouhuiquanViewController.swift; sourceTree = "<group>"; };
 		B7248FA11CC5CFA7000A4D78 /* ProductListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductListTableViewCell.swift; sourceTree = "<group>"; };
 		B7248FA21CC5CFA7000A4D78 /* ProductListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductListTableViewCell.xib; sourceTree = "<group>"; };
+		B729C3811D6D7945007D2B2C /* BorrowListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowListViewController.swift; sourceTree = "<group>"; };
+		B729C3841D6D8436007D2B2C /* BorrowListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorrowListTableViewCell.swift; sourceTree = "<group>"; };
+		B729C3851D6D8436007D2B2C /* BorrowListTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BorrowListTableViewCell.xib; sourceTree = "<group>"; };
 		B72CBF631CC7010F003FFBC2 /* MyWealthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyWealthViewController.swift; sourceTree = "<group>"; };
 		B72CBF681CC70B9C003FFBC2 /* YiRenDai-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YiRenDai-Bridging-Header.h"; sourceTree = "<group>"; };
 		B72E47431D0FF10D00584465 /* AddPaymentBankCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddPaymentBankCardViewController.swift; sourceTree = "<group>"; };
@@ -292,6 +298,15 @@
 				B7BEB90B1CE5736E0089D20D /* TentacleView.swift */,
 			);
 			name = GesturePassword;
+			sourceTree = "<group>";
+		};
+		B729C3831D6D8410007D2B2C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				B729C3841D6D8436007D2B2C /* BorrowListTableViewCell.swift */,
+				B729C3851D6D8436007D2B2C /* BorrowListTableViewCell.xib */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		B72CBF621CC7001B003FFBC2 /* MyWealth */ = {
@@ -556,6 +571,7 @@
 		B7DBC3241CC8A4F600D2C214 /* IBorrow */ = {
 			isa = PBXGroup;
 			children = (
+				B729C3831D6D8410007D2B2C /* Cell */,
 				B7DBC3251CC8A6C100D2C214 /* LcqViewController.swift */,
 				B7DBC3271CC8ACDB00D2C214 /* LcqTableViewCell.swift */,
 				B7DBC3281CC8ACDB00D2C214 /* LcqTableViewCell.xib */,
@@ -563,6 +579,7 @@
 				B78AA59E1CFD316A009D9B1D /* IBorrowViewController.swift */,
 				B78AA5A01CFD6E95009D9B1D /* ApplyBorrowViewController.swift */,
 				B7FDFEF61CFE7FFC00DA1867 /* IntroductionsViewController.swift */,
+				B729C3811D6D7945007D2B2C /* BorrowListViewController.swift */,
 			);
 			name = IBorrow;
 			sourceTree = "<group>";
@@ -667,7 +684,6 @@
 				TargetAttributes = {
 					B7816E471CC46AA800EC4B77 = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = M7YC435M3S;
 					};
 					B7816E5B1CC46AA900EC4B77 = {
 						CreatedOnToolsVersion = 7.3;
@@ -716,6 +732,7 @@
 				B7816E511CC46AA800EC4B77 /* Main.storyboard in Resources */,
 				B7801BCE1CCB66F0003EDEFA /* ActivityCenterTableViewCell.xib in Resources */,
 				B76DF59F1CE2D98000BF7912 /* ManageTeamTableViewCell.xib in Resources */,
+				B729C3871D6D8436007D2B2C /* BorrowListTableViewCell.xib in Resources */,
 				B70CC12E1CE411D2002C1445 /* FAQDetailTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -881,6 +898,7 @@
 				B74C7ABE1D0109020048FF2A /* MyCardTableViewCell.swift in Sources */,
 				B7BEB90E1CE5736E0089D20D /* TentacleView.swift in Sources */,
 				B73AD2DA1D0F907F00BC0D9B /* DotsView.swift in Sources */,
+				B729C3821D6D7945007D2B2C /* BorrowListViewController.swift in Sources */,
 				B75E1D621CCF3F99001F0B44 /* MyAccountViewController.swift in Sources */,
 				B7622E651D0E44EB00BB1726 /* ChangePwdViewController.swift in Sources */,
 				B78AA5A11CFD6E95009D9B1D /* ApplyBorrowViewController.swift in Sources */,
@@ -911,6 +929,7 @@
 				B78AA59F1CFD316A009D9B1D /* IBorrowViewController.swift in Sources */,
 				B78B66A41CDB2F16005232FF /* ContactUsViewController.swift in Sources */,
 				B7816E8C1CC48AAC00EC4B77 /* StartScrollViewController.swift in Sources */,
+				B729C3861D6D8436007D2B2C /* BorrowListTableViewCell.swift in Sources */,
 				B7816E9D1CC4DBE800EC4B77 /* UIColorExtension.swift in Sources */,
 				B708B2971D58B32900A3449B /* ZijintuoguanViewController.swift in Sources */,
 				B7AEA4BA1CD84FA8006194C6 /* RegisterFinishViewController.swift in Sources */,

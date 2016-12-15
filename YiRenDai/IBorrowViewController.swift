@@ -26,8 +26,15 @@ class IBorrowViewController: BaseNavigationController {
         super.viewDidLoad()
 
         setTopViewTitle("我要借款")
+        setTopViewRightBtn("借款列表")
         
         initView()
+    }
+    
+    override func clickRightBtnEvent() {
+        let borrowListVC = BorrowListViewController()
+        borrowListVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(borrowListVC, animated: true)
     }
 
     //MARK:自定义方法

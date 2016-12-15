@@ -122,8 +122,13 @@ class LjInvestBtnViewController: BaseNavigationController {
     
     func ljBuyBtnFunc(){
         if ToolKit.getBoolByKey("isLogin") {
-            DataProvider.sharedInstance.getCharge(productID, member_id: ToolKit.getStringByKey("userId"), order_amount: "0.01", pay_method: "2") { (data) in
-                print(data)
+            DataProvider.sharedInstance.getCharge(productID, member_id: ToolKit.getStringByKey("userId"), order_amount: "100", pay_method: "2") { (data) in
+                let charge = data["data"]["charge"].object
+                Pingpp.createPayment(charge as! NSObject, viewController: self, appURLScheme: kUrlScheme, withCompletion: { (result, error) in
+                    if result == "success"{
+                        
+                    }
+                })
             }
         }else{
             let loginVC = LoginViewController()
